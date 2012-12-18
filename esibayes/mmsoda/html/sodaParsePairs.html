@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+
+   <title>SCEM-UA Toolbox - gelmanrubin</title>
+
+   <meta name="keywords" content="gelmanrubin">
+
+   <meta name="description" content="gelmanrubin">
+
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  
+   <meta name="robots" content="index, follow">
+
+   <meta author="Jurriaan H. Spaaks">
+
+   <link type="text/css" rel="stylesheet" href="styles/soda_styles.css">
+ 
+</head>
+
+
+
+<body>
+<a name="_top"></a>
+
+<div class="linkheader">
+<a href="matlab:edit(fullfile(scemroot,'gelmanrubin'))">View source code of the function <span style="font-family:monospace">gelmanrubin()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(scemroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+</div>
+
+<div class="spacer">
+</div>
+
+
+<div class="h1">
+gelmanrubin</div>
+
+<div class="h2">
+Syntax
+</div>
+
+<div class="txt">
+<pre>rHatRoot = gelmanrubin(scemPar,sequences)</pre>
+</div>
+
+<div class="h2">
+Description
+</div>
+
+<div class="txt">
+<p>
+The <span style="font-family:monospace">gelmanrubin</span> function estimates the scale reduction that could be achieved if additional samples were being drawn indefinitely. The procedure is based on variances that may exist between different parameters in the same sequence, as well as corresponding parameters in different sequences. See also <a href="matlab:eval(['!',fullfile(scemroot,'printables','1992_gelman_rubin.pdf')])">Gelman and Rubin (1992)</a> <i>Inference from iterative simulation using multiple sequences</i> Statistical Science 7(4):457-472.
+</p>
+
+<p>
+The structure array <span style="font-family:monospace">scemPar</span> must have a field <span style="font-family:monospace">modeGelRub</span>, containing one of two strings: <span style="font-family:monospace">&#0039;strict&#0039;</span> or <span style="font-family:monospace">&#0039;loose&#0039;</span>. When <span style="font-family:monospace">&#0039;strict&#0039;</span> is used, the equation used to calculate <span style="font-family:monospace">rHatRoot</span> is exactly the same as that used in the beforementioned paper; if <span style="font-family:monospace">&#0039;loose&#0039;</span> is selected, a slightly modified version is used. The difference between the two relates to the denominator of the middle term of Equation (4) as included on page 461 of the paper; in <span style="font-family:monospace">&#0039;strict&#0039;</span> mode the denominator is set to <span style="font-family:monospace">m*n^2</span>, whereas in  <span style="font-family:monospace">&#0039;loose&#0039;</span> mode, <span style="font-family:monospace">(m*n)^2</span> is used.
+</p>
+</div>
+
+
+<div class="footer">
+</div>
+
+
+<div class="spacer">
+</div>
+
+
+<a name="_bottom"></a>
+
+
+</body>
+
+</html>

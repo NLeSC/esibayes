@@ -1,0 +1,13 @@
+runmmsoda.sh
+matlabprog
+mmlib/libmmpi.c
+mmlib/libmmpi.exports
+mmlib/libmmpi.h
+mmlib/libmmpi.so
+mmlib/mccExcludedFiles.log
+mmlib/readme.txt
+mmtools/mm_bcast.mexa64
+mmtools/mm_receive.mexa64
+mmtools/mm_send.mexa64
+
+matlabprog

@@ -1,0 +1,6 @@
+libmmpi.exports
+libmmpi.so
+mccExcludedFiles.log
+readme.txt
+libmmpi.c
+libmmpi.h

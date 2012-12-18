@@ -1,0 +1,405 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+
+   <title>SODA Toolbox - soda</title>
+
+   <meta name="keywords" content="soda">
+
+   <meta name="description" content="soda">
+
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+   <meta name="robots" content="index, follow">
+
+   <meta author="Jurriaan H. Spaaks">
+
+   <link type="text/css" rel="stylesheet" href="styles/soda-styles.css">
+
+</head>
+
+
+
+<body>
+<a name="_top"></a>
+
+
+<div class="linkheader">
+<a href="matlab:edit(fullfile(sodaroot,'soda'))">View source code of the function <span style="font-family:monospace">soda()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(sodaroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+</div>
+
+<div class="spacer">
+</div>
+
+
+<div class="h1">
+soda</div>
+
+<div class="h2">
+Syntax
+</div>
+
+<div class="txt">
+<pre>
+soda <span class="string">-addtools</span>
+soda <span class="string">-addtools -quiet</span>
+soda <span class="string">-docinstall</span>
+soda <span class="string">-docinstall -quiet</span>
+soda <span class="string">-help</span>
+evalResults = soda()
+[evalResults,critGelRub] = soda()
+[evalResults,critGelRub,sequences] = soda()
+[evalResults,critGelRub,sequences,conf] = soda()
+</pre>
+</div>
+
+<div class="h2">
+Description
+</div>
+
+<div class="txt">
+<p>
+   <span style="font-family:monospace">soda <span class="string">-addtools</span></span>
+</p>
+
+<p>
+   Makes the SCEM-UA related tools available by adding the <span style="font-family:monospace">soda/tools</span> directory to the path.
+</p>
+</div>
+
+
+
+<div class="txt">
+<p>
+   <span style="font-family:monospace">soda <span class="string">-addtools -quiet</span></span>
+</p>
+
+<p>
+   Same as <span style="font-family:monospace">soda <span class="string">-addtools</span></span>, but without any verbose feedback.
+</p>
+</div>
+
+
+<div class="txt">
+<span style="font-family:monospace">soda <span class="string">-docinstall</span></span>
+<p>
+   Installs the documentation by writing the &#0039;info.xml&#0039; file; applies the user-defined syntax highlighting by writing the 'soda-styles.css' style sheet file; adds the <span style="font-family:monospace">soda/tools</span> and <span style="font-family:monospace">soda/visualization</span> directories to the path by calling <span style="font-family:monospace">soda <span class="string">-addtools -quiet</span></span>.
+</p>
+
+</div>
+
+<div class="txt">
+<p>
+   <span style="font-family:monospace">soda <span class="string">-docinstall -quiet</span></span>
+</p>
+<p>
+   Same as <span style="font-family:monospace">soda <span class="string">-docinstall</span></span>, but without any verbose feedback.
+</p>
+</div>
+
+<div class="txt">
+<p>
+   <span style="font-family:monospace">soda <span class="string">-help</span></span>
+</p>
+<p>
+   Prints a help message to the screen.
+</p>
+</div>
+
+
+<div class="txt">
+<p>
+   <span style="font-family:monospace">evalResults = soda()</span><br>
+   <span style="font-family:monospace">[evalResults,critGelRub] = soda()</span><br>
+   <span style="font-family:monospace">[evalResults,critGelRub,sequences] = soda()</span><br>
+   <span style="font-family:monospace">[evalResults,critGelRub,sequences,conf] = soda()</span><br>
+</p>
+
+<p>
+Calls the SODA parameter optimization algorithm with the options specified in the <span style="font-family:monospace">&#0039;conf&#0039;</span> structure array. The table below lists what fields can be included in <span style="font-family:monospace">conf</span>. Fields can be of various types:
+<ul>
+<li>U: can be set by the user;</li>
+<li>N: can not be set by the user;</li>
+<li>O: optional field;</li>
+<li>R: required field.</li>
+</ul>
+Fields that not assigned by the user will be assigned their default values, which are listed in the file &#0039;<span style="font-family:monospace">soda/soda-default-settings.ini</span>&#0039; or in the file as specified in <span style="font-family:monospace">conf.useIniFile</span>.
+</p>
+
+
+</div>
+
+
+
+
+<div class="txt">
+<table>
+
+<tr>
+    <td valign="top"><b>Field name</b></td>
+    <td valign="top"><b>Type</b></td>
+    <td valign="top"><b>Description</b></td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;Cb&#0039;</span></pre></td>
+    <td valign="top">N</td>
+    <td valign="top">Parameter related to the kurtosis (aka peakedness) of the exponential power distribution. See also <span style="font-family:monospace">&#0039;conf.kurt&#0039;</span>.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;Wb&#0039;</span></pre></td>
+    <td valign="top">N</td>
+    <td valign="top">Parameter related to the kurtosis (aka peakedness) of the exponential power distribution. See also <span style="font-family:monospace">&#0039;conf.kurt&#0039;</span>.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;constNames&#0039;</span></pre></td>
+    <td valign="top">U,R</td>
+    <td valign="top">Cell array of strings containing the names of variables which must be imported as constants during the optimization procedure.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;convMaxDiff&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">If the last <span style="font-family:monospace">conf.nGelRub</span> rows from <span style="font-family:monospace">critGelRub</span> are less than <span style="font-family:monospace">convMaxDiff</span> apart, <a href="convergence.html">convergence</a> has been achieved.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;convUseLastFraction&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Indicates what fraction of <span style="font-family:monospace">sequences</span> should be used to calculate the Gelman-Rubin scale reduction criterion <span style="font-family:monospace">critGelRub</span>.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;converged&#0039;</span></pre></td>
+    <td valign="top">N</td>
+    <td valign="top">Signifies whether the optimization has converged (<span style="font-family:monospace">true</span>) or not (<span style="font-family:monospace">false</span>). Default is <span style="font-family:monospace">false</span>.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;critGelRubConvd&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Convergence can only be achieved if all rows in <span style="font-family:monospace">critGelRub</span> are smaller than <span style="font-family:monospace">conf.critGelRubConvd</span>.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;drawInterval&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Indicates after how many generations the dynamic visualization script is called. See also: <span style="font-family:monospace">&#0039;conf.visualizationCall&#0039;</span></td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;evalCol&#0039;</span></pre></td>
+    <td valign="top">N</td>
+    <td valign="top">Indicates which column in <span style="font-family:monospace">evalResults</span> contains the &#0039;evaluated&#0039; flag. This flag is set to <span style="font-family:monospace">true</span> if the parameter on the current row has been evaluated, and is <span style="font-family:monospace">false</span> otherwise.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;iterCol&#0039;</span></pre></td>
+    <td valign="top">N</td>
+    <td valign="top">Indicates which column in <span style="font-family:monospace">evalResults</span> is used to store the iteration number. Each parameter set is assigned its own iteration number.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;jumpRate&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">A scaling factor imposed on the covariance matrix. The product of these two, together with an n-dimensional random normal draw is used to calculate the jumping distance.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;kurt&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Measure of kurtosis (peakedness) of the exponential power probability distribution. The probability is Gaussian if kurtosis equals zero, double exponential if kurtosis is equal to one, and tends to a uniform distribution as kurtosis approaches -1. Default is 0.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;measNames&#0039;</span></pre></td>
+    <td valign="top">U,(R)</td>
+    <td valign="top">Cell array of strings containing the names of variables which must be imported as measurements during the optimization procedure. Required only when <span style="font-family:monospace">conf.optMethod</span> has been set to &#0039;<span style="font-family:monospace">error minimization</span>&#0039;.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;modeGelRub&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Flag indicating the method according to which the Gelman-Rubin scale reduction criterion should be calculated.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;modelCallStr&#0039;</span></pre></td>
+    <td valign="top">U,R</td>
+    <td valign="top">Character array containing the call to the model function.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;nCompl&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Number of Markov chains, or equivalently, number of complexes or number of sequences.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;nGelRub&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Indicates how many rows of <span style="font-family:monospace">critGelRub</span> should be used to determine if <a href="convergence.html">convergence</a> has been achieved.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;nMeasurements&#0039;</span></pre></td>
+    <td valign="top">U,(R)</td>
+    <td valign="top">Number of observations. Required only when <span style="font-family:monospace">conf.optMethod</span> has been set to &#0039;<span style="font-family:monospace">error minimization</span>&#0039;.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;nModelEvalsMax&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Maximum number of model evaluations to be executed by SCEM-UA.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;nOffspring&#0039;</span></pre></td>
+    <td valign="top">N</td>
+    <td valign="top">Number of offspring per generation.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;nOffspringFraction&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Fraction of the number of samples (<span style="font-family:monospace">conf.nSamples</span>).</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;nOffspringPerCompl&#0039;</span></pre></td>
+    <td valign="top">N</td>
+    <td valign="top">Number of offspring per complex.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;nOptPars&#0039;</span></pre></td>
+    <td valign="top">N</td>
+    <td valign="top">The number of optimized parameters.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;nSamples&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Number of samples.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;nSamplesPerCompl&#0039;</span></pre></td>
+    <td valign="top">N</td>
+    <td valign="top">Number of samples per complex.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;objCallStr&#0039;</span></pre></td>
+    <td valign="top">U,R</td>
+    <td valign="top">Character array containing the call to the <a href="objective-function.html">objective function</a>.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;objCol&#0039;</span></pre></td>
+    <td valign="top">N</td>
+    <td valign="top">Signifies which column of <span style="font-family:monospace">evalResults</span> stores the objective score.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;optEndTime&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">The time at which the optimization procedure should be aborted, even if convergence has not been achieved.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;optMethod&#0039;</span></pre></td>
+    <td valign="top">U,R</td>
+    <td valign="top">Signifies what kind of optimization should be performed.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;parCols&#0039;</span></pre></td>
+    <td valign="top">N</td>
+    <td valign="top">Signifies which columns of <span style="font-family:monospace">evalResults</span> store the parameter sets.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;parMap&#0039;</span></pre></td>
+    <td valign="top">U,R</td>
+    <td valign="top">Cell array of strings containing the names of variables which must be imported as parameters during the optimization procedure.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;parMapTex&#0039;</span></pre></td>
+    <td valign="top">U,R</td>
+    <td valign="top">Cell array of TeX strings used in dynamic visualization.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;plotYN&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Logical flag indicating whether or not visualization should be performed during optimization.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;randSeed&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Random seed for MATLAB's <span style="font-family:monospace">rand()</span> and <span style="font-family:monospace">randn()</span> functions.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;rangeMax&#0039;</span></pre></td>
+    <td valign="top">U,R</td>
+    <td valign="top">Maximum allowed values for all optimized parameters.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;rangeMin&#0039;</span></pre></td>
+    <td valign="top">U,R</td>
+    <td valign="top">Minimum allowed values for all optimized parameters.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;realPartOnly&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">If set to true, this option makes the SCEM-UA algorithm ignore the complex part of results generated by the <a href="matlab:doc sqrtm">sqrtm</a> function in <a href="generateoffspring.html">generateoffspring</a>.</td>
+</tr>
+
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;startFromUniform&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Logical flag indicating if the prior probability distribution is uniform or not.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;thresholdL&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Threshold likelihood used in the generation of offspring as well as in the Metropolis-Hastings annealing procedure.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;useIniFile&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">File from which to read SCEM-UA's default settings.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;verboseOutput&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Logical flag indicating if verbose feedback should be output to the screen.</td>
+</tr>
+<tr>
+    <td valign="top"><pre><span class="string">&#0039;visualizationCall&#0039;</span></pre></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Character array containing the call to the visualization script.</td>
+</tr>
+</table>
+
+
+<table>
+<tr>
+    <td valign="top" nowrap><b>Output argument</b></td>
+    <td valign="top"><b>Description</b></td>
+</tr>
+<tr>
+    <td valign="top"><pre>evalResults</pre></td>
+    <td valign="top">This 2-D array is ordered as follows: column 1 holds the iteration number; columns 1+1:N hold the parameter set as used in the current iteration, with N being the number of optimized parameters; column N+1 holds the objective function score; column N+2 should be true (1) for all iterations that have been evaluated.</td>
+</tr>
+<tr>
+    <td valign="top"><pre>critGelRub</pre></td>
+    <td valign="top">This array holds the Gelman-Rubin convergence information. The scale reduction criterion is calculated after every generation. Column 1 in <span style="font-family:monospace">critGelRub</span> holds the iteration number of the last model evaluation before the Gelman-Rubin scale reduction criterion was assessed; columns 1+1:N hold the value of the Gelman-Rubin scale reduction criterion for each parameter, with N the number of calibration parameters.</td>
+</tr>
+<tr>
+    <td valign="top"><pre>sequences</pre></td>
+    <td valign="top">Rows and columns of this array hold the exact same information as <span style="font-family:monospace">evalResults</span>, but divided over <span style="font-family:monospace">conf.nCompl</span> Markov chains.</td>
+</tr>
+<tr>
+    <td valign="top"><pre>conf</pre></td>
+    <td valign="top">This array is the <span style="font-family:monospace">conf</span> structure array as supplied by the user, with some fields added by the SCEM-UA algorithm.</td>
+</tr>
+<tr>
+    <td valign="top"><pre>bayesStore</pre></td>
+    <td valign="top">If you have specified a function using the <span style="font-family:monospace">conf.bayesStore</span> option, that information needs to be output in this variable.</td>
+</tr>
+
+</table>
+
+</div>
+
+
+
+<div class="footer">
+</div>
+
+
+<div class="spacer">
+</div>
+
+
+<a name="_bottom"></a>
+
+
+</body>
+
+</html>

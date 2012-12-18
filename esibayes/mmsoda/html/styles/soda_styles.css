@@ -1,0 +1,90 @@
+a:link, a:visited
+        {
+        text-decoration:none;
+        color:#0672e5;
+        }
+
+
+a:hover {
+         color:#ff00e6;
+        }
+
+
+div {
+      width:700px;
+      padding:20px;
+      font-family:verdana,times;
+     }
+
+
+.h1     {
+         font-weight:bold;
+         font-size:200%;
+         background-color:#676767;
+         color:#37fa05;
+         border-top: 1px solid #000000;
+         border-left: 1px solid #000000;
+         border-right: 1px solid #000000;
+        }
+
+.h2     {
+
+         font-size:125%;
+         font-weight:bold;
+         background-color:#bbbbbb;
+         color:#f5048d;
+         border-left: 1px solid #000000;
+         border-right: 1px solid #000000;
+        }
+
+
+.txt    {   
+         font-size:90%;
+         background-color:#eeeeee;
+         border-left: 1px solid #000000;
+         border-right: 1px solid #000000;
+         line-height:200%;
+        }
+
+.footer {
+         background-color:#eeeeee;
+         border-left: 1px solid #000000;
+         border-right: 1px solid #000000;
+         border-bottom: 1px solid #000000;
+         height:0px;
+         }
+
+
+.linkheader {
+             border:1px solid #CCCCCC;
+             background-image:url(../images/soda-big-banner.png);
+             background-repeat: no-repeat;
+             height:175px;
+             padding-bottom:0px;
+            }  
+
+
+
+.spacer {
+         height:40px
+        }
+
+
+pre {
+         padding-left:20px;
+         line-height:200%;
+    }
+
+.comment {color: #228B22;}
+.string  {color: #A020F0;}
+.keyword {color: #0000FF;}
+.syscmd  {color: #B28C00;}
+
+
+
+
+td      {
+         border-bottom:1px solid #eeeeee;
+         padding:10px;
+         font-size:90%;
+        }

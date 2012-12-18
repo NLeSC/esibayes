@@ -1,0 +1,21 @@
+function varargout=sodaPlotInn(sodaPar,evalResults)
+
+figHandle=gcf;
+
+Ix=find(evalResults(:,sodaPar.objCol)==max(evalResults(:,sodaPar.objCol)));
+
+parVec=evalResults(Ix(1),sodaPar.parCols);
+[ensemblePred,stateInn,sodaPar] = sodaEnKF(sodaPar,parVec);
+meanStateInn = mean(stateInn,3);
+
+figure(figHandle)
+H=plot(sodaPar.obsPoints{1,2},meanStateInn,'-b.');
+
+xlabel(sodaPar.obsPoints{1,1})
+ylabel('state innovation')
+set(gca,'xlim',[min(sodaPar.obsPoints{1,2}),max(sodaPar.obsPoints{1,2})])
+set(gcf,'name',mfilename,'numbertitle','off')
+
+if nargout==1
+    varargout{1}=H;
+end

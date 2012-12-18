@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+
+   <title>SCEM-UA Toolbox - model adaptations</title>
+
+   <meta name="keywords" content="model adaptations">
+
+   <meta name="description" content="model adaptations">
+
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  
+   <meta name="robots" content="index, follow">
+
+   <meta author="Jurriaan H. Spaaks">
+
+   <link type="text/css" rel="stylesheet" href="styles/soda_styles.css">
+ 
+</head>
+
+
+
+<body>
+<a name="_top"></a>
+
+<div class="linkheader">
+<a href="matlab:web(fullfile(scemroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+</div>
+
+<div class="spacer">
+</div>
+
+
+<div class="h1">
+Model adaptations
+</div>
+
+<div class="h2">
+Overview
+</div>
+
+<div class="txt">
+<p>The &quot;Overview&quot; section provides a quick summary of how to re-structure a very simple model in such a way that it can be used within the SCEM-UA parameter optimization framework. Subsequent sections give more specific instructions.</p>
+<p>Consider a script m-file:
+</p>
+<pre>
+<span class="comment">% define parameters:</span>
+a = 0.3;
+b = 2.5;
+
+<span class="comment">% define constants:</span>
+x = [1:0.1:10];
+
+<span class="comment">% calculate model result:</span>
+
+y = a*x + b;
+
+</pre>
+<p>
+The above script will generate a model prediction (<span style="font-family=monospaced">y</span>) based on the parameters (<span style="font-family=monospaced">a</span> and <span style="font-family=monospaced">b</span>) and the constant <span style="font-family=monospaced">x</span>.
+</p>
+<p>
+Rewriting the script as a function might yield:
+</p>
+<pre>
+<span class="keyword">function</span> y = linearmodel(parVec)
+
+<span class="comment">% somehow import the values for all constants...</span>
+<span class="comment">% and assign them to their respective variable names:</span>
+importconstants
+
+<span class="comment">% assign the values from input argument &quot;parVec&quot; ...</span>
+<span class="comment">% to their respective variable names:</span>
+importparameters
+
+<span class="comment">% calculate model result:</span>
+y = a*x + b;
+
+</pre>
+<p>
+We may now call this function with many combinations of the parameters (<span style="font-family=monospaced">a</span> and <span style="font-family=monospaced">b</span>), generating different linear curves for each parameter combination. For example like so: 
+</p>
+
+<pre>
+<span class="comment">% draw 1000 samples from a uniform random <br>% distribution between -1 and 4:</span>
+parameterSamples = -1+4*rand(1000,2)
+
+<span class="keyword">for</span> k=1:size(parameterSamples,1)
+
+   <span class="comment">% calculate y using the k-th parameter...</span>
+   <span class="comment">% set from "parameterSamples":</span>
+   y(k,:) = linearmodel(parameterSamples(k,:))
+
+<span class="keyword">end</span>
+
+</pre>
+
+<p>
+Now perhaps we also have some observations, corresponding to our predicted value of <span style="font-family=monospaced">y</span>. We may evaluate the Goodness-of-Fit between modeled and observed values of <span style="font-family=monospaced">y</span> using some <a href="objective-function.html">objective function</a>.
+</p>
+<p> 
+After this initial sample of 1000 model evaluations, it becomes pretty clear that some parts of the <a href="parameter-space.html">parameter space</a> generate results which give good scores for the objective function, whereas other parts give bad results. Once we figure out which parts of the parameter space are unlikely to yield good results, we may want to concentrate our sampling to the remaining part. This implies that we are no longer sampling from a uniform distribution, but rather we impose a higher probability on the regions of the parameter space which give the best results. As we continue sampling while updating the probability distribution, we are increasingly more certain of the best region. At some point, the shape of the distribution becomes stable and the algorithm has reached <a href="convergence.html">convergence</a>.
+</p>
+<p>
+The interesting thing about SCEM-UA is that, once the optimization algorithm converges, the shape of the probability distribution approximates the uncertainty distribution on the parameters.
+</p>
+
+</div>
+
+<div class="h2">
+More details
+</div>
+
+<div class="txt">
+...
+</div>
+
+
+<div class="footer">
+</div>
+
+
+<div class="spacer">
+</div>
+
+
+<a name="_bottom"></a>
+
+
+</body>
+
+</html>
