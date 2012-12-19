@@ -1,19 +1,19 @@
-function rHatRoot = sodaGelmanRubin(scemPar,sequences)
+function rHatRoot = sodaGelmanRubin(conf,sequences)
 %
 % <a href="matlab:web(fullfile(scemroot,'html','gelmanrubin.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
 %
 % Based on 7-step prescriptive summary in Gelman and Rubin 1992;
 % Statistical Science, Vol. 7, No. 4, p457-472.
 
-parCols = scemPar.parCols;
+parCols = conf.parCols;
 
 % Use only the last X rows from each complex to diminish the effect of the
 % starting distribution:
 
-iGeneration = (size(sequences,1)-scemPar.nSamplesPerCompl)/scemPar.nOffspringPerCompl;
-startAtRow = scemPar.nSamplesPerCompl +...
-                   floor(iGeneration*(1-scemPar.convUseLastFraction))*...
-                   scemPar.nOffspringPerCompl+1;
+iGeneration = (size(sequences,1)-conf.nSamplesPerCompl)/conf.nOffspringPerCompl;
+startAtRow = conf.nSamplesPerCompl +...
+                   floor(iGeneration*(1-conf.convUseLastFraction))*...
+                   conf.nOffspringPerCompl+1;
 
 
 
@@ -22,7 +22,7 @@ if (size(sequences,1)-startAtRow)<10
 end
 
 n = size(sequences,1)-startAtRow+1;
-m = scemPar.nCompl;
+m = conf.nCompl;
 
 rHatRoot = repmat(NaN,[1,length(parCols)]);
 
@@ -64,7 +64,7 @@ for p=parCols
     term01 = ((n-1)/n)^2 * (1/m) * varHatsSquared +...
              ((m+1)/(m*n))^2 * (2/(m-1)) * (B_over_n*n)^2;
 
-    switch scemPar.modeGelRub
+    switch conf.modeGelRub
         case 'strict'
             % paper actually says: 
             term02 = 2*(((m+1)*(n-1))/(m*n^2))
@@ -72,7 +72,7 @@ for p=parCols
             % vrugt:
             term02 = 2*(((m+1)*(n-1))/(m*n)^2);
         otherwise
-            error(['SCEM system parameter ',39,'scemPar.modeGelRub',39,...
+            error(['SCEM system parameter ',39,'conf.modeGelRub',39,...
                 ' should be set ',10,'to either ',39,'strict',39,...
                 ' or ',39,'loose',39,'.'])
     end
@@ -87,7 +87,7 @@ for p=parCols
     df = 2*vHat^2/varHatvHat;
 
     % Calculate potential scale reduction factor:
-    rHatRoot(1,p-scemPar.parCols(1)+1) = sqrt((vHat/W)*df/(df-2));
+    rHatRoot(1,p-conf.parCols(1)+1) = sqrt((vHat/W)*df/(df-2));
 
 end
 
