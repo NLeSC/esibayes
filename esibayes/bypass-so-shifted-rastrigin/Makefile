@@ -1,4 +1,4 @@
-MPIINCLUDE=/usr/lib/openmpi/include
+MPIINCLUDE=/sara/sw/openmpi-gnu-1.6.3/include
 MFILES=setmpistuff.m whoami.m
 PMFILES=$(addprefix ./../mmsoda/mmlib/,$(MFILES))
 MEXFILES=mm_send.mexa64 mm_receive.mexa64 mm_bcast.mexa64
@@ -26,7 +26,7 @@ clean:
 	rm -f matlabprog ./../mmsoda/mmlib/libmmpi.* ./../mmsoda/mmlib/mccExcludedFiles.log ./../mmsoda/mmlib/readme.txt ./../mmsoda/mmtools/*.mexa64
 
 purge:
-	rm -f results/*
+	rm -f results/*-results-*
 
 rmhostfile:
 	#if [ -z "$ PBS_ENVIRONMENT"]; then
