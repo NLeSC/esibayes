@@ -4,20 +4,20 @@
 
 <head>
 
-   <title>SCEM-UA Toolbox - calcobjscore</title>
+   <title>SODA Toolbox - calcobjscore</title>
 
-   <meta name="keywords" content="calcobjscore">
+   <meta name="keywords" content="sodaCalcObjScore">
 
-   <meta name="description" content="calcobjscore">
+   <meta name="description" content="sodaCalcObjScore">
 
    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-  
+
    <meta name="robots" content="index, follow">
 
    <meta author="Jurriaan H. Spaaks">
 
-   <link type="text/css" rel="stylesheet" href="styles/soda_styles.css">
- 
+   <link type="text/css" rel="stylesheet" href="styles/soda-styles.css">
+
 </head>
 
 
@@ -26,8 +26,8 @@
 <a name="_top"></a>
 
 <div class="linkheader">
-<a href="matlab:edit(fullfile(scemroot,'calcobjscore'))">View source code of the function <span style="font-family:monospace">calcobjscore()</span> in the MATLAB editor</a><br><br>
-<a href="matlab:web(fullfile(scemroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+<a href="matlab:edit(fullfile(sodaroot,'sodaCalcObjScore'))">View source code of the function <span style="font-family:monospace">sodaCalcObjScore()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(sodaroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
 </div>
 
 <div class="spacer">
@@ -35,7 +35,7 @@
 
 
 <div class="h1">
-calcobjscore
+sodaCalcObjScore
 </div>
 
 
@@ -44,7 +44,7 @@ Syntax
 </div>
 
 <div class="txt">
-<pre>[evalResults,nModelEvals] = calcobjscore(scemPar,evalResults,nModelEvals)</pre>
+<pre>[evalResults,nModelEvals] = sodaCalcObjScore(conf,evalResults,nModelEvals)</pre>
 </div>
 
 <div class="h2">
@@ -52,7 +52,7 @@ Description
 </div>
 
 <div class="txt">
-Function <span style="font-family:monospace">calcobjscore</span> iterates over the parameter sets in variable <span style="font-family:monospace">evalResults</span>; if a row <span style="font-family:monospace">k</span> in <span style="font-family:monospace">evalResults</span> has not yet been evaluated (<span style="font-family:monospace">evalResults(k,scemPar.evalCol)==false</span>), function <span style="font-family:monospace">calcobjscore</span> first calls the model using the model call string specified by <span style="font-family:monospace">scemPar.modelCallStr</span>. The model result is directed towards an objective function as specified by <span style="font-family:monospace">scemPar.objCallStr</span>. Both the model function itself and the objective function are called using an <a href="matlab:doc matlab/eval"><span style="font-family:monospace">eval</span></a> statement. The objective function should be constructed in such a way that it yields a 1x1 array objective score.
+Function <span style="font-family:monospace">sodaCalcObjScore</span> iterates over the parameter sets in variable <span style="font-family:monospace">evalResults</span>; if a row <span style="font-family:monospace">k</span> in <span style="font-family:monospace">evalResults</span> has not yet been evaluated (<span style="font-family:monospace">evalResults(k,conf.evalCol)==false</span>), function <span style="font-family:monospace">calcobjscore</span> first calls the model using the model call string specified by <span style="font-family:monospace">conf.modelCallStr</span>. The model result is directed towards an objective function as specified by <span style="font-family:monospace">conf.objCallStr</span>. Both the model function itself and the objective function are called using an <a href="matlab:doc matlab/eval"><span style="font-family:monospace">eval</span></a> statement. The objective function should be constructed in such a way that it yields a 1x1 array objective score.
 </div>
 
 
