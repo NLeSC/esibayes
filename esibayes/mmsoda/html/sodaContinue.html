@@ -4,20 +4,20 @@
 
 <head>
 
-   <title>SCEM-UA Toolbox - continuescem</title>
+   <title>SODA Toolbox - sodaContinue</title>
 
-   <meta name="keywords" content="continuescem">
+   <meta name="keywords" content="sodaContinue">
 
-   <meta name="description" content="continuescem">
+   <meta name="description" content="sodaContinue">
 
    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-  
+
    <meta name="robots" content="index, follow">
 
    <meta author="Jurriaan H. Spaaks">
 
-   <link type="text/css" rel="stylesheet" href="styles/soda_styles.css">
- 
+   <link type="text/css" rel="stylesheet" href="styles/soda-styles.css">
+
 </head>
 
 
@@ -27,8 +27,8 @@
 
 
 <div class="linkheader">
-<a href="matlab:edit(fullfile(scemroot,'continuescem'))">View source code of the function <span style="font-family:monospace">continuescem()</span> in the MATLAB editor</a><br><br>
-<a href="matlab:web(fullfile(scemroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+<a href="matlab:edit(fullfile(sodaroot,'sodaContinue'))">View source code of the function <span style="font-family:monospace">sodaContinue()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(sodaroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
 </div>
 
 <div class="spacer">
@@ -37,7 +37,7 @@
 
 
 <div class="h1">
-continuescem
+sodaContinue
 </div>
 
 <div class="h2">
@@ -45,7 +45,7 @@ Syntax
 </div>
 
 <div class="txt">
-<pre>runCondition = continuescem(scemPar,nModelEvals)</pre>
+<pre>runCondition = sodaContinue(conf,nModelEvals)</pre>
 </div>
 
 <div class="h2">
@@ -55,8 +55,8 @@ Description
 <div class="txt">
 This function determines whether the optimization procedure should continue. Termination is based on one of the following:<br>
 <ol>
-<li>the maximum number of iterations as specified by <span style="font-family:monospace">scemPar.nModelEvalsMax</span> has been reached;</li>
-<li>the optimization end time as specified by <span style="font-family:monospace">scemPar.optEndTime</span> has been exceeded;</li>
+<li>the maximum number of iterations as specified by <span style="font-family:monospace">conf.nModelEvalsMax</span> has been reached;</li>
+<li>the optimization end time as specified by <span style="font-family:monospace">conf.optEndTime</span> has been exceeded;</li>
 <li>convergence has been achieved.</li>
 </ol>
 
