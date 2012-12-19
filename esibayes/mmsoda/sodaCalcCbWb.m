@@ -1,10 +1,10 @@
-function [Cb,Wb] = sodaCalcCbWb(scemPar)
+function [Cb,Wb] = sodaCalcCbWb(conf)
 %
-% <a href="matlab:web(fullfile(scemroot,'html','calccbwb.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
+% <a href="matlab:web(fullfile(sodaroot,'html','calccbwb.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
 %
 % This function calculates the parameters for the exponential power density
 % Equation [20] paper by Thiemann et al. WRR 2001, Vol 37, No 10, 2521-2535
-kurt = scemPar.kurt;
+kurt = conf.kurt;
 
 A1 = gamma(3*(1+kurt)/2); 
 A2 = gamma((1+kurt)/2); 
