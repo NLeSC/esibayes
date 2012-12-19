@@ -4,20 +4,20 @@
 
 <head>
 
-   <title>SCEM-UA Toolbox - generateoffspring</title>
+   <title>SODA Toolbox - sodaGenerateOffspring</title>
 
-   <meta name="keywords" content="generateoffspring">
+   <meta name="keywords" content="sodaGenerateOffspring">
 
-   <meta name="description" content="generateoffspring">
+   <meta name="description" content="sodaGenerateOffspring">
 
    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-  
+
    <meta name="robots" content="index, follow">
 
    <meta author="Jurriaan H. Spaaks">
 
-   <link type="text/css" rel="stylesheet" href="styles/soda_styles.css">
- 
+   <link type="text/css" rel="stylesheet" href="styles/soda-styles.css">
+
 </head>
 
 
@@ -26,8 +26,8 @@
 <a name="_top"></a>
 
 <div class="linkheader">
-<a href="matlab:edit(fullfile(scemroot,'generateoffspring'))">View source code of the function <span style="font-family:monospace">generateoffspring()</span> in the MATLAB editor</a><br><br>
-<a href="matlab:web(fullfile(scemroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+<a href="matlab:edit(fullfile(sodaroot,'sodaGenerateOffspring'))">View source code of the function <span style="font-family:monospace">sodaGenerateOffspring()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(sodaroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
 </div>
 
 <div class="spacer">
@@ -35,7 +35,7 @@
 
 
 <div class="h1">
-generateoffspring
+sodaGenerateOffspring
 </div>
 
 <div class="h2">
@@ -43,7 +43,7 @@ Syntax
 </div>
 
 <div class="txt">
-<pre>propChild = generateoffspring(scemPar,curCompl,curSeq)</pre>
+<pre>propChild = sodaGenerateOffspring(conf,curCompl,curSeq)</pre>
 </div>
 
 <div class="h2">
@@ -53,8 +53,8 @@ Description
 <div class="txt">
 Based on the covariance matrix of the current complex (local variable <span style="font-family:monospace">covCompl</span>), a jumping distance <span style="font-family:monospace">jumpDist</span> is calculated as the product of:
 <ol>
-<li>a random draw from a normal distribution of dimension <span style="font-family:monospace">scemPar.noptPars</span>;</li>
-<li>the jump distance scaling factor <span style="font-family:monospace">scemPar.jumpRate</span>; </li>
+<li>a random draw from a normal distribution of dimension <span style="font-family:monospace">conf.noptPars</span>;</li>
+<li>the jump distance scaling factor <span style="font-family:monospace">conf.jumpRate</span>; </li>
 <li>the covariance matrix of the current complex <span style="font-family:monospace">covCompl</span>.</li>
 </ol>
 
@@ -66,13 +66,13 @@ The jump is centered on local variable <span style="font-family:monospace">jumpB
 </ol>
 
 <p>
-Whether one or the other is seleced, depends on the outcome of a test. 
+Whether one or the other is seleced, depends on the outcome of a test.
 </p>
 <p>
-If <span style="font-family:monospace">scemPar.optMethod</span> is set to <span style="font-family:monospace">'direct probability'</span>, the average complex density divided by the average sequence density must be larger than <span style="font-family:monospace">scemPar.thresholdL</span> to make the algorithm jump from the mean of the current complex; if not, the last position of the current sequence (<span style="font-family:monospace">curSeq</span>) is used. 
+If <span style="font-family:monospace">conf.optMethod</span> is set to <span style="font-family:monospace">'direct probability'</span>, the average complex density divided by the average sequence density must be larger than <span style="font-family:monospace">conf.thresholdL</span> to make the algorithm jump from the mean of the current complex; if not, the last position of the current sequence (<span style="font-family:monospace">curSeq</span>) is used.
 </p>
 <p>
-If <span style="font-family:monospace">scemPar.optMethod</span> is set to <span style="font-family:monospace">'error minimization'</span>, the ratio of average complex density over average sequence density raised to the power of <span style="font-family:monospace">-nMeasurements*(1+scemPar.kurt)/2</span> must be larger than <span style="font-family:monospace">scemPar.thresholdL</span> to make the algorithm jump from the mean of the current complex; if not, the last position of the current sequence (<span style="font-family:monospace">curSeq</span>) is used. 
+If <span style="font-family:monospace">conf.optMethod</span> is set to <span style="font-family:monospace">'error minimization'</span>, the ratio of average complex density over average sequence density raised to the power of <span style="font-family:monospace">-nMeasurements*(1+conf.kurt)/2</span> must be larger than <span style="font-family:monospace">conf.thresholdL</span> to make the algorithm jump from the mean of the current complex; if not, the last position of the current sequence (<span style="font-family:monospace">curSeq</span>) is used.
 </p>
 
 

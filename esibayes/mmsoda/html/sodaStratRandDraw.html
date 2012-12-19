@@ -4,20 +4,20 @@
 
 <head>
 
-   <title>SCEM-UA Toolbox - stratranddraw</title>
+   <title>SODA Toolbox - sodaStratRandDraw</title>
 
-   <meta name="keywords" content="stratranddraw">
+   <meta name="keywords" content="sodaStratRandDraw">
 
-   <meta name="description" content="stratranddraw">
+   <meta name="description" content="sodaStratRandDraw">
 
    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-  
+
    <meta name="robots" content="index, follow">
 
    <meta author="Jurriaan H. Spaaks">
 
-   <link type="text/css" rel="stylesheet" href="styles/soda_styles.css">
- 
+   <link type="text/css" rel="stylesheet" href="styles/soda-styles.css">
+
 </head>
 
 
@@ -26,8 +26,8 @@
 <a name="_top"></a>
 
 <div class="linkheader">
-<a href="matlab:edit(fullfile(scemroot,'stratranddraw'))">View source code of the function <span style="font-family:monospace">stratranddraw()</span> in the MATLAB editor</a><br><br>
-<a href="matlab:web(fullfile(scemroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+<a href="matlab:edit(fullfile(sodaroot,'sodaStratRandDraw'))">View source code of the function <span style="font-family:monospace">sodaStratRandDraw()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(sodaroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
 </div>
 
 <div class="spacer">
@@ -35,7 +35,7 @@
 
 
 <div class="h1">
-stratranddraw
+sodaStratRandDraw
 </div>
 
 <div class="h2">
@@ -43,7 +43,7 @@ Syntax
 </div>
 
 <div class="txt">
-<pre>sRandDraw = stratranddraw(scemPar)</pre>
+<pre>sRandDraw = sodaStratRandDraw(conf)</pre>
 </div>
 
 <div class="h2">
@@ -52,10 +52,10 @@ Description
 
 <div class="txt">
 <p>
-Stratified random sampling of points from the valid parameter space as defined by <span style="font-family:monospace">scemPar.parRangeMin</span> and <span style="font-family:monospace">scemPar.parRangeMax</span>.  
+Stratified random sampling of points from the valid parameter space as defined by <span style="font-family:monospace">conf.parSpaceLoBound</span> and <span style="font-family:monospace">conf.parSpaceHiBound</span>.
 </p>
 <p>
-<span style="font-family:monospace">stratranddraw</span> divides each axis <span style="font-family:monospace">(1..scemPar.nOptPars)</span> into  <span style="font-family:monospace">X</span> segments, such that <span style="font-family:monospace">X</span> is the largest positive integer for which <span style="font-family:monospace">X^scemPar.nOptPars < scemPar.nSamples</span>. This way the parameter space is divided into <span style="font-family:monospace">nStratRandSamples</span> hyperrectangles. From each hyperrectangle, exactly one random sample is taken. When the number of required samples <span style="font-family:monospace">scemPar.nSamples</span> is larger than <span style="font-family:monospace">nStratRandSamples</span>, an additional <span style="font-family:monospace">nSamples-nStratRandSamples</span> samples are taken using uniform random sampling of the parameter space (see <a href="unifranddraw.html">unifranddraw</a>).
+<span style="font-family:monospace">sodaStratRandDraw</span> divides each axis <span style="font-family:monospace">(1..conf.nOptPars)</span> into  <span style="font-family:monospace">X</span> segments, such that <span style="font-family:monospace">X</span> is the largest positive integer for which <span style="font-family:monospace">X^conf.nOptPars < conf.nSamples</span>. This way the parameter space is divided into <span style="font-family:monospace">nStratRandSamples</span> hyperrectangles. From each hyperrectangle, exactly one random sample is taken. When the number of required samples <span style="font-family:monospace">conf.nSamples</span> is larger than <span style="font-family:monospace">nStratRandSamples</span>, an additional <span style="font-family:monospace">nSamples-nStratRandSamples</span> samples are taken using uniform random sampling of the parameter space (see <a href="unifranddraw.html">sodaUnifRandDraw</a>).
 </p>
 </div>
 

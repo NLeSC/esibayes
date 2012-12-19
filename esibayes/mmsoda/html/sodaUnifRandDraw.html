@@ -4,20 +4,20 @@
 
 <head>
 
-   <title>SCEM-UA Toolbox - unifranddraw</title>
+   <title>SODA Toolbox - sodaUnifRandDraw</title>
 
-   <meta name="keywords" content="unifranddraw">
+   <meta name="keywords" content="sodaUnifRandDraw">
 
-   <meta name="description" content="unifranddraw">
+   <meta name="description" content="sodaUnifRandDraw">
 
    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-  
+
    <meta name="robots" content="index, follow">
 
    <meta author="Jurriaan H. Spaaks">
 
-   <link type="text/css" rel="stylesheet" href="styles/soda_styles.css">
- 
+   <link type="text/css" rel="stylesheet" href="styles/soda-styles.css">
+
 </head>
 
 
@@ -27,8 +27,8 @@
 
 
 <div class="linkheader">
-<a href="matlab:edit(fullfile(scemroot,'unifranddraw'))">View source code of the function <span style="font-family:monospace">unifranddraw()</span> in the MATLAB editor</a><br><br>
-<a href="matlab:web(fullfile(scemroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+<a href="matlab:edit(fullfile(sodaroot,'sodaUnifRandDraw'))">View source code of the function <span style="font-family:monospace">sodaUnifRandDraw()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(sodaroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
 </div>
 
 <div class="spacer">
@@ -36,7 +36,7 @@
 
 
 <div class="h1">
-unifranddraw
+sodaUnifRandDraw
 </div>
 
 <div class="h2">
@@ -44,7 +44,7 @@ Syntax
 </div>
 
 <div class="txt">
-<pre>uRandDraw = unifranddraw(scemPar)</pre>
+<pre>uDraw = sodaUnifRandDraw(conf,drawMode)</pre>
 </div>
 
 <div class="h2">
@@ -53,7 +53,7 @@ Description
 
 <div class="txt">
 <p>
-Uniform random sampling of points from the valid parameter space as defined by <span style="font-family:monospace">scemPar.parRangeMin</span> and <span style="font-family:monospace">scemPar.parRangeMax</span>.  
+Uniform random sampling of points from the valid parameter space as defined by <span style="font-family:monospace">conf.parSpaceLoBound</span> and <span style="font-family:monospace">conf.parSpaceHiBound</span>.
 </p>
 
 </div>

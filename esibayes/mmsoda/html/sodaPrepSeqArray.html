@@ -4,20 +4,20 @@
 
 <head>
 
-   <title>SCEM-UA Toolbox - prepseqarray</title>
+   <title>SODA Toolbox - sodaPrepSeqArray</title>
 
-   <meta name="keywords" content="prepseqarray">
+   <meta name="keywords" content="sodaPrepSeqArray">
 
-   <meta name="description" content="prepseqarray">
+   <meta name="description" content="sodaPrepSeqArray">
 
    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-  
+
    <meta name="robots" content="index, follow">
 
    <meta author="Jurriaan H. Spaaks">
 
-   <link type="text/css" rel="stylesheet" href="styles/soda_styles.css">
- 
+   <link type="text/css" rel="stylesheet" href="styles/soda-styles.css">
+
 </head>
 
 
@@ -26,8 +26,8 @@
 <a name="_top"></a>
 
 <div class="linkheader">
-<a href="matlab:edit(fullfile(scemroot,'prepseqarray'))">View source code of the function <span style="font-family:monospace">prepseqarray()</span> in the MATLAB editor</a><br><br>
-<a href="matlab:web(fullfile(scemroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+<a href="matlab:edit(fullfile(sodaroot,'sodaPrepSeqArray'))">View source code of the function <span style="font-family:monospace">sodaPrepSeqArray()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(sodaroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
 </div>
 
 <div class="spacer">
@@ -36,14 +36,15 @@
 
 
 <div class="h1">
-prepseqarray</div>
+sodaPrepSeqArray
+</div>
 
 <div class="h2">
 Syntax
 </div>
 
 <div class="txt">
-<pre>sequences = prepseqarray(scemPar,sequences)</pre>
+<pre>sequences = sodaPrepSeqArray(conf,sequences)</pre>
 </div>
 
 <div class="h2">
@@ -51,7 +52,7 @@ Description
 </div>
 
 <div class="txt">
-Function <span style="font-family:monospace">prepseqarray</span> prepares the array <span style="monospace">sequences</span> for the next generation by pre-allocation. This is achieved by concatenating the existing array <span style="font-family:monospace">sequences</span> with an array of size <span style="font-family:monospace">[scemPar.nOffspringPerCompl,size(sequences,2),scemPar.nCompl]</span>, filled with NaNs.
+Function <span style="font-family:monospace">sodaPrepSeqArray</span> prepares the array <span style="monospace">sequences</span> for the next generation by pre-allocation. This is achieved by concatenating the existing array <span style="font-family:monospace">sequences</span> with an array of size <span style="font-family:monospace">[conf.nOffspringPerCompl,size(sequences,2),conf.nCompl]</span>, filled with NaNs.
 </div>
 
 

@@ -1,4 +1,4 @@
-function complexes = conftComplexes(conf,evalResults)
+function complexes = sodaPartComplexes(conf,evalResults)
 %
 % <a href="matlab:web(fullfile(scemroot,'html','partcomplexes.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
 %

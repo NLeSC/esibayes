@@ -1,6 +1,6 @@
 function propChild = sodaGenerateOffspring(conf,curCompl,curSeq,iGeneration)
 %
-% <a href="matlab:web(fullfile(scemroot,'html','generateoffspring.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
+% <a href="matlab:web(fullfile(sodaroot,'html','generateoffspring.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
 %
 %
 
