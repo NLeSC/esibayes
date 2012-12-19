@@ -43,7 +43,7 @@ nCompl = 5;
 % define the number of samples used for the burn-in
 nSamples = 10*nCompl;
 % define the maximum number of parameter space samples
-nModelEvalsMax = nSamples+100*(1/5)*nSamples;
+nModelEvalsMax = nSamples+3*(1/5)*nSamples;
 % define the number of ensemble members to use in the EnKF
 nMembers = 10;
 % specify if soda should visualize the results as they become available (requires X forwarding over ssh)

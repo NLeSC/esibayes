@@ -21,6 +21,7 @@ R = parVec(1);
 
 
 for iPrior=2:nPriorChunk
+    pause(0.1);
 
     timeNow = timeVecPrior(iPrior-1);
 

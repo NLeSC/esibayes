@@ -11,15 +11,15 @@ case $mode in
 
 1)
     ## interactive on one of the login nodes
-    echo "unloading module matlab/64"
-    module unload matlab/64
-    echo "loading module openmpi/gnu/64"
-    module load openmpi/gnu/64
+    echo "unloading module matlab"
+    module unload matlab
+    echo "loading module openmpi/gnu"
+    module load openmpi/gnu/
     echo "loading module mcr"
-    module load mcr/64
+    module load mcr
     echo "Starting MPI job on node "`hostname`
     ncpus=`cat /proc/cpuinfo | grep processor | wc -l`
-    nprocs=4
+    nprocs=8
     echo "I detected that "`hostname`" has "$ncpus" processors, but I'll start only "$nprocs" processes to keep the sysadmins happy."
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./../mmsoda/mmlib
     date

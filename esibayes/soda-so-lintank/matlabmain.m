@@ -6,6 +6,12 @@ if ~(exist('mpisize','var')==1)
     whoami()
 end
 
+timing.code(1)=uint8(0);
+timing.timer(1)=double(0);
+timing.counter=uint32(0);
+timing.starttime=tic;
+assignin('base','timing',timing);
+
 if mpirank == 0
 
     % run the MPI server in a while loop as process with mpirank 0
@@ -23,47 +29,8 @@ else
 
 end
 
-try
-    sendcounter = evalin('base','sendcounter');
-catch
-    sendcounter = 0;
-end
+fn=sprintf('timing_%03d.mat',mpirank);
+timing = evalin('base','timing');
+save(fn,'timing');
 
-try
-    sumsend = evalin('base','sumsend');
-catch
-    sumsend = 0;
-end
-
-try
-    recvcounter = evalin('base','recvcounter');
-catch
-    recvcounter = 0;
-end
-
-try
-    sumrecv = evalin('base','sumrecv');
-catch
-    sumrecv = 0;
-end
-
-if ~(exist('sumrun','var')==1)
-    sumrun=0;
-    runcounter=0;
-end
-
-%Statistics of sending / calculating
-str = sprintf('%03d - Summary of sending',mpirank);
-disp(str)
-str = sprintf('%03d - Messages: %9d --- Time: %s',mpirank,sendcounter,sumsend);
-disp(str)
-str = sprintf('%03d - Summary of receiving',mpirank);
-disp(str)
-str = sprintf('%03d - Messages: %9d --- Time: %s',mpirank,recvcounter,sumrecv);
-disp(str)
-str = sprintf('%03d - Summary of tasks',mpirank);
-disp(str)
-str = sprintf('%03d - Tasks: %9d --- Time: %s',mpirank,runcounter,sumrun);
-disp(str)
-        
 end

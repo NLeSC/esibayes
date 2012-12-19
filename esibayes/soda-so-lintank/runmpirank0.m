@@ -16,7 +16,15 @@ while ~allWorkersAreDead
         str=sprintf('%03d - Waiting for a message...',mpirank);
         disp(str)
     end
+    timing = evalin('base','timing');
+    timing.counter=timing.counter+1;
+    timing.code(timing.counter)=uint8(41);
+    assignin('base','timing',timing);
     message = receivevar;
+    timing = evalin('base','timing');
+    timing.counter=timing.counter+1;
+    timing.code(timing.counter)=uint8(42);
+    assignin('base','timing',timing);
 
     switch message.cmd
 
@@ -139,7 +147,6 @@ while ~allWorkersAreDead
                 disp(str)
             end
 
-            stoptrserver()
             if verbosity>=1
                 str = sprintf('%03d - Exiting.',mpirank);
                 disp(str)
