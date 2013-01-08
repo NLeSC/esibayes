@@ -1,7 +1,7 @@
 #include "mex.h"
 #include <mpi.h>
 #include <string.h>
-#include "../mmlib/matlabmpi.h"
+#include "matlabmpi.h"
 /*
  * Tiny function that receives a message
  */

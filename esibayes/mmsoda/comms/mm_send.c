@@ -2,7 +2,7 @@
 #include <mpi.h>
 #include <stdio.h>
 #include <string.h>
-#include "../mmlib/matlabmpi.h"
+#include "matlabmpi.h"
 /*
  * Function that sends a message (variable)
  */
