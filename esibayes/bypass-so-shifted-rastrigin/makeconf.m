@@ -1,4 +1,6 @@
-function makeconf(N)
+function makeconf()
+
+N = 100;
 
 
 % define the objective function name
