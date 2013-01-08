@@ -1,4 +1,6 @@
-function makeconf(makeRespSurf)
+function makeconf()
+
+makeRespSurf = true;
 
 
 % define the objective function name
