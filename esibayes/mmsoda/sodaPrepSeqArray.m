@@ -5,5 +5,5 @@ function sequences = sodaPrepSeqArray(conf,sequences)
 
 TMP = repmat(NaN,[conf.nOffspringPerCompl,...
                            size(sequences,2),...
-                            scemPar.nCompl]);
+                            conf.nCompl]);
 sequences = cat(1,sequences,TMP);

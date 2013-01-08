@@ -21,26 +21,25 @@ switch sodaOptions{1}
                 soda('-addtools','-quiet')
             end
 
-            fid=fopen(fullfile(sodaroot,'info.xml.template'),'r');
-            textInfoXML='';
-            while true
-                tline = fgets(fid);
-                if ischar(tline)
-                    textInfoXML = [textInfoXML,tline];
-                else
-                    break
-                end
-            end
-            fclose(fid);
-
-            fid=fopen(fullfile(sodaroot,'info.xml'),'wt');
-            fprintf(fid,textInfoXML,sodaroot);
-            fclose(fid);
-
-            if conf.verboseOutput
-                disp(['SODA: ',char(39),'info.xml',char(39),' file ',...
-                    'written successfully. '])
-            end
+            % fid=fopen(fullfile(sodaroot,'info.xml.template'),'r');
+            % textInfoXML='';
+            % while true
+            %     tline = fgets(fid);
+            %     if ischar(tline)
+            %         textInfoXML = [textInfoXML,tline];
+            %     else
+            %         break
+            %     end
+            % end
+            % fclose(fid);
+            % 
+            % fid=fopen(fullfile(sodaroot,'info.xml'),'wt');
+            % fprintf(fid,textInfoXML,sodaroot);
+            % fclose(fid);
+            % if conf.verboseOutput
+            %     disp(['SODA: ',char(39),'info.xml',char(39),' file ',...
+            %         'written successfully. '])
+            % end
 
         catch
             if conf.verboseOutput
@@ -192,10 +191,11 @@ switch sodaOptions{1}
 
     case '-rmpath'
         s=sodaroot;
-        rmpath(s)
         rmpath(fullfile(s,'tools'))
         rmpath(fullfile(s,'visualization'))
         rmpath(fullfile(s,'enkf'))
+        rmpath(fullfile(s,'mo'))        
+        rmpath(s)        
         clear s
 
         disp('SODA toolbox has successfully been removed from the path.')

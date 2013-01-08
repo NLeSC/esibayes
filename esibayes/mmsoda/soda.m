@@ -43,6 +43,9 @@ elseif isempty(varargin)
     conf.nOptPars = numel(conf.parNames);
     if any(strcmp(conf.modeStr,{'soda','reset'}))
         conf.nStatesKF = numel(conf.stateNamesKF);
+        if ~isfield(conf,'namesNOKF')
+            conf.namesNOKF = {};
+        end
         conf.nNOKF = numel(conf.namesNOKF);
         conf.nPrior = numel(conf.priorTimes);
         if ~isfield(conf,'assimilate')
@@ -129,7 +132,7 @@ elseif isempty(varargin)
     conf.nOffspringPerCompl = conf.nOffspring/conf.nCompl;
 
     % Calculate the parameters in the exponential power density function:
-    [conf.cBeta,conf.omegaBeta] = sodaCalcCbWb(conf);
+%     [conf.cBeta,conf.omegaBeta] = sodaCalcCbWb(conf);
 
 
     % Indicate the meaning of each column in 'evalResults':
@@ -528,14 +531,12 @@ if all(nOut<[2:5])
     error(['Function ',39,mfilename,39,' should have at least 2 output arguments.',char(10),...
         '[evalResults,critGelRub]=soda(conf)',char(10),...
         '[evalResults,critGelRub,conf]=soda(conf)',char(10),...
-        '[evalResults,critGelRub,sequences,conf]=soda(conf)',char(10),...
-        '[evalResults,critGelRub,sequences,conf,bayesStore]=soda(conf)',char(10)])
+        '[evalResults,critGelRub,sequences,conf]=soda(conf)',char(10)])
 elseif all(nOut>[2:5])
     error(['Function ',39,mfilename,39,' should have at most 5 output arguments.',char(10),...
         '[evalResults,critGelRub]=soda(conf)',char(10),...
         '[evalResults,critGelRub,conf]=soda(conf)',char(10),...
-        '[evalResults,critGelRub,sequences,conf]=soda(conf)',char(10),...
-        '[evalResults,critGelRub,sequences,conf,bayesStore]=soda(conf)',char(10)])
+        '[evalResults,critGelRub,sequences,conf]=soda(conf)',char(10)])
 end
 
 if conf.nCompl<2

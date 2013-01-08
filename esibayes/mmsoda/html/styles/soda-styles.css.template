@@ -11,7 +11,7 @@ a:hover {
 
 
 div {
-      width:700px;
+      width:750px;
       padding:20px;
       font-family:verdana,times;
      }
@@ -38,7 +38,7 @@ div {
         }
 
 
-.txt    {   
+.txt    {
          font-size:90%%;
          background-color:#eeeeee;
          border-left: 1px solid #000000;
@@ -61,7 +61,7 @@ div {
              background-repeat: no-repeat;
              height:175px;
              padding-bottom:0px;
-            }  
+            }
 
 
 
