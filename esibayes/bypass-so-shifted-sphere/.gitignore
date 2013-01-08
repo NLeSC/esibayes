@@ -1,1 +1,8 @@
 matlabprog
+libmmpi.c
+libmmpi.exports
+libmmpi.h
+libmmpi.so
+mccExcludedFiles.log
+readme.txt
+timing_???.mat

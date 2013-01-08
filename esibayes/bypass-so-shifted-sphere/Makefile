@@ -1,8 +1,6 @@
 MPIINCLUDE=/sara/sw/openmpi-gnu-1.6.3/include
-MFILES=setmpistuff.m whoami.m
-PMFILES=$(addprefix ./../mmsoda/mmlib/,$(MFILES))
-MEXFILES=mm_send.mexa64 mm_receive.mexa64 mm_bcast.mexa64
-PMEXFILES=$(addprefix ./../mmsoda/mmtools/,$(MEXFILES))
+MFILES=./../mmsoda/comms/*.m ./../mmsoda/mmlib/*.m
+MEXFILES=./../mmsoda/comms/mm_bcast.mexa64 ./../mmsoda/comms/mm_receive.mexa64 ./../mmsoda/comms/mm_send.mexa64
 USERMODELFILES=model/*.m
 MMSODAMFILES=./../mmsoda/*.m ./../mmsoda/tools/*.m ./../mmsoda/visualization/*.m ./../mmsoda/enkf/*.m  ./../mmsoda/mo/*.m
 MMSODAOTHERFILES=-a ./../mmsoda/soda-default-settings.ini
@@ -12,18 +10,17 @@ VERBOSITY=-v
 
 all: lib matlabprog
 
-./../mmsoda/mmtools/%.mexa64: ./../mmsoda/mmtools/%.c
+./../mmsoda/comms/%.mexa64: ./../mmsoda/comms/%.c
 	mex -I$(MPIINCLUDE) -lmpi $(VERBOSITY) -o $@ $<
 
-lib: *.m $(PMFILES) $(PMEXFILES)
-	mcc -B csharedlib:libmmpi *.m $(PMFILES) $(PMEXFILES) $(USERMODELFILES) $(MMSODAMFILES) $(MMSODAOTHERFILES) $(VERBOSITY)
-	mv mccExcludedFiles.log readme.txt libmmpi.* ./../mmsoda/mmlib
+lib: $(MFILES) $(MEXFILES)
+	mcc -B csharedlib:libmmpi $(MFILES) $(MEXFILES) $(USERMODELFILES) $(MMSODAMFILES) $(MMSODAOTHERFILES) $(VERBOSITY)
 
 matlabprog: lib
-	mbuild -output matlabprog ./../mmsoda/mmlib/matlabmpi.c -L./../mmsoda/mmlib -I./../mmsoda/mmlib -I$(MPIINCLUDE) -lmmpi -lmpi
+	mbuild -output matlabprog ./../mmsoda/comms/matlabmpi.c -L. -I. -I$(MPIINCLUDE) -lmmpi -lmpi $(VERBOSITY)
 
 clean:
-	rm -f matlabprog ./../mmsoda/mmlib/libmmpi.* ./../mmsoda/mmlib/mccExcludedFiles.log ./../mmsoda/mmlib/readme.txt ./../mmsoda/mmtools/*.mexa64
+	rm -f matlabprog libmmpi.* mccExcludedFiles.log readme.txt ./../mmsoda/comms/*.mexa64
 
 purge:
 	rm -f results/*-results-*

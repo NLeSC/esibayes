@@ -151,6 +151,8 @@ switch sodaOptions{1}
             addpath(fullfile(sodaroot,'visualization'))
             addpath(fullfile(sodaroot,'enkf'))
             addpath(fullfile(sodaroot,'mo'))
+            addpath(fullfile(sodaroot,'mmlib'))
+            addpath(fullfile(sodaroot,'comms'))
 
             if conf.verboseOutput
                 disp('SODA: tools should now be available.')
@@ -195,6 +197,8 @@ switch sodaOptions{1}
         rmpath(fullfile(s,'visualization'))
         rmpath(fullfile(s,'enkf'))
         rmpath(fullfile(s,'mo'))        
+        rmpath(fullfile(s,'mmlib'))
+        rmpath(fullfile(s,'comms'))
         rmpath(s)        
         clear s
 
