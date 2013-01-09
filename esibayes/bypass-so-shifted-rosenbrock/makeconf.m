@@ -21,7 +21,7 @@ doPlot = true;
 sampleDrawMode = 'stratified';
 if makeRespSurf
     % define the number of samples used for the burn-in
-    nSamples = 100*100;
+    nSamples = 50*50;
     % define the maximum number of parameter space samples
     nModelEvalsMax = nSamples;
 else
