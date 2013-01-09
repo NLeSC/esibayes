@@ -22,8 +22,9 @@ case $mode in
     nprocs=8
     echo "I detected that "`hostname`" has "$ncpus" processors, but I'll start only "$nprocs" processes to keep the sysadmins happy."
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.
+    export MCR_CACHE_ROOT=$TMPDIR
     date
-    mpirun -n $nprocs ./matlabprog -v 0 -b 500000000
+    mpirun -n $nprocs ./matlabprog -v 0
     date
     ;;
 2)
@@ -42,6 +43,7 @@ case $mode in
     ((nprocs=$ncpus))
     echo "I detected that "`hostname`" has "$ncpus" processors. I'll start "$nprocs" processes."
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.
+    export MCR_CACHE_ROOT=$TMPDIR
     mpirun -n $nprocs ./matlabprog
     ;;
 3)
@@ -70,6 +72,7 @@ case $mode in
     echo "Starting interactive MPI job on "$nnodes" batch nodes with a total of "$nprocs" CPUs."
     cat $TMPDIR/myhostfile
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PBS_O_WORKDIR
+    export MCR_CACHE_ROOT=$TMPDIR
     cd $PBS_O_WORKDIR
     mpirun -np $nprocs -hostfile $TMPDIR/myhostfile $PBS_O_WORKDIR/matlabprog
     ;;
