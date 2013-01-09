@@ -1,4 +1,14 @@
-function makeconf(iStart,iEnd,wu,numTime,dailyDischarge)
+function makeconf()
+
+
+% load the artificial data
+load('./data/leafriver-art.m.mat','numTime','dailyDischarge',...
+    'dailyPotEvapTrans','dailyPrecip','wu','iStart','iEnd','convFactor',...
+    'obsQSigma')
+
+sodaPack
+save('./data/constants.m.mat','mConstants')
+clear mConstants
 
 
 % define what kind of run this will be ('bypass', 'scemua', 'reset' , or 'soda')
@@ -26,12 +36,15 @@ nModelEvalsMax = nSamples+500*(1/5)*nSamples;
 % define the number of ensemble members to use in the EnKF
 nMembers = 1;
 % specify if soda should visualize the results as they become available (requires X forwarding over ssh)
-doPlot = true;
+doPlot = false;
 % specify how the parameter space is sampled ('stratified', 'stratified random'), useful for making imagescs of sensitivity
 sampleDrawMode = 'stratified';
 startFromUniform = true;
 drawInterval = 10;
 realPartOnly = true;
+saveInterval = 0; %dont' save for performance
+saveEnKFResults = false % not used in scemua but whatever
+
 
 if doPlot
    figure
@@ -47,6 +60,11 @@ clear iEnd
 clear wu
 clear numTime
 clear dailyDischarge
+clear dailyPotEvapTrans
+clear dailyPrecip
+clear convFactor
+clear obsQSigma
+
 
 save('./results/conf.mat')
 

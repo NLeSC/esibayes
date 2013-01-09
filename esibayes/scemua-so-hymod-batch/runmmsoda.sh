@@ -11,19 +11,19 @@ case $mode in
 
 1)
     ## interactive on one of the login nodes
-    echo "unloading module matlab/64"
-    module unload matlab/64
-    echo "loading module openmpi/gnu/64"
-    module load openmpi/gnu/64
+    echo "unloading module matlab"
+    module unload matlab
+    echo "loading module openmpi/gnu"
+    module load openmpi/gnu/
     echo "loading module mcr"
-    module load mcr/64
+    module load mcr
     echo "Starting MPI job on node "`hostname`
     ncpus=`cat /proc/cpuinfo | grep processor | wc -l`
-    nprocs=4
+    nprocs=8
     echo "I detected that "`hostname`" has "$ncpus" processors, but I'll start only "$nprocs" processes to keep the sysadmins happy."
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./../mmsoda/mmlib
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.
     date
-    mpirun -n $nprocs ./matlabprog -v 0
+    mpirun -n $nprocs ./matlabprog -v 0 -b 500000000
     date
     ;;
 2)
@@ -41,7 +41,7 @@ case $mode in
     ncpus=`cat /proc/cpuinfo | grep processor | wc -l`
     ((nprocs=$ncpus))
     echo "I detected that "`hostname`" has "$ncpus" processors. I'll start "$nprocs" processes."
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./../mmsoda/mmlib
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.
     mpirun -n $nprocs ./matlabprog
     ;;
 3)
@@ -69,7 +69,7 @@ case $mode in
     done
     echo "Starting interactive MPI job on "$nnodes" batch nodes with a total of "$nprocs" CPUs."
     cat $TMPDIR/myhostfile
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PBS_O_WORKDIR/../mmsoda/mmlib
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PBS_O_WORKDIR
     cd $PBS_O_WORKDIR
     mpirun -np $nprocs -hostfile $TMPDIR/myhostfile $PBS_O_WORKDIR/matlabprog
     ;;

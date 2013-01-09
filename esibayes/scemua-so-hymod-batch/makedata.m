@@ -1,5 +1,4 @@
-
-
+function makedata()
 
 
 load('./data/leafriver.mat','numTime','dailyDischarge','dailyPotEvapTrans','dailyPrecip')
