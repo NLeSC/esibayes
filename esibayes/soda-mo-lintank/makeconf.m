@@ -1,5 +1,10 @@
 function makeconf(obsTime,obsWaterLevel)
 
+
+% load the observations that were just created by 'makedata'
+load('./data/obs.m.mat','obsWaterLevel','obsTime')
+
+
 % define what kind of run this will be ('scemua', 'reset' , or 'soda')
 modeStr = 'soda';
 % define the model name
@@ -47,11 +52,13 @@ nModelEvalsMax = nSamples+100*(1/5)*nSamples;
 % define the number of ensemble members to use in the EnKF
 nMembers = 6;
 % specify if soda should visualize the results as they become available (requires X forwarding over ssh)
-doPlot = true;
+doPlot = false;
 % specify how the parameter space is sampled ('stratified', 'stratified random'), useful for making imagescs of sensitivity
 sampleDrawMode = 'stratified';
 startFromUniform = true;
 
+saveInterval = 0;
+saveEnKFResults = false;
 
 
 

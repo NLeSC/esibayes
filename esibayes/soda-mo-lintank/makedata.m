@@ -45,3 +45,20 @@ else
 end
 
 
+
+clear
+
+% load the observations that were just created by 'makedata'
+load('./data/obs.m.mat','obsWaterLevel','obsTime','obsQ','timeStep')
+simTime = obsTime;
+
+% define which variables are constants (i.e. for all parameter combinations, ensemble members, and data assimilation steps)
+mConstants = {'timeStep',1;...
+              'obsTime',obsTime;...
+              'obsQ',obsQ;...
+              'obsWaterLevel',obsWaterLevel;...
+              'modeStr','inv'};
+          
+save('./data/constants.m.mat','mConstants')          
+
+
