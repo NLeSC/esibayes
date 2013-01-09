@@ -1,7 +1,6 @@
-
 function makeconf()
 
-N = 100;
+N = 50;
 
 % define the objective function name
 objCallStr = 'shiftedSphere';
