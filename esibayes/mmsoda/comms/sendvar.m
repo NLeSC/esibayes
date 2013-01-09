@@ -27,5 +27,3 @@ timing.counter=timing.counter+1;
 timing.timer(timing.counter)=toc(timing.starttime);
 timing.code(timing.counter)=uint8(34);
 assignin('base','timing',timing);
-
-end

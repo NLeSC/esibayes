@@ -1,6 +1,6 @@
 function matlabmain(verbosity)
 
-assignin('base','verbosity',verbosity)
+assignin('base','verbosity',verbosity);
 
 if ~(exist('mpisize','var')==1)
     whoami()
@@ -32,5 +32,3 @@ end
 fn=sprintf('timing_%03d.mat',mpirank);
 timing = evalin('base','timing');
 save(fn,'timing');
-
-end

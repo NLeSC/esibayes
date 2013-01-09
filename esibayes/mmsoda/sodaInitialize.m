@@ -151,9 +151,13 @@ switch sodaOptions{1}
             addpath(fullfile(sodaroot,'visualization'))
             addpath(fullfile(sodaroot,'enkf'))
             addpath(fullfile(sodaroot,'mo'))
-            addpath(fullfile(sodaroot,'mmlib'))
-            addpath(fullfile(sodaroot,'comms'))
-
+            if ~isdeployed
+                addpath('model')
+                % addpath('data')
+                % addpath('results')
+                addpath(fullfile(sodaroot,'mmlib'))
+                addpath(fullfile(sodaroot,'comms'))
+            end
             if conf.verboseOutput
                 disp('SODA: tools should now be available.')
             end
@@ -192,15 +196,19 @@ switch sodaOptions{1}
         end
 
     case '-rmpath'
-        s=sodaroot;
-        rmpath(fullfile(s,'tools'))
-        rmpath(fullfile(s,'visualization'))
-        rmpath(fullfile(s,'enkf'))
-        rmpath(fullfile(s,'mo'))        
-        rmpath(fullfile(s,'mmlib'))
-        rmpath(fullfile(s,'comms'))
-        rmpath(s)        
-        clear s
+        
+        rmpath(fullfile(sodaroot,'tools'))
+        rmpath(fullfile(sodaroot,'visualization'))
+        rmpath(fullfile(sodaroot,'enkf'))
+        rmpath(fullfile(sodaroot,'mo'))
+        if ~isdeployed
+                rmpath('model')
+                % rmpath('data')
+                % rmpath('results')
+                rmpath(fullfile(sodaroot,'mmlib'))
+                rmpath(fullfile(sodaroot,'comms'))
+            end
+        rmpath(sodaroot)        
 
         disp('SODA toolbox has successfully been removed from the path.')
 

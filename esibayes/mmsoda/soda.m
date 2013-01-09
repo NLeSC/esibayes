@@ -32,7 +32,7 @@ elseif isempty(varargin)
     % define whether the run should be parallel or sequential
     conf.executeInParallel = isdeployed;
     if conf.executeInParallel
-        verbosity = evalin('caller','verbosity')
+        verbosity = evalin('caller','verbosity');
     end
 
     % verify the integrity of conf's fieldnames:
@@ -269,7 +269,7 @@ elseif isempty(varargin)
         conf.startFromUniform = false;
 
     end
-    
+    conf = orderfields(conf);
     
     iGeneration  = (size(evalResults,1)-conf.nSamples)/conf.nOffspring;
 
@@ -440,7 +440,7 @@ elseif isempty(varargin)
             v = nDaysPerParSet*24;
             u = 'hours';
         end
-        conf.avgWalltimePerParSet = [sprintf('%f',v),' ',u];
+        conf.avgWalltimePerParSet = {v,u};
 
         disp([upper([conf.modeStr,soMoStr]),' run completed on: ',datestr(conf.optEndTime,...
             'mmmm dd, yyyy'),' ',datestr(conf.optEndTime,'HH:MM:SS')])
@@ -527,16 +527,19 @@ end
 function conf = check_input_integrity(conf,nOut)
 
 
-if all(nOut<[2:5])
+if nOut<2
     error(['Function ',39,mfilename,39,' should have at least 2 output arguments.',char(10),...
-        '[evalResults,critGelRub]=soda(conf)',char(10),...
-        '[evalResults,critGelRub,conf]=soda(conf)',char(10),...
-        '[evalResults,critGelRub,sequences,conf]=soda(conf)',char(10)])
+        '[evalResults,critGelRub] = soda()',char(10),...
+        '[evalResults,critGelRub,conf] = soda()',char(10),...
+        '[evalResults,critGelRub,sequences,conf] = soda()',char(10),...
+        '[evalResults,critGelRub,sequences,metropolisRejects,conf] = soda()',char(10)])
+    
 elseif all(nOut>[2:5])
     error(['Function ',39,mfilename,39,' should have at most 5 output arguments.',char(10),...
-        '[evalResults,critGelRub]=soda(conf)',char(10),...
-        '[evalResults,critGelRub,conf]=soda(conf)',char(10),...
-        '[evalResults,critGelRub,sequences,conf]=soda(conf)',char(10)])
+        '[evalResults,critGelRub] = soda()',char(10),...
+        '[evalResults,critGelRub,conf] = soda()',char(10),...
+        '[evalResults,critGelRub,sequences,conf] = soda()',char(10),...
+        '[evalResults,critGelRub,sequences,metropolisRejects,conf] = soda()',char(10)])
 end
 
 if conf.nCompl<2
