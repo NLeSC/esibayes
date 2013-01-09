@@ -17,7 +17,7 @@ nSamples = 20*nCompl;
 % define the maximum number of parameter space samples
 nModelEvalsMax = nSamples+100*(1/5)*nSamples;
 % specify if soda should visualize the results as they become available (requires X forwarding over ssh)
-doPlot = true;
+doPlot = false;
 % specify how the parameter space is sampled ('stratified', 'stratified random'), useful for making imagescs of sensitivity
 sampleDrawMode = 'stratified';
 
