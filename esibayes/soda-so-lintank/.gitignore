@@ -5,3 +5,5 @@ libmmpi.h
 libmmpi.so
 mccExcludedFiles.log
 readme.txt
+struct1.mat
+struct2.mat
