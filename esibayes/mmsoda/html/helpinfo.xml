@@ -4,7 +4,7 @@
 <?xml-stylesheet type="text/xsl" href="optional"?>
 
 <matlabrelease>14</matlabrelease>
-<name>SCEM-UA</name>
+<name>SODA</name>
 <type>toolbox</type>
 <icon>html/images/scem_ua_icon_16x16.gif</icon>
 <help_location>html</help_location>

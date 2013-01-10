@@ -58,7 +58,7 @@ Description
 <span style="font-family:monospace">converged = sodaAbortOptim(critGelRub,conf)</span>
 </p>
 <p>
-This function returns true if there are at least <span style="font-family:monospace">conf.nGelRub</span> values in the <span style="font-family:monospace">critGelRub</span> variable and these are sufficiently close. It returns false otherwise.
+This function returns true if there are at least <span style="font-family:monospace">conf.nGelRub</span> values in the <span style="font-family:monospace">critGelRub</span> variable, which must be sufficiently close (argument <span style="font-family:monospace">conf.convMaxDiff</span>) and less than <span style="font-family:monospace">conf.critGelRubConvd</span>. It returns false otherwise.
 </p>
 </div>
 

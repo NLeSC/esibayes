@@ -51,7 +51,7 @@ Description
 </div>
 
 <div class="txt">
-This function evolves a complex through a Metropolis annealing scheme, that is by accepting or rejecting a proposed child based on (1) the objective score of that child and (2) a uniform random draw. Output variable <span style="font-family:monospace">curCompl</span> contains the updated complex. Depending on how the annealing works out, <span style="font-family:monospace">acceptedChild</span> contains either the proposed child <span style="font-family:monospace">propChild</span>, or the member of <span style="font-family:monospace">curSeq</span> that has the maximum iteration number. <span style="font-family:monospace">acceptedChild</span> is an output argument because it needs to be added to the <span style="font-family:monospace">sequences</span> variable later on during execution of the optimization code.
+This function evolves a complex through a Metropolis annealing scheme, that is by accepting or rejecting a proposed child based on (1) the objective score of that child and (2) a uniform random draw. Output variable <span style="font-family:monospace">curCompl</span> contains the updated complex. Depending on how the annealing works out, <span style="font-family:monospace">acceptedChild</span> contains either the proposed child <span style="font-family:monospace">propChild</span>, or the member of <span style="font-family:monospace">curSeq</span> that has the maximum evaluation number (column <span style="font-family:monospace">conf.evalCol</span>). <span style="font-family:monospace">acceptedChild</span> is an output argument because it needs to be added to the <span style="font-family:monospace">sequences</span> variable later on.
 </div>
 
 

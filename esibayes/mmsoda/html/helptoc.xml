@@ -3,61 +3,60 @@
 
 <toc version="1.0">
 
-<tocitem target="contents.html" >SCEM-UA Toolbox
-  
+<tocitem target="contents.html" >SODA Toolbox
+
 
    <tocitem image="$toolbox/matlab/icons/reficon.gif" target="contents.html">Toolbox Contents
 
-   
+
       <tocitem image="$toolbox/matlab/icons/reficon.gif" target="contents-algorithm.html">algorithm
-   
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="abortoptim.html">abortoptim</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="allcomb.html">allcomb</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="calccbwb.html">calccbwb</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="calcobjscore.html">calcobjscore</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="continuescem.html">continuescem</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="evolvecomplex.html">evolvecomplex</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="gelmanrubin.html">gelmanrubin</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="generateoffspring.html">generateoffspring</tocitem> 
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="partcomplexes.html">partcomplexes</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="prepseqarray.html">prepseqarray</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="scemua.html">scemua</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="stratranddraw.html">stratranddraw</tocitem> 
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="unifranddraw.html">unifranddraw</tocitem> 
+
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaAbortOptim.html">sodaAbortOptim</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaAllComb.html">sodaAllComb</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaCalcObjScore.html">sodaCalcObjScore</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaContinue.html">sodaContinue</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaEvolveComplex.html">sodaEvolveComplex</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaGelmanRubin.html">sodaGelmanRubin</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaGenerateOffspring.html">sodaGenerateOffspring</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaInitialize.html">sodaInitialize</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaPartComplexes.html">sodaPartComplexes</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaPrepSeqArray.html">sodaPrepSeqArray</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaPrepRejArray.html">sodaPrepRejArray</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="soda.html">soda</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaStratDraw.html">sodaStratDraw</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaStratRandDraw.html">sodaStratRandDraw</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaUnifRandDraw.html">sodaUnifRandDraw</tocitem>
 
       </tocitem>
 
       <tocitem image="$toolbox/matlab/icons/reficon.gif" target="contents-visualization.html">visualization
-   
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="marghist.html">marghist</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="matrixofcontourf.html">matrixofcontourf</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="matrixofimagesc.html">matrixofimagesc</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="matrixofscatter.html">matrixofscatter</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="plotconv.html">plotconv</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="plotgelmanrubin.html">plotgelmanrubin</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="plotobj.html">plotobj</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="plotpaco.html">plotpaco</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="plotseq.html">plotseq</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="visualization1.html">visualization1</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="visualization2.html">visualization2</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="visualization3.html">visualization3</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="visualization4.html">visualization4</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="visualization5.html">visualization5</tocitem>
+
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaMargHist.html">sodaMargHist</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaMatrixOfScatter.html">sodaMatrixOfScatter</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaPlotConv.html">sodaPlotConv</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaPlotGelmanRubin.html">sodaPlotGelmanRubin</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaPlotObj.html">sodaPlotObj</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaPlotPaCo.html">sodaPlotPaCo</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaPlotSeq.html">sodaPlotSeq</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaVisualization1.html">sodaVisualization1</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaVisualization2.html">sodaVisualization2</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaVisualization3.html">sodaVisualization3</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaVisualization4.html">sodaVisualization4</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaVisualization5.html">sodaVisualization5</tocitem>
 
       </tocitem>
 
 
-   
+
       <tocitem image="$toolbox/matlab/icons/reficon.gif" target="contents-tools.html">tools
-   
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="bayesprobint.html">bayesprobint</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="buildconstantsmap.html">buildconstantsmap</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="buildparametermap.html">buildparametermap</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="effnasu.html">effnasu</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="ggobiexport.html">ggobiexport</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="importconstants.html">importconstants</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="importmeasurements.html">importmeasurements</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="importparameters.html">importparameters</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaDiffStruct.html">sodaDiffStruct</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaLoadSettings.html">sodaLoadSettings</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaParsePairs.html">sodaParsePairs</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaroot.html">sodaroot</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaSubplotScreen.html">sodaSubplotScreen</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaUnpack.html">sodaUnpack</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaVerifyFieldNames.html">sodaVerifyFieldNames</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="subaxes.html">subaxes</tocitem>
           <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="uimatlab.html">uimatlab</tocitem>
           <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="uioctave.html">uioctave</tocitem>
 
@@ -65,27 +64,29 @@
 
    </tocitem>
 
+<!--
    <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="examples.html">Examples
-       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="scemua_bimodalmodel.html">scemua_bimodalmodel</tocitem> 
-       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="scemua_cubicmodel.html">scemua_cubicmodel</tocitem> 
-       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="scemua_hyperbanana.html">scemua_hyperbanana</tocitem> 
-       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="scemua_interceptionmodel.html">scemua_interceptionmodel</tocitem> 
-       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="scemua_linearmodel.html">scemua_linearmodel</tocitem> 
-   </tocitem> 
+       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="scemua_bimodalmodel.html">scemua_bimodalmodel</tocitem>
+       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="scemua_cubicmodel.html">scemua_cubicmodel</tocitem>
+       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="scemua_hyperbanana.html">scemua_hyperbanana</tocitem>
+       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="scemua_interceptionmodel.html">scemua_interceptionmodel</tocitem>
+       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="scemua_linearmodel.html">scemua_linearmodel</tocitem>
+   </tocitem>
+-->
 
-   <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="model-adaptations.html">Model adaptations</tocitem> 
+   <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="model-adaptations.html">Model adaptations</tocitem>
 
    <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="concepts-of-parameter-optimization.html">Concepts of parameter optimization
-       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="parameter-space.html">Parameter space</tocitem> 
-       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="convergence.html">Convergence</tocitem> 
-       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="objective-function.html">Objective function</tocitem> 
-   </tocitem> 
+       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="parameter-space.html">Parameter space</tocitem>
+       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="convergence.html">Convergence</tocitem>
+       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="objective-function.html">Objective function</tocitem>
+   </tocitem>
 
-   <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="printables.html">Printables</tocitem> 
+   <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="printables.html">Printables</tocitem>
 
-   <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="history.html">History</tocitem> 
+   <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="history.html">History</tocitem>
 
-   <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="license.html">License</tocitem> 
+   <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="license.html">License</tocitem>
 
 
 
