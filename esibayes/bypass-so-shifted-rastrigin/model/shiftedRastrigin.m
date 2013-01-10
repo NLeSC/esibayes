@@ -1,12 +1,9 @@
-function objScore = shiftedRastrigin(mConstants,allStateValuesKF,allValuesNOKF,parVec)
+function objScore = shiftedRastrigin(conf,constants,allStateValuesKF,allValuesNOKF,parVec)
 % 9.Shifted Rastrign's Function
 
-% map the constants values to their respective variables:
-for iConstant=1:size(mConstants,1)
-    eval([mConstants{iConstant,1},'=mConstants{iConstant,2};'])
-end
+sodaUnpack()
 
-x = parVec;
+x = [x1,x2];
 
 [ps,D]=size(x);
 
