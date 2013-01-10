@@ -7,7 +7,7 @@ else
 end
 
 confFile = './results/conf.mat';
-constantsFile = './data/constants.m.mat';
+constantsFile = './data/constants.mat';
 
 if exist(confFile,'file')==2
     conf = load(confFile);
@@ -16,7 +16,7 @@ else
 end
 
 if exist(constantsFile,'file')==2
-    load(constantsFile,'mConstants')
+    constants = load(constantsFile);
 else
     if strcmp(conf.modeStr,'bypass')
         % do nothing
@@ -25,7 +25,7 @@ else
     else
         disp('I don''t see the constants file...attempting to proceed without it.')
     end
-    mConstants = {};
+    constants = struct([]);
 end
 
 
@@ -55,7 +55,7 @@ if conf.executeInParallel
             bundle = msg; % this is a memory-efficient way of
             clear msg     % renaming a variable
 
-            bundle = sodaProcessBundle(conf,mConstants,bundle);
+            bundle = sodaProcessBundle(conf,constants,bundle);
 
             runcounter=runcounter+1;
             sumrun=sumrun+toc(timer);
@@ -70,7 +70,7 @@ else % if conf.executeInParallel
     bundle = msg; % this is a memory-efficient way of
     clear msg     % renaming a variable
 
-    bundle = sodaProcessBundle(conf,mConstants,bundle);
+    bundle = sodaProcessBundle(conf,constants,bundle);
 
 
 end % if conf.executeInParallel

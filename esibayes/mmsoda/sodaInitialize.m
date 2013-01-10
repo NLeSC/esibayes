@@ -1,54 +1,56 @@
 function varargout = sodaInitialize(sodaOptions)
 
-conf.verboseOutput = true;
-if nargin>1 && ischar(sodaOptions{2})
-    switch sodaOptions{2}
-        case {'-q','-quiet'}
-            conf.verboseOutput = false;
-        otherwise
-            conf.verboseOutput = true;
-    end
+% conf.verboseOutput = true;
+% if nargin>1 && ischar(sodaOptions{2})
+%     switch sodaOptions{2}
+%         case {'-q','--quiet'}
+%             conf.verboseOutput = false;
+%         otherwise
+%             conf.verboseOutput = true;
+%     end
+% 
+% end
 
-end
+conf.verboseOutput = ~any(strcmp('--quiet',sodaOptions)|strcmp('-q',sodaOptions));
 
 switch sodaOptions{1}
-    case '-docinstall'
+    case {'--docinstall','-d'}
         %             try
-        try
-            if conf.verboseOutput
-                soda('-addtools')
-            else
-                soda('-addtools','-quiet')
-            end
-
-            % fid=fopen(fullfile(sodaroot,'info.xml.template'),'r');
-            % textInfoXML='';
-            % while true
-            %     tline = fgets(fid);
-            %     if ischar(tline)
-            %         textInfoXML = [textInfoXML,tline];
-            %     else
-            %         break
-            %     end
-            % end
-            % fclose(fid);
-            % 
-            % fid=fopen(fullfile(sodaroot,'info.xml'),'wt');
-            % fprintf(fid,textInfoXML,sodaroot);
-            % fclose(fid);
-            % if conf.verboseOutput
-            %     disp(['SODA: ',char(39),'info.xml',char(39),' file ',...
-            %         'written successfully. '])
-            % end
-
-        catch
-            if conf.verboseOutput
-                warning('SODA:writing_of_info_file',...
-                    ['An error occurred during writing ',...
-                    'of SODA ',char(39),...
-                    'info.xml',char(39),' file'])
-            end
+        % try
+        if conf.verboseOutput
+            soda('--addtools')
+        else
+            soda('--addtools','--quiet')
         end
+
+        % fid=fopen(fullfile(sodaroot,'info.xml.template'),'r');
+        % textInfoXML='';
+        % while true
+        %     tline = fgets(fid);
+        %     if ischar(tline)
+        %         textInfoXML = [textInfoXML,tline];
+        %     else
+        %         break
+        %     end
+        % end
+        % fclose(fid);
+        % 
+        % fid=fopen(fullfile(sodaroot,'info.xml'),'wt');
+        % fprintf(fid,textInfoXML,sodaroot,sodaroot);
+        % fclose(fid);
+        % if conf.verboseOutput
+        %     disp(['SODA: ',char(39),'info.xml',char(39),' file ',...
+        %         'written successfully. '])
+        % end
+        % 
+        % catch
+        %     if conf.verboseOutput
+        %         warning('SODA:writing_of_info_file',...
+        %             ['An error occurred during writing ',...
+        %             'of SODA ',char(39),...
+        %             'info.xml',char(39),' file'])
+        %     end
+        % end
         try
             if uimatlab
 
@@ -142,7 +144,7 @@ switch sodaOptions{1}
         end
         %     end
 
-    case '-addtools'
+    case {'--addtools','-a'}
         try
 
             p = mfilename('fullpath');
@@ -169,53 +171,55 @@ switch sodaOptions{1}
                     'the SODA tools to the path.'])
             end
         end
-    case '-help'
+    case {'--help','-h'}
         if conf.verboseOutput
             disp(['% soda -docinstall ',char(10),...
                   '%       adds some folders to the path, which contain helpful',char(10),...
                   '%       functions, and installs the documentation by writing ',char(10),...
                   '%       the info.xml file.',char(10)...
                   '%',char(10),...
-                  '% soda -addtools ',char(10)...
+                  '% soda --addtools ',char(10)...
                   '%       adds some folders to the path, which contain helpful',char(10),...
                   '%       functions.',char(10),...
                   '%',char(10),...
                   '% soda -help ',char(10),...
                   '%       shows this help.',char(10),...
                   '%',char(10),...
-                  '% soda -rmpath',char(10),...
+                  '% soda --rmpath',char(10),...
                   '%       removes the SODA directories from the path',char(10),...
                   '%',char(10),...
-                  '% soda -showoptions',char(10),...
+                  '% soda --showoptions',char(10),...
                   '%       lists the valid options for the SODA function.',char(10)...
                   '%',char(10),...
-                  '% soda -root',char(10),...
+                  '% soda --root',char(10),...
                   '%       returns the root of the SODA toolbox.',char(10),...
                   '%',char(10),...
                    ])
         end
 
-    case '-rmpath'
+    case {'--rmpath','p'}
         
-        rmpath(fullfile(sodaroot,'tools'))
         rmpath(fullfile(sodaroot,'visualization'))
         rmpath(fullfile(sodaroot,'enkf'))
         rmpath(fullfile(sodaroot,'mo'))
         if ~isdeployed
-                rmpath('model')
-                % rmpath('data')
-                % rmpath('results')
-                rmpath(fullfile(sodaroot,'mmlib'))
-                rmpath(fullfile(sodaroot,'comms'))
-            end
-        rmpath(sodaroot)        
-
+            rmpath('model')
+            % rmpath('data')
+            % rmpath('results')
+            rmpath(fullfile(sodaroot,'mmlib'))
+            rmpath(fullfile(sodaroot,'comms'))
+        end
+        tmp = sodaroot;
+        rmpath(fullfile(tmp,'tools'))
+        rmpath(tmp)        
+        clear tmp
+        
         disp('SODA toolbox has successfully been removed from the path.')
 
-    case '-showoptions'
+    case {'--showoptions','-s'}
         sodaVerifyFieldNames(conf,'show')
 
-    case '-root'
+    case {'--root','-r'}
         a=mfilename('fullpath');
         Ix=findstr(a,[filesep,'soda']);
         s=a(1:Ix(end));
@@ -225,6 +229,6 @@ switch sodaOptions{1}
     otherwise
         if conf.verboseOutput
             warning('SODA:DocInstall',['For installing the documen',...
-                'tation, type >>soda -docinstall'])
+                'tation, type >>soda --docinstall'])
         end
 end

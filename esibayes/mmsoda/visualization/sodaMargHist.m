@@ -1,7 +1,6 @@
 function varargout=sodaMargHist(conf,evalResults,varargin)
 
 % assign default options:
-windowState = 'unspecified';
 histMode='absolute';
 nBins = min([50,round(conf.nSamples/5)]);
 N = min([size(evalResults,1),5*conf.nSamples]);
@@ -18,8 +17,7 @@ printToFile = false;
 printToPNG = false;
 printToEPS = false;
 
-authorizedOptions = {'windowState',...
-                     'histMode',...
+authorizedOptions = {'histMode',...
                      'nBins',...
                      'iterSelection',...
                      'faceColor',...
@@ -126,26 +124,6 @@ set(gcf,'name',mfilename,'numbertitle','off')
 
 
 
-if uimatlab || isdeployed
-    % This code block will only be useful when I find a way to get the
-    % window state, or when I can plot something without bringing up the
-    % window.
-    try
-        switch windowState
-            case 'unspecified'
-                % do nothing
-            case 'minimized'
-                setWindowState(gcf,'minimize')
-            case 'maximized'
-                setWindowState(gcf,'maximized')
-            case 'restore'
-                setWindowState(gcf,'restore')
-            otherwise
-                error('Unknown window state')
-        end
-    catch
-    end
-end
 
 
 

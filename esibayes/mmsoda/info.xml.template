@@ -9,12 +9,12 @@
 
 <icon>html/images/scem_ua_icon_16x16.gif</icon>
 
-<help_location>html</help_location>
+<help_location>%shtml</help_location>
 
 <list>
    <listitem>
       <label>Help</label>
-      <callback>html/contents.html</callback>
+      <callback>%shtml/contents.html</callback>
       <icon>$toolbox/matlab/icons/book_mat.gif</icon>
    </listitem>
 </list>
