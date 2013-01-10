@@ -4,20 +4,20 @@
 
 <head>
 
-   <title>SCEM-UA Toolbox - plotpaco</title>
+   <title>SODA Toolbox - sodaPlotPaCo</title>
 
-   <meta name="keywords" content="plotpaco">
+   <meta name="keywords" content="sodaPlotPaCo">
 
-   <meta name="description" content="plotpaco">
+   <meta name="description" content="sodaPlotPaCo">
 
    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-  
+
    <meta name="robots" content="index, follow">
 
    <meta author="Jurriaan H. Spaaks">
 
-   <link type="text/css" rel="stylesheet" href="styles/soda_styles.css">
- 
+   <link type="text/css" rel="stylesheet" href="styles/soda-styles.css">
+
 </head>
 
 
@@ -27,8 +27,8 @@
 
 
 <div class="linkheader">
-<a href="matlab:edit(fullfile(scemroot,'visualization','plotpaco'))">View source code of the function <span style="font-family:monospace">plotpaco()</span> in the MATLAB editor</a><br><br>
-<a href="matlab:web(fullfile(scemroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+<a href="matlab:edit(fullfile(sodaroot,'visualization','sodaPlotPaCo'))">View source code of the function <span style="font-family:monospace">sodaPlotPaCo()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(sodaroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
 </div>
 
 <div class="spacer">
@@ -37,7 +37,7 @@
 
 
 <div class="h1">
-plotpaco
+sodaPlotPaCo
 </div>
 
 <div class="h2">
@@ -46,7 +46,7 @@ Syntax
 
 <div class="txt">
 <pre>
-plotpaco(scemPar,evalresults)
+sodaPlotPaCo(conf,evalResults)
 </pre>
 </div>
 
@@ -56,7 +56,7 @@ Description
 
 <div class="txt">
 <p>
-<span style="font-family:monospace">plotpaco(scemPar,evalresults)</span>
+<span style="font-family:monospace">sodaPlotPaCo(conf,evalResults)</span>
 </p>
 <p>
 Plots a parallel coordinate plot of the parameters. Depending on the options, parameter values can be standardized, axes can be inverted, or the plot can be constructed based on user-specified selections of the data.
@@ -80,7 +80,7 @@ Plots a parallel coordinate plot of the parameters. Depending on the options, pa
    </td>
 
    <td>
-      Logical array with <span style="font-family:monospace">scemPar.nOptPars</span> elements stating if the plotting axis for a particular parameter should be inverted or not.
+      Logical array with <span style="font-family:monospace">conf.nOptPars</span> elements stating if the plotting axis for a particular parameter should be inverted or not.
    </td>
 </tr>
 
@@ -100,7 +100,7 @@ Plots a parallel coordinate plot of the parameters. Depending on the options, pa
    </td>
 
    <td>
-      This parameter lets you make a parallel coordinates plot based on a selection of rows from the <span style="font-family:monospace">evalResults</span> array. By default, the last  <span style="font-family:monospace">scemPar.nSamples</span> rows are selected.
+      This parameter lets you make a parallel coordinates plot based on a selection of rows from the <span style="font-family:monospace">evalResults</span> array. By default, the last  <span style="font-family:monospace">5*conf.nSamples</span> rows are selected.
    </td>
 </tr>
 
