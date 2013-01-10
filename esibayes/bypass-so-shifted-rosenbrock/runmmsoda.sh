@@ -24,7 +24,7 @@ case $mode in
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.
     export MCR_CACHE_ROOT=$TMPDIR
     date
-    mpirun -n $nprocs ./matlabprog -v 0
+    mpirun -n $nprocs ./matlabprog -v 0 -b 500000000
     date
     ;;
 2)
@@ -44,7 +44,7 @@ case $mode in
     echo "I detected that "`hostname`" has "$ncpus" processors. I'll start "$nprocs" processes."
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.
     export MCR_CACHE_ROOT=$TMPDIR
-    mpirun -n $nprocs ./matlabprog
+    mpirun -n $nprocs ./matlabprog -v 0 -b 500000000
     ;;
 3)
     ## interactive on multiple batch nodes
@@ -74,7 +74,7 @@ case $mode in
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PBS_O_WORKDIR
     export MCR_CACHE_ROOT=$TMPDIR
     cd $PBS_O_WORKDIR
-    mpirun -np $nprocs -hostfile $TMPDIR/myhostfile $PBS_O_WORKDIR/matlabprog
+    mpirun -np $nprocs -hostfile $TMPDIR/myhostfile $PBS_O_WORKDIR/matlabprog -v 0 -b 500000000
     ;;
 *)
     echo "default case"

@@ -1,7 +1,6 @@
-function makedata()
+function makeconstants()
 
 load('./data/shifted-sphere.mat','o')
-mConstants = {'o',o};
 
-save('./data/constants.m.mat','mConstants')
+save('./data/constants.mat')
 

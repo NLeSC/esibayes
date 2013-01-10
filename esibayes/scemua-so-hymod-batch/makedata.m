@@ -11,15 +11,29 @@ convFactor = 22.5;
 % crudest estimate of sigma ever:
 obsQSigma = 0.01;%std(dailyDischarge(1:end-1)-dailyDischarge(2:end));
 
-sodaPack()
 
 
+% fake conf variable:
 conf.nOptPars = 5;
 conf.parNames = {'cmax','bexp','fQuickFlow','Rs','Rq'};
 conf.nStatesKF = 0;
 conf.nNOKF = 1;
 conf.namesNOKF = {'output'};
 conf.priorTimes = numTime([iStart,iStart+wu:iEnd]);
+
+
+% fake constants variable:
+constants.wu = wu;
+constants.iStart = iStart;
+constants.iEnd = iEnd;
+constants.convFactor = convFactor;
+constants.obsQSigma = obsQSigma;
+constants.numTime = numTime;
+constants.dailyDischarge = dailyDischarge;
+constants.dailyPotEvapTrans =dailyPotEvapTrans;
+constants.dailyPrecip = dailyPrecip;
+
+
 
 stateValuesKFOld = [];
 
@@ -30,7 +44,7 @@ parVec=[300,0.2,0.3,0.01,0.4];
 priorTimes = conf.priorTimes';
 
 
-[stateValuesKFNew,valuesNOKFNew] = hymod_batch(conf,mConstants,...
+[stateValuesKFNew,valuesNOKFNew] = hymod_batch(conf,constants,...
                 stateValuesKFOld,valuesNOKFOld,parVec,priorTimes);
 
 nPrior = numel(priorTimes);

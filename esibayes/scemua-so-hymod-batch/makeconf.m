@@ -1,14 +1,10 @@
 function makeconf()
 
 
-% load the artificial data
-load('./data/leafriver-art.m.mat','numTime','dailyDischarge',...
-    'dailyPotEvapTrans','dailyPrecip','wu','iStart','iEnd','convFactor',...
-    'obsQSigma')
 
-sodaPack
-save('./data/constants.m.mat','mConstants')
-clear mConstants
+load('./data/constants.mat')
+
+
 
 
 % define what kind of run this will be ('bypass', 'scemua', 'reset' , or 'soda')

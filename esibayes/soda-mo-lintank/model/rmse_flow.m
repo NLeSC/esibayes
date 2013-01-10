@@ -1,10 +1,6 @@
-function objScore = rmse_flow(mConstants,allStateValuesKF,allValuesNOKF,parVec)
+function objScore = rmse_flow(conf,constants,allStateValuesKF,allValuesNOKF,parVec)
 
-
-% map the constants values to their respective variables:
-for iConstant=1:size(mConstants,1)
-   eval([mConstants{iConstant,1},'=mConstants{iConstant,2};'])
-end
+sodaUnpack()
 
 
 [tmp,nMembers,nNOKF,nDASteps] = size(allValuesNOKF);
