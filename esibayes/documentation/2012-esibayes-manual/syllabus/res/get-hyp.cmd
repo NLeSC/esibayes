@@ -1,0 +1,1 @@
+copy .\..\..\..\latex-resources\hyp-master.tex .\..\tex\hyp.tex

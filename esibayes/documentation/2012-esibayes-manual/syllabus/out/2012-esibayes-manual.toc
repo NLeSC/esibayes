@@ -1,0 +1,14 @@
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}Getting started}{2}{chapter.2}
+\contentsline {section}{\numberline {2.1}Cluster computing}{2}{section.2.1}
+\contentsline {section}{\numberline {2.2}The LISA cluster: hardware}{3}{section.2.2}
+\contentsline {section}{\numberline {2.3}Transferring files to and from the LISA cluster}{4}{section.2.3}
+\contentsline {section}{\numberline {2.4}Issuing commands on the LISA cluster}{4}{section.2.4}
+\contentsline {section}{\numberline {2.5}Jobscripts and the scheduler}{13}{section.2.5}
+\contentsline {chapter}{\numberline {3}Parallel optimization}{18}{chapter.3}
+\contentsline {section}{\numberline {3.1}The Master-Worker paradigm}{19}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Master side}{19}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Worker side}{20}{subsection.3.1.2}
+\contentsline {chapter}{\numberline {4}\texttt {piped}}{21}{chapter.4}
+\contentsline {chapter}{\numberline {5}How to structure your problem}{23}{chapter.5}
+\contentsline {chapter}{\numberline {6}Remote graphical applications}{24}{chapter.6}
