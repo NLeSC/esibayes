@@ -3,7 +3,7 @@ if exist('conf','var')==1
     % this script is called by runmpirankOtherFun
 else
     % this script is the main program
-    pause(15)
+    % pause(15)
 end
 
 confFile = './results/conf.mat';
@@ -37,7 +37,7 @@ runcounter=0;
 if conf.executeInParallel
     while true
 
-        msg = gettask();
+        msg = receivevar(0);
         timer = tic;
         if ischar(msg)
             switch msg
@@ -57,10 +57,7 @@ if conf.executeInParallel
 
             bundle = sodaProcessBundle(conf,mConstants,bundle);
 
-            runcounter=runcounter+1;
-            sumrun=sumrun+toc(timer);
-
-            putresult(bundle);
+            sendvar(0,bundle);
         end % if
 
     end % while

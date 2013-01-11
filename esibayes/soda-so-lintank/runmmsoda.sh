@@ -19,11 +19,11 @@ case $mode in
     module load mcr
     echo "Starting MPI job on node "`hostname`
     ncpus=`cat /proc/cpuinfo | grep processor | wc -l`
-    nprocs=8
+    nprocs=17
     echo "I detected that "`hostname`" has "$ncpus" processors, but I'll start only "$nprocs" processes to keep the sysadmins happy."
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.
     date
-    mpirun -n $nprocs ./matlabprog -v 0
+    mpirun -n $nprocs ./matlabprog -v 3
     date
     ;;
 2)

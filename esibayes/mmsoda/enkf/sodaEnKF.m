@@ -141,11 +141,11 @@ switch conf.modeStr
 
             % submit tasks:
             iTask = 0;
+            iWorker = 0;
             for iParSet=1:nParSets
                 for iMember=1:nMembers
 
                     iTask = iTask + 1;
-
                     bundle(iTask).type = 'model';
                     bundle(iTask).iEval = parsets(iParSet,conf.evalCol);
                     bundle(iTask).iParSet = iParSet;
@@ -159,8 +159,8 @@ switch conf.modeStr
 
                     if iTask==ceil((nParSets*nMembers)/nWorkers) || (iParSet==nParSets && iMember==nMembers)
                         if conf.executeInParallel
-
-                            puttask(bundle);
+                            iWorker = iWorker + 1;
+                            sendvar(iWorker,bundle);
                             iTask = 0;
                         else
                             trPool.result = runmpirankOtherFun(conf,bundle);
@@ -169,11 +169,13 @@ switch conf.modeStr
                     end
                 end
             end
-
+            nActiveWorkers = iWorker;
 
             if conf.executeInParallel
                 % retrieve results:
-                trPool = waitForResults();
+                for i = 1:nActiveWorkers;
+                    trPool(i).result=receivevar();
+                end
                 % save('dbg.mat')
             end
 
@@ -194,7 +196,7 @@ switch conf.modeStr
             end
 
             clear trPool
-            
+
             switch conf.modeStr
                 case 'reset'
 
@@ -236,15 +238,16 @@ switch conf.modeStr
 
                 otherwise
             end
+
         end
 
         
     otherwise
 end
 
-
 % now submit the objective tasks:
 iTask = 0;
+iWorker = 0;
 for iParSet=1:nParSets
 
     iTask = iTask + 1;
@@ -258,8 +261,8 @@ for iParSet=1:nParSets
 
     if iTask==ceil(nParSets/nWorkers) || iParSet==nParSets
         if conf.executeInParallel
-
-            puttask(bundle);
+            iWorker = iWorker + 1;
+            sendvar(iWorker,bundle);
             iTask = 0;
         else
             trPool.result = runmpirankOtherFun(conf,bundle);
@@ -267,10 +270,13 @@ for iParSet=1:nParSets
         clear bundle
     end
 end
+nActiveWorkers = iWorker; 
 
 if conf.executeInParallel
     % retrieve results:
-    trPool = waitForResults();
+    for i = 1:nActiveWorkers;
+        trPool(i).result=receivevar();
+    end
     % save('dbg.mat')
 end
 

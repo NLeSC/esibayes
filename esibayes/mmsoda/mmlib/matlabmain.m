@@ -15,13 +15,13 @@ assignin('base','timing',timing);
 if mpirank == 0
 
     % run the MPI server in a while loop as process with mpirank 0
-    runmpirank0
-
-elseif mpirank == 1
-
-    % run the task-generating process (i.e. the optimization algorithm)
     runmpirank1
 
+%elseif mpirank == 1
+%
+%    % run the task-generating process (i.e. the optimization algorithm)
+%    runmpirank1
+%
 else
 
     % all others are task-receiving processes

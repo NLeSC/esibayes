@@ -26,4 +26,7 @@ mm_send(destination,tmp);
 timing.counter=timing.counter+1;
 timing.timer(timing.counter)=toc(timing.starttime);
 timing.code(timing.counter)=uint8(34);
+timing.counter=timing.counter+1;
+timing.timer(timing.counter)=toc(timing.starttime);
+timing.code(timing.counter)=uint8(4);
 assignin('base','timing',timing);

@@ -156,7 +156,7 @@ elseif isempty(varargin)
         if ~(exist('mpisize','var')==1)
             whoami()
         end
-        conf.nWorkers = mpisize-2;
+        conf.nWorkers = mpisize-1;
     else
         conf.nWorkers = 1;
     end
@@ -465,10 +465,8 @@ elseif isempty(varargin)
 
 
         if conf.executeInParallel
-            terminateworkers();
-            if verbosity >=1
-                str=sprintf('%03d - mpirank%d terminated itself.',mpirank,mpirank);
-                disp(str)
+            for iWorker = 1:conf.nWorkers
+                sendvar(iWorker,'die');
             end
         end
 

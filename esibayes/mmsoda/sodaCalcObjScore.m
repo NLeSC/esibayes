@@ -33,7 +33,6 @@ disp(str)
 % call the ensemble Kalman Filter:
 parsets = sodaEnKF(conf,parsets);
 
-
 % reshape end result if necessary:
 iSample = 1;
 if size(varargin{1},3)>1
