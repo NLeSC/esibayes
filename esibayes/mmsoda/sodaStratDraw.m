@@ -13,8 +13,8 @@ nSamplesPerAxis = floor(nSamples^(1/nOptPars));
 %end
 
 
-nStratRandSamples=nSamplesPerAxis^nOptPars;
-nUniRandSamples = nSamples-nStratRandSamples;
+nStratSamples=nSamplesPerAxis^nOptPars;
+nUniRandSamples = nSamples-nStratSamples;
 
 pStr='';
 
@@ -35,8 +35,8 @@ for k=1:numel(conf.parSpaceHiBound)
 end
 
 eval(['parCombs = sodaAllComb(',pStr,')+',...
-    'repmat(res,[nStratRandSamples,1]).*',...
-    '0.5.*ones(nStratRandSamples,nOptPars);'])
+    'repmat(res,[nStratSamples,1]).*',...
+    '0.5.*ones(nStratSamples,nOptPars);'])
 
 if nUniRandSamples>0
     disp(['Unable to distribute uniformly the number of samples. ',...

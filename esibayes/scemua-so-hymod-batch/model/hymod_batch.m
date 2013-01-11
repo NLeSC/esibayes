@@ -1,4 +1,4 @@
-function [stateValuesKFNew,valuesNOKFNew] = hymod_batch(conf,mConstants,stateValuesKFOld,valuesNOKFOld,parVec,priorTimes)
+function [stateValuesKFNew,valuesNOKFNew] = hymod_batch(conf,constants,stateValuesKFOld,valuesNOKFOld,parVec,priorTimes)
 % function output = hymod(parVec,Extra)
 % Runs the HYMOD model
 

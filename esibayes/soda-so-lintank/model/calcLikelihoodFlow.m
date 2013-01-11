@@ -1,4 +1,4 @@
-function objScore = rmse_flow(mConstants,allStateValuesKF,allValuesNOKF,parVec)
+function objScore = calcLikelihoodFlow(conf,mConstants,allStateValuesKF,allValuesNOKF,parVec)
 
 
 % map the constants values to their respective variables:

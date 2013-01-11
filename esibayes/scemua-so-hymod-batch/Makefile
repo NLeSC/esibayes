@@ -18,6 +18,12 @@ lib: $(MFILES) $(MEXFILES)
 
 matlabprog: lib
 	mbuild -output matlabprog ./../mmsoda/comms/matlabmpi.c -L. -I. -I$(MPIINCLUDE) -lmmpi -lmpi $(VERBOSITY)
+	# move some files to mmsoda/mmlib to avoid cluttering the user's dir.
+	mv libmmpi.c ./../mmsoda/mmlib/
+	mv libmmpi.exports ./../mmsoda/mmlib/
+	mv libmmpi.h ./../mmsoda/mmlib/
+	mv mccExcludedFiles.log ./../mmsoda/mmlib/
+	mv readme.txt ./../mmsoda/mmlib/
 
 clean:
 	rm -f matlabprog libmmpi.* mccExcludedFiles.log readme.txt ./../mmsoda/comms/*.mexa64

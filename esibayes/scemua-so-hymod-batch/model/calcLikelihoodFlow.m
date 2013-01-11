@@ -1,8 +1,7 @@
-function objScore = calcLikelihoodFlow(mConstants,allStateValuesKF,allValuesNOKF,parVec)
+function objScore = calcLikelihoodFlow(conf,constants,allStateValuesKF,allValuesNOKF,parVec)
 
-for iConstant = 1:size(mConstants,1)
-    eval([mConstants{iConstant,1},' = mConstants{iConstant,2};'])
-end
+sodaUnpack()
+
 
 [nParsets,nMembers,nNOKF,nPrior] = size(allValuesNOKF);
 

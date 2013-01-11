@@ -65,15 +65,6 @@ The jump is centered on local variable <span style="font-family:monospace">jumpB
 <li>the last point (i.e. the point in the current sequence that has the highest iteration number).</li>
 </ol>
 
-<p>
-Whether one or the other is seleced, depends on the outcome of a test.
-</p>
-<p>
-If <span style="font-family:monospace">conf.optMethod</span> is set to <span style="font-family:monospace">'direct probability'</span>, the average complex density divided by the average sequence density must be larger than <span style="font-family:monospace">conf.thresholdL</span> to make the algorithm jump from the mean of the current complex; if not, the last position of the current sequence (<span style="font-family:monospace">curSeq</span>) is used.
-</p>
-<p>
-If <span style="font-family:monospace">conf.optMethod</span> is set to <span style="font-family:monospace">'error minimization'</span>, the ratio of average complex density over average sequence density raised to the power of <span style="font-family:monospace">-nMeasurements*(1+conf.kurt)/2</span> must be larger than <span style="font-family:monospace">conf.thresholdL</span> to make the algorithm jump from the mean of the current complex; if not, the last position of the current sequence (<span style="font-family:monospace">curSeq</span>) is used.
-</p>
 
 
 

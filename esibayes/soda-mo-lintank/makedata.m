@@ -36,29 +36,4 @@ subplot(2,1,2)
 plot(obsTime-0.5*timeStep,obsQ,'-.b')
 
 
-if uioctave
-    %save('./data/obs.o.mat','-binary','obsWaterLevel','obsTime','obsQ','timeStep')
-    save('./data/obs.m.mat','-mat7-binary','obsWaterLevel','obsTime','obsQ','timeStep')
-elseif uimatlab || isdeployed
-    save('./data/obs.m.mat','-mat','obsWaterLevel','obsTime','obsQ','timeStep')
-else
-end
-
-
-
-clear
-
-% load the observations that were just created by 'makedata'
-load('./data/obs.m.mat','obsWaterLevel','obsTime','obsQ','timeStep')
-simTime = obsTime;
-
-% define which variables are constants (i.e. for all parameter combinations, ensemble members, and data assimilation steps)
-mConstants = {'timeStep',1;...
-              'obsTime',obsTime;...
-              'obsQ',obsQ;...
-              'obsWaterLevel',obsWaterLevel;...
-              'modeStr','inv'};
-          
-save('./data/constants.m.mat','mConstants')          
-
-
+save('./data/obs.mat','-mat','obsWaterLevel','obsTime','obsQ','timeStep')

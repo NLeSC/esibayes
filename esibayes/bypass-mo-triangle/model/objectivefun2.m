@@ -1,4 +1,4 @@
-function objScore = objectivefun2(mConstants,allStateValuesKF,allValuesNOKF,parVec)
+function objScore = objectivefun2(conf,mConstants,allStateValuesKF,allValuesNOKF,parVec)
 
 theta1 = parVec(1);
 theta2 = parVec(2);

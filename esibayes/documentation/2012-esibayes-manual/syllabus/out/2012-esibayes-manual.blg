@@ -1,0 +1,45 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: ./../out/2012-esibayes-manual.aux
+The style file: chicago.bst
+Database file #1: ./../bib/literaturedb.bib
+You've used 4 entries,
+            2861 wiz_defined-function locations,
+            640 strings with 6048 characters,
+and the built_in function-call counts, 3462 in all, are:
+= -- 260
+> -- 337
+< -- 0
++ -- 108
+- -- 110
+* -- 364
+:= -- 642
+add.period$ -- 12
+call.type$ -- 4
+change.case$ -- 37
+chr.to.int$ -- 4
+cite$ -- 4
+duplicate$ -- 70
+empty$ -- 171
+format.name$ -- 126
+if$ -- 637
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 4
+newline$ -- 23
+num.names$ -- 40
+pop$ -- 25
+preamble$ -- 1
+purify$ -- 61
+quote$ -- 0
+skip$ -- 74
+stack$ -- 0
+substring$ -- 158
+swap$ -- 22
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 80
+warning$ -- 0
+while$ -- 33
+width$ -- 0
+write$ -- 54

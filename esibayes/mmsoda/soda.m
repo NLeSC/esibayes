@@ -1,4 +1,5 @@
 function varargout = soda(varargin)
+% Parallel SCEM-UA, MOSCEM-UA and SODA
 %
 % <a href="matlab:web(fullfile(sodaroot,'html','soda.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>
 %
@@ -7,7 +8,7 @@ function varargout = soda(varargin)
 % <a href="matlab:soda -docinstall">Install documentation now</a>
 %
 %
-% based on SODA algorithm by J.A. Vrugt
+% based on SCEM-UA, MOSCEMUA and SODA algorithms by J.A. Vrugt
 %
 % Author         : Jurriaan H. Spaaks
 % Date           : July 2012

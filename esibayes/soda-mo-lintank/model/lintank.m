@@ -1,4 +1,4 @@
-function [stateValuesKFNew,valuesNOKFNew] = lintank(conf,mConstants,stateValuesKFOld,valuesNOKFOld,parVec,priorTimes)
+function [stateValuesKFNew,valuesNOKFNew] = lintank(conf,constants,stateValuesKFOld,valuesNOKFOld,parVec,priorTimes)
 
 sodaUnpack()
 

@@ -52,7 +52,8 @@ Description
 
 <div class="txt">
 <p>
-descripton missing
+<span style="font-family:monospace">sodaStratDraw</span> divides each axis <span style="font-family:monospace">(1..conf.nOptPars)</span> into  <span style="font-family:monospace">X</span> segments, such that <span style="font-family:monospace">X</span> is the largest positive integer for which <span style="font-family:monospace">X^conf.nOptPars < conf.nSamples</span>. This way the parameter space is divided into <span style="font-family:monospace">nStratSamples</span> hyperrectangles. Exactly one sample is taken at the center of each hyperrectangle. When the number of required samples <span style="font-family:monospace">conf.nSamples</span> is larger than <span style="font-family:monospace">nStratSamples</span>, an additional <span style="font-family:monospace">nSamples-nStratSamples</span> samples are taken using uniform random sampling of the parameter space (see <a href="sodaUnifRandDraw.html">sodaUnifRandDraw</a>).
+
 </p>
 </div>
 

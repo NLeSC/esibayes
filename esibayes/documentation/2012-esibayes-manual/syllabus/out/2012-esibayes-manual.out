@@ -1,0 +1,14 @@
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}
+\BOOKMARK [0][-]{chapter.2}{Getting started}{}
+\BOOKMARK [1][-]{section.2.1}{Cluster computing}{chapter.2}
+\BOOKMARK [1][-]{section.2.2}{The LISA cluster: hardware}{chapter.2}
+\BOOKMARK [1][-]{section.2.3}{Transferring files to and from the LISA cluster}{chapter.2}
+\BOOKMARK [1][-]{section.2.4}{Issuing commands on the LISA cluster}{chapter.2}
+\BOOKMARK [1][-]{section.2.5}{Jobscripts and the scheduler}{chapter.2}
+\BOOKMARK [0][-]{chapter.3}{Parallel optimization}{}
+\BOOKMARK [1][-]{section.3.1}{The Master-Worker paradigm}{chapter.3}
+\BOOKMARK [2][-]{subsection.3.1.1}{Master side}{section.3.1}
+\BOOKMARK [2][-]{subsection.3.1.2}{Worker side}{section.3.1}
+\BOOKMARK [0][-]{chapter.4}{piped}{}
+\BOOKMARK [0][-]{chapter.5}{How to structure your problem}{}
+\BOOKMARK [0][-]{chapter.6}{Remote graphical applications}{}

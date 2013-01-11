@@ -4,20 +4,20 @@
 
 <head>
 
-   <title>SCEM-UA Toolbox - plotgelmanrubin</title>
+   <title>SODA Toolbox - sodaPlotGelmanRubin</title>
 
-   <meta name="keywords" content="plotgelmanrubin">
+   <meta name="keywords" content="sodaPlotGelmanRubin">
 
-   <meta name="description" content="plotgelmanrubin">
+   <meta name="description" content="sodaPlotGelmanRubin">
 
    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-  
+
    <meta name="robots" content="index, follow">
 
    <meta author="Jurriaan H. Spaaks">
 
-   <link type="text/css" rel="stylesheet" href="styles/soda_styles.css">
- 
+   <link type="text/css" rel="stylesheet" href="styles/soda-styles.css">
+
 </head>
 
 
@@ -27,8 +27,8 @@
 
 
 <div class="linkheader">
-<a href="matlab:edit(fullfile(scemroot,'visualization','plotgelmanrubin'))">View source code of the function <span style="font-family:monospace">plotgelmanrubin()</span> in the MATLAB editor</a><br><br>
-<a href="matlab:web(fullfile(scemroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+<a href="matlab:edit(fullfile(sodaroot,'visualization','sodaPlotGelmanRubin'))">View source code of the function <span style="font-family:monospace">sodaPlotGelmanRubin()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(sodaroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
 </div>
 
 <div class="spacer">
@@ -37,7 +37,7 @@
 
 
 <div class="h1">
-plotgelmanrubin
+sodaPlotGelmanRubin
 </div>
 
 <div class="h2">
@@ -46,8 +46,8 @@ Syntax
 
 <div class="txt">
 <pre>
-plotgelmanrubin(scemPar,critGelRub)
-plotgelmanrubin(scemPar,critGelRub,<span class="string">'view'</span>,<span class="string">'zoom'</span>)
+sodaPlotGelmanRubin(conf,critGelRub)
+sodaPlotGelmanRubin(conf,critGelRub,<span class="string">'view'</span>,<span class="string">'zoom'</span>)
 </pre>
 </div>
 
@@ -57,39 +57,48 @@ Description
 
 <div class="txt">
 
-<pre>
-plotgelmanrubin(scemPar,critGelRub)
-</pre>
+<span style="font-family:monospace">sodaPlotGelmanRubin(conf,critGelRub)</span>
 
+</div>
+<div class = "txt">
 <p>
-For each parameter, this function plots how the Gelman-Rubin convergence criterion decreases with each generation. 
+For each parameter, this function plots how the Gelman-Rubin convergence criterion decreases with each generation.
 </p>
 
+
+</div>
+
+
+
+
+<div class="txt">
+<p>
+    <span style="font-family:monospace">sodaPlotGelmanRubin(conf,critGelRub,<span class="string">'view'</span>,<span class="string">'full'</span>)</span>
+</p>
+<p>
+Including the view option lets you set the limits on the y-axis. If you select <span style="font-family:monospace" class="string">'full'</span>, no limits are set and all data points will be visible. If you select <span style="font-family:monospace" class="string">'zoom'</span>, the y-axis automatically zooms to the range spanned by the last <span style="font-family:monospace">conf.nGelRub</span> generations in the <span style="font-family:monospace">critGelRub</span> array. Default behavior is <span style="font-family:monospace" class="string">'zoom'</span>.
+</p>
+<p>
+<img src="images/plotgelmanrubin-full.png">
+</p>
+<p>
+
+Note that the green dashed line corresponds with the value of <span style="font-family:monospace">conf.critGelRubConvd</span>.
+</p>
+
+</div>
+<div class="txt">
+<p>
+    <span style="font-family:monospace">sodaPlotGelmanRubin(conf,critGelRub,<span class="string">'view'</span>,<span class="string">'zoom'</span>)</span>
+</p>
+<p>
+This is the same plot as above, but with the view option set to <span style="font-family:monospace" class="string">'full'</span>:
+</p>
 <p>
 <img src="images/plotgelmanrubin-zoom.png">
 </p>
 
-<div class="spacer">
-</div>
 
-<pre>
-plotgelmanrubin(scemPar,critGelRub,<span class="string">'view'</span>,<span class="string">'full'</span>)
-plotgelmanrubin(scemPar,critGelRub,<span class="string">'view'</span>,<span class="string">'zoom'</span>)
-</pre>
-
-<p>
-Including the view option lets you set the limits on the y-axis. If you select <span style="font-family:monospace">'full'</span>, no limits are set and all data points will be visible. If you select <span style="font-family:monospace">'zoom'</span>, the y-axis automatically zooms to the range spanned by the last <span style="font-family:monospace">scemPar.nGelRub</span> generations in the <span style="font-family:monospace">critGelRub</span> array. Default behavior is <span style="font-family:monospace">'zoom'</span>. 
-</p>
-
-
-<p>
-This is the same plot as above, but with the view option set to <span style="font-family:monospace">'full'</span>:
-</p>
-<img src="images/plotgelmanrubin-full.png">
-<p>
-
-Note that the green dashed line corresponds with the value of <span style="font-family:monospace">scemPar.critGelRubConvd</span>.
-</p>
 
 
 </div>

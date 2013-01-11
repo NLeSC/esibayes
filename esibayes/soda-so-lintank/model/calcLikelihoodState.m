@@ -1,4 +1,4 @@
-function objScore = calcLikelihoodState(mConstants,allStateValuesKFPrior,allValuesNOKF,parVec)
+function objScore = calcLikelihoodState(conf,mConstants,allStateValuesKFPrior,allValuesNOKF,parVec)
 
 
 % map the constants values to their respective variables:

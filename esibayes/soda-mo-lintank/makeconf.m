@@ -2,7 +2,7 @@ function makeconf(obsTime,obsWaterLevel)
 
 
 % load the observations that were just created by 'makedata'
-load('./data/obs.m.mat','obsWaterLevel','obsTime')
+load('./data/obs.mat','obsWaterLevel','obsTime')
 
 
 % define what kind of run this will be ('scemua', 'reset' , or 'soda')

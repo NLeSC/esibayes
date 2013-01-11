@@ -1,4 +1,4 @@
-function bundle = sodaProcessBundle(conf,mConstants,bundle)
+function bundle = sodaProcessBundle(conf,constants,bundle)
 
 nTasks = numel(bundle);
 nStatesKF = conf.nStatesKF;
@@ -16,7 +16,7 @@ switch bundle(1).type
             priorTimes = bundle(iTask).priorTimes;
             nPrior = numel(priorTimes);
 
-            eval(['[stateValuesKFNew,valuesNOKFNew] = ',conf.modelName,'(conf,mConstants,stateValuesKFOld,valuesNOKFOld,parVec,priorTimes);'])
+            eval(['[stateValuesKFNew,valuesNOKFNew] = ',conf.modelName,'(conf,constants,stateValuesKFOld,valuesNOKFOld,parVec,priorTimes);'])
 
             switch conf.modeStr
                 case {'reset','soda'}
@@ -41,11 +41,11 @@ switch bundle(1).type
             parVec = bundle(iTask).parVec;
 
             if conf.isSingleObjective
-                eval(['llScore = ',conf.objCallStr,'(mConstants,allStateValuesKFPrior,allValuesNOKF,parVec);'])
+                eval(['llScore = ',conf.objCallStr,'(conf,constants,allStateValuesKFPrior,allValuesNOKF,parVec);'])
                 bundle(iTask).llScores = llScore;
             elseif conf.isMultiObjective
                 for iObj = 1:conf.nObjs
-                    eval(['llScores(1,iObj) = ',conf.objCallStrs{iObj},'(mConstants,allStateValuesKFPrior,allValuesNOKF,parVec);'])
+                    eval(['llScores(1,iObj) = ',conf.objCallStrs{iObj},'(conf,constants,allStateValuesKFPrior,allValuesNOKF,parVec);'])
                 end
                 bundle(iTask).llScores = llScores;
             else
