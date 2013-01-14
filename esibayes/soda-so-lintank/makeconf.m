@@ -1,4 +1,6 @@
-function makeconf(obsTime,obsWaterLevel)
+function makeconf()
+
+load('./data/constants.mat','obsTime','obsWaterLevel')
 
 % define what kind of run this will be ('bypass', 'scemua', 'reset' , or 'soda')
 modeStr = 'soda';

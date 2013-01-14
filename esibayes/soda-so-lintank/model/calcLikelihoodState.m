@@ -1,10 +1,6 @@
-function objScore = calcLikelihoodState(conf,mConstants,allStateValuesKFPrior,allValuesNOKF,parVec)
+function objScore = calcLikelihoodState(conf,constants,allStateValuesKFPrior,allValuesNOKF,parVec)
 
-
-% map the constants values to their respective variables:
-for iConstant=1:size(mConstants,1)
-   eval([mConstants{iConstant,1},'=mConstants{iConstant,2};'])
-end
+sodaUnpack()
 
 
 [nParsets,nMembers,nNOKF,nPrior] = size(allValuesNOKF);

@@ -30,7 +30,7 @@ elseif isempty(varargin)
         error('I can''t find the *.mat file that holds the SODA configuration.')
     end
 
-    % define whether the run should be parallel or sequential
+    % define whether the run is parallel or sequential
     conf.executeInParallel = isdeployed;
     if conf.executeInParallel
         verbosity = evalin('caller','verbosity');
@@ -180,7 +180,6 @@ elseif isempty(varargin)
         end
     end
     save('./results/conf.mat','-struct','conf',saveList{:})
-    %ave(filename, '-struct', structName, fieldNames) 
     clear authorizedFieldNames
     clear iVar
     clear nVars
@@ -236,7 +235,7 @@ elseif isempty(varargin)
         else
             s = 'mo';
         end
-        load([thisconf.modeStr,'-',s,'-tempstate.m.mat'],...
+        load([thisconf.modeStr,'-',s,'-tempstate.mat'],...
             'conf','critGelRub','evalResults','metropolisRejects',...
             'sequences','complexes')
 
@@ -275,17 +274,8 @@ elseif isempty(varargin)
     iGeneration  = (size(evalResults,1)-conf.nSamples)/conf.nOffspring;
 
     if conf.saveInterval>0
-        if uioctave
-            save(['./results/',conf.modeStr,soMoStr,'-tempstate.m.mat'],'-mat7-binary',...
+        save(['./results/',conf.modeStr,soMoStr,'-tempstate.mat'],'-mat',...
                             'evalResults','critGelRub','sequences','metropolisRejects','conf','complexes')
-        elseif uimatlab || isdeployed
-            save(['./results/',conf.modeStr,soMoStr,'-tempstate.m.mat'],'-mat',...
-                            'evalResults','critGelRub','sequences','metropolisRejects','conf','complexes')
-        else
-            warning('Unrecognized UI, attempting save...')
-            save(['./results/',conf.modeStr,soMoStr,'-tempstate.mat'],...
-                            'evalResults','critGelRub','sequences','metropolisRejects','conf','complexes')
-        end
     end
     if conf.doPlot
         if ~isempty(getenv('DISPLAY'))
@@ -401,17 +391,8 @@ elseif isempty(varargin)
 
             if mod(iGeneration,conf.saveInterval)==0
 
-                if uioctave
-                    save(['./results/',conf.modeStr,soMoStr,'-tempstate.m.mat'],'-mat7-binary',...
+                save(['./results/',conf.modeStr,soMoStr,'-tempstate.mat'],'-mat',...
                             'evalResults','critGelRub','sequences','metropolisRejects','conf','complexes')
-                elseif uimatlab || isdeployed
-                    save(['./results/',conf.modeStr,soMoStr,'-tempstate.m.mat'],'-mat',...
-                            'evalResults','critGelRub','sequences','metropolisRejects','conf','complexes')
-                else
-                    warning('Unrecognized UI, attempting save...')
-                    save(['./results/',conf.modeStr,soMoStr,'-tempstate.mat'],...
-                            'evalResults','critGelRub','sequences','metropolisRejects','conf','complexes')
-                end
 
             end %  mod(iGeneration,...
 
@@ -606,6 +587,7 @@ elseif isSingleObjective
     conf.isSingleObjective = true;
     conf.isMultiObjective = false;
     conf.nObjs = 1;
+    conf.paretoMethod = 'none';
 elseif isMultiObjective
     conf.isSingleObjective = false;
     conf.isMultiObjective = true;
