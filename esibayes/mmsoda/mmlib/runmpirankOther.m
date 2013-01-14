@@ -3,7 +3,7 @@ if exist('conf','var')==1
     % this script is called by runmpirankOtherFun
 else
     % this script is the main program
-    pause(15) % for NFS slowness
+    % pause(15) % for NFS slowness
 end
 
 confFile = './results/conf.mat';
@@ -14,7 +14,8 @@ if exist(confFile,'file')==2
     fileProps = dir(confFile);
     oneMinute = 1/60*24;
     if now() - datenum(fileProps.date) < oneMinute
-        conf = load(confFile);
+%        conf = load(confFile);
+        conf = bcastvar(0,0);
     else
         error('Looks like you are using an old version of the SODA configuration file (could be due to NFS slowness).')
     end

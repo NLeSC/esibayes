@@ -180,6 +180,7 @@ elseif isempty(varargin)
         end
     end
     save('./results/conf.mat','-struct','conf',saveList{:})
+    bcastvar(0,conf);
     clear authorizedFieldNames
     clear iVar
     clear nVars

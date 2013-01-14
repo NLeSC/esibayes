@@ -23,7 +23,7 @@ sodaUnpack()
 
 
 for iPrior=2:numel(priorTimes)
-%     pause(0.1);
+     pause(0.1);
 
     timeNow = priorTimes(iPrior-1);
 
