@@ -1,6 +1,6 @@
 function runCondition = sodaContinue(conf,nModelEvals)
 %
-% <a href="matlab:web(fullfile(scemroot,'html','continuescem.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
+% <a href="matlab:web(fullfile(sodaroot,'html','sodaContinue.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
 %
 
 if isinf(conf.optEndTime)

@@ -1,6 +1,6 @@
 function converged = sodaAbortOptim(critGelRub,conf)
 %
-% <a href="matlab:web(fullfile(scemroot,'html','sodaAbortOptim.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
+% <a href="matlab:web(fullfile(sodaroot,'html','sodaAbortOptim.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
 %
 
 

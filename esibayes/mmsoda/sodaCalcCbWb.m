@@ -1,6 +1,6 @@
 function [Cb,Wb] = sodaCalcCbWb(conf)
 %
-% <a href="matlab:web(fullfile(sodaroot,'html','calccbwb.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
+% <a href="matlab:web(fullfile(sodaroot,'html','sodaCalcCbWb.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
 %
 % This function calculates the parameters for the exponential power density
 % Equation [20] paper by Thiemann et al. WRR 2001, Vol 37, No 10, 2521-2535

@@ -1,6 +1,6 @@
 function sequences = sodaPrepSeqArray(conf,sequences)
 %
-% <a href="matlab:web(fullfile(sodaroot,'html','prepseqarray.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
+% <a href="matlab:web(fullfile(sodaroot,'html','sodaPrepSeqArray.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
 %
 
 TMP = repmat(NaN,[conf.nOffspringPerCompl,...

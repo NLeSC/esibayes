@@ -1,6 +1,6 @@
 function [curCompl,acceptedChild] = sodaEvolveComplex(conf,curCompl,curSeq,propChild)
 %
-% <a href="matlab:web(fullfile(scemroot,'html','evolvecomplex.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>
+% <a href="matlab:web(fullfile(sodaroot,'html','sodaEvolveComplex.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>
 %
 
 % global DEBUG_VAR_Ratio

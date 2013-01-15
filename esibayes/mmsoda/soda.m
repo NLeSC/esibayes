@@ -4,8 +4,8 @@ function varargout = soda(varargin)
 % <a href="matlab:web(fullfile(sodaroot,'html','soda.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>
 %
 % If you haven't used the SODA documentation before, you need to
-% install it by running >> soda -docinstall
-% <a href="matlab:soda -docinstall">Install documentation now</a>
+% install it by running >> soda --docinstall
+% <a href="matlab:soda --docinstall">Install documentation now</a>
 %
 %
 % based on SCEM-UA, MOSCEMUA and SODA algorithms by J.A. Vrugt
@@ -432,19 +432,8 @@ elseif isempty(varargin)
 
 
         % save the results
-        if uioctave
-           % only saving in matlab format, since Octave can't save in Octave format, surprisingly...
-           % save([conf.modeStr,'-results.o.mat'],'-binary')
-           save(['./results/',conf.modeStr,soMoStr,'-results.m.mat'],'-mat7-binary',...
-                'evalResults','critGelRub','sequences','metropolisRejects','conf','complexes')
-        elseif uimatlab || isdeployed
-           save(['./results/',conf.modeStr,soMoStr,'-results.m.mat'],...
-                'evalResults','critGelRub','sequences','metropolisRejects','conf','complexes')
-        else
-           disp('unrecognized UI...attempting save...')
-           save(['./results/',conf.modeStr,soMoStr,'-results.mat'],...
-                'evalResults','critGelRub','sequences','metropolisRejects','conf','complexes')
-        end
+        save(['./results/',conf.modeStr,soMoStr,'-results.mat'],...
+             'evalResults','critGelRub','sequences','metropolisRejects','conf','complexes')
 
 
         if conf.executeInParallel

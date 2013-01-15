@@ -12,5 +12,4 @@ simQMean = shiftdim(mean(allValuesNOKF(1,1:nMembers,outputCol,1:nDASteps),member
 
 objScore = sqrt(mean((obsQ(2:nDASteps)-simQMean(2:nDASteps)).^2));
 
-% save('./../streams/debug.m.mat','-mat7-binary')
-% save('./../streams/debug.o.mat','-binary')
+% save('./../streams/debug.mat','-mat7-binary')

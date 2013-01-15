@@ -14,5 +14,4 @@ simWaterLevelMean = shiftdim(mean(allStateValuesKF(1,1:nMembers,selectCol,1:nDAS
 
 objScore = sqrt(mean((obsWaterLevel(2:nDASteps)-simWaterLevelMean(2:nDASteps)).^2));
 
-% save('./../streams/debug.m.mat','-mat7-binary')
-% save('./../streams/debug.o.mat','-binary')
+% save('./../streams/debug.mat','-mat7-binary')

@@ -1,6 +1,6 @@
 function complexes = sodaPartComplexes(conf,evalResults)
 %
-% <a href="matlab:web(fullfile(scemroot,'html','partcomplexes.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
+% <a href="matlab:web(fullfile(sodaroot,'html','sodaPartComplexes.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
 %
 
 nCols = size(evalResults,2);

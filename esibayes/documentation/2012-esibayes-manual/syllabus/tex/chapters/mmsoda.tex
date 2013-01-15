@@ -1,0 +1,180 @@
+\chapter{The MMSODA Toolbox for MATLAB}
+
+There are various softwares that implement the Master-Worker paradigm. The most commonly used Master-Worker software is probably MPI\index{Message Passing Interface}\index{MPI}, which stands for \textit{Message Passing Interface}. Most cluster computers have some form of MPI installed. We will use the GNU version of OpenMPI, since this is the default MPI package at the LISA cluster computer.
+
+We have developed a parallel MATLAB version of SODA \citep[e.g.][]{vrug-diks-gupt-bout-vers-2005} that makes use of MPI. The software package is called `The MMSODA Toolbox for MATLAB', or MMSODA for short (MMSODA stands for MATLAB-MPI-SODA). In this chapter, we will look at how to set it up.
+
+MMSODA merges a number of previously separate softwares, namely SCEM-UA \citep{vrug-gupt-bout-soro-2003}, MOSCEM-UA \citep{vrug-gupt-bast-bout-soro-2003}, SODA \citep{vrug-diks-gupt-bout-vers-2005}, MOSODA \citep{}, pSCEM-UA \citep{}, and pSODA \citep{}. In short, those acronyms imply that: MMSODA can do parameter tuning with or without intermediate state updating by an ensemble Kalman Filter; that MMSODA supports both single-objective and multi-objective optimization; and that the optimization can be run either in series, or in parallel.
+
+The serial/parallel capability is particularly attractive, since it allows the users to set up their optimizations locally on their own machines, thus ensuring a familiar development environment. When the user finishes setting up the optimization, running it on a cluster computer is simply a matter of copying the relevant directory to the cluster storage using standard tools (e.g. WinSCP) and compiling the software by executing a script that comes with the software. Furthermore, MMSODA is fully documented with HTML documentation which can be accessed in the same way as MATLAB's built-in commands, namely through the \texttt{doc} command.
+
+%scemua-so-seq  SCEM-UA
+%scemua-so-par  parallel SCEM-UA
+%scemua-mo-seq MOSCEM-UA
+%scemua-mo-par parallel MOSCEM-UA
+%soda-so-seq  SODA
+%soda-so-par  parallel SODA
+%soda-mo-seq   MO SODA
+%soda-mo-par  parallel MO SODA
+
+
+The remainder of this chapter explains how to set up increasingly sophisticated optimizations within the MMSODA framework. Let's start off with the simplest possible example: a single-objective SCEM-UA optimization of a benchmark function \texttt{calcLikelihood()}, and let's not do anything in parallel just yet.
+
+\smallq{First download the \texttt{mmsoda} folder from $<$somewhere$>$. }
+
+\smallq{Create a new directory next to your \texttt{mmsoda} folder. Let's call this directory \texttt{example1}. Change directory into \texttt{example1}, and create three directories in it called \texttt{data}, \texttt{model}, and \texttt{results}. (We won't always use all three folders, but \texttt{mmsoda} expects all three to be present regardless of whether they are used). So now you have a directory somewhere on your local storage device that has the following subfolders:
+\begin{itemize}
+\item{\texttt{./example1}}
+\item{\texttt{./example1/data}}
+\item{\texttt{./example1/model}}
+\item{\texttt{./example1/results}}
+\item{\texttt{./mmsoda} (which includes a bunch of subdirectories and subsubdirectories that are not relevant for the moment).}
+\end{itemize}
+}
+
+\smallq{Open MATLAB and set your working directory to \texttt{example1}.}
+
+\smallq{In order to use \texttt{mmsoda}, its files need to be added to the MATLAB search path. You must do this using the \texttt{addpath} command as follows:\\
+\texttt{>> addpath(\squote{s})}, in which \texttt{s} indicates the location of the \texttt{mmsoda} directory. For example, it could be:\\
+\texttt{>> addpath(\squote{C:\textbackslash{}Users\textbackslash{}jspaaks\textbackslash{}esibayes\textbackslash{}mmsoda})}\\ on a Windows machine or \\
+\texttt{>> addpath(\squote{/home/jspaaks/esibayes/mmsoda})}\\
+on Linux.
+}
+\smallq{At the MATLAB prompt, type:\\
+\texttt{>> soda --docinstall}\\
+to complete the \texttt{mmsoda} setup.}
+
+\smallq{Test whether everything works as it should by typing: \\
+\texttt{>> doc soda} \\
+at the MATLAB command prompt. This should bring up MATLAB's help browser. Click on the link `View HTML documentation for this function in the help browser'. You should now see an overview of the functions comprising the MMSODA Toolbox for MATLAB.}
+
+\smallq{Spend at least 12 minutes to browse through the documentation.}
+
+The function that we want to optimize implements the double-normal probability distribution:
+\begin{equation}\label{eq:double-normal}
+\begin{align}
+p=\frac{1}{2}\cdot{}\frac{1}{\sqrt{2\cdot{}\pi\cdot{}\sigma{}_1}}\cdot{}\mathrm{exp}\left[-\frac{1}{2}\cdot{}\left(\frac{x-\mu_1}{\sigma_1} \right)^2 \right] \quad & + \\
+\frac{1}{2}\cdot{}\frac{1}{\sqrt{2\cdot{}\pi\cdot{}\sigma{}_2}}\cdot{}\mathrm{exp}\left[-\frac{1}{2}\cdot{}\left(\frac{x-\mu_2}{\sigma_2} \right)^2 \right] \quad & \\
+\end{align}
+\end{equation}
+with $\mu_1 = -10$, $\sigma_1 = 3$, $\mu_2 = 5$, $\sigma_2 = 1$, respectively. The parameter that is optimized (or, equivalently, whose probability distribution we will estimate by means of the MMSODA Toolbox for MATLAB) is $x$. For example, for $x=4.5$, $p = $.
+
+Because MMSODA expect the objective function to return a log-likelihood $l$, we must actually take the natural logarithm of $p$ as the objective score:
+\begin{equation}\label{eq:log-likelihood}
+l=\mathrm{log}\left(p\right)
+\end{equation}
+
+Before we actually start writing any code for this objective function however, let's first create the `conf.mat' and `constants.mat' files.
+
+\smallq{Start a new text file in the MATLAB editor and save it as `makeconf.m' in the current working directory.}
+
+\smallq{At the first line in `makeconf.m', add the following:\\
+\texttt{function makeconf()}\\}
+
+Now we need to edit the contents of `makeconf.m' as follows.
+
+\smallq{At the prompt, type \\
+\texttt{doc soda} \\
+and bring up the HTML documentation for the \texttt{soda()} function.}
+
+Near the bottom of the documentation, there is an overview of the configuration variables that you need to specify for a given type of optimization. For our double-normal example, we will use MMSODA in \squote{bypass} mode. This mode is used when the log-likelihood can be estimated directly from the parameter vector, without the need to run a (dynamic) model structure.
+
+\smallq{If you look in the table with all the configuration variables, you'll see that only 5 variables are required for running MMSODA in \squote{bypass} mode. These are \texttt{modeStr}, \texttt{objCallStr}, \texttt{parNames}, \texttt{parSpaceHiBound}, and \texttt{parSpaceLoBound}. Make sure you understand the description for each of these.}
+
+\smallq{Return to `makeconf.m' and add the following:\\
+Add the following:\\
+\texttt{modeStr = \squote{bypass};}\\
+\texttt{objCallStr = \squote{calcLikelihood};}\\
+\texttt{parNames = {\squote{x}};}\\
+\texttt{parSpaceHiBound = [30];}\\
+\texttt{parSpaceLoBound = [-10];}\\
+}
+
+With the above settings we specify that we want MMSODA to do a bypass run, in which the function `calcLikelihood.m' (which we will create shortly) is optimized. \texttt{calcLikelihood} has one tunable parameter, \texttt{x}. The bounds that we set on the search for the optimal value of \texttt{x} are \texttt{[-10,30]}.
+
+\smallq{At the last line in `makeconf.m', add the following:\\
+\texttt{save(\squote{./results/conf.mat})}\\}
+
+\smallq{Save and close `makeconf.m'.}
+
+
+Next, we need to create `constants.mat' by a similar procedure.
+
+\smallq{Create a new m-file in the current working directory called `makeconstants.m'.}
+
+\smallq{At a first line in `makeconstants.m', type:\\
+\texttt{function makeconstants()}}
+
+Now we need to assign the constants, i.e.\,the variables that \texttt{calcLikelihood} needs in order to calculate the log-likelihood according to equations~\ref{eq:double-normal}--ref{eq:log-likelihood}.
+
+\smallq{In `makeconstants.m' add:\\
+\texttt{parMu1 = -10;}\\
+\texttt{parSigma1 = 3;}\\
+\texttt{parMu2 = 5;}\\
+\texttt{parSigma2 = 1;}\\
+i.e. the two means and two standard deviations for the double normal distribution.
+}
+
+\smallq{At the last line in `makeconstants.m', add\\
+\texttt{save(\squote{./data/constants.mat})}
+}
+
+\smallq{Save and close `makeconstants.m'.}
+
+Finally, we need to create the objective function m-file that implements equations~\ref{eq:double-normal} and \ref{eq:log-likelihood}.
+
+\smallq{Create a new m-file, called `calcLikelihood.m' and save it in the subdirectory `./model'.}
+
+\smallq{Open `./model/calcLikelihood.m'. MMSODA uses a standardized way of passing the input and output arguments to and from the objective function, so the first line is always exactly the same (with the exception of the name of the function \texttt{calcLikelihood}, which may vary), like so:\\
+\texttt{function objScore = calcLikelihood(conf,constants,allStateValuesKF,allValuesNOKF,parVec)}
+}
+
+\smallq{As a second line, type: \\
+\texttt{sodaUnpack()}\\
+This function uses the information from the input arguments to construct the variable \texttt{x} and assigns it a value based on the value of \texttt{parVec}. Furthermore, it constructs the model constants and assigns them the correct values.}
+
+Now that we have \texttt{parMu1}, \texttt{parSigma1}, \texttt{parMu2}, \texttt{parSigma2}, and \texttt{x} we can calculate the probability density \texttt{dens} as follows:
+\begin{verbatim}
+dens = (1/(sqrt(2*pi*parSigma1^2))*exp(-(1/2)*((x-parMu1)/parSigma1)^2) + ...
+        1/(sqrt(2*pi*parSigma2^2))*exp(-(1/2)*((x-parMu2)/parSigma2)^2))/2;
+\end{verbatim}
+
+\smallq{Add this calculation to your \texttt{calcLikelihood} function.}
+
+\smallq{Don't forget that MMSODA expects a log-likelihood however, so as a final line in \texttt{calcLikelihood}, add:\\
+\texttt{objScore = log(dens);}}
+
+\smallq{Save and close `calcLikelihood.m'.}
+
+\smallq{Make sure that the current working directory is the `example1' directory. At the MATLAB command prompt, type:\\
+\texttt{>> makeconf()}\\
+and check that a new file `conf.mat' is created in subdirectory `./results'.}
+
+\smallq{At the MATLAB command prompt, type:\\
+\texttt{>> makeconstants()}\\
+and check that a new file `constants.mat' is created in subdirectory `./data'.}
+
+\smallq{At the command prompt, type \texttt{clear} to clear the workspace if there are any variables in it.}
+
+\smallq{Now, we are ready to run the optimization. At the MATLAB command prompt, type:\\
+\texttt{>> [evalResults,critGelRub,sequences,metropolisRejects,conf] = soda();}\\
+and wait for the optimization to finish.}
+
+%make sure your working directory is bypass-so-test
+%in the command window type makeconf
+%in the command window type makeconstants
+%in the command window type [evalResults,critGelRub,sequences,metropolisRejects,conf] = soda();
+
+
+
+
+
+
+
+%scemua example - hymod batch
+
+%soda example - lorenz
+
+
+%cluster
+

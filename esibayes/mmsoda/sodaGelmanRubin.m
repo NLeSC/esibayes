@@ -1,6 +1,6 @@
 function rHatRoot = sodaGelmanRubin(conf,sequences)
 %
-% <a href="matlab:web(fullfile(scemroot,'html','gelmanrubin.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
+% <a href="matlab:web(fullfile(sodaroot,'html','sodaGelmanRubin.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
 %
 % Based on 7-step prescriptive summary in Gelman and Rubin 1992;
 % Statistical Science, Vol. 7, No. 4, p457-472.

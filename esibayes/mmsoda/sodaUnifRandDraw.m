@@ -1,6 +1,6 @@
 function uDraw = sodaUnifRandDraw(conf,drawMode)
 %
-% <a href="matlab:web(fullfile(scemroot,'html','latin.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
+% <a href="matlab:web(fullfile(sodaroot,'html','sodaUnifRandDraw.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
 %
 
 % This code has been revised by JHS2007

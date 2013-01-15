@@ -1,6 +1,6 @@
 function sDraw = sodaStratDraw(conf)
 %
-% <a href="matlab:web(fullfile(sodaroot,'html','stratrand.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>
+% <a href="matlab:web(fullfile(sodaroot,'html','sodaStratDraw.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>
 %
 
 nOptPars = conf.nOptPars;

@@ -1,15 +1,7 @@
 function varargout = sodaInitialize(sodaOptions)
-
-% conf.verboseOutput = true;
-% if nargin>1 && ischar(sodaOptions{2})
-%     switch sodaOptions{2}
-%         case {'-q','--quiet'}
-%             conf.verboseOutput = false;
-%         otherwise
-%             conf.verboseOutput = true;
-%     end
-% 
-% end
+%
+% <a href="matlab:web(fullfile(sodaroot,'html','sodaInitialize.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
+%
 
 conf.verboseOutput = ~any(strcmp('--quiet',sodaOptions)|strcmp('-q',sodaOptions));
 
