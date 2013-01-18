@@ -29,10 +29,11 @@
 int mpi_rank, mpi_size;
 int mpibuffersize=1000000;
 int verbosity=0;
+int savetimings=0;
 
 int run_main(int argc, char **argv)
 {
-    mxArray *MLmpi_size, *MLmpi_rank, *MLbuffersize, *MLverbosity;
+    mxArray *MLmpi_size, *MLmpi_rank, *MLbuffersize, *MLverbosity, *MLsavetimings;
 
     /* Call the mclInitializeApplication routine. Make sure that the application
      * was initialized properly by checking the return status. This initialization
@@ -70,7 +71,10 @@ int run_main(int argc, char **argv)
         MLverbosity = mxCreateDoubleMatrix(1,1,mxREAL);
         buf = mxGetPr(MLverbosity);
         *buf = (double) verbosity;
-        mlfMatlabmain(MLverbosity);
+        MLsavetimings = mxCreateDoubleMatrix(1,1,mxREAL);
+        buf = mxGetPr(MLsavetimings);
+        *buf = (double) savetimings;
+        mlfMatlabmain(MLverbosity,MLsavetimings);
     }
     /* Free the memory created */
     mxDestroyArray(MLmpi_size); MLmpi_size=0;
@@ -93,7 +97,7 @@ int main(int argc, char *argv[])
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD,&mpi_rank);
     MPI_Comm_size(MPI_COMM_WORLD,&mpi_size);
-    while ((ch = getopt(argc, argv, "hv:b:")) !=-1) {
+    while ((ch = getopt(argc, argv, "htv:b:")) !=-1) {
         switch(ch) {
         case 'v':
             verbosity=atoi(optarg);
@@ -107,6 +111,12 @@ int main(int argc, char *argv[])
                 printf("Setting the buffer size to %d bytes.\n",mpibuffersize);
             }
             break;
+        case 't':
+            savetimings=1;
+            if (mpi_rank==0) {
+                printf("Timings will be saved.\n");
+            }
+            break;
         case 'h':
         case '?':
         default:
@@ -115,14 +125,20 @@ int main(int argc, char *argv[])
                 printf("\nThese are the optional command line parameters:\n");
                 printf("\t-b Sets the MPI buffer size (bytes).\n");
                 printf("\t-h Prints this help message.\n");
+                printf("\t-t Save timings.\n");
                 printf("\t-v Sets the verbosity level [0-3].\n\n");
             }
             MPI_Finalize();
             return 5;
         }
     }
-    mclmcrInitialize();
-    rc=mclRunMain((mclMainFcnType)run_main,0,NULL);
+    if (mpi_size<2) {
+        printf("\nThis program can only be run on more than one processor!\n");
+        rc=7;
+    } else {
+        mclmcrInitialize();
+        rc=mclRunMain((mclMainFcnType)run_main,0,NULL);
+    }
     free(MM_BUFFER);
     MPI_Finalize();
     return rc;

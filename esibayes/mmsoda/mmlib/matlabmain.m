@@ -1,4 +1,4 @@
-function matlabmain(verbosity)
+function matlabmain(verbosity,savetimings)
 
 assignin('base','verbosity',verbosity);
 
@@ -29,6 +29,8 @@ else
 
 end
 
-fn=sprintf('timing_%03d.mat',mpirank);
-timing = evalin('base','timing');
-save(fn,'timing');
+if savetimings == 1
+    fn=sprintf('timing_%03d.mat',mpirank);
+    timing = evalin('base','timing');
+    save(fn,'timing');
+end
