@@ -10,5 +10,15 @@
 \contentsline {subsection}{\numberline {3.1.1}Master side}{19}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}Worker side}{20}{subsection.3.1.2}
 \contentsline {chapter}{\numberline {4}\texttt {piped}}{21}{chapter.4}
-\contentsline {chapter}{\numberline {5}How to structure your problem}{23}{chapter.5}
-\contentsline {chapter}{\numberline {6}Remote graphical applications}{24}{chapter.6}
+\contentsline {chapter}{\numberline {5}The MMSODA Toolbox for MATLAB}{23}{chapter.5}
+\contentsline {section}{\numberline {5.1}MMSODA in \textquotesingle bypass\textquotesingle mode; offline}{24}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Creating the `constants.mat' and `conf.mat' files}{25}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Creating the objective function m-file}{26}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}Running the optimization locally}{27}{subsection.5.1.3}
+\contentsline {section}{\numberline {5.2}MMSODA in \textquotesingle bypass\textquotesingle mode; online}{28}{section.5.2}
+\contentsline {section}{\numberline {5.3}Compiling MMSODA and your model code into a binary}{28}{section.5.3}
+\contentsline {section}{\numberline {5.4}MMSODA in \textquotesingle scemua\textquotesingle mode; offline}{29}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}Creating the objective function m-file}{31}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.2}Running the optimization locally}{31}{subsection.5.4.2}
+\contentsline {chapter}{\numberline {6}How to structure your problem}{32}{chapter.6}
+\contentsline {chapter}{\numberline {7}Remote graphical applications}{33}{chapter.7}

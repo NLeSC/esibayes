@@ -129,7 +129,7 @@ switch typeStr
             end
         else
         end
-        if isfield(conf,'parNamesTex')
+        if isfield(conf,'parNamesTex') && ~isempty(conf.parNamesTex)
             yLabels = conf.parNamesTex;
         else
             yLabels = conf.parNames;
@@ -140,7 +140,7 @@ switch typeStr
         % plot parameters vs objectives
         x = parCols;
         y = llCols;
-        if isfield(conf,'parNamesTex')
+        if isfield(conf,'parNamesTex') && ~isempty(conf.parNamesTex)
             xLabels = conf.parNamesTex;
         else
             xLabels = conf.parNames;
@@ -165,7 +165,7 @@ switch typeStr
         % plot parameters vs parameters
         x = parCols;
         y = parCols;
-        if isfield(conf,'parNamesTex')
+        if isfield(conf,'parNamesTex') && ~isempty(conf.parNamesTex)
             xLabels = conf.parNamesTex;
         else
             xLabels = conf.parNames;
@@ -177,7 +177,7 @@ switch typeStr
         % plot parameters vs model evaluation number
         x = parCols;
         y = evalCol;
-        if isfield(conf,'parNamesTex')
+        if isfield(conf,'parNamesTex') && ~isempty(conf.parNamesTex)
             xLabels = conf.parNamesTex;
         else
             xLabels = conf.parNames;
@@ -190,7 +190,7 @@ switch typeStr
         x = evalCol;
         y = parCols;
         xLabels = {'model evaluation number'};
-        if isfield(conf,'parNamesTex')
+        if isfield(conf,'parNamesTex') && ~isempty(conf.parNamesTex)
             yLabels = conf.parNamesTex;
         else
             yLabels = conf.parNames;
@@ -204,7 +204,7 @@ switch typeStr
         % plot parameters vs pareto
         x = parCols;
         y = paretoCol;
-        if isfield(conf,'parNamesTex')
+        if isfield(conf,'parNamesTex') && ~isempty(conf.parNamesTex)
             xLabels = conf.parNamesTex;
         else
             xLabels = conf.parNames;
@@ -219,7 +219,7 @@ switch typeStr
         end
         x = parCols;
         y = objCol;
-        if isfield(conf,'parNamesTex')
+        if isfield(conf,'parNamesTex') && ~isempty(conf.parNamesTex)
             xLabels = conf.parNamesTex;
         else
             xLabels = conf.parNames;
@@ -234,7 +234,7 @@ switch typeStr
         end
         x = objCol;
         y = parCols;
-        if isfield(conf,'parNamesTex')
+        if isfield(conf,'parNamesTex') && ~isempty(conf.parNamesTex)
             yLabels = conf.parNamesTex;
         else
             yLabels = conf.parNames;
@@ -250,7 +250,7 @@ switch typeStr
         x = paretoCol;
         y = parCols;
         xLabels = {'Pareto score'};
-        if isfield(conf,'parNamesTex')
+        if isfield(conf,'parNamesTex') && ~isempty(conf.parNamesTex)
             yLabels = conf.parNamesTex;
         else
             yLabels = conf.parNames;

@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2012.5.4)  15 JAN 2013 09:47
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2012.5.4)  24 JAN 2013 14:40
 entering extended mode
  %&-line parsing enabled.
-**2012-esibayes-manual.tex
+**./2012-esibayes-manual.tex
 (./2012-esibayes-manual.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
@@ -817,24 +817,139 @@ Chapter 4.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <24.88> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1.
 File: ./../eps/piped.eps Graphic file (type eps)
-<./../eps/piped.eps>) (./chapters/how-to-structure-your-problem.tex [21
+<./../eps/piped.eps>) (./chapters/mmsoda.tex [21
 
-]
-[22]
+] [22]
 Chapter 5.
-) (./chapters/remote-graphical-applications.tex [23
+
+Underfull \hbox (badness 2285) in paragraph at lines 7--8
+[]\OT1/cmr/m/n/10 MMSODA merges a num-ber of pre-vi-ously sep-a-rate soft-wares
+, namely SCEM-UA
+ []
+
+
+Underfull \hbox (badness 1527) in paragraph at lines 7--8
+\OT1/cmr/m/n/10 ([], []), MOSCEM-UA ([], []), SODA ([], []),
+ []
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textquotesingle' on input line 23.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textquotesingle' on input line 23.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [23
 
 ]
-Chapter 6.
+LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 44.
 
-LaTeX Warning: Reference `fig:plotseq-1-600' on page 24 undefined on input line
+LaTeX Font Info:    No file OMScmtt.fd. on input line 44.
+
+
+LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbackslash' on input line 44.
+
+
+! Package amsmath Error: Erroneous nesting of equation structures;
+(amsmath)                trying to recover with `aligned'.
+
+See the amsmath package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.60 \end{align}
+                
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[24]
+Underfull \hbox (badness 10000) in paragraph at lines 76--76
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 94--94
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--99
+
+ []
+
+[25]
+Overfull \hbox (63.65738pt too wide) in paragraph at lines 136--136
+\OT1/cmtt/m/n/10 function objScore = calcLikelihood(conf,constants,allStateValu
+esKF,allValuesNOKF,parVec) 
+ []
+
+
+Overfull \hbox (5.90788pt too wide) in paragraph at lines 146--146
+[]\OT1/cmtt/m/n/10 dens = (1/(sqrt(2*pi*parSigma1^2))*exp(-(1/2)*((x-parMu1)/pa
+rSigma1)^2) + ...[] 
+ []
+
+[26]
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
+
+ []
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.196 }
+       
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[27]
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textquotesingle' on input line 201.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textquotesingle' on input line 201.
+
+[28]
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textquotesingle' on input line 261.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textquotesingle' on input line 261.
+
+
+Package natbib Warning: Citation `boyle' on page 29 undefined on input line 263
+.
+
+[29] [30]) (./chapters/how-to-structure-your-problem.tex [31]
+Chapter 6.
+) (./chapters/remote-graphical-applications.tex [32
+
+]
+Chapter 7.
+
+LaTeX Warning: Reference `fig:plotseq-1-600' on page 33 undefined on input line
  6.
 
 File: ./../eps/xlaunch-1.eps Graphic file (type eps)
 <./../eps/xlaunch-1.eps>
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [24
+ [33
 
 ]
 File: ./../eps/xlaunch-2.eps Graphic file (type eps)
@@ -844,7 +959,7 @@ File: ./../eps/xlaunch-3.eps Graphic file (type eps)
  <./../eps/xlaunch-3.eps>
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [25]
+ [34]
 File: ./../eps/xlaunch-4.eps Graphic file (type eps)
 
 <./../eps/xlaunch-4.eps>
@@ -852,44 +967,50 @@ File: ./../eps/xlaunch-5.eps Graphic file (type eps)
  <./../eps/xlaunch-5.eps>
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [26]
+ [35]
 File: ./../eps/putty-x-forwarding.eps Graphic file (type eps)
 
 <./../eps/putty-x-forwarding.eps>
 File: ./../eps/octave-peaks-x-forwarding.eps Graphic file (type eps)
  <./../eps/octave-peaks-x-forwarding.eps>
-[27]
+[36]
 Underfull \vbox (badness 2119) has occurred while \output is active []
 
- [28]
+ [37]
 File: ./../eps/matlab-remote-debugging.eps Graphic file (type eps)
 
-<./../eps/matlab-remote-debugging.eps>) [29] (./../out/2012-esibayes-manual.bbl
-) (./../out/2012-esibayes-manual.ind [30
+<./../eps/matlab-remote-debugging.eps>) [38] (./../out/2012-esibayes-manual.bbl
+) (./../out/2012-esibayes-manual.ind [39
 
 
-] [31
+] [40
 
-] [32
+] [41
 
 ])
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [33
+ [42
 
 ]
+
+Package natbib Warning: There were undefined citations.
+
 (./../out/2012-esibayes-manual.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 10831 strings out of 495062
- 156257 string characters out of 1182645
+ 10880 strings out of 495062
+ 156980 string characters out of 1182645
  314392 words of memory out of 3000000
- 13673 multiletter control sequences out of 15000+50000
- 15183 words of font info for 59 fonts, out of 3000000 for 9000
+ 13715 multiletter control sequences out of 15000+50000
+ 15859 words of font info for 61 fonts, out of 3000000 for 9000
  88 hyphenation exceptions out of 8191
- 68i,12n,134p,2225b,1783s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 68i,12n,134p,2227b,1783s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on ./../out/2012-esibayes-manual.dvi (37 pages, 306820 bytes).
+Output written on ./../out/2012-esibayes-manual.dvi (46 pages, 358536 bytes).

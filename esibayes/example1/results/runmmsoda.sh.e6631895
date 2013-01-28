@@ -1,0 +1,8 @@
+Message from module openmpi/gnu//1.6.3: 
+This module is now default. If you encounter problems:
+recompile or use the 1.4.5 module. 
+More info:
+https://www.sara.nl/systems/lisa/news/2012-11-02-ompi1.4-ompi1.6
+=>> PBS: job killed: walltime 641 exceeded limit 600
+mpirun: killing job...
+

@@ -20,9 +20,11 @@ The serial/parallel capability is particularly attractive, since it allows the u
 
 The remainder of this chapter explains how to set up increasingly sophisticated optimizations within the MMSODA framework. Let's start off with the simplest possible example: a single-objective SCEM-UA optimization of a benchmark function \texttt{calcLikelihood()}, and let's not do anything in parallel just yet.
 
+\section{MMSODA in \squote{bypass} mode; offline}
+
 \smallq{First download the \texttt{mmsoda} folder from $<$somewhere$>$. }
 
-\smallq{Create a new directory next to your \texttt{mmsoda} folder. Let's call this directory \texttt{example1}. Change directory into \texttt{example1}, and create three directories in it called \texttt{data}, \texttt{model}, and \texttt{results}. (We won't always use all three folders, but \texttt{mmsoda} expects all three to be present regardless of whether they are used). So now you have a directory somewhere on your local storage device that has the following subfolders:
+\smallq{Create a new directory next to your \texttt{mmsoda} folder. Let's call this directory \texttt{example1}. Change directory into \texttt{example1}, and create three directories in it called \texttt{data}, \texttt{model}, and \texttt{results}. (We won't always use all three folders, but MMSODA expects all three to be present regardless of whether they are used). So now you have a directory somewhere on your local storage device that has the following subfolders:
 \begin{itemize}
 \item{\texttt{./example1}}
 \item{\texttt{./example1/data}}
@@ -34,7 +36,7 @@ The remainder of this chapter explains how to set up increasingly sophisticated 
 
 \smallq{Open MATLAB and set your working directory to \texttt{example1}.}
 
-\smallq{In order to use \texttt{mmsoda}, its files need to be added to the MATLAB search path. You must do this using the \texttt{addpath} command as follows:\\
+\smallq{Before we can use the functionality provided by the MMSODA Toolbox for MATLAB, we need to tell MATLAB about its existence by adding the main folder to the MATLAB search path. You must do this using the \texttt{addpath} command as follows:\\
 \texttt{>> addpath(\squote{s})}, in which \texttt{s} indicates the location of the \texttt{mmsoda} directory. For example, it could be:\\
 \texttt{>> addpath(\squote{C:\textbackslash{}Users\textbackslash{}jspaaks\textbackslash{}esibayes\textbackslash{}mmsoda})}\\ on a Windows machine or \\
 \texttt{>> addpath(\squote{/home/jspaaks/esibayes/mmsoda})}\\
@@ -42,13 +44,13 @@ on Linux.
 }
 \smallq{At the MATLAB prompt, type:\\
 \texttt{>> soda --docinstall}\\
-to complete the \texttt{mmsoda} setup.}
+to complete the MMSODA setup. In principle, you only have to run this command once per MATLAB session, as long as you do not change the location of MMSODA's main directory on your storage.}
 
 \smallq{Test whether everything works as it should by typing: \\
 \texttt{>> doc soda} \\
 at the MATLAB command prompt. This should bring up MATLAB's help browser. Click on the link `View HTML documentation for this function in the help browser'. You should now see an overview of the functions comprising the MMSODA Toolbox for MATLAB.}
 
-\smallq{Spend at least 12 minutes to browse through the documentation.}
+\smallq{Spend at least 12 minutes to browse through the documentation. In any case, make sure to read the documentation on `soda.m'.}
 
 The function that we want to optimize implements the double-normal probability distribution:
 \begin{equation}\label{eq:double-normal}
@@ -57,14 +59,16 @@ p=\frac{1}{2}\cdot{}\frac{1}{\sqrt{2\cdot{}\pi\cdot{}\sigma{}_1}}\cdot{}\mathrm{
 \frac{1}{2}\cdot{}\frac{1}{\sqrt{2\cdot{}\pi\cdot{}\sigma{}_2}}\cdot{}\mathrm{exp}\left[-\frac{1}{2}\cdot{}\left(\frac{x-\mu_2}{\sigma_2} \right)^2 \right] \quad & \\
 \end{align}
 \end{equation}
-with $\mu_1 = -10$, $\sigma_1 = 3$, $\mu_2 = 5$, $\sigma_2 = 1$, respectively. The parameter that is optimized (or, equivalently, whose probability distribution we will estimate by means of the MMSODA Toolbox for MATLAB) is $x$. For example, for $x=4.5$, $p = $.
+with $\mu_1 = -10$, $\sigma_1 = 3$, $\mu_2 = 5$, $\sigma_2 = 1$, respectively. The parameter that is optimized (or, equivalently, whose probability distribution we will estimate by means of the MMSODA Toolbox for MATLAB) is $x$. For example, for $x=4.5$, $p = 0.1760$.
 
 Because MMSODA expect the objective function to return a log-likelihood $l$, we must actually take the natural logarithm of $p$ as the objective score:
 \begin{equation}\label{eq:log-likelihood}
 l=\mathrm{log}\left(p\right)
 \end{equation}
 
-Before we actually start writing any code for this objective function however, let's first create the `conf.mat' and `constants.mat' files.
+\subsection{Creating the `constants.mat' and `conf.mat' files}
+
+Before we actually start writing any code for this objective function however, let's first create the `conf.mat' and `constants.mat' files that are needed for running \texttt{soda()}.
 
 \smallq{Start a new text file in the MATLAB editor and save it as `makeconf.m' in the current working directory.}
 
@@ -73,24 +77,23 @@ Before we actually start writing any code for this objective function however, l
 
 Now we need to edit the contents of `makeconf.m' as follows.
 
-\smallq{At the prompt, type \\
+\smallq{At the MATLAB prompt, type \\
 \texttt{doc soda} \\
 and bring up the HTML documentation for the \texttt{soda()} function.}
 
-Near the bottom of the documentation, there is an overview of the configuration variables that you need to specify for a given type of optimization. For our double-normal example, we will use MMSODA in \squote{bypass} mode. This mode is used when the log-likelihood can be estimated directly from the parameter vector, without the need to run a (dynamic) model structure.
+Near the bottom of the documentation, there is an overview of the configuration variables that must be specified for a given type of optimization. For our double-normal example, we will use MMSODA in \squote{bypass} mode. This mode is used when the log-likelihood can be estimated directly from the parameter vector, without the need to run a (dynamic) model structure.
 
-\smallq{If you look in the table with all the configuration variables, you'll see that only 5 variables are required for running MMSODA in \squote{bypass} mode. These are \texttt{modeStr}, \texttt{objCallStr}, \texttt{parNames}, \texttt{parSpaceHiBound}, and \texttt{parSpaceLoBound}. Make sure you understand the description for each of these.}
+\smallq{If you look in the table with the configuration variables, you'll see that only 5 variables are required for running MMSODA in \squote{bypass} mode. These are \texttt{modeStr}, \texttt{objCallStr}, \texttt{parNames}, \texttt{parSpaceHiBound}, and \texttt{parSpaceLoBound}. Make sure you understand the description for each of these.}
 
 \smallq{Return to `makeconf.m' and add the following:\\
-Add the following:\\
 \texttt{modeStr = \squote{bypass};}\\
 \texttt{objCallStr = \squote{calcLikelihood};}\\
-\texttt{parNames = {\squote{x}};}\\
-\texttt{parSpaceHiBound = [30];}\\
-\texttt{parSpaceLoBound = [-10];}\\
+\texttt{parNames = \{\squote{x}\};}\\
+\texttt{parSpaceHiBound = [10];}\\
+\texttt{parSpaceLoBound = [-30];}\\
 }
 
-With the above settings we specify that we want MMSODA to do a bypass run, in which the function `calcLikelihood.m' (which we will create shortly) is optimized. \texttt{calcLikelihood} has one tunable parameter, \texttt{x}. The bounds that we set on the search for the optimal value of \texttt{x} are \texttt{[-10,30]}.
+With the above settings we specify that we want MMSODA to do a bypass run, in which the function `calcLikelihood.m' (which we will create shortly) is optimized. \texttt{calcLikelihood} has one tunable parameter, \texttt{x}. The bounds that we set on the search for the optimal value of \texttt{x} are \texttt{[-30,10]}.
 
 \smallq{At the last line in `makeconf.m', add the following:\\
 \texttt{save(\squote{./results/conf.mat})}\\}
@@ -102,10 +105,10 @@ Next, we need to create `constants.mat' by a similar procedure.
 
 \smallq{Create a new m-file in the current working directory called `makeconstants.m'.}
 
-\smallq{At a first line in `makeconstants.m', type:\\
+\smallq{At the first line in `makeconstants.m', type:\\
 \texttt{function makeconstants()}}
 
-Now we need to assign the constants, i.e.\,the variables that \texttt{calcLikelihood} needs in order to calculate the log-likelihood according to equations~\ref{eq:double-normal}--ref{eq:log-likelihood}.
+Now we need to assign the constants, i.e.\,the variables that \texttt{calcLikelihood} needs in order to calculate the log-likelihood according to equations~\ref{eq:double-normal}--\ref{eq:log-likelihood}.
 
 \smallq{In `makeconstants.m' add:\\
 \texttt{parMu1 = -10;}\\
@@ -122,6 +125,9 @@ i.e. the two means and two standard deviations for the double normal distributio
 \smallq{Save and close `makeconstants.m'.}
 
 Finally, we need to create the objective function m-file that implements equations~\ref{eq:double-normal} and \ref{eq:log-likelihood}.
+
+
+\subsection{Creating the objective function m-file}
 
 \smallq{Create a new m-file, called `calcLikelihood.m' and save it in the subdirectory `./model'.}
 
@@ -146,6 +152,8 @@ dens = (1/(sqrt(2*pi*parSigma1^2))*exp(-(1/2)*((x-parMu1)/parSigma1)^2) + ...
 
 \smallq{Save and close `calcLikelihood.m'.}
 
+\subsection{Running the optimization locally}
+
 \smallq{Make sure that the current working directory is the `example1' directory. At the MATLAB command prompt, type:\\
 \texttt{>> makeconf()}\\
 and check that a new file `conf.mat' is created in subdirectory `./results'.}
@@ -158,7 +166,7 @@ and check that a new file `constants.mat' is created in subdirectory `./data'.}
 
 \smallq{Now, we are ready to run the optimization. At the MATLAB command prompt, type:\\
 \texttt{>> [evalResults,critGelRub,sequences,metropolisRejects,conf] = soda();}\\
-and wait for the optimization to finish.}
+and wait for the optimization to finish. Input arguments to \texttt{soda} are not required, since \texttt{soda} knows to look in `./results/conf.mat' for the configuration, in `./data/constants.mat' for the model constants, and in `./model' for the model functions and objective functions.}
 
 %make sure your working directory is bypass-so-test
 %in the command window type makeconf
@@ -168,10 +176,146 @@ and wait for the optimization to finish.}
 
 
 
+\smallq{\textit{some exercises with interpretation of the results.}}
+
+
+\smallq{Refer back to the documentation on the \texttt{soda} function; specifically, browse through some of the configuration options for running MMSODA in `bypass' mode. Alter your `makeconf.m' with the options that you find useful, and re-run the optimization.}
+
+\smallq{When you are satisfied with the way you set up MMSODA locally, you can make preparations for running it in parallel on the LISA cluster computer. Running on LISA requires a jobscript, which can be tricky to set up sometimes. Therefore, the MMSODA Toolbox for MATLAB comes with a function that helps you set up the jobscript correctly by asking a series of questions. At the MATLAB prompt, type:\\
+\texttt{>> sodaWriteJobscript}\\
+and use the following information to answer the questions:\\
+\begin{enumerate}
+\item{the optimization will run on one of the login nodes;}
+\item{we want not much verbal feedback from the program;}
+\item{we want the default value for MPI\_BUFFER\_SIZE;}
+\item{we don't want to use all the cores on the login node;}
+\item{we want to start 8 processes;}
+\item{we don't want to save the timing information.}
+\end{enumerate}\\
+(Note that the default answer is indicated in brackets, and that you can accept the default by simply pressing Enter.)
+}
+
+When \texttt{sodaWriteJobscript} finishes, it prints a message in the command window that tells you what file it has just created. This file should be located in the current working directory. We will use it shortly to start the optimization on the cluster.
+
+
+\section{MMSODA in \squote{bypass} mode; online}
+
+\smallq{Use WinSCP or the alternative program of your choice to copy the `example1' and `mmsoda' directories, including all of their contents, to your storage on the cluster.}
+
+When you are satisfied with the way you set up MMSODA locally, you can run it on the LISA cluster computer. In order to do so, we must first compile the software into a so-called `binary' or `executable'. You do not need to worry about how this works in detail, it is just a matter of running a script called `Makefile' that we have prepared already. This script collects all the relevant software (your model files, your objective functions, as well as the code that enables communication between the Master and the Workers) and creates one program out of it.
+
+\section{Compiling MMSODA and your model code into a binary}
+
+\smallq{Use PuTTY to start an SSH connection to the LISA cluster.}
+
+\smallq{In the PuTTY terminal, load the MATLAB program and MPI programs by typing:\\
+\texttt{module load matlab}\\
+and\\
+\texttt{module load openmpi/gnu}\\
+at the prompt. (These commands will not give any feedback on the success or otherwise of the command, but you could check that by typing the following command:\\
+\texttt{module list}\\
+which should now include both MATLAB and OpenMPI/GNU).
+}
+
+\smallq{Use the \texttt{cd} command to set `example1' as your current directory.}
+
+%\smallq{\textit{Get Makefile from `template-project'.}}
+
+\smallq{Now we are ready to compile. At the terminal, type:\\
+\texttt{make}\\
+You should see some text scrolling over your screen---it takes a while to complete. The \texttt{make} command looks for a file called `Makefile' in the current directory, and uses the information in it to correctly build the binary.}
+
+\smallq{After \texttt{make} finishes, list the directory contents with \texttt{ls -l} and verify that
+you now have two extra files `matlabprog' and `libmmpi.so'.}
+
+Starting the optimization requires that we adjust the `permission bits' for the `run-mmsoda.sh' file we just created on your local machine. Permission bits indicate what a specific user is allowed to do with a particular file. (You may know the same concept from Windows, where you can sometimes have `Read-only' versions of a file). The permission bits are listed as the first 10 columns in the output from \texttt{ls -l}:
+\begin{lstlisting}[style=basic,style=bash]
+jspaaks@login1:~/esibayes/example1$ ls -l
+total 204
+drwxr-xr-x 2 jspaaks jspaaks     26 Jan 16 16:09 data
+-rwxrwxr-x 1 jspaaks jspaaks 172792 Jan 18 11:57 libmmpi.so
+-rw-r--r-- 1 jspaaks jspaaks    176 Jan 16 16:02 makeconf.m
+-rw-r--r-- 1 jspaaks jspaaks    120 Jan 16 15:06 makeconstants.m
+-rw-rw-r-- 1 jspaaks jspaaks   1357 Jan 16 16:10 Makefile
+-rwxrwxr-x 1 jspaaks jspaaks  11969 Jan 18 11:57 matlabprog
+drwxr-xr-x 2 jspaaks jspaaks     29 Jan 16 16:09 model
+drwxr-xr-x 2 jspaaks jspaaks   4096 Jan 16 17:36 results
+-rw-r--r-- 1 jspaaks jspaaks    580 Jan 18 13:26 run-mmsoda.sh
+jspaaks@login1:~/esibayes/example1$
+\end{lstlisting}
+For `run-mmsoda.sh', the permissions are set to \texttt{-rw-r--r--}. The first character \texttt{-} indicates that `run-mmsoda.sh' is a file (as opposed to a \texttt{d} which would indicate a directory). Characters 2, 3 and 4 (\texttt{rw-}) indicate what you, i.e.\,the currently logged-in user, is allowed to do with `run-mmsoda.sh'. Currently, you are allowed to read from (\texttt{r}) and write to (\texttt{w}) `run-mmsoda.sh'. The \texttt{-} character from the fourth column of \texttt{ls -l} indicates that you are currently not allowed to execute `run-mmsoda.sh' as a script.
+
+\smallq{Change the permission bit for `run-mmsoda.sh' by typing at the prompt:\\
+\texttt{chmod +x run-mmsoda.sh}\\
+Check that the permissions have changed to \texttt{-rwxr--r--} (\texttt{x} for `execute').}
+
+\smallq{Now we can start the optimization in parallel on the login node. At the terminal, type:\\
+\texttt{./run-mmsoda.sh}\\
+(Don't omit the \texttt{./} at the beginning, otherwise it won't work.)
+}
+
+\smallq{\textit{Parallel execution is actually slower than in series due to Amdahl's Law.}}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\section{MMSODA in \squote{scemua} mode; offline}
+
+Now that we have a working example of MMSODA in `bypass' mode, let's try our hand at something a little more difficult: optimizing the parameters of a dynamic model. The model we will use in this section is called HYMOD \citep[e.g.][]{boyle}.
+
+\smallq{Go to tutorial/example2 and open hymod\_batch.m in the MATLAB editor. Study the structure of the script.}
+
+Although `hymod\_batch' is a fairly simple model, it has all the ingredients typical of a dynamic model: it has an initial part, a dynamic part and a final part. In the initial part, the model parameters are specified. Furthermore, the state variables are assigned their initial value, and a number of other variables are created whose value does not change during the model run, but which are still necessary, i.e.\,model constants. Among these the \texttt{timeVec} variable is particularly important, since it defines the points in time for which a model prediction is required.
+
+When you want to set up a dynamic model like HYMOD, such that it runs within an optimization framework like the MMSODA Toolbox for MATLAB, you need to make some changes to the model file(s). For starters, the script must be adapted such that the model prediction becomes a function of the model parameter vector, the constants, and the initial state values. During the conversion from model script to model function most of the initial part is usually moved elsewhere---we want the model function to directly start with the dynamic part.
+
+
+\smallq{First, let's create the `constants.mat' file by adding a \texttt{save} command in `hymod\_batch.m'. (Check out \texttt{doc save} for information about saving only particular variables, i.e.\,only the variables that are in fact model constants). Running the `hymod\_batch' should create `constants.mat' in tutorial/example2.}
+
+\smallq{On your local machine, create a new directory next to your \texttt{mmsoda} and \texttt{example1} folders. Let's call this directory \texttt{example2}. Change directory into \texttt{example2}, and create the necessary subdirectories in it.}
+
+\smallq{Copy your `constants.m' into example2/data/}
+
+\smallq{Set your MATLAB working directory to \texttt{example2}.}
+
+\smallq{Take another look at the HTML documentation for \texttt{soda}, specifically at the table that lists the configuration variables for 'scemua' mode. The following variables are required for a 'scemua' optimization: \texttt{modeStr}, \texttt{modelName}, \texttt{objCallStr}, \texttt{parNames}, \texttt{parSpaceHiBound}, \texttt{parSpaceLoBound}, and \texttt{priorTimes}. Make sure you understand the description for each of these configuration variables.}
+
+\smallq{Create a new m-file called `makeconf.m' just like you did before, but this time make sure that the m-file lists the necessary configuration variables for a `scemua' optimization. Use the information below to set it up correctly:}
+\begin{enumerate}
+\item{Set \texttt{modeStr} to \texttt{\squote{scemua}};}
+\item{Set \texttt{modelName} to \texttt{\squote{hymod}};}
+\item{Set \texttt{objCallStr} to \texttt{\squote{calcLikelihoodState}};}
+\item{Set \texttt{parNames} to a cell array of strings with the 5 parameter names exactly as they are used in the dynamic part of the model;}
+\item{For the upper boundary of the parameter space, use 350.0, 0.6, 0.99, 0.02, and 0.600 for \texttt{cmax}, \texttt{bexp}, \texttt{fQuickflow}, \texttt{Rs}, and \texttt{Rq}, respectively;}
+\item{For the lower boundary of the parameter space, use 200.0, 0.1, 0.00, 0.001, and 0.200 for \texttt{cmax}, \texttt{bexp}, \texttt{fQuickflow}, \texttt{Rs}, and \texttt{Rq}, respectively;}
+\item{Get the \texttt{priorTimes} values from \texttt{timeVec}.}
+\end{enumerate}
+
+\subsection{Creating the objective function m-file}
+
+
+\subsection{Running the optimization locally}
+
+% about the objective function
 
 
 
-%scemua example - hymod batch
+%make sure your working directory is example2
+%in the command window type makeconf
+%in the command window type makeconstants
+%in the command window type [evalResults,critGelRub,sequences,metropolisRejects,conf] = soda();
+
+\smallq{\textit{some exercises with interpretation of the results.}}
+
+
+
+
+
+
+
+
+
+
+
 
 %soda example - lorenz
 

@@ -1,5 +1,12 @@
 function varargout=sodaMargHist(conf,evalResults,varargin)
 
+if nargin == 0
+    disp(['% Function ',mfilename,' usage'])
+    disp('% varargout = sodaMargHist(conf,evalResults,varargin)')
+    varargout = {};
+    return
+end
+
 % assign default options:
 histMode='absolute';
 nBins = min([50,round(conf.nSamples/5)]);

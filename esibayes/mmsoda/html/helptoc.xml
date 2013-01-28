@@ -11,55 +11,68 @@
 
       <tocitem image="$toolbox/matlab/icons/reficon.gif" target="contents-algorithm.html">algorithm
 
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaAbortOptim.html">sodaAbortOptim</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaAllComb.html">sodaAllComb</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaCalcObjScore.html">sodaCalcObjScore</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaContinue.html">sodaContinue</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaEvolveComplex.html">sodaEvolveComplex</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaGelmanRubin.html">sodaGelmanRubin</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaGenerateOffspring.html">sodaGenerateOffspring</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaInitialize.html">sodaInitialize</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaPartComplexes.html">sodaPartComplexes</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaPrepSeqArray.html">sodaPrepSeqArray</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaPrepRejArray.html">sodaPrepRejArray</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="soda.html">soda</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaStratDraw.html">sodaStratDraw</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaStratRandDraw.html">sodaStratRandDraw</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaUnifRandDraw.html">sodaUnifRandDraw</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaAbortOptim.html">sodaAbortOptim</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaAllComb.html">sodaAllComb</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaCalcObjScore.html">sodaCalcObjScore</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaContinue.html">sodaContinue</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaEvolveComplex.html">sodaEvolveComplex</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaGelmanRubin.html">sodaGelmanRubin</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaGenerateOffspring.html">sodaGenerateOffspring</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaInitialize.html">sodaInitialize</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaPartComplexes.html">sodaPartComplexes</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaPrepSeqArray.html">sodaPrepSeqArray</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaPrepRejArray.html">sodaPrepRejArray</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="soda.html">soda</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaStratDraw.html">sodaStratDraw</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaStratRandDraw.html">sodaStratRandDraw</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaUnifRandDraw.html">sodaUnifRandDraw</tocitem>
 
       </tocitem>
 
       <tocitem image="$toolbox/matlab/icons/reficon.gif" target="contents-visualization.html">visualization
 
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaMargHist.html">sodaMargHist</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaMatrixOfScatter.html">sodaMatrixOfScatter</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaPlotConv.html">sodaPlotConv</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaPlotGelmanRubin.html">sodaPlotGelmanRubin</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaPlotObj.html">sodaPlotObj</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaPlotPaCo.html">sodaPlotPaCo</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaPlotSeq.html">sodaPlotSeq</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaVisualization1.html">sodaVisualization1</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaVisualization2.html">sodaVisualization2</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaVisualization3.html">sodaVisualization3</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaVisualization4.html">sodaVisualization4</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaVisualization5.html">sodaVisualization5</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaMargHist.html">sodaMargHist</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaMatrixOfScatter.html">sodaMatrixOfScatter</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaPlotConv.html">sodaPlotConv</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaPlotGelmanRubin.html">sodaPlotGelmanRubin</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaPlotObj.html">sodaPlotObj</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaPlotPaCo.html">sodaPlotPaCo</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaPlotSeq.html">sodaPlotSeq</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaVisualization1.html">sodaVisualization1</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaVisualization2.html">sodaVisualization2</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaVisualization3.html">sodaVisualization3</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaVisualization4.html">sodaVisualization4</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaVisualization5.html">sodaVisualization5</tocitem>
 
       </tocitem>
 
 
 
       <tocitem image="$toolbox/matlab/icons/reficon.gif" target="contents-tools.html">tools
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaDiffStruct.html">sodaDiffStruct</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaLoadSettings.html">sodaLoadSettings</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaParsePairs.html">sodaParsePairs</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaroot.html">sodaroot</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaSubplotScreen.html">sodaSubplotScreen</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaUnpack.html">sodaUnpack</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="sodaVerifyFieldNames.html">sodaVerifyFieldNames</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="subaxes.html">subaxes</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="uimatlab.html">uimatlab</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="uioctave.html">uioctave</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaAnalyzeTimings.html">sodaAnalyzeTimings</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaCopyMakefile.html">sodaCopyMakefile</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaDiffStruct.html">sodaDiffStruct</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaLoadSettings.html">sodaLoadSettings</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaOpenBrowser.html">sodaOpenBrowser</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaOpenPdf.html">sodaOpenPdf</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaParsePairs.html">sodaParsePairs</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaPrepParallelFiles.html">sodaPrepParallelFiles</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaroot.html">sodaroot</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaSubplotScreen.html">sodaSubplotScreen</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaUnpack.html">sodaUnpack</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaVerifyFieldNames.html">sodaVerifyFieldNames</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaWriteJobscript.html">sodaWriteJobscript</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="subaxes.html">subaxes</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="uimatlab.html">uimatlab</tocitem>
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="uioctave.html">uioctave</tocitem>
 
+      </tocitem>
+
+
+      <tocitem image="$toolbox/matlab/icons/reficon.gif" target="contents-other.html">other
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="the-dynamic-model.html">the dynamic model</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="the-objective-function.html">the objective function</tocitem>
+          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="helper-apps.txt.html">helper-apps.txt</tocitem>
       </tocitem>
 
    </tocitem>
@@ -74,8 +87,11 @@
    </tocitem>
 -->
 
+<!--
    <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="model-adaptations.html">Model adaptations</tocitem>
+-->
 
+<!--
    <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="concepts-of-parameter-optimization.html">Concepts of parameter optimization
        <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="parameter-space.html">Parameter space</tocitem>
        <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="convergence.html">Convergence</tocitem>
@@ -85,6 +101,7 @@
    <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="printables.html">Printables</tocitem>
 
    <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="history.html">History</tocitem>
+-->
 
    <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="license.html">License</tocitem>
 

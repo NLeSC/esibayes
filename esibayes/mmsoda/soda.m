@@ -180,7 +180,9 @@ elseif isempty(varargin)
         end
     end
     save('./results/conf.mat','-struct','conf',saveList{:})
-    bcastvar(0,conf);
+    if conf.executeInParallel
+        bcastvar(0,conf);
+    end
     clear authorizedFieldNames
     clear iVar
     clear nVars
@@ -629,6 +631,15 @@ end
 clear k
 clear rmFields
 
+
+mustBeCellOfStr = {'namesNOKF','objCallStrs','objTexNames','parNames','parNamesTex','stateNamesKF'};
+for k=1:numel(mustBeCellOfStr)
+    if isfield(conf,mustBeCellOfStr{k}) && ~iscellstr(conf.(mustBeCellOfStr{k}))
+        error(['Configuration variable ',char(39),mustBeCellOfStr{k},char(39),' should be a cell array of strings.'])
+    end
+end
+clear mustBeCellOfStr;
+clear k;
 
 if strncmp(conf.modeStr,'soda',4) && ~all(conf.stateSpaceLoBound<conf.stateSpaceHiBound)
     error(['State domain boundaries incorrectly specified. Check parameters ',...
