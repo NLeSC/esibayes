@@ -46,6 +46,7 @@ Syntax
 <pre>
 soda <span class="string">--addtools</span>
 soda <span class="string">--addtools --quiet</span>
+soda <span class="string">--builddb</span>
 soda <span class="string">--docinstall</span>
 soda <span class="string">--docinstall --quiet</span>
 soda <span class="string">--help</span>
@@ -93,11 +94,18 @@ Description
 </p>
 </div>
 
+<div class="txt">
+<span style="font-family:monospace">soda <span class="string">--builddb</span></span>
+<p>
+   Builds the database that is used by the <a href="matlab:doc docsearch">docsearch</a> command. See also <a href="matlab:doc builddocsearchdb">builddocsearchdb</a>. Only used offline.
+</p>
+
+</div>
 
 <div class="txt">
 <span style="font-family:monospace">soda <span class="string">--docinstall</span></span>
 <p>
-   Installs the documentation by writing the 'soda-styles.css' style sheet file using the user-specific styles; adds the necessary directories to the MATLAB search path by calling <span style="font-family:monospace">soda <span class="string">--addtools --quiet</span></span>. Only used offline.
+   Installs the documentation by writing the 'soda-styles.css' style sheet file using the user-specific styles; adds the necessary directories to the MATLAB search path by calling <span style="font-family:monospace">soda <span class="string">--addtools --quiet</span></span>; builds the the <a href="matlab:doc docsearch">docsearch</a> documentation by calling <span style="font-family:monospace">soda <span class="string">--builddb</span></span>. Only used offline.
 </p>
 
 </div>
@@ -240,7 +248,6 @@ Configuration variables that are not assigned by the user will be assigned their
 
 
 </div>
-
 
 <a id="_soda_options"></a>
 
@@ -393,7 +400,7 @@ Configuration variables that are not assigned by the user will be assigned their
     <td valign="top">N</td>
     <td valign="top">N</td>
     <td valign="top">N</td>
-    <td valign="top">This scalar integer value holds the column in <span style="font-family:monospace">evalResults</span> and <span style="font-family:monospace">sequences</span> that contains the model evaluation number.</td>
+    <td valign="top">This scalar integer value holds the column in <span style="font-family:monospace">evalResults</span>, <span style="font-family:monospace">sequences</span>, and <span style="font-family:monospace">metropolisRejects</span> that contains the model evaluation number.</td>
 </tr>
 
 
@@ -493,7 +500,7 @@ Configuration variables that are not assigned by the user will be assigned their
     <td valign="top">N</td>
     <td valign="top">N</td>
     <td valign="top">N</td>
-    <td valign="top">For single-objective optimization, <span style="font-family:monospace">llCols</span> is a scalar integer that indicates which column in <span style="font-family:monospace">evalResults</span> and <span style="font-family:monospace">sequences</span> holds the log likelihood information. For multi-objective optimization, <span style="font-family:monospace">llCols</span> is a row vector of integers, that indicates which columns in <span style="font-family:monospace">evalResults</span> and <span style="font-family:monospace">sequences</span> hold the objective scores (which need not necessarily be all log likelihood values).</td>
+    <td valign="top">For single-objective optimization, <span style="font-family:monospace">llCols</span> is a scalar integer that indicates which column in <span style="font-family:monospace">evalResults</span>, <span style="font-family:monospace">sequences</span>, and <span style="font-family:monospace">metropolisRejects</span> holds the log likelihood information. For multi-objective optimization, <span style="font-family:monospace">llCols</span> is a row vector of integers, that indicates which columns in <span style="font-family:monospace">evalResults</span>, <span style="font-family:monospace">sequences</span>, and <span style="font-family:monospace">metropolisRejects</span> hold the objective scores (which need not necessarily be all log likelihood values).</td>
 </tr>
 
 
@@ -745,7 +752,7 @@ Configuration variables that are not assigned by the user will be assigned their
     <td valign="top">N</td>
     <td valign="top">N</td>
     <td valign="top">N</td>
-    <td valign="top">This scalar integer defines which column in <span style="font-family:monospace">evalResults</span> and <span style="font-family:monospace">sequences</span> holds the objective score. For single-objective optimization, it is equal to <span style="font-family:monospace">conf.llCol</span> (the column that holds the log-likelihood), while for multi-objective optimization, it is equal to <span style="font-family:monospace">conf.paretoCol</span> (the column that holds the Pareto score).</td>
+    <td valign="top">This scalar integer defines which column in <span style="font-family:monospace">evalResults</span>, <span style="font-family:monospace">sequences</span>, and <span style="font-family:monospace">metropolisRejects</span> holds the objective score. For single-objective optimization, it is equal to <span style="font-family:monospace">conf.llCol</span> (the column that holds the log-likelihood), while for multi-objective optimization, it is equal to <span style="font-family:monospace">conf.paretoCol</span> (the column that holds the Pareto score).</td>
 </tr>
 
 
@@ -825,7 +832,7 @@ Configuration variables that are not assigned by the user will be assigned their
     <td valign="top">N</td>
     <td valign="top">N</td>
     <td valign="top">N</td>
-    <td valign="top">Row vector of integers that specify which columns in <span style="font-family:monospace">evalResults</span> and <span style="font-family:monospace">sequences</span> hold parameter combinations.</td>
+    <td valign="top">Row vector of integers that specify which columns in <span style="font-family:monospace">evalResults</span>, <span style="font-family:monospace">sequences</span>, and <span style="font-family:monospace">metropolisRejects</span> hold parameter combinations.</td>
 </tr>
 
 
@@ -835,7 +842,7 @@ Configuration variables that are not assigned by the user will be assigned their
     <td valign="top">N</td>
     <td valign="top">N</td>
     <td valign="top">N</td>
-    <td valign="top">For multi-objective optimization, this scalar integer value specifies which column in <span style="font-family:monospace">evalResults</span> and <span style="font-family:monospace">sequences</span> holds the Pareto score.</td>
+    <td valign="top">For multi-objective optimization, this scalar integer value specifies which column in <span style="font-family:monospace">evalResults</span>, <span style="font-family:monospace">sequences</span>, and <span style="font-family:monospace">metropolisRejects</span> holds the Pareto score.</td>
 </tr>
 
 

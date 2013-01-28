@@ -33,9 +33,13 @@
 
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaMargHist.html">sodaMargHist</tocitem>
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaMatrixOfScatter.html">sodaMatrixOfScatter</tocitem>
+<!--
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaPlotConv.html">sodaPlotConv</tocitem>
+-->
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaPlotGelmanRubin.html">sodaPlotGelmanRubin</tocitem>
+<!--
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaPlotObj.html">sodaPlotObj</tocitem>
+-->
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaPlotPaCo.html">sodaPlotPaCo</tocitem>
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaPlotSeq.html">sodaPlotSeq</tocitem>
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaVisualization1.html">sodaVisualization1</tocitem>
@@ -72,36 +76,10 @@
       <tocitem image="$toolbox/matlab/icons/reficon.gif" target="contents-other.html">other
           <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="the-dynamic-model.html">the dynamic model</tocitem>
           <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="the-objective-function.html">the objective function</tocitem>
-          <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="helper-apps.txt.html">helper-apps.txt</tocitem>
       </tocitem>
 
    </tocitem>
 
-<!--
-   <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="examples.html">Examples
-       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="scemua_bimodalmodel.html">scemua_bimodalmodel</tocitem>
-       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="scemua_cubicmodel.html">scemua_cubicmodel</tocitem>
-       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="scemua_hyperbanana.html">scemua_hyperbanana</tocitem>
-       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="scemua_interceptionmodel.html">scemua_interceptionmodel</tocitem>
-       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="scemua_linearmodel.html">scemua_linearmodel</tocitem>
-   </tocitem>
--->
-
-<!--
-   <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="model-adaptations.html">Model adaptations</tocitem>
--->
-
-<!--
-   <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="concepts-of-parameter-optimization.html">Concepts of parameter optimization
-       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="parameter-space.html">Parameter space</tocitem>
-       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="convergence.html">Convergence</tocitem>
-       <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="objective-function.html">Objective function</tocitem>
-   </tocitem>
-
-   <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="printables.html">Printables</tocitem>
-
-   <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="history.html">History</tocitem>
--->
 
    <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="license.html">License</tocitem>
 

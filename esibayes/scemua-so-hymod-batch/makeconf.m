@@ -28,11 +28,11 @@ nCompl = 5;
 % define the number of samples used for the burn-in
 nSamples = 20*nCompl;
 % define the maximum number of parameter space samples
-nModelEvalsMax = nSamples+5*(1/5)*nSamples;
+nModelEvalsMax = nSamples+50*(1/5)*nSamples;
 % define the number of ensemble members to use in the EnKF
 nMembers = 1;
 % specify if soda should visualize the results as they become available (requires X forwarding over ssh)
-doPlot = false;
+doPlot = true;
 % specify how the parameter space is sampled ('stratified', 'stratified random'), useful for making imagescs of sensitivity
 sampleDrawMode = 'stratified';
 startFromUniform = true;
@@ -41,6 +41,7 @@ realPartOnly = true;
 saveInterval = 0; %dont' save for performance
 saveEnKFResults = false % not used in scemua but whatever
 
+visualizationCall = 'sodaVisualization5';
 
 if doPlot
    figure

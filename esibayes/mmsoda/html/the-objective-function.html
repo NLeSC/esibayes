@@ -44,7 +44,7 @@ Syntax
 </div>
 
 <div class="txt">
-<span style="font-family:monospace"><span class="keyword">function</span> objScore = calcLikelihood(conf,constants,allStateValuesKF,allValuesNOKF,parVec)
+<span style="font-family:monospace"><span class="keyword">function</span> objScore = <i>&lt;calcLikelihood&gt;</i>(conf,constants,allStateValuesKF,allValuesNOKF,parVec)
 </span>
 </div>
 
@@ -54,13 +54,13 @@ Description
 
 <div class="txt">
 
-<span style="font-family:monospace"><span class="keyword">function</span> objScore = calcLikelihood(conf,constants,allStateValuesKF,allValuesNOKF,parVec)
+<span style="font-family:monospace"><span class="keyword">function</span> objScore = <i>&lt;calcLikelihood&gt;</i>(conf,constants,allStateValuesKF,allValuesNOKF,parVec)
 </span>
 
 </div>
 <div class = "txt">
 <p>
-When constructing the objective function, make sure to strictly adhere to the format as displayed above; only the name of the function itself (here: <span style="font-family:monospace">calcLikelihood</span>) may be different. The reason behind this strictness is that the optimization algorithm prepares these variables and then constructs the call to the objective function at runtime. Also, the <a href="matlab: web(fullfile(sodaroot,'html','sodaUnpack.html'),'-helpbrowser')"><span style:"font-family:monospace">sodaUnpack()</span></a> function call, that is typically found on the second line of the objective function, expects the variables <span style:"font-family:monospace">conf</span>, <span style:"font-family:monospace">constants</span> and <span style:"font-family:monospace">parVec</span> to be present in the objective function workspace.
+When constructing the objective function, make sure to strictly adhere to the format as displayed above; only the name of the function itself (here: <span style="font-family:monospace"><i>&lt;calcLikelihood&gt;</i></span>) may be different. The table <a href="#_the_objective_function">below</a> lists the meaning of the input and output variables. The reason behind this strictness is that the optimization algorithm prepares these variables and then constructs the call to the objective function at runtime. Also, the <a href="matlab: web(fullfile(sodaroot,'html','sodaUnpack.html'),'-helpbrowser')"><span style:"font-family:monospace">sodaUnpack()</span></a> function call, that is typically found on the second line of the objective function, expects the variables <span style:"font-family:monospace">conf</span>, <span style:"font-family:monospace">constants</span> and <span style:"font-family:monospace">parVec</span> to be present in the objective function workspace.
 </p>
 
 
@@ -68,6 +68,8 @@ When constructing the objective function, make sure to strictly adhere to the fo
 
 <div class = "txt">
 
+
+<a name="_the_objective_function"></a>
 <table>
 <tr>
     <td valign="top" nowrap><b>Argument</b></td>

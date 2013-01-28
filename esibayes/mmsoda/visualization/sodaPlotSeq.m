@@ -184,3 +184,9 @@ for r=1:size(C,1)
     end
 end
 
+
+
+function k = isodd(n)
+
+k = mod(n,2)==1;
+

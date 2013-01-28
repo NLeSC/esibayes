@@ -4,20 +4,20 @@
 
 <head>
 
-   <title>SCEM-UA Toolbox - plotseq</title>
+   <title>MMSODA Toolbox for MATLAB - plotseq</title>
 
    <meta name="keywords" content="plotseq">
 
    <meta name="description" content="plotseq">
 
    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-  
+
    <meta name="robots" content="index, follow">
 
    <meta author="Jurriaan H. Spaaks">
 
-   <link type="text/css" rel="stylesheet" href="styles/soda_styles.css">
- 
+   <link type="text/css" rel="stylesheet" href="styles/soda-styles.css">
+
 </head>
 
 
@@ -27,8 +27,8 @@
 
 
 <div class="linkheader">
-<a href="matlab:edit(fullfile(scemroot,'visualization','plotseq'))">View source code of the function <span style="font-family:monospace">plotseq()</span> in the MATLAB editor</a><br><br>
-<a href="matlab:web(fullfile(scemroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+<a href="matlab:edit(fullfile(sodaroot,'visualization','plotseq'))">View source code of the function <span style="font-family:monospace">plotseq()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(sodaroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
 </div>
 
 <div class="spacer">
@@ -37,7 +37,7 @@
 
 
 <div class="h1">
-plotseq
+sodaPlotSeq
 </div>
 
 <div class="h2">
@@ -46,7 +46,7 @@ Syntax
 
 <div class="txt">
 <pre>
-plotseq(scemPar,sequences)
+sodaPlotSeq(conf,sequences,metropolisRejects)
 </pre>
 </div>
 
@@ -56,14 +56,19 @@ Description
 
 <div class="txt">
 <p>
-<span style="font-family:monospace">plotseq(scemPar,sequences)</span>
+<span style="font-family:monospace">sodaPlotSeq(conf,sequences,metropolisRejects)</span>
 </p>
 <p>
-Similar to <a href="plotconv.html">plotconv</a>, but with colors indicating the sequence that a particular point is in.
+Plots the number of draws from the parameter space against the value of each parameter. Individual sequences are indicated by different colors. See also <a href="sodaMatrixOfScatter.html"><span style="font-family:monospace">sodaMatrixOfScatter()</span></a> with <span style="font-family:monospace">typeStr</span> set to <span style="font-family:monospace"><span class="string">'eval-par'</span></span>.
 </p>
 <p>
-<img src="images/plotseq.png">
+<img src="images/sodaPlotSeq.png" width="700px">
 </p>
+
+<p>
+Note that in the above figure, the light grey lines indicate the generations, the dark grey line near the middle represents the part of the record that is used to calculate the Gelman-Rubin convergence statistics (see configuration variable <span style="font-family:monospace">convUseLastFraction</span> in <a href="soda.html#_soda_options"><span style="font-family:monospace">this table</span></a>).
+</p>
+
 
 </div>
 
