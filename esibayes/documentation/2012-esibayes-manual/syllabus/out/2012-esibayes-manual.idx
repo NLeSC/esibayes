@@ -71,20 +71,19 @@
 \indexentry{embarassingly parallel|hyperpage}{18}
 \indexentry{Master-Worker paradigm|hyperpage}{19}
 \indexentry{Master-Slave paradigm|hyperpage}{19}
-\indexentry{Linux commands!piped@\texttt{piped}|hyperpage}{21}
-\indexentry{daemon|hyperpage}{21}
-\indexentry{Linux commands!ps@\texttt{ps}|hyperpage}{21}
-\indexentry{Linux commands!grep@\texttt{grep}|hyperpage}{21}
-\indexentry{Linux commands!kill@\texttt{kill}|hyperpage}{21}
 \indexentry{Message Passing Interface|hyperpage}{21}
 \indexentry{MPI|hyperpage}{21}
-\indexentry{Message Passing Interface|hyperpage}{23}
-\indexentry{MPI|hyperpage}{23}
-\indexentry{graphical programs|hyperpage}{33}
-\indexentry{X!forwarding over SSH|hyperpage}{33}
-\indexentry{X|hyperpage}{33}
-\indexentry{Xming|hyperpage}{33}
-\indexentry{X11|hyperpage}{36}
-\indexentry{Linux commands!echo \char`\$ DISPLAY@\texttt{echo \$DISPLAY}|hyperpage}{36}
-\indexentry{MATLAB Compiler Runtime|hyperpage}{38}
-\indexentry{MCR|hyperpage}{38}
+\indexentry{Linux commands!make@\texttt  {make}|hyperpage}{26}
+\indexentry{Makefile|hyperpage}{26}
+\indexentry{permission bits|hyperpage}{27}
+\indexentry{Linux commands!chmod@\texttt  {chmod}|hyperpage}{27}
+\indexentry{sum of squared residuals|hyperpage}{32}
+\indexentry{SSR|hyperpage}{32}
+\indexentry{graphical programs|hyperpage}{35}
+\indexentry{X!forwarding over SSH|hyperpage}{35}
+\indexentry{X|hyperpage}{35}
+\indexentry{Xming|hyperpage}{35}
+\indexentry{X11|hyperpage}{38}
+\indexentry{Linux commands!echo \char`\$ DISPLAY@\texttt{echo \$DISPLAY}|hyperpage}{38}
+\indexentry{MATLAB Compiler Runtime|hyperpage}{40}
+\indexentry{MCR|hyperpage}{40}

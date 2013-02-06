@@ -1,4 +1,4 @@
-function objScore = shiftedRosenbrock(conf,constants,allStateValuesKF,allValuesNOKF,parVec)
+function objScore = shiftedRosenbrock(conf,constants,modelOutput,parVec)
 % 3.Shifted Rosenbrock Function
 
 sodaUnpack()

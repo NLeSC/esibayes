@@ -45,17 +45,17 @@ nCompl = 5;
 % define the number of samples used for the burn-in
 nSamples = 10*nCompl;
 % define the maximum number of parameter space samples
-nModelEvalsMax = nSamples+3*(1/5)*nSamples;
+nModelEvalsMax = nSamples+100*(1/5)*nSamples;
 % define the number of ensemble members to use in the EnKF
 nMembers = 10;
 % specify if soda should visualize the results as they become available (requires X forwarding over ssh)
-doPlot = false;
+doPlot = true;
 % specify how the parameter space is sampled ('stratified', 'stratified random'), useful for making imagescs of sensitivity
 sampleDrawMode = 'stratified';
-saveInterval = 0;
-saveEnKFResults = false;
+% saveInterval = 0;
+% saveEnKFResults = true;
 
-drawInterval = 50;
+drawInterval = 10;
 
 if doPlot
    figure

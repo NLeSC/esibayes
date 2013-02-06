@@ -1,4 +1,4 @@
-function objScore = shiftedSphere(conf,constants,allStateValuesKF,allValuesNOKF,parVec)
+function objScore = shiftedSphere(conf,constants,modelOutput,parVec)
 % 1.Shifted Sphere Function 
 
 sodaUnpack()

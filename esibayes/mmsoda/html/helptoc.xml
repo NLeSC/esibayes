@@ -36,6 +36,7 @@
 <!--
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaPlotConv.html">sodaPlotConv</tocitem>
 -->
+          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaPlotEnsemble.html">sodaPlotEnsemble</tocitem>
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaPlotGelmanRubin.html">sodaPlotGelmanRubin</tocitem>
 <!--
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="sodaPlotObj.html">sodaPlotObj</tocitem>

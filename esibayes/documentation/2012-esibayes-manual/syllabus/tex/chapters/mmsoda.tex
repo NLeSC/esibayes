@@ -20,7 +20,7 @@ The serial/parallel capability is particularly attractive, since it allows the u
 
 The remainder of this chapter explains how to set up increasingly sophisticated optimizations within the MMSODA framework. Let's start off with the simplest possible example: a single-objective SCEM-UA optimization of a benchmark function \texttt{calcLikelihood()}, and let's not do anything in parallel just yet.
 
-\section{MMSODA in \squote{bypass} mode; offline}
+\section{MMSODA in `bypass' mode; offline}
 
 \smallq{First download the \texttt{mmsoda} folder from $<$somewhere$>$. }
 
@@ -132,7 +132,7 @@ Finally, we need to create the objective function m-file that implements equatio
 \smallq{Create a new m-file, called `calcLikelihood.m' and save it in the subdirectory `./model'.}
 
 \smallq{Open `./model/calcLikelihood.m'. MMSODA uses a standardized way of passing the input and output arguments to and from the objective function, so the first line is always exactly the same (with the exception of the name of the function \texttt{calcLikelihood}, which may vary), like so:\\
-\texttt{function objScore = calcLikelihood(conf,constants,allStateValuesKF,allValuesNOKF,parVec)}
+\texttt{function objScore = calcLikelihood(conf,constants,modelOutput,parVec)}
 }
 
 \smallq{As a second line, type: \\
@@ -178,13 +178,12 @@ and wait for the optimization to finish. Input arguments to \texttt{soda} are no
 
 \smallq{\textit{some exercises with interpretation of the results.}}
 
-
 \smallq{Refer back to the documentation on the \texttt{soda} function; specifically, browse through some of the configuration options for running MMSODA in `bypass' mode. Alter your `makeconf.m' with the options that you find useful, and re-run the optimization.}
 
-\smallq{When you are satisfied with the way you set up MMSODA locally, you can make preparations for running it in parallel on the LISA cluster computer. Running on LISA requires a jobscript, which can be tricky to set up sometimes. Therefore, the MMSODA Toolbox for MATLAB comes with a function that helps you set up the jobscript correctly by asking a series of questions. At the MATLAB prompt, type:\\
-\texttt{>> sodaWriteJobscript}\\
+\smallq{When you are satisfied with the way you set up MMSODA locally, you can make preparations for running it in parallel on the LISA cluster computer. Running on LISA requires a so-called `Makefile'\index{Makefile} as well as a jobscript, both of which are tricky to write yourself. Therefore, the MMSODA Toolbox for MATLAB comes with a function that helps you generate the correct files by asking a series of questions. At the MATLAB prompt, type:\\
+\texttt{>> sodaPrepParallelFiles()}\\
 and use the following information to answer the questions:\\
-\begin{enumerate}
+\begin{enumerate}\label{li:answers-sodaPrepParallelFiles}
 \item{the optimization will run on one of the login nodes;}
 \item{we want not much verbal feedback from the program;}
 \item{we want the default value for MPI\_BUFFER\_SIZE;}
@@ -198,7 +197,7 @@ and use the following information to answer the questions:\\
 When \texttt{sodaWriteJobscript} finishes, it prints a message in the command window that tells you what file it has just created. This file should be located in the current working directory. We will use it shortly to start the optimization on the cluster.
 
 
-\section{MMSODA in \squote{bypass} mode; online}
+\section{MMSODA in `bypass' mode; online}
 
 \smallq{Use WinSCP or the alternative program of your choice to copy the `example1' and `mmsoda' directories, including all of their contents, to your storage on the cluster.}
 
@@ -221,14 +220,14 @@ which should now include both MATLAB and OpenMPI/GNU).
 
 %\smallq{\textit{Get Makefile from `template-project'.}}
 
-\smallq{Now we are ready to compile. At the terminal, type:\\
+\smallq{Now we are ready to compile. At the terminal, type:\index{Linux commands!make@\texttt{make}}\\
 \texttt{make}\\
-You should see some text scrolling over your screen---it takes a while to complete. The \texttt{make} command looks for a file called `Makefile' in the current directory, and uses the information in it to correctly build the binary.}
+You should see some text scrolling over your screen---it takes a while to complete. The \texttt{make} command looks for a file called `Makefile'\index{Makefile} in the current directory, and uses the information in it to correctly build the binary.}
 
 \smallq{After \texttt{make} finishes, list the directory contents with \texttt{ls -l} and verify that
 you now have two extra files `matlabprog' and `libmmpi.so'.}
 
-Starting the optimization requires that we adjust the `permission bits' for the `run-mmsoda.sh' file we just created on your local machine. Permission bits indicate what a specific user is allowed to do with a particular file. (You may know the same concept from Windows, where you can sometimes have `Read-only' versions of a file). The permission bits are listed as the first 10 columns in the output from \texttt{ls -l}:
+Starting the optimization requires that we adjust the `permission bits'\index{permission bits} for the `run-mmsoda.sh' file we just created on your local machine. Permission bits indicate what a specific user is allowed to do with a particular file. (You may know the same concept from Windows, where you can sometimes have `Read-only' versions of a file). The permission bits are listed as the first 10 columns in the output from \texttt{ls -l}:
 \begin{lstlisting}[style=basic,style=bash]
 jspaaks@login1:~/esibayes/example1$ ls -l
 total 204
@@ -245,7 +244,7 @@ jspaaks@login1:~/esibayes/example1$
 \end{lstlisting}
 For `run-mmsoda.sh', the permissions are set to \texttt{-rw-r--r--}. The first character \texttt{-} indicates that `run-mmsoda.sh' is a file (as opposed to a \texttt{d} which would indicate a directory). Characters 2, 3 and 4 (\texttt{rw-}) indicate what you, i.e.\,the currently logged-in user, is allowed to do with `run-mmsoda.sh'. Currently, you are allowed to read from (\texttt{r}) and write to (\texttt{w}) `run-mmsoda.sh'. The \texttt{-} character from the fourth column of \texttt{ls -l} indicates that you are currently not allowed to execute `run-mmsoda.sh' as a script.
 
-\smallq{Change the permission bit for `run-mmsoda.sh' by typing at the prompt:\\
+\smallq{Change the permission bit for `run-mmsoda.sh' by typing at the prompt:\index{Linux commands!chmod@\texttt{chmod}}\\
 \texttt{chmod +x run-mmsoda.sh}\\
 Check that the permissions have changed to \texttt{-rwxr--r--} (\texttt{x} for `execute').}
 
@@ -258,54 +257,230 @@ Check that the permissions have changed to \texttt{-rwxr--r--} (\texttt{x} for `
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
-\section{MMSODA in \squote{scemua} mode; offline}
+\section{MMSODA in `scemua' mode; offline}
 
-Now that we have a working example of MMSODA in `bypass' mode, let's try our hand at something a little more difficult: optimizing the parameters of a dynamic model. The model we will use in this section is called HYMOD \citep[e.g.][]{boyle}.
+Now that we have a working example of MMSODA in `bypass' mode, let's try our hand at something a little more difficult: optimizing the parameters of a dynamic model. Let's first make a small digression and look at the general structure of dynamic models. Such models simulate the behavior of a number of states over time. As an example, Fig.~\ref{fig:states-and-flows} shows a system in which there are two states. The first state is the water level in a tank which has a small hole in the bottom. The second state is the water level in a tank that has no leaks. The first tank discharges into the second. The rate of discharge $Q$ is dependent on the volume of water in the tank $V_{tank_1}$ and on a resistance parameter $R$ (if there is a big leak in the first tank, the resistance is low, but if the leak is only small, the resistance is high). The model simulates the discharge as follows:
+\begin{equation}\label{eq:flow-from-tank1}
+Q = \frac{V_{tank_1}}{-R}
+\end{equation}
 
-\smallq{Go to tutorial/example2 and open hymod\_batch.m in the MATLAB editor. Study the structure of the script.}
+Given the state of the upper tank at a given point in time $V_{tank_1}(t)$, Eq.\,\ref{eq:flow-from-tank1} may be used to calculate the corresponding flow at time $t$. Furthermore, the current state $V_{tank_1}(t)$ and flow $Q(t)$ may be used to simulate the state at a later time, $t+\Delta{}t_{sim}$, provided that $\Delta{}t_{sim}$ is sufficiently small:
+\begin{equation}\label{eq:numerical-integration-tank1}
+V_{tank_1}(t+\Delta{}t_{sim}) = V_{tank_1}(t) + Q(t)*\Delta{}t_{sim}
+\end{equation}
 
-Although `hymod\_batch' is a fairly simple model, it has all the ingredients typical of a dynamic model: it has an initial part, a dynamic part and a final part. In the initial part, the model parameters are specified. Furthermore, the state variables are assigned their initial value, and a number of other variables are created whose value does not change during the model run, but which are still necessary, i.e.\,model constants. Among these the \texttt{timeVec} variable is particularly important, since it defines the points in time for which a model prediction is required.
+If the initial state of the system $V_{tank_1}(t_0)$ and $V_{tank_2}(t_0)$ is known, and if the resistance parameter $R$ has been assigned, repeated application of Eqs.\,\ref{eq:flow-from-tank1} and \ref{eq:numerical-integration-tank1} thus enables constructing a time series of simulated values for $V_{tank_1}$ and $V_{tank_2}$.
 
-When you want to set up a dynamic model like HYMOD, such that it runs within an optimization framework like the MMSODA Toolbox for MATLAB, you need to make some changes to the model file(s). For starters, the script must be adapted such that the model prediction becomes a function of the model parameter vector, the constants, and the initial state values. During the conversion from model script to model function most of the initial part is usually moved elsewhere---we want the model function to directly start with the dynamic part.
+\begin{figure}[htb]
+  \centering
+    \includegraphics[width=\textwidth]{./../eps/states-and-flows.eps}
+  \caption{The general structure of dynamic models.}
+  \label{fig:states-and-flows}
+\end{figure}
+
+For environmental models, it is very common that not all the parameter values are known beforehand, so it becomes necessary to estimate their values by comparing simulation results to observations of the system's states. The model must therefore be set up such that it returns the system's state at the times for which an observation is available, otherwise the comparison isn't much use. Since the time interval between observations $\Delta{}t_{obs}$ can be (much) larger than the model integration interval $\Delta{}t_{sim}$, multiple model integration steps are often needed in between observation times. Listing~\ref{list:lintank-script} shows a simple MATLAB script that implements the system depicted in Figure~\ref{fig:states-and-flows}. Over the next few exercises, we will:
+\begin{enumerate}
+\item{prepare a `constants.mat',}
+\item{prepare a `conf.mat',}
+\item{prepare the main model m-file by adapting `lintank\_script.m' such that it can be used within the MMSODA framework,}
+\item{construct a likelihood function.}
+\end{enumerate}
+The above four steps are necessary for all types of optimization except `bypass'.
 
 
-\smallq{First, let's create the `constants.mat' file by adding a \texttt{save} command in `hymod\_batch.m'. (Check out \texttt{doc save} for information about saving only particular variables, i.e.\,only the variables that are in fact model constants). Running the `hymod\_batch' should create `constants.mat' in tutorial/example2.}
+\smallq{Before we start, make sure you understand how the `lintank\_script.m' works by studying Listing~\ref{list:lintank-script} and running through it line-by-line using MATLAB's debugging capabilities.}
 
-\smallq{On your local machine, create a new directory next to your \texttt{mmsoda} and \texttt{example1} folders. Let's call this directory \texttt{example2}. Change directory into \texttt{example2}, and create the necessary subdirectories in it.}
+\lstinputlisting[style=basic,style=matlab,style=numbered,style=spacious,caption={Simple MATLAB script that implements the system depicted in Figure~\ref{fig:states-and-flows}. A copy of this script has been included in your tutorial folder under `tutorial/lintank\_script.m'.},label=list:lintank-script]{./../m/lintank_script.m}
 
-\smallq{Copy your `constants.m' into example2/data/}
+\begin{figure}[htb]
+  \centering
+    \includegraphics[width=\textwidth]{./../eps/result-of-lintank-script.eps}
+  \caption{Result of running the code from Listing~\ref{list:lintank-script}.}
+  \label{fig:result-of-lintank-script}
+\end{figure}
 
-\smallq{Set your MATLAB working directory to \texttt{example2}.}
 
-\smallq{Take another look at the HTML documentation for \texttt{soda}, specifically at the table that lists the configuration variables for 'scemua' mode. The following variables are required for a 'scemua' optimization: \texttt{modeStr}, \texttt{modelName}, \texttt{objCallStr}, \texttt{parNames}, \texttt{parSpaceHiBound}, \texttt{parSpaceLoBound}, and \texttt{priorTimes}. Make sure you understand the description for each of these configuration variables.}
+\smallq{Create a new directory structure with the required subdirectories just like you did before.}
 
-\smallq{Create a new m-file called `makeconf.m' just like you did before, but this time make sure that the m-file lists the necessary configuration variables for a `scemua' optimization. Use the information below to set it up correctly:}
+\smallq{Read the MMSODA documentation on `the dynamic model' (see Figure~\ref{fig:doc-the-dynamic-model}).}
+
+\begin{figure}[htb]
+  \centering
+    \includegraphics[width=\textwidth]{./../eps/doc-the-dynamic-model.eps}
+  \caption{MATLAB documentation on how to set up the dynamic model.}
+  \label{fig:doc-the-dynamic-model}
+\end{figure}
+
+In the initialization part of Listing~\ref{list:lintank-script}, 10 variables (\texttt{R}, \texttt{state1Init}, \texttt{state2Init}, \texttt{priorTimes}, \texttt{tNow}, \texttt{tEnd}, \texttt{dtSimDefault}, \texttt{rec}, \texttt{state1}, and \texttt{state2}) are created, but only some of these need to included in `constants.mat'. For example, \texttt{R} does not need to be in `constants.mat' because its value will be determined by MMSODA: the variable \texttt{R} is assigned by \texttt{sodaUnpack} (which uses the input argument \texttt{parVec} to do so). Similarly, \texttt{priorTimes} and its derivatives \texttt{tNow} and \texttt{tEnd} do not need to be in `constants.mat' because \texttt{priorTimes} is an input argument, too. \texttt{state1}, \texttt{state2}, and \texttt{rec} are all derived from other variables, so they do not need to be part of `constants.mat' either. Essentially, all we need is \texttt{state1Init}, \texttt{state2Init}, and \texttt{dtSimDefault}.
+
+\smallq{Write `makeconstants.m'.}
+
+\smallq{Create a new m-file called `makeconf.m' just like you did before, but this time make sure that the m-file lists the necessary configuration variables for a `scemua' optimization. Refer to the configuration variables table in the MATLAB documentation of \texttt{soda}, and use the information below to set up the optimization:
 \begin{enumerate}
 \item{Set \texttt{modeStr} to \texttt{\squote{scemua}};}
-\item{Set \texttt{modelName} to \texttt{\squote{hymod}};}
-\item{Set \texttt{objCallStr} to \texttt{\squote{calcLikelihoodState}};}
-\item{Set \texttt{parNames} to a cell array of strings with the 5 parameter names exactly as they are used in the dynamic part of the model;}
-\item{For the upper boundary of the parameter space, use 350.0, 0.6, 0.99, 0.02, and 0.600 for \texttt{cmax}, \texttt{bexp}, \texttt{fQuickflow}, \texttt{Rs}, and \texttt{Rq}, respectively;}
-\item{For the lower boundary of the parameter space, use 200.0, 0.1, 0.00, 0.001, and 0.200 for \texttt{cmax}, \texttt{bexp}, \texttt{fQuickflow}, \texttt{Rs}, and \texttt{Rq}, respectively;}
-\item{Get the \texttt{priorTimes} values from \texttt{timeVec}.}
+\item{Set \texttt{modelName} to \texttt{\squote{lintank}}. (We will create `lintank.m' later);}
+\item{Set \texttt{objCallStr} to \texttt{\squote{calcLikelihoodState}}. (We will create `calcLikelihoodState.m' later);}
+\item{Set \texttt{parNames} to a cell array of strings with the name of the resistance parameter exactly as used in the dynamic part of the model: \texttt{\{\squote{R}\}}. \texttt{R} is the only parameter that will be optimized; }
+\item{For the upper boundary of the parameter space, use 1000.0;}
+\item{For the lower boundary of the parameter space, use 80.0;}
+\item{Fill in the \texttt{priorTimes} values by copying from `lintank\_script.m';}
+\item{Set \texttt{nOutputs} to 2.}
+
 \end{enumerate}
-
-\subsection{Creating the objective function m-file}
-
-
-\subsection{Running the optimization locally}
-
-% about the objective function
+} % smallq
 
 
+\smallq{Copy `lintank\_script.m' to your `model' subdirectory. Rename it to `lintank.m'.}
 
-%make sure your working directory is example2
-%in the command window type makeconf
-%in the command window type makeconstants
-%in the command window type [evalResults,critGelRub,sequences,metropolisRejects,conf] = soda();
+\smallq{Adapt `lintank.m' to be a function. Refer to the MMSODA documentation on the dynamic model for the proper way of constructing the function's input and output arguments. Remove all lines from the initialization part that are obsolete given that we want to run it within the MMSODA framework. Afterwards, your code should look like that of Listing~\ref{list:lintank-function-1-19}.}
 
-\smallq{\textit{some exercises with interpretation of the results.}}
+\lstinputlisting[style=basic,style=matlab,style=numbered,style=spacious,caption={First 19 lines of `lintank.m'. A copy of this script has been included in your tutorial folder under `tutorial/lintank.m'.},label=list:lintank-function-1-19,firstline=1,lastline=19]{./../m/lintank.m}
 
+
+Next, we need to make sure that we output the correct values. For this, we want to return an array of size \texttt{nOutputs x nPrior}. The $n^{th}$ column in the output argument \texttt{modelOutput} must contain the values pertaining to the $n^{th}$ time in \texttt{priorTimes}. Listing~\ref{list:lintank-function-61-68} shows a simple way of accomplishing this.
+
+\lstinputlisting[style=basic,style=matlab,style=numbered,style=spacious,caption={Last 8 lines of `lintank.m'. A copy of this script has been included in your tutorial folder under `tutorial/lintank.m'.},label=list:lintank-function-61-68,firstline=61,lastline=68,firstnumber=61]{./../m/lintank.m}
+
+
+
+\smallq{Now it's time to test if everything works so far. Make sure MATLAB is in the correct working directory (i.e.\,one level higher than your `data', `model', and `results' directories). At the MATLAB prompt type:\\
+\texttt{>> [evalResults,critGelRub,sequences,metropolisRejects,conf] = soda()}\\
+and press Enter. If all goes well, MMSODA will start printing various messages to your screen. You should see the message `\texttt{Evaluating parameter sets 1-250}', and if you haven't commented out the visualization part in `lintank.m', you should see 250 plots being made before MMSODA crashes with the following error:}
+\begin{lstlisting}[style=basic,style=bash]
+Error using eval
+Undefined function 'calcLikelihoodState' for input arguments of type 'struct'.
+>>
+\end{lstlisting}
+The error is because MMSODA refers to the configuration variable \texttt{objCallStr}, which you set to \texttt{\squote{calcLikelihoodState}}. When MMSODA attempts to run \texttt{calcLikelihoodState}, this results in an error because we still have to create `calcLikelihoodState.m'.
+
+\smallq{Read the documentation about the objective function (see Figure~\ref{fig:doc-the-objective-function}).}
+
+\begin{figure}[htb]
+  \centering
+    \includegraphics[width=\textwidth]{./../eps/doc-the-objective-function.eps}
+  \caption{MATLAB documentation on how to set up the objective function.}
+  \label{fig:doc-the-objective-function}
+\end{figure}
+
+\smallq{Create a new m-file in the `./model' subdirectory, and call this file `calcLikelihoodState.m'. Refer to the documentation and make sure the first line of the objective function is correct.}
+
+The objective function we will use is related to the sum of squared residuals \index{sum of squared residuals} or SSR\index{SSR}:
+\begin{equation}\label{eq:SSR}
+\mathrm{SSR} = \displaystyle\sum\limits_{t=1}^{n_o}(\hat{x}_{t}-\tilde{x}_{t})^2
+\end{equation}
+with $\hat{x}_{t}$ the $t^{\mathrm{th}}$ predicted value of $x$, $\tilde{x}_{t}$ the $t^{\mathrm{th}}$ observed value of $x$, and $n_o$ the total number of observations.
+
+However, we can't use the SSR directly as an objective score, because the SSR is not a log-likelihood (or a probability, for that matter). This problem is easily resolved though, by using the following objective function\footnote{Skip forward to Chapter~\ref{ch:likelihoods-in-optimization} to see how this was derived.}:
+\begin{equation}\label{eq:objScore}
+\ell = -\frac{1}{2} \cdot{} n_o \cdot{} \mathrm{log}\left(\mathrm{SSR}\right)
+\end{equation}
+
+In order to calculate the SSR, we need some observations. These have been prepared already and are located in the tutorial folder.
+
+\smallq{Copy `tutorial/lintank-obs.mat' to your `./data' folder.}
+
+\smallq{In `calcLikelihoodState.m', add \\
+\texttt{load({\squote{./data/lintank-obs.mat}},\squote{obs},\squote{obsTimes})}
+}% smallq
+
+
+Now that we have the observations in the workspace, we still need to select the corresponding simulations from the \texttt{modelOutput} variable. Refer to the documentation on the objective function for a description. We want to select all values pertaining to the first state (since this is the state that we have observations for). We can do so by:
+\begin{lstlisting}[style=basic,style=matlab]
+% row of interest in 'modelOutput' is #1
+r = 1;
+nPriors = 4;
+nObs = nPriors-1;
+
+% extract the relevant row from 'modelOutput'
+sim = modelOutput(r,1:nPriors);
+
+% Calculate the SSR, but ignore the first entry in 'obs' and 'sim' because those are always
+% exactly the same anyway
+ssr = sum((obs(1,2:nPriors)-sim(1,2:nPriors)).^2);
+
+% use the SSR to calculate the likelihood
+objScore = -(1/2) * nObs * log(ssr);
+\end{lstlisting}
+
+
+\smallq{Add the command lines above to your \texttt{calcLikelihoodState} in order to let it calculate the SSR and the objective score according to Eq.~\ref{eq:objScore}.}
+
+\smallq{Make sure you are still in the right working directory. At the MATLAB prompt, type:\\
+\texttt{>> [evalResults,critGelRub,sequences,metropolisRejects,conf] = soda()}\\
+}
+
+
+Currently, \texttt{calcLikelihoodState} loads the observations from file every time it needs to calculate the \texttt{objScore}. Since file operations are much slower than memory operations, it is more efficient to load the observations just once (during creation of the constants), and then keep them in the computer's memory.
+
+\smallq{Cut the \texttt{load} statement from \texttt{calcLikelihoodState} and paste it into `makeconstants.m'. Make sure to re-run \texttt{makeconstants()}, otherwise `./data/constants.mat' will remain unchanged.}
+
+\smallq{Read the documentation on MMSODA's \texttt{sodaUnpack()} function. Go back to `calcLikelihoodState.m' and use \texttt{sodaUnpack()} to make the observations available in the objective function's workspace.}
+
+\smallq{\textit{some interpretation of results}.}
+
+\section{MMSODA in `scemua' mode; online}
+
+\smallq{Generate a `Makefile' and a jobscript using \texttt{sodaPrepParallelFiles()}. Use the same answers as those given on page~\pageref{li:answers-sodaPrepParallelFiles}. }
+
+\smallq{Copy the working directory to LISA using WinSCP or an alternative program. Make sure the directory is at the same level as the `mmsoda' folder.}
+
+\smallq{Use PuTTY to start an SSH connection to the LISA cluster.}
+
+\smallq{Add the necessary software modules and compile your m-files together with the MMSODA m-files.}
+
+\smallq{Add the executable permission to `run-mmsoda.sh'.}
+
+\smallq{Start the optimization interactively on the \texttt{login} node.}
+
+
+%The model we will use in this section is called HYMOD \citep[e.g.][]{boyle}.
+
+%\textit{$<$about the HYMOD model$>$}
+
+
+%\smallq{Go to tutorial/example2 and open `hymod\_batch.m' in the MATLAB editor. Study the structure of the script.}
+
+%Although `hymod\_batch' is a fairly simple model, it has all the ingredients typical of a dynamic model: it has an initial part, a dynamic part and a final part. In the initial part, the model parameters are specified. Furthermore, the state variables are assigned their initial value, and a number of other variables are created whose value does not change during the model run, but which are still necessary, i.e.\,model constants. Among these the \texttt{timeVec} variable is particularly important, since it defines the points in time for which a model prediction is required.
+
+%When you want to set up a dynamic model like HYMOD, such that it runs within an optimization framework like the MMSODA Toolbox for MATLAB, you need to make some changes to the model file(s). For starters, the script must be adapted such that the model prediction becomes a function of the model parameter vector, the constants, and the initial state values. During the conversion from model script to model function most of the initial part is usually moved elsewhere---we want the model function to directly start with the dynamic part.
+
+
+%\smallq{First, let's create the `constants.mat' file by adding a \texttt{save} command in `hymod\_batch.m'. (Check out \texttt{doc save} for information about saving only particular variables, i.e.\,only the variables that are in fact model constants). Running the `hymod\_batch' should create `constants.mat' in tutorial/example2.}
+
+%\smallq{On your local machine, create a new directory next to your \texttt{mmsoda} and \texttt{example1} folders. Let's call this directory \texttt{example2}. Change directory into \texttt{example2}, and create the necessary subdirectories in it.}
+
+%\smallq{Copy your `constants.m' into example2/data/}
+
+%\smallq{Set your MATLAB working directory to \texttt{example2}.}
+
+%\smallq{Take another look at the HTML documentation for \texttt{soda}, specifically at the table that lists the configuration variables for 'scemua' mode. The following variables are required for a 'scemua' optimization: \texttt{modeStr}, \texttt{modelName}, \texttt{objCallStr}, \texttt{parNames}, \texttt{parSpaceHiBound}, \texttt{parSpaceLoBound}, and \texttt{priorTimes}. Make sure you understand the description for each of these configuration variables.}
+
+%\smallq{Create a new m-file called `makeconf.m' just like you did before, but this time make sure that the m-file lists the necessary configuration variables for a `scemua' optimization. Use the information below to set it up correctly:}
+%\begin{enumerate}
+%\item{Set \texttt{modeStr} to \texttt{\squote{scemua}};}
+%\item{Set \texttt{modelName} to \texttt{\squote{hymod}};}
+%\item{Set \texttt{objCallStr} to \texttt{\squote{calcLikelihoodState}};}
+%\item{Set \texttt{parNames} to a cell array of strings with the 5 parameter names exactly as they are used in the dynamic part of the model;}
+%\item{For the upper boundary of the parameter space, use 350.0, 0.6, 0.99, 0.02, and 0.600 for \texttt{cmax}, \texttt{bexp}, \texttt{fQuickflow}, \texttt{Rs}, and \texttt{Rq}, respectively;}
+%\item{For the lower boundary of the parameter space, use 200.0, 0.1, 0.00, 0.001, and 0.200 for \texttt{cmax}, \texttt{bexp}, \texttt{fQuickflow}, \texttt{Rs}, and \texttt{Rq}, respectively;}
+%\item{Get the \texttt{priorTimes} values from \texttt{timeVec}.}
+%\end{enumerate}
+
+%\subsection{Creating the objective function m-file}
+
+
+%\subsection{Running the optimization locally}
+
+%% about the objective function
+
+
+
+%%make sure your working directory is example2
+%%in the command window type makeconf
+%%in the command window type makeconstants
+%%in the command window type [evalResults,critGelRub,sequences,metropolisRejects,conf] = soda();
+
+%\smallq{\textit{some exercises with interpretation of the results.}}
 
 
 

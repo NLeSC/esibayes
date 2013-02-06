@@ -28,7 +28,7 @@ For the example in Figure~\ref{fig:walltime-comparison}, $\alpha$ is about 0.1 (
 
 
 For Monte-Carlo type optimization, the Master-Worker paradigm\index{Master-Worker paradigm} (sometimes also referred to as Master-Slave\index{Master-Slave paradigm}) is the most common. In the Master-Worker paradigm, one of the available nodes is assigned the role of Master, while all the other nodes assume Worker roles.
- 
+
 \subsection{Master side}
 
 The Master node is responsible for keeping track of the status of all Worker nodes with regard to what program a given Worker should run next, as well as to the logistics of the optimization, i.e.\,whether all nodes are connected, which nodes are busy calculating, which have finished, which are waiting for a new task, etc. Furthermore, the Master node is the brains of the optimization algorithm: the Master decides which tasks should be evaluated next. At the very beginning of the optimization, the Master typically checks whether all the nodes are online. After that, the Master will send each node all data that the Worker needs to complete its tasks. This typically includes things like the observations against which the model result will be compared, as well as the model's initial and boundary conditions---basically everything that is constant for all tasks. The Master also sends the model structure itself. Once all Workers have received the data and the model structure, the Master node determines what parameter combinations need to be sampled first. This is entirely dependent on which algorithm is used for the optimization. In any case, the Master compiles a list of all parameter combinations that need to be evaluated (i.e.\,for which the model structure needs to be run). It then distributes these parameter combinations over the available Workers, and waits for the Workers to start returning results. A result is usually in the form of an objective score or likelihood function value, but can in principle be any variable, or even a collection of variables.
@@ -36,8 +36,15 @@ The Master node is responsible for keeping track of the status of all Worker nod
 \subsection{Worker side}
 
 
-On the Worker side, things are pretty simple: when the Worker starts, it loads all the initial and boundary conditions that it received from the Master, after which it goes into a never-ending loop. The never-ending loop consists of just a few components: first, it waits for a new task, i.e.\,, a new parameter combination. Once it has received the parameter combination, it runs the model structure with the parameter combination it just received. After the model finishes, the Worker will typically run some sort of objective function to calculate the likelihood function value, for instance by comparing it to observations (which the Master sent to the Worker at the very beginning). The objective function's result is then sent back to the Master node, and the Worker returns to the beginning of the never-ending loop where it either continues with the next task, or waits until it receives a new one. 
+On the Worker side, things are pretty simple: when the Worker starts, it loads all the initial and boundary conditions that it received from the Master, after which it goes into a never-ending loop. The never-ending loop consists of just a few components: first, it waits for a new task, i.e.\,, a new parameter combination. Once it has received the parameter combination, it runs the model structure with the parameter combination it just received. After the model finishes, the Worker will typically run some sort of objective function to calculate the likelihood function value, for instance by comparing it to observations (which the Master sent to the Worker at the very beginning). The objective function's result is then sent back to the Master node, and the Worker returns to the beginning of the never-ending loop where it either continues with the next task, or waits until it receives a new one.
 
 
 
+
+\begin{figure}[htb]
+  \centering
+    \includegraphics[width=0.9\textwidth]{./../eps/master-worker-paradigm.eps}
+  \caption{Message passing between a master node and its workers.}
+  \label{fig:master-worker-paradigm}
+\end{figure}
 

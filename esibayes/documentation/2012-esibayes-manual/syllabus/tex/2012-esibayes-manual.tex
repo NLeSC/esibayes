@@ -29,6 +29,7 @@
 \usepackage{breakurl}
 \usepackage[hang,flushmargin,multiple,perpage]{footmisc}
 \usepackage{float}
+\usepackage{longtable}
 
 
 \definecolor{orange}{rgb}{1,0.5,0}
@@ -149,7 +150,7 @@
 
 
 
-\newcommand{\squote}[1]{\textquotesingle #1\textquotesingle } % 39 is the decimal ascii code for single straight quote.
+\newcommand{\squote}[1]{\textquotesingle{}#1\textquotesingle{}} % 39 is the decimal ascii code for single straight quote.
 
 \renewcommand{\captionfont}{\footnotesize}
 \renewcommand{\captionlabelfont}{\sffamily}
@@ -173,6 +174,11 @@
    xleftmargin = 0mm,
    breaklines = false,
 }
+
+\lstdefinestyle{spacious}{
+   aboveskip = 2.5em
+}
+
 
 \lstdefinestyle{numbered}{numbers=left,
    numberstyle=\scriptsize\ttfamily{\color{gray}},
@@ -236,11 +242,17 @@
 \input{./chapters/introduction}
 \input{./chapters/getting-started}
 \input{./chapters/parallel-optimization}
-\input{./chapters/piped}
+%\input{./chapters/piped}
 \input{./chapters/mmsoda}
-\input{./chapters/how-to-structure-your-problem}
 \input{./chapters/remote-graphical-applications.tex}
+
+\input{./chapters/likelihood}
+
 \backmatter
+
+%\input{./chapters/likelihood-definition-of-terms}
+
+
 
 \bibliographystyle{chicago}
 \bibliography{./../bib/literaturedb}

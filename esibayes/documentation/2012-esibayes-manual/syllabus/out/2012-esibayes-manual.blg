@@ -1,12 +1,11 @@
 This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
-The top-level auxiliary file: ./../out/./2012-esibayes-manual.aux
+The top-level auxiliary file: ./../out/2012-esibayes-manual.aux
 The style file: chicago.bst
 Database file #1: ./../bib/literaturedb.bib
 Warning--I didn't find a database entry for ""
-Warning--I didn't find a database entry for "boyle"
 You've used 5 entries,
             2861 wiz_defined-function locations,
-            645 strings with 6252 characters,
+            644 strings with 6243 characters,
 and the built_in function-call counts, 4351 in all, are:
 = -- 322
 > -- 432
@@ -45,4 +44,4 @@ warning$ -- 0
 while$ -- 40
 width$ -- 0
 write$ -- 67
-(There were 2 warnings)
+(There was 1 warning)

@@ -1,4 +1,4 @@
-function objScore = calcLikelihood(conf,constants,allStateValuesKF,allValuesNOKF,parVec)
+function objScore = calcLikelihood(conf,constants,modelOutput,parVec)
 
 sodaUnpack()
 

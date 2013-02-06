@@ -52,7 +52,7 @@ nModelEvalsMax = nSamples+100*(1/5)*nSamples;
 % define the number of ensemble members to use in the EnKF
 nMembers = 6;
 % specify if soda should visualize the results as they become available (requires X forwarding over ssh)
-doPlot = false;
+doPlot = true;
 % specify how the parameter space is sampled ('stratified', 'stratified random'), useful for making imagescs of sensitivity
 sampleDrawMode = 'stratified';
 startFromUniform = true;

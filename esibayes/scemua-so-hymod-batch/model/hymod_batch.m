@@ -1,5 +1,5 @@
-function [stateValuesKFNew,valuesNOKFNew] = hymod_batch(conf,constants,stateValuesKFOld,valuesNOKFOld,parVec,priorTimes)
-% function output = hymod(parVec,Extra)
+function modelOutput = hymod_batch(conf,constants,init,parVec,priorTimes)
+
 % Runs the HYMOD model
 
 sodaUnpack()
@@ -61,13 +61,16 @@ for iPrior = 1:nPrior-1
 end
 
 
-nStatesKF = conf.nStatesKF;
-nNOKF = conf.nNOKF;
-nPrior = numel(conf.priorTimes);
-stateValuesKFNew(1:nStatesKF,1:nPrior) = repmat(NaN,[nStatesKF,nPrior]);
+% nStatesKF = conf.nStatesKF;
+% nNOKF = conf.nNOKF;
+% nPrior = numel(conf.priorTimes);
+% stateValuesKFNew(1:nStatesKF,1:nPrior) = repmat(NaN,[nStatesKF,nPrior]);
+% 
+% valuesNOKFNew(1:nNOKF,1) = NaN;
+% valuesNOKFNew(1:nNOKF,2:nPrior) = tempOutput(1,2:nPrior);
 
-valuesNOKFNew(1:nNOKF,1) = NaN;
-valuesNOKFNew(1:nNOKF,2:nPrior) = tempOutput(1,2:nPrior);
+
+modelOutput(2:nPrior) = tempOutput(1,2:nPrior);
 
 
 

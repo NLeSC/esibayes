@@ -17,8 +17,9 @@ obsQSigma = 0.01;%std(dailyDischarge(1:end-1)-dailyDischarge(2:end));
 conf.nOptPars = 5;
 conf.parNames = {'cmax','bexp','fQuickFlow','Rs','Rq'};
 conf.nStatesKF = 0;
-conf.nNOKF = 1;
-conf.namesNOKF = {'output'};
+conf.nNOKF = 0;
+% conf.namesNOKF = {'output'};
+conf.nOutputs = 1;
 conf.priorTimes = numTime([iStart,iStart+wu:iEnd]);
 
 
@@ -35,28 +36,24 @@ constants.dailyPrecip = dailyPrecip;
 
 
 
-stateValuesKFOld = [];
-
-valuesNOKFOld = NaN;
+init = [[];NaN];
 
 parVec=[300,0.2,0.3,0.01,0.4];
 
 priorTimes = conf.priorTimes';
 
 
-[stateValuesKFNew,valuesNOKFNew] = hymod_batch(conf,constants,...
-                stateValuesKFOld,valuesNOKFOld,parVec,priorTimes);
+modelOutput = hymod_batch(conf,constants,init,parVec,priorTimes);
 
 nPrior = numel(priorTimes);
 
 dailyDischarge = repmat(NaN,size(dailyDischarge));
-dailyDischarge(iStart+wu:iEnd) = valuesNOKFNew(2:nPrior);
+dailyDischarge(iStart+wu:iEnd) = modelOutput(1,2:nPrior);
 
 
 save('./data/leafriver-art.mat','dailyDischarge','dailyPotEvapTrans',...
 'dailyPrecip','iStart','iEnd','numTime','parVec','priorTimes','conf',...
-'stateValuesKFNew','stateValuesKFOld','valuesNOKFNew','valuesNOKFOld',...
-'wu','convFactor','obsQSigma')
+'modelOutput','init','wu','convFactor','obsQSigma')
 
 
 

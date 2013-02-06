@@ -45,7 +45,7 @@ Syntax
 
 <div class="txt">
 <span style="font-family:monospace"><span class="keyword">function</span>
-[stateValuesKFNew,valuesNOKFNew] = <i>&lt;modelname&gt;</i>(conf,constants,stateValuesKFOld,valuesNOKFOld,parVec,priorTimes)</span>
+modelOutput = <i>&lt;modelname&gt;</i>(conf,constants,init,parVec,priorTimes)</span>
 </div>
 
 <div class="h2">
@@ -55,12 +55,12 @@ Description
 <div class="txt">
 
 <span style="font-family:monospace"><span class="keyword">function</span>
-[stateValuesKFNew,valuesNOKFNew] = <i>&lt;modelname&gt;</i>(conf,constants,stateValuesKFOld,valuesNOKFOld,parVec,priorTimes)</span>
+modelOutput = <i>&lt;modelname&gt;</i>(conf,constants,init,parVec,priorTimes)</span>
 
 </div>
 <div class = "txt">
 <p>
-When constructing the dynamic model function, make sure to strictly adhere to the format as displayed above; only the name of the function itself (here: <span style="font-family:monospace"><i>&lt;modelname&gt;</i></span>) may be different. The table <a href="#_the_dynamic_model"> below</a> lists the meaning of the input and output variables. The reason behind this strictness is that the optimization algorithm prepares these variables and then constructs the call to the main model function at runtime. Also, the <a href="matlab: web(fullfile(sodaroot,'html','sodaUnpack.html'),'-helpbrowser')"><span style:"font-family:monospace">sodaUnpack()</span></a> function call, that is typically found on the second line of the main model function, expects the variables <span style:"font-family:monospace">conf</span>, <span style:"font-family:monospace">constants</span>, <span style:"font-family:monospace">stateValuesKFOld</span>, <span style:"font-family:monospace">valuesNOKFOld</span>, and <span style:"font-family:monospace">parVec</span> to be present in the main model function workspace.
+When constructing the dynamic model function, make sure to strictly adhere to the format as displayed above; only the name of the function itself (here: <span style="font-family:monospace"><i>&lt;modelname&gt;</i></span>) may be different. The table <a href="#_the_dynamic_model">below</a> lists the meaning of the input and output variables. The reason behind this strictness is that the optimization algorithm prepares these variables and then constructs the call to the main model function at runtime. Also, the <a href="matlab: web(fullfile(sodaroot,'html','sodaUnpack.html'),'-helpbrowser')"><span style="font-family:monospace">sodaUnpack()</span></a> function call, that is typically found on the second line of the main model function, expects the variables <span style="font-family:monospace">conf</span>, <span style="font-family:monospace">constants</span>, <span style="font-family:monospace">init</span>, <span style="font-family:monospace">parVec</span>, and <span style="font-family:monospace">priorTimes</span> to be present in the main model function workspace.
 </p>
 
 
@@ -74,35 +74,84 @@ When constructing the dynamic model function, make sure to strictly adhere to th
     <td valign="top" nowrap><b>Argument</b></td>
     <td valign="top"><b>Description</b></td>
 </tr>
+
 <tr>
-    <td valign="top"><pre>stateValuesKFNew</pre></td>
-    <td valign="top"><p>Output argument of size <span style="font-family:monospace">conf.nStatesKF x conf.nPrior</span> and of class double, containing the model predicted values of the Ensemble Kalman Filter state variables at time = <span style="font-family:monospace">priorTimes(end)</span>.</p></td>
+    <td valign="top"><span style="font-family:monospace">modelOutput</span></td>
+    <td valign="top">
+        <p>
+            If <span style="font-family:monospace">modeStr</span> is equal to <span style="font-family:monospace"><span class="string">'bypass'</span></span>, there is no dynamic model.
+        </p>
+        <p>
+            If <span style="font-family:monospace">modeStr</span> is equal to <span style="font-family:monospace"><span class="string">'scemua'</span></span>, output argument <span style="font-family:monospace">modelOutput</span> is of size <span style="font-family:monospace">conf.nOutputs x conf.nPrior</span> and of class double, containing the model outputs for all time steps listed in <span style="font-family:monospace">conf.priorTimes</span>.
+        </p>
+        <p>
+            If <span style="font-family:monospace">modeStr</span> is equal to <span style="font-family:monospace"><span class="string">'reset'</span></span> or <span style="font-family:monospace"><span class="string">'soda'</span></span>, output argument <span style="font-family:monospace">modelOutput</span> is of size <span style="font-family:monospace">(conf.nStatesKF + conf.nNOKF) x conf.nPrior x conf.nMembers</span> and of class double, containing the model outputs for all time steps listed in <span style="font-family:monospace">conf.priorTimes</span>, and for all ensemble members.
+        </p>
+
+    </td>
+</tr>
+
+<!--
+<tr>
+    <td valign="top"><span style="font-family:monospace">stateValuesKFNew</span></td>
+    <td valign="top">
+        <p>
+            For <span style="font-family:monospace"><span class="string">'bypass'</span></span> mode, there is no dynamic model.
+        </p>
+        <p>
+            For <span style="font-family:monospace"><span class="string">'scemua'</span></span> mode, output argument <span style="font-family:monospace">stateValuesKFNew</span> must be of size <span style="font-family:monospace">conf.nOutputs x conf.nPrior</span> and of class double.
+        </p>
+        <p>
+            For <span style="font-family:monospace"><span class="string">'reset'</span></span> and <span style="font-family:monospace"><span class="string">'soda'</span></span> mode, output argument <span style="font-family:monospace">stateValuesKFNew</span> must be of size <span style="font-family:monospace">conf.nStatesKF x conf.nPrior</span> and of class double, and contains the Kalman Filter states at time = <span style="font-family:monospace">priorTimes(end)</span>.
+        </p>
+
+        </td>
 </tr>
 <tr>
-    <td valign="top"><pre>valuesNOKFNew</pre></td>
-    <td valign="top"><p>Output argument of size <span style="font-family:monospace">conf.nNOKF x conf.nPrior</span> and of class double, containing the model predicted values of Non-Ensemble Kalman Filter variables, at time = <span style="font-family:monospace">priorTimes(end)</span>.</p></td>
+    <td valign="top"><span style="font-family:monospace">valuesNOKFNew</span></td>
+    <td valign="top">
+        <p>
+            For <span style="font-family:monospace"><span class="string">'bypass'</span></span> mode, there is no dynamic model.
+        </p>
+        <p>
+            For <span style="font-family:monospace"><span class="string">'scemua'</span></span> mode, output argument <span style="font-family:monospace">valuesNOKFNew</span> must be an empty array of class double.
+        </p>
+        <p>
+            For <span style="font-family:monospace"><span class="string">'reset'</span></span> and <span style="font-family:monospace"><span class="string">'soda'</span></span> mode, output argument <span style="font-family:monospace">valuesNOKFNew</span> must be of size <span style="font-family:monospace">conf.nNOKF x conf.nPrior</span> and of class double, and contains the model predicted values of Non-Ensemble Kalman Filter variables, at time = <span style="font-family:monospace">priorTimes(end)</span>.
+        </p>
+    </td>
 </tr>
+-->
+
 <tr>
-    <td valign="top"><pre>conf</pre></td>
+    <td valign="top"><span style="font-family:monospace">init</span></td>
+    <td valign="top">
+        <p>
+            If <span style="font-family:monospace">modeStr</span> is equal to <span style="font-family:monospace"><span class="string">'bypass'</span></span>, there is no dynamic model.
+        </p>
+        <p>
+            If <span style="font-family:monospace">modeStr</span> is equal to <span style="font-family:monospace"><span class="string">'scemua'</span></span>, input argument <span style="font-family:monospace">init</span> is of size <span style="font-family:monospace">conf.nOutputs x 1</span> and of class double, containing the values of the model outputs at time <span style="font-family:monospace">conf.priorTimes(1)</span>.
+        </p>
+        <p>
+            If <span style="font-family:monospace">modeStr</span> is equal to <span style="font-family:monospace"><span class="string">'reset'</span></span> or <span style="font-family:monospace"><span class="string">'soda'</span></span>, input argument <span style="font-family:monospace">init</span> is of size <span style="font-family:monospace">(conf.nStatesKF + conf.nNOKF) x conf.nPrior x 1</span> and of class double, containing the values of the model outputs at time <span style="font-family:monospace">conf.priorTimes(1)</span>.
+        </p>
+
+    </td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">conf</span></td>
     <td valign="top"><p>1x1 struct argument, in which your MMSODA configuration variables have been collected, using the information from the './results/conf.mat' file as well as the default settings from the file indicated by <span style="font-family:monospace">conf.useIniFile</span>.</p></td>
 </tr>
 <tr>
-    <td valign="top"><pre>constants</pre></td>
+    <td valign="top"><span style="font-family:monospace">constants</span></td>
     <td valign="top"><p>1x1 struct argument, in which the model constants have been collected, using the information from './data/constants.mat'.</p></td>
 </tr>
 <tr>
-    <td valign="top"><pre>stateValuesKFOld</pre></td>
-    <td valign="top"><p>Input argument of size <span style="font-family:monospace">conf.nStatesKF x conf.nPrior</span> and of class double, containing the values of the current Ensemble Kalman Filter member for all Ensemble Kalman Filter states for all time steps listed in <span style="font-family:monospace">priorTimes</span>. </p></td>
-</tr>
-<tr>
-    <td valign="top"><pre>valuesNOKFOld</pre></td>
-    <td valign="top"><p>Input argument of size <span style="font-family:monospace">conf.nNOKF x conf.nPrior</span> and of class double, containing the values of the current Ensemble Kalman Filter member for all Non-Ensemble Kalman Filter variables for all time steps listed in <span style="font-family:monospace">priorTimes</span>. </p></td>
-</tr>
-<tr>
-    <td valign="top"><pre>parVec</pre></td>
+    <td valign="top"><span style="font-family:monospace">parVec</span></td>
     <td valign="top"><p>Input argument of size <span style="font-family:monospace">1 x conf.nOptPars</span> and class double, containing the parameter combination that MMSODA sampled from the parameter space.</p></td>
 </tr><tr>
-    <td valign="top"><pre>priorTimes</pre></td>
+    <td valign="top"><span style="font-family:monospace">priorTimes</span></td>
     <td valign="top"><p>Input argument of size <span style="font-family:monospace">1 x conf.nPrior</span> and class double, containing a list of points in time for which the model must make a prior prediction.</p></td>
 </tr>
 

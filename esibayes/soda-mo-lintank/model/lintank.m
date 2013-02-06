@@ -1,4 +1,4 @@
-function [stateValuesKFNew,valuesNOKFNew] = lintank(conf,constants,stateValuesKFOld,valuesNOKFOld,parVec,priorTimes)
+function modelOutput  = lintank(conf,constants,init,parVec,priorTimes)
 
 sodaUnpack()
 
@@ -26,3 +26,7 @@ for k=2:nPriorChunk
     valuesNOKFNew(1:nNOKF,k) = [rand;Q];
     
 end
+
+
+
+modelOutput = [stateValuesKFNew;valuesNOKFNew];

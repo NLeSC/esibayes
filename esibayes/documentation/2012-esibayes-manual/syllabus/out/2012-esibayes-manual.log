@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2012.5.4)  24 JAN 2013 14:40
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2012.5.4)  4 FEB 2013 15:50
 entering extended mode
  %&-line parsing enabled.
-**./2012-esibayes-manual.tex
+**2012-esibayes-manual.tex
 (./2012-esibayes-manual.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
@@ -575,15 +575,33 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks39
 \@floatcapt=\box36
 )
-Package color Info: Redefining color black on input line 42.
-Package color Info: Redefining color white on input line 43.
+(/usr/share/texmf-texlive/tex/latex/tools/longtable.sty
+Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
+\LTleft=\skip98
+\LTright=\skip99
+\LTpre=\skip100
+\LTpost=\skip101
+\LTchunksize=\count134
+\LTcapwidth=\dimen142
+\LT@head=\box37
+\LT@firsthead=\box38
+\LT@foot=\box39
+\LT@lastfoot=\box40
+\LT@cols=\count135
+\LT@rows=\count136
+\c@LT@tables=\count137
+\c@LT@chunks=\count138
+\LT@p@ftn=\toks40
+)
+Package color Info: Redefining color black on input line 43.
+Package color Info: Redefining color white on input line 44.
 \@indexfile=\write5
 \openout5 = `2012-esibayes-manual.idx'.
 
 
 Writing index file 2012-esibayes-manual.idx
 (./hyp.tex)
-\c@smallqcounter=\count134
+\c@smallqcounter=\count139
  (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
@@ -593,32 +611,35 @@ File: lstlang1.sty 2004/09/05 1.3 listings language file
 (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
-(./../out/2012-esibayes-manual.aux)
+(./../out/2012-esibayes-manual.aux
+
+LaTeX Warning: Label `eq:normal-distribution-calibration' multiply defined.
+
+)
 \openout1 = `2012-esibayes-manual.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 223.
-LaTeX Font Info:    ... okay on input line 223.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 223.
-LaTeX Font Info:    ... okay on input line 223.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 223.
-LaTeX Font Info:    ... okay on input line 223.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 223.
-LaTeX Font Info:    ... okay on input line 223.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 223.
-LaTeX Font Info:    ... okay on input line 223.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 223.
-LaTeX Font Info:    ... okay on input line 223.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 223.
-LaTeX Font Info:    ... okay on input line 223.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 223.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 223.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 229.
+LaTeX Font Info:    ... okay on input line 229.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 229.
+LaTeX Font Info:    ... okay on input line 229.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 229.
+LaTeX Font Info:    ... okay on input line 229.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 229.
+LaTeX Font Info:    ... okay on input line 229.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 229.
+LaTeX Font Info:    ... okay on input line 229.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 229.
+LaTeX Font Info:    ... okay on input line 229.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 229.
+LaTeX Font Info:    ... okay on input line 229.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 229.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 229.
 
-
-(/usr/share/texmf-texlive/tex/latex/base/ts1cmr.fd
+ (/usr/share/texmf-texlive/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 223.
-Package hyperref Info: Link coloring ON on input line 223.
+LaTeX Font Info:    ... okay on input line 229.
+Package hyperref Info: Link coloring ON on input line 229.
 
 (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
@@ -626,16 +647,16 @@ Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
 (/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
 Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
-\c@section@level=\count135
+\c@section@level=\count140
 )
-LaTeX Info: Redefining \ref on input line 223.
-LaTeX Info: Redefining \pageref on input line 223.
+LaTeX Info: Redefining \ref on input line 229.
+LaTeX Info: Redefining \pageref on input line 229.
 
 (./../out/2012-esibayes-manual.out) (./../out/2012-esibayes-manual.out)
 \@outlinefile=\write6
 \openout6 = `2012-esibayes-manual.out'.
 
-\AtBeginShipoutBox=\box37
+\AtBeginShipoutBox=\box41
 
 *geometry auto-detecting driver*
 *geometry detected driver: dvips*
@@ -678,11 +699,16 @@ driver: dvips
 \@twosidetrue \@mparswitchtrue 
 (1in=72.27pt, 1cm=28.45pt)
 -----------------------
-\c@lstlisting=\count136
+\c@lstlisting=\count141
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
+Package caption Info: longtable package is loaded.
+(/usr/share/texmf-texlive/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2008/03/28 v1.2 longtable captions (AR)
+)
 Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
+
 ABD: EveryShipout initializing macros (./chapters/title.tex)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -705,10 +731,7 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 1.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-)
-LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 12.
-)
+))
 \tf@toc=\write7
 \openout7 = `2012-esibayes-manual.toc'.
 
@@ -812,15 +835,10 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [18
 
 ]
-[19]) (./chapters/piped.tex [20]
+[19]
+File: ./../eps/master-worker-paradigm.eps Graphic file (type eps)
+ <./../eps/master-worker-paradigm.eps>) (./chapters/mmsoda.tex [20]
 Chapter 4.
-LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <24.88> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1.
-File: ./../eps/piped.eps Graphic file (type eps)
-<./../eps/piped.eps>) (./chapters/mmsoda.tex [21
-
-] [22]
-Chapter 5.
 
 Underfull \hbox (badness 2285) in paragraph at lines 7--8
 []\OT1/cmr/m/n/10 MMSODA merges a num-ber of pre-vi-ously sep-a-rate soft-wares
@@ -833,17 +851,9 @@ Underfull \hbox (badness 1527) in paragraph at lines 7--8
  []
 
 
-Package hyperref Warning: Glyph not defined in PD1 encoding,
-(hyperref)                removing `\textquotesingle' on input line 23.
-
-
-Package hyperref Warning: Glyph not defined in PD1 encoding,
-(hyperref)                removing `\textquotesingle' on input line 23.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [23
+ [21
 
 ]
 LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 44.
@@ -868,7 +878,7 @@ l.60 \end{align}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[24]
+[22]
 Underfull \hbox (badness 10000) in paragraph at lines 76--76
 
  []
@@ -883,19 +893,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 99--99
 
  []
 
-[25]
-Overfull \hbox (63.65738pt too wide) in paragraph at lines 136--136
-\OT1/cmtt/m/n/10 function objScore = calcLikelihood(conf,constants,allStateValu
-esKF,allValuesNOKF,parVec) 
- []
-
-
+[23]
 Overfull \hbox (5.90788pt too wide) in paragraph at lines 146--146
 []\OT1/cmtt/m/n/10 dens = (1/(sqrt(2*pi*parSigma1^2))*exp(-(1/2)*((x-parMu1)/pa
 rSigma1)^2) + ...[] 
  []
 
-[26]
+[24]
 Underfull \hbox (badness 10000) in paragraph at lines 196--196
 
  []
@@ -913,43 +917,55 @@ Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[27]
-
-Package hyperref Warning: Glyph not defined in PD1 encoding,
-(hyperref)                removing `\textquotesingle' on input line 201.
-
-
-Package hyperref Warning: Glyph not defined in PD1 encoding,
-(hyperref)                removing `\textquotesingle' on input line 201.
-
-[28]
-
-Package hyperref Warning: Glyph not defined in PD1 encoding,
-(hyperref)                removing `\textquotesingle' on input line 261.
+[25] [26] [27]
+File: ./../eps/states-and-flows.eps Graphic file (type eps)
+ <./../eps/states-and-flows.eps> [28]
+(./../out/./../m/lintank_script.m
+Overfull \hbox (12.22067pt too wide) in paragraph at lines 13--14
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
 
 
-Package hyperref Warning: Glyph not defined in PD1 encoding,
-(hyperref)                removing `\textquotesingle' on input line 261.
+Overfull \hbox (7.75807pt too wide) in paragraph at lines 43--44
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][] 
+ []
 
+[29])
+File: ./../eps/result-of-lintank-script.eps Graphic file (type eps)
+ <./../eps/result-of-lintank-script.eps>
+File: ./../eps/doc-the-dynamic-model.eps Graphic file (type eps)
 
-Package natbib Warning: Citation `boyle' on page 29 undefined on input line 263
-.
+<./../eps/doc-the-dynamic-model.eps> [30] (./../out/./../m/lintank.m [31])
+(./../out/./../m/lintank.m)
+File: ./../eps/doc-the-objective-function.eps Graphic file (type eps)
+ <./../eps/doc-the-objective-function.eps> [32]
+Overfull \hbox (7.75807pt too wide) in paragraph at lines 398--399
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+] 
+ []
 
-[29] [30]) (./chapters/how-to-structure-your-problem.tex [31]
-Chapter 6.
-) (./chapters/remote-graphical-applications.tex [32
+[33]
+Underfull \hbox (badness 10000) in paragraph at lines 411--411
 
-]
-Chapter 7.
+ []
 
-LaTeX Warning: Reference `fig:plotseq-1-600' on page 33 undefined on input line
+) (./chapters/remote-graphical-applications.tex [34]
+Chapter 5.
+
+LaTeX Warning: Reference `fig:plotseq-1-600' on page 35 undefined on input line
  6.
 
 File: ./../eps/xlaunch-1.eps Graphic file (type eps)
 <./../eps/xlaunch-1.eps>
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [33
+ [35
 
 ]
 File: ./../eps/xlaunch-2.eps Graphic file (type eps)
@@ -959,7 +975,7 @@ File: ./../eps/xlaunch-3.eps Graphic file (type eps)
  <./../eps/xlaunch-3.eps>
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [34]
+ [36]
 File: ./../eps/xlaunch-4.eps Graphic file (type eps)
 
 <./../eps/xlaunch-4.eps>
@@ -967,35 +983,43 @@ File: ./../eps/xlaunch-5.eps Graphic file (type eps)
  <./../eps/xlaunch-5.eps>
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [35]
+ [37]
 File: ./../eps/putty-x-forwarding.eps Graphic file (type eps)
 
 <./../eps/putty-x-forwarding.eps>
 File: ./../eps/octave-peaks-x-forwarding.eps Graphic file (type eps)
  <./../eps/octave-peaks-x-forwarding.eps>
-[36]
+[38]
 Underfull \vbox (badness 2119) has occurred while \output is active []
 
- [37]
+ [39]
 File: ./../eps/matlab-remote-debugging.eps Graphic file (type eps)
 
-<./../eps/matlab-remote-debugging.eps>) [38] (./../out/2012-esibayes-manual.bbl
-) (./../out/2012-esibayes-manual.ind [39
+<./../eps/matlab-remote-debugging.eps>) (./chapters/likelihood.tex [40]
+Chapter 6.
+[41
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [42]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [43]
+[44]) [45] (./../out/2012-esibayes-manual.bbl)
+(./../out/2012-esibayes-manual.ind [46
 
 
-] [40
+] [47
 
-] [41
+] [48
 
 ])
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [42
+ [49
 
 ]
-
-Package natbib Warning: There were undefined citations.
-
 (./../out/2012-esibayes-manual.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1003,14 +1027,17 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 10880 strings out of 495062
- 156980 string characters out of 1182645
- 314392 words of memory out of 3000000
- 13715 multiletter control sequences out of 15000+50000
- 15859 words of font info for 61 fonts, out of 3000000 for 9000
+ 11129 strings out of 495062
+ 160633 string characters out of 1182645
+ 329039 words of memory out of 3000000
+ 13931 multiletter control sequences out of 15000+50000
+ 20304 words of font info for 75 fonts, out of 3000000 for 9000
  88 hyphenation exceptions out of 8191
- 68i,12n,134p,2227b,1783s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 68i,13n,134p,2225b,1790s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on ./../out/2012-esibayes-manual.dvi (46 pages, 358536 bytes).
+Output written on ./../out/2012-esibayes-manual.dvi (53 pages, 467024 bytes).

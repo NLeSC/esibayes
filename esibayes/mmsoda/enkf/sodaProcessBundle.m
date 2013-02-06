@@ -5,6 +5,9 @@ nStatesKF = conf.nStatesKF;
 nNOKF = conf.nNOKF;
 nDASteps = conf.nDASteps;
 
+if strcmp(conf.modeStr,'scemua')
+    nOutputs = conf.nOutputs;
+end
 
 switch bundle(1).type
     % a bundle of tasks has to be of the same type for this to work:
@@ -15,20 +18,20 @@ switch bundle(1).type
             parVec = bundle(iTask).parVec;
             priorTimes = bundle(iTask).priorTimes;
             nPrior = numel(priorTimes);
+            
+            init = cat(1,stateValuesKFOld,valuesNOKFOld);
 
-            eval(['[stateValuesKFNew,valuesNOKFNew] = ',conf.modelName,'(conf,constants,stateValuesKFOld,valuesNOKFOld,parVec,priorTimes);'])
-
+            eval(['modelOutput = ',conf.modelName,'(conf,constants,init,parVec,priorTimes);'])
+            
             switch conf.modeStr
                 case {'reset','soda'}
-                    % bundle(iTask).stateValuesKFPrior(1:nStatesKF,2:nPrior) = stateValuesKFNew(1:nStatesKF,1:nPrior-1);
-                    % bundle(iTask).valuesNOKF(1:nNOKF,2:nPrior) = valuesNOKFNew(1:nNOKF,1:nPrior-1);
-                    bundle(iTask).stateValuesKFPrior(1:nStatesKF,1:nPrior) = stateValuesKFNew(1:nStatesKF,1:nPrior);
-                    bundle(iTask).valuesNOKF(1:nNOKF,1:nPrior) = valuesNOKFNew(1:nNOKF,1:nPrior);
+                    bundle(iTask).stateValuesKFPrior(1:nStatesKF,1:nPrior) = modelOutput(1:nStatesKF,1:nPrior);
+                    bundle(iTask).valuesNOKF(1:nNOKF,1:nPrior) = modelOutput(nStatesKF+(1:nNOKF),1:nPrior);
                 case 'scemua'
-                    % bundle(iTask).stateValuesKFPrior(1:nStatesKF,2:nPrior) = stateValuesKFNew(1:nStatesKF,1:nPrior-1);
-                    % bundle(iTask).valuesNOKF(1:nNOKF,2:nPrior) = valuesNOKFNew(1:nNOKF,1:nPrior-1);
-                    bundle(iTask).stateValuesKFPrior(1:nStatesKF,1:nPrior) = stateValuesKFNew(1:nStatesKF,1:nPrior);
-                    bundle(iTask).valuesNOKF(1:nNOKF,1:nPrior) = valuesNOKFNew(1:nNOKF,1:nPrior);
+                    % abuse the KFPrior field for storing the model
+                    % outputs, even though we're not doing any KF:
+                    bundle(iTask).stateValuesKFPrior(1:nOutputs,1:nPrior) = modelOutput(1:nOutputs,1:nPrior);
+                    bundle(iTask).valuesNOKF(1:nNOKF,1:nPrior) = NaN;
                 otherwise
             end
         end
@@ -36,16 +39,21 @@ switch bundle(1).type
     case 'objective'
         for iTask=1:nTasks
 
-            allStateValuesKFPrior = bundle(iTask).allStateValuesKFPrior;
-            allValuesNOKF = bundle(iTask).allValuesNOKF;
-            parVec = bundle(iTask).parVec;
+            if strcmp(conf.modeStr,'bypass')
+                modelOutputs = [];
+            else
+                allStateValuesKFPrior = bundle(iTask).allStateValuesKFPrior;
+                allValuesNOKF = bundle(iTask).allValuesNOKF;
+                modelOutputs = cat(1,allStateValuesKFPrior,allValuesNOKF);
+            end
+            parVec = bundle(iTask).parVec;            
 
             if conf.isSingleObjective
-                eval(['llScore = ',conf.objCallStr,'(conf,constants,allStateValuesKFPrior,allValuesNOKF,parVec);'])
+                eval(['llScore = ',conf.objCallStr,'(conf,constants,modelOutputs,parVec);'])
                 bundle(iTask).llScores = llScore;
             elseif conf.isMultiObjective
                 for iObj = 1:conf.nObjs
-                    eval(['llScores(1,iObj) = ',conf.objCallStrs{iObj},'(conf,constants,allStateValuesKFPrior,allValuesNOKF,parVec);'])
+                    eval(['llScores(1,iObj) = ',conf.objCallStrs{iObj},'(conf,constants,modelOutputs,parVec);'])
                 end
                 bundle(iTask).llScores = llScores;
             else

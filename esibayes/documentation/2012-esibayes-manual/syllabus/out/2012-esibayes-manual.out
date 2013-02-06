@@ -9,16 +9,18 @@
 \BOOKMARK [1][-]{section.3.1}{The Master-Worker paradigm}{chapter.3}
 \BOOKMARK [2][-]{subsection.3.1.1}{Master side}{section.3.1}
 \BOOKMARK [2][-]{subsection.3.1.2}{Worker side}{section.3.1}
-\BOOKMARK [0][-]{chapter.4}{piped}{}
-\BOOKMARK [0][-]{chapter.5}{The MMSODA Toolbox for MATLAB}{}
-\BOOKMARK [1][-]{section.5.1}{MMSODA in bypass mode; offline}{chapter.5}
-\BOOKMARK [2][-]{subsection.5.1.1}{Creating the `constants.mat' and `conf.mat' files}{section.5.1}
-\BOOKMARK [2][-]{subsection.5.1.2}{Creating the objective function m-file}{section.5.1}
-\BOOKMARK [2][-]{subsection.5.1.3}{Running the optimization locally}{section.5.1}
-\BOOKMARK [1][-]{section.5.2}{MMSODA in bypass mode; online}{chapter.5}
-\BOOKMARK [1][-]{section.5.3}{Compiling MMSODA and your model code into a binary}{chapter.5}
-\BOOKMARK [1][-]{section.5.4}{MMSODA in scemua mode; offline}{chapter.5}
-\BOOKMARK [2][-]{subsection.5.4.1}{Creating the objective function m-file}{section.5.4}
-\BOOKMARK [2][-]{subsection.5.4.2}{Running the optimization locally}{section.5.4}
-\BOOKMARK [0][-]{chapter.6}{How to structure your problem}{}
-\BOOKMARK [0][-]{chapter.7}{Remote graphical applications}{}
+\BOOKMARK [0][-]{chapter.4}{The MMSODA Toolbox for MATLAB}{}
+\BOOKMARK [1][-]{section.4.1}{MMSODA in `bypass' mode; offline}{chapter.4}
+\BOOKMARK [2][-]{subsection.4.1.1}{Creating the `constants.mat' and `conf.mat' files}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.2}{Creating the objective function m-file}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.3}{Running the optimization locally}{section.4.1}
+\BOOKMARK [1][-]{section.4.2}{MMSODA in `bypass' mode; online}{chapter.4}
+\BOOKMARK [1][-]{section.4.3}{Compiling MMSODA and your model code into a binary}{chapter.4}
+\BOOKMARK [1][-]{section.4.4}{MMSODA in `scemua' mode; offline}{chapter.4}
+\BOOKMARK [1][-]{section.4.5}{MMSODA in `scemua' mode; online}{chapter.4}
+\BOOKMARK [0][-]{chapter.5}{Remote graphical applications}{}
+\BOOKMARK [0][-]{chapter.6}{Likelihoods in optimization}{}
+\BOOKMARK [1][-]{section.6.1}{Definition of the system}{chapter.6}
+\BOOKMARK [1][-]{section.6.2}{Constructing a likelihood for a simple error model}{chapter.6}
+\BOOKMARK [1][-]{section.6.3}{Bayes' law in parameter optimization}{chapter.6}
+\BOOKMARK [1][-]{section.6.4}{Definition of terms}{chapter.6}

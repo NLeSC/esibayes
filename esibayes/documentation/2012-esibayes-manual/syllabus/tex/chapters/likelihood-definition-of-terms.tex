@@ -1,0 +1,60 @@
+
+\chapter{Appendix}
+
+
+\begin{center}
+\begin{longtable}{lp{10cm}}
+\caption{Definition of terms.}\\
+\vspace{1em}
+%\hline
+%\textbf{First entry} & \textbf{Second entry}\\
+%\hline
+\endfirsthead
+\multicolumn{2}{c}{\captionlabelfont\captionfont\tablename\  \thetable{}: \rmfamily Definition of terms (continued).} \\
+\vspace{1em}
+%\hline
+%\textbf{First entry} & \textbf{Second entry} \\
+%\hline
+\endhead
+%\hline
+\multicolumn{2}{r}{\textit{Continued on next page}} \\
+\endfoot
+%\hline
+\endlastfoot
+$f(\cdot{})$&true state operator (nonlinear function)\\
+$\hat{f}(\cdot{})$&supposed state operator (nonlinear function)\\
+$h(\cdot{})$&true measurement operator (nonlinear function)\\
+$\hat{h}(\cdot{})$&supposed measurement operator (nonlinear function)\\
+$g(\cdot{})$&nonlinear transformation of the model output\\
+$\boldsymbol\Theta$&constrained parameter space\\
+$\mathbf{\Omega}$&constrained state space\\
+$\mathbb{R}$&real number space\\
+$\boldsymbol\theta$&true parameter values pertaining to the state operator\\
+$\hat{\boldsymbol\theta}$&estimate of the parameter values pertaining to the state operator\\
+$\boldsymbol\phi$&true parameter values pertaining to the measurement operator\\
+$\sigma$&standard deviation of the normal distribution\\
+$\mu$&mean of the normal distribution\\
+$\nu_{t+1}$&random perturbation of the true output at time $t$\\
+$\psi_{t+1}$&random perturbation of the true forcing at time $t$\\
+$\omega_{t+1}$&random perturbation of the true state at time $t$\\
+$u_t$&true forcing at time $t$\\
+$\tilde{u}_t$&observed forcing at time $t$\\
+$x_t$&true state at time $t$\\
+$\tilde{x}_t$&observed state at time $t$\\
+$\hat{x}_t$&predicted state at time $t$\\
+$y_t$&true output at time $t$\\
+$\tilde{y}_t$&observed output at time $t$\\
+$\hat{y}_t$&predicted output at time $t$\\
+$\boldsymbol\varepsilon$&observation-prediction residual vector\\
+$\mathcal{N}$&normal probability distribution\\
+$L(\cdot{})$&log likelihood\\
+$p(\boldsymbol\theta|\tilde{\mathbf{x}})$&posterior probability of $\boldsymbol{\theta}$ given the observations $\tilde{\mathbf{x}}$\\
+$p(\boldsymbol\theta)$&prior probability of $\boldsymbol{\theta}$\\
+$p(\tilde{\mathbf{x}}|\boldsymbol\theta)$&likelihood of the observations $\tilde{\mathbf{x}}$ given the parameters $\boldsymbol{\theta}$\\
+$p(\tilde{\mathbf{x}})$&probability of the observations $\tilde{\mathbf{x}}$, or \textit{evidence}\\
+$s^2$&estimator of variance $\sigma^2$\\
+$n_p$&number of parameters in the vector $\hat{\boldsymbol{\theta}}$\\
+$n_o$&number of observations in the vector $\tilde{\mathbf{x}}$\\
+$n_e$&number of evaluations of $\hat{f}(\cdot{})$ within a parameter optimization context\\
+\end{longtable}
+\end{center}

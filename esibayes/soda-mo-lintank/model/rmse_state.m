@@ -1,17 +1,20 @@
-function objScore = rmse_state(conf,constants,allStateValuesKF,allValuesNOKF,parVec)
-
+function objScore = rmse_state(conf,constants,modelOutput,parVec)
 
 sodaUnpack()
 
 
+[nOutputs,nDASteps,nMembers,tmp] = size(modelOutput);
 
-[tmp,nMembers,nKF,nDASteps] = size(allStateValuesKF);
+% row of interest in modelOutput is #1
+r = 1;
 
-memberDim = 2;
-selectCol = 1; % the 1st position in allStateValuesKF(iParSet,iMember,1,1:nDASteps) holds the state information
+obs = repmat(obsWaterLevel(2:nDASteps),[1,1,nMembers]);
+sim = modelOutput(r,2:nDASteps,1:nMembers);
 
-simWaterLevelMean = shiftdim(mean(allStateValuesKF(1,1:nMembers,selectCol,1:nDASteps),memberDim),2);
+nObs = nDASteps-1;
 
-objScore = sqrt(mean((obsWaterLevel(2:nDASteps)-simWaterLevelMean(2:nDASteps)).^2));
+ensembleMeanErr = mean(obs-sim,3);
 
-% save('./../streams/debug.mat','-mat7-binary')
+ssr = sum(ensembleMeanErr.^2);
+
+objScore = (1/2) * nObs * log(ssr);

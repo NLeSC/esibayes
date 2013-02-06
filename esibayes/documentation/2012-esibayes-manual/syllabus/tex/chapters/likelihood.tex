@@ -1,0 +1,213 @@
+%\chapter{Likelihoods in optimization}
+%\input{./inputs/sec-definition-of-the-system}
+%\input{./inputs/sec-bayes-law-in-parameter-optimization}
+%\input{./inputs/sec-constructing-a-simple-likelihood}
+%\input{./inputs/definition-of-terms}
+
+
+\chapter{Likelihoods in optimization}
+\label{ch:likelihoods-in-optimization}
+
+
+\section{Definition of the system}
+
+
+The discrete-time state-space formulation of a nonlinear dynamic system is\footnote{Refer to Section~\ref{sec:definition-of-terms} for the meaning of the symbols used in this Chapter.}:
+
+\begin{equation}\label{eq:true-state}
+x_{t+1}=f(x_t,u_t,\boldsymbol\theta)
+\end{equation}
+\begin{equation}\label{eq:true-output}
+y_{t+1}=h(x_{t+1},\boldsymbol\phi)
+\end{equation}
+To keep notation as simple as possible, we consider a system in which the state, the forcing and the output at any given time can be represented as scalars. Further note that the `state' of the system at a given time can include history.
+Since it is generally impossible to observe the true state, the true forcing, and the true output of a system, we have to make do with the observed state, observed forcing, and the observed output instead:
+
+\begin{equation}\label{eq:observed-state}
+\tilde{x}_{t+1}=x_{t+1} + \omega_{t+1}
+\end{equation}
+\begin{equation}\label{eq:observed-forcing}
+\tilde{u}_{t+1}=u_{t+1} + \psi_{t+1}
+\end{equation}
+\begin{equation}\label{eq:observed-output}
+\tilde{y}_{t+1}=y_{t+1} + \nu_{t+1}
+\end{equation}
+Note that Eqs.~\ref{eq:observed-state}--\ref{eq:observed-output} assume that the dimensionality of $x_{t+1}$, $u_{t+1}$ and $y_{t+1}$ is the same as their observed counterparts, and that they do indeed represent the same entities (in other words, there is no \textit{incommensurability}). Furthermore, we do not know the mechanism by which $x_t$ leads to $x_{t+1}$ in Eq.~\ref{eq:true-state}, so instead we propose a mechanism $\hat{f}(\cdot{})$; similarly we do not know how $x_{t+1}$ leads to $y_{t+1}$ in Eq.~\ref{eq:true-output}, so we propose $\hat{h}(\cdot{})$. Typically, $\hat{f}(\cdot{})$ and $\hat{h}(\cdot{})$ are part of the same computer model structure. Because of philosophical reasons, it is impossible to prove that $\hat{f}(\cdot{})$ and $\hat{h}(\cdot{})$ are in fact the correct functions $f(\cdot{})$ and $h(\cdot{})$---instead, we can only subject $\hat{f}(\cdot{})$ and $\hat{h}(\cdot{})$ to increasingly more difficult tests, and if $\hat{f}(\cdot{})$ and $\hat{h}(\cdot{})$ are not falsified by these tests, then the confidence in the correctness of $\hat{f}(\cdot{})$ and $\hat{h}(\cdot{})$ increases.
+
+
+
+\section{Constructing a likelihood for a simple error model}
+The probability of sampling a value $x$ from a normal distribution  is calculated with:
+\begin{equation}\label{eq:normal-distribution}
+p\,(\,x\,|\,\mu,\sigma\,) = \frac{1}{\sqrt{2\pi\sigma^2}}\:\mathrm{exp}\left[{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}\right]
+\end{equation}
+Within the context of calibration, this is equivalent to:
+\begin{equation}\label{eq:normal-distribution-calibration}
+p\,(\,\hat{x}\,|\,\tilde{x},\sigma\,) = \frac{1}{\sqrt{2\pi\sigma^2}}\:\mathrm{exp}\left[{-\frac{1}{2}\left(\frac{\hat{x}-\tilde{x}}{\sigma}\right)^2}\right]
+\end{equation}
+Note that this assumes that the true mean of the distribution can be observed, i.e.\,$\tilde{x}=\mu$.
+
+For the case where we have not just 1 observation, but instead have a time series of $n_o$ observations, the probability $p\,(\,\hat{\mathbf{x}}\,|\,\tilde{\mathbf{x}},\boldsymbol\sigma\,)$ is calculated as the product of all individual probabilities\footnote{Note that this can be extended to deal with non-constant variance (\textit{heteroscedasticity}) by making $\sigma$ into a vector $\boldsymbol\sigma$:
+\begin{equation}\label{eq:heteroscedastic-normal-distribution-calibration}
+p\,(\,\hat{\mathbf{x}}\,|\,\tilde{\mathbf{x}},\boldsymbol\sigma\,) = \prod_{t=1}^{n_o} \frac{1}{\sqrt{2\pi\sigma_t^2}}\:\mathrm{exp}\left[{-\frac{1}{2}\left(\frac{\hat{x}_t-\tilde{x}_t}{\sigma_t}\right)^2}\right]\nonumber
+\end{equation}}:
+\begin{equation}\label{eq:normal-distribution-calibration}
+p\,(\,\hat{\mathbf{x}}\,|\,\tilde{\mathbf{x}},\sigma\,) = \prod_{t=1}^{n_o} \frac{1}{\sqrt{2\pi\sigma^2}}\:\mathrm{exp}\left[{-\frac{1}{2}\left(\frac{\hat{x}_t-\tilde{x}_t}{\sigma}\right)^2}\right]
+\end{equation}
+Note that the multiplication of individual probabilities in Eq.~\ref{eq:normal-distribution-calibration} reflects the implicit assumption that the errors are independent---an assumption that is often violated.
+
+\vspace{1em}
+Since $\frac{1}{\sqrt{2\pi\sigma^2}}$ is constant for homoscedastic problems, Eq.~\ref{eq:normal-distribution-calibration} can be rearranged as follows:
+\begin{equation}\label{eq:normal-distribution-calibration2}
+p\,(\,\hat{\mathbf{x}}\,|\,\tilde{\mathbf{x}},\sigma\,) = \left[\frac{1}{\sqrt{2\pi\sigma^2}}\right]^{n_o}\:\cdot{}\:\prod_{t=1}^{n_o}\:\mathrm{exp}\left[{-\frac{1}{2}\left(\frac{\hat{x}_t-\tilde{x}_t}{\sigma}\right)^2}\right]
+\end{equation}
+and since:
+\begin{equation}
+\left[\frac{1}{\sqrt{2\pi\sigma^2}}\right]^{n_o} = \left[\sqrt{2\pi\sigma^2}\right]^{-n_o} \nonumber
+\end{equation}
+Eq.~\ref{eq:normal-distribution-calibration2} can be rewritten as:
+\begin{equation}\label{eq:normal-distribution-calibration3}
+p\,(\,\hat{\mathbf{x}}\,|\,\tilde{\mathbf{x}},\sigma\,) = \left[\sqrt{2\pi\sigma^2}\right]^{-n_o}\:\cdot{}\:\prod_{t=1}^{n_o}\:\mathrm{exp}\left[{-\frac{1}{2}\left(\frac{\hat{x}_t-\tilde{x}_t}{\sigma}\right)^2}\right]
+\end{equation}
+Furthermore,
+\begin{equation}
+\mathrm{exp}(a)\cdot{}\mathrm{exp}(b)=\mathrm{exp}(a+b)
+\end{equation}
+so Eq.~\ref{eq:normal-distribution-calibration3} may be written as:
+\begin{equation}\label{eq:normal-distribution-calibration4}
+p\,(\,\hat{\mathbf{x}}\,|\,\tilde{\mathbf{x}},\sigma\,) = \left[\sqrt{2\pi\sigma^2}\right]^{-n_o}\:\cdot{}\:\mathrm{exp}\left[-\frac{1}{2}\sum_{t=1}^{n_o}\left(\frac{\hat{x}_t-\tilde{x}_t}{\sigma}\right)^2\right]
+\end{equation}
+The probability density in Eq.~\ref{eq:normal-distribution-calibration4} is related to the \textit{log-likelihood} according to\footnote{Note that, $\hat{\mathbf{x}}$ in Eq.~\ref{eq:log-likelihood1} is only dependent on the parameter vector  $\boldsymbol\theta$, while the observations $\tilde{\mathbf{x}}$ and $\sigma$ are given. When a probability is a function of the parameter value, `likelihood' is preferred over `probability'.}:
+\begin{align}\label{eq:log-likelihood1}
+\ell\,(\,\hat{\mathbf{x}}\,|\,\tilde{\mathbf{x}},\sigma\,) &= \mathrm{log}\left(\,p\,(\,\hat{\mathbf{x}}\,|\,\tilde{\mathbf{x}},\sigma\,)\,\right)\\
+&=\mathrm{log}\left(\left[\sqrt{2\pi\sigma^2}\right]^{-n_o}\cdot{}\mathrm{exp}\left[-\frac{1}{2}\sum_{t=1}^{n_o}\left(\frac{\hat{x}_t-\tilde{x}_t}{\sigma}\right)^2\right]
+\right)
+\end{align}
+and since:
+\begin{equation}\label{eq:log-multiplication}
+\mathrm{log}\left(a\cdot{}b\right) = \mathrm{log}\left(a\right) + \mathrm{log}\left(b\right),
+\end{equation}
+\begin{equation}\label{eq:log-power}
+\mathrm{log}\left(a^b\right) = b \cdot \mathrm{log}\left(a\right),
+\end{equation}
+\begin{equation}
+\mathrm{log}\left[\mathrm{exp}\left(a\right)\right] = a,
+\end{equation}
+Eq.~\ref{eq:log-likelihood1} can be rewritten as:
+\begin{equation}\label{eq:log-likelihood2}
+\ell\,(\,\hat{\mathbf{x}}\,|\,\tilde{\mathbf{x}},\sigma\,) = -n_o \cdot{} \mathrm{log}\left[\sqrt{2\pi\sigma^2}\right]\:+\:\left[-\frac{1}{2}\sum_{t=1}^{n_o}\left(\frac{\hat{x}_t-\tilde{x}_t}{\sigma}\right)^2\right]
+\end{equation}
+Subsequently applying Eqs.~\ref{eq:log-power} and \ref{eq:log-multiplication}, Eq.~\ref{eq:log-likelihood2} can be rewritten as:
+\begin{equation}\label{eq:log-likelihood3}
+\ell\,(\,\hat{\mathbf{x}}\,|\,\tilde{\mathbf{x}},\sigma\,) = -\frac{1}{2}n_o\cdot{}\mathrm{log}\left(2\pi\right)\:-\:\frac{1}{2}n_o\cdot{}\mathrm{log}\left(\sigma^2\right)\:-\:\frac{1}{2}\sum_{t=1}^{n_o}\left(\frac{\hat{x}_t-\tilde{x}_t}{\sigma}\right)^2
+\end{equation}
+to yield the Gaussian log-likelihood function with unknown variance $\sigma^2$ of the residuals $\hat{x}_t-\tilde{x}_y$. For many measuring devices, $\sigma^2$ is either known or can be determined by simple tests. If necessary, $\sigma^2$ can also be estimated from the observations themselves according to:
+\begin{equation}\label{eq:variance-estimator}
+s^2 = \frac{1}{n_o-1}\sum_{t=1}^{n_o}\left(\hat{x}_t-\tilde{x}_t\right)^2
+\end{equation}
+\begin{equation}\label{eq:log-likelihood4}
+\ell\,(\,\hat{\mathbf{x}}\,|\,\tilde{\mathbf{x}}\,) = -\frac{1}{2}n_o\cdot{}\mathrm{log}\left(2\pi\right)\:-\:\frac{1}{2}n_o\cdot{}\mathrm{log}\left(s^2\right)\:-\:\frac{1}{2}\sum_{t=1}^{n_o}\left(\frac{\hat{x}_t-\tilde{x}_t}{s}\right)^2
+\end{equation}
+
+
+
+
+\section{Bayes' law in parameter optimization}
+
+
+Eq.~\ref{eq:bayes-law-general} shows Bayes' Law:
+\begin{equation}\label{eq:bayes-law-general}
+p(A|B) = \frac{p(B|A)\:p(A)}{p(B)}
+\end{equation}
+It describes how a prior belief in something can be modified or strengthened as a result of observations. For example, within the context of parameter estimation, it describes how a \textit{prior} belief in the value of a parameter vector, or $p(\boldsymbol\theta)$, can be modified by something called the \textit{likelihood} , or $p(\tilde{\mathbf{x}}|\boldsymbol\theta)$, to yield a \textit{posterior} belief in the value of the parameter vector, or $p(\boldsymbol\theta|\tilde{\mathbf{x}})$,  according to Eq.~\ref{eq:bayes-law} ($p(\tilde{\mathbf{x}})$ is just a normalization constant):
+\begin{equation}\label{eq:bayes-law}
+p(\boldsymbol\theta|\tilde{\mathbf{x}}) = \frac{p(\tilde{\mathbf{x}}|\boldsymbol\theta)\:p(\boldsymbol\theta)}{p(\tilde{\mathbf{x}})}
+\end{equation}
+
+%In Bayesian parameter estimation, we want to quantify the uncertainty of the parameter vector $\boldsymbol\theta$ given some observed data $\tilde{\mathbf{x}}$, or:
+%\begin{equation}
+%p(\boldsymbol\theta|\mathbf{\tilde{x}})
+%\end{equation}
+%
+%
+%For example, if the real system behavior is characterized by a vector of state values $\mathbf{x} = x_1,x_2,\ldots,x_{n_o-1},x_{n_o}$, then we may have observations $\mathbf{\tilde{x}} = \tilde{x}_1,\tilde{x}_2,\ldots,\tilde{x}_{n_o-1},\tilde{x}_{n_o}$ of it.
+%
+%
+%In order to calculate this probability we can split it into:
+%
+%In Eq.~\ref{eq:bayes-law}, $p(\mathbf{\tilde{x}}|\boldsymbol\theta)$ is referred to as the \textit{conditional probability} or \textit{likelihood}, $p(\boldsymbol\theta)$ is referred to as the \textit{prior}, $p(\mathbf{\tilde{x}})$ is called the \textit{evidence}, and finally, $p(\boldsymbol\theta|\mathbf{\tilde{x}})$ is known as the \textit{posterior}. Eq.~\ref{eq:bayes-law} is known as Bayes' Law.
+%
+
+
+
+% bayes law describes the process of learning from data: the prior understanding can modify the posterior understaning given some likelihood
+
+%ay: given an initial probabilitym, which may be uniform, we can
+
+
+% by taking samples from the parameter space, we are learning (changing the posterior)
+
+
+
+
+
+
+\section{Definition of terms}
+\label{sec:definition-of-terms}
+
+\begin{center}
+\begin{longtable}{lp{10cm}}
+\caption{Definition of terms.}\\
+\vspace{1em}
+%\hline
+%\textbf{First entry} & \textbf{Second entry}\\
+%\hline
+\endfirsthead
+\multicolumn{2}{c}{\captionlabelfont\captionfont\tablename\  \thetable{}: \rmfamily Definition of terms (continued).} \\
+\vspace{1em}
+%\hline
+%\textbf{First entry} & \textbf{Second entry} \\
+%\hline
+\endhead
+%\hline
+\multicolumn{2}{r}{\textit{Continued on next page}} \\
+\endfoot
+%\hline
+\endlastfoot
+$f(\cdot{})$&true state operator (nonlinear function)\\
+$\hat{f}(\cdot{})$&supposed state operator (nonlinear function)\\
+$h(\cdot{})$&true measurement operator (nonlinear function)\\
+$\hat{h}(\cdot{})$&supposed measurement operator (nonlinear function)\\
+$g(\cdot{})$&nonlinear transformation of the model output\\
+$\boldsymbol\Theta$&constrained parameter space\\
+$\mathbf{\Omega}$&constrained state space\\
+$\mathbb{R}$&real number space\\
+$\boldsymbol\theta$&true parameter values pertaining to the state operator\\
+$\hat{\boldsymbol\theta}$&estimate of the parameter values pertaining to the state operator\\
+$\boldsymbol\phi$&true parameter values pertaining to the measurement operator\\
+$\sigma$&standard deviation of the normal distribution\\
+$\mu$&mean of the normal distribution\\
+$\nu_{t+1}$&random perturbation of the true output at time $t$\\
+$\psi_{t+1}$&random perturbation of the true forcing at time $t$\\
+$\omega_{t+1}$&random perturbation of the true state at time $t$\\
+$u_t$&true forcing at time $t$\\
+$\tilde{u}_t$&observed forcing at time $t$\\
+$x_t$&true state at time $t$\\
+$\tilde{x}_t$&observed state at time $t$\\
+$\hat{x}_t$&predicted state at time $t$\\
+$y_t$&true output at time $t$\\
+$\tilde{y}_t$&observed output at time $t$\\
+$\hat{y}_t$&predicted output at time $t$\\
+$\boldsymbol\varepsilon$&observation-prediction residual vector\\
+$\mathcal{N}$&normal probability distribution\\
+$\ell(\cdot{})$&log likelihood\\
+$p(\boldsymbol\theta|\tilde{\mathbf{x}})$&posterior probability of $\boldsymbol{\theta}$ given the observations $\tilde{\mathbf{x}}$\\
+$p(\boldsymbol\theta)$&prior probability of $\boldsymbol{\theta}$\\
+$p(\tilde{\mathbf{x}}|\boldsymbol\theta)$&likelihood of the observations $\tilde{\mathbf{x}}$ given the parameters $\boldsymbol{\theta}$\\
+$p(\tilde{\mathbf{x}})$&probability of the observations $\tilde{\mathbf{x}}$, or \textit{evidence}\\
+$s^2$&estimator of variance $\sigma^2$\\
+$n_p$&number of parameters in the vector $\hat{\boldsymbol{\theta}}$\\
+$n_o$&number of observations in the vector $\tilde{\mathbf{x}}$\\
+$n_e$&number of evaluations of $\hat{f}(\cdot{})$ within a parameter optimization context\\
+\end{longtable}
+\end{center}

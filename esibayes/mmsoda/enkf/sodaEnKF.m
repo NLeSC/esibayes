@@ -18,6 +18,11 @@ nNOKF = conf.nNOKF;
 nDASteps = conf.nDASteps;
 nPrior = conf.nPrior;
 
+if strcmp(conf.modeStr,'scemua')
+    nOutputs = conf.nOutputs;
+end
+
+
 nanArrayKF = repmat(NaN,[nParSets,nMembers,nStatesKF,nPrior]);
 nanArrayNOKF = repmat(NaN,[nParSets,nMembers,nNOKF,nPrior]);
 
@@ -153,7 +158,7 @@ switch conf.modeStr
                     bundle(iTask).iDAStep = iDAStep;
                     bundle(iTask).parVec = parsets(iParSet,parCols);
                     bundle(iTask).stateValuesKFPost = shiftdim(stateValuesKFPost(iParSet,iMember,1:nStatesKF,s),2);
-                    bundle(iTask).stateValuesKFPrior = repmat(NaN,[nStatesKF,nPriorChunk]);                    
+                    bundle(iTask).stateValuesKFPrior = repmat(NaN,[nStatesKF,nPriorChunk]);
                     bundle(iTask).valuesNOKF = shiftdim(valuesNOKF(iParSet,iMember,1:nNOKF,s),2);
                     bundle(iTask).priorTimes = priorTimesChunk;
 
@@ -190,8 +195,15 @@ switch conf.modeStr
                     iParSet = result.iParSet;
                     iMember = result.iMember;
                     
-                    stateValuesKFPrior(iParSet,iMember,1:nStatesKF,s+1:e) = shiftdim(result.stateValuesKFPrior(1:nStatesKF,2:nPriorChunk),-2);
-                    valuesNOKF(iParSet,iMember,1:nNOKF,s+1:e) = shiftdim(result.valuesNOKF(1:nNOKF,2:nPriorChunk),-2);
+                    switch conf.modeStr
+                        case 'scemua'
+                            stateValuesKFPrior(iParSet,iMember,1:nOutputs,s+1:e) = shiftdim(result.stateValuesKFPrior(1:nOutputs,2:nPriorChunk),-2);
+                            valuesNOKF(iParSet,iMember,1:nNOKF,s+1:e) = shiftdim(result.valuesNOKF(1:nNOKF,2:nPriorChunk),-2);
+                        case {'reset','soda'}
+                            stateValuesKFPrior(iParSet,iMember,1:nStatesKF,s+1:e) = shiftdim(result.stateValuesKFPrior(1:nStatesKF,2:nPriorChunk),-2);
+                            valuesNOKF(iParSet,iMember,1:nNOKF,s+1:e) = shiftdim(result.valuesNOKF(1:nNOKF,2:nPriorChunk),-2);
+                        otherwise
+                    end
                 end
             end
 
@@ -256,8 +268,17 @@ for iParSet=1:nParSets
     bundle(iTask).iEval = parsets(iParSet,conf.evalCol);
     bundle(iTask).iParSet = iParSet;
     bundle(iTask).parVec = parsets(iParSet,parCols);
-    bundle(iTask).allStateValuesKFPrior = stateValuesKFPrior(iParSet,1:nMembers,1:nStatesKF,1:nPrior);
-    bundle(iTask).allValuesNOKF = valuesNOKF(iParSet,1:nMembers,1:nNOKF,1:nPrior);
+    switch conf.modeStr
+        case 'scemua'
+            tmp = permute(stateValuesKFPrior(iParSet,1:nMembers,1:nOutputs,1:nPrior),[3,4,2,1]);
+            bundle(iTask).allStateValuesKFPrior = tmp;
+        case {'reset','soda'}
+            tmp = stateValuesKFPrior(iParSet,1:nMembers,1:nStatesKF,1:nPrior);
+            bundle(iTask).allStateValuesKFPrior = permute(tmp,[3,4,2,1]);
+        otherwise
+    end
+    tmp = valuesNOKF(iParSet,1:nMembers,1:nNOKF,1:nPrior);
+    bundle(iTask).allValuesNOKF = permute(tmp,[3,4,2,1]);
 
     if iTask==ceil(nParSets/nWorkers) || iParSet==nParSets
         if conf.executeInParallel

@@ -1,7 +1,5 @@
-function objScore = calcLikelihood(conf,constants,allStateValuesKF,allValuesNOKF,parVec)
-% function doublenormal calculates the density directly, so calculating the
-% likelihood is a matter of passing the information from allValuesNOKF on to
-% the variable objScore;
+function objScore = calcLikelihood(conf,constants,modelOutput,parVec)
+% function doublenormal calculates the log likelihood directly
 
 
 sodaUnpack()

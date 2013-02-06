@@ -1,15 +1,20 @@
-function objScore = rmse_flow(conf,constants,allStateValuesKF,allValuesNOKF,parVec)
+function objScore = rmse_flow(conf,constants,modelOutput,parVec)
 
 sodaUnpack()
 
 
-[tmp,nMembers,nNOKF,nDASteps] = size(allValuesNOKF);
+[nOutputs,nDASteps,nMembers,tmp] = size(modelOutput);
 
-memberDim = 2;
-outputCol = 2; % the 2nd position in allValuesNOKF(iParSet,iMember,2,1:nDASteps) holds the 'Q' information
+% row of interest in modelOutput is #3
+r = 3;
 
-simQMean = shiftdim(mean(allValuesNOKF(1,1:nMembers,outputCol,1:nDASteps),memberDim),2);
+obs = repmat(obsQ(2:nDASteps),[1,1,nMembers]);
+sim = modelOutput(r,2:nDASteps,1:nMembers);
 
-objScore = sqrt(mean((obsQ(2:nDASteps)-simQMean(2:nDASteps)).^2));
+nObs = nDASteps-1;
 
-% save('./../streams/debug.mat','-mat7-binary')
+ensembleMeanErr = mean(obs-sim,3);
+
+ssr = sum(ensembleMeanErr.^2);
+
+objScore = (1/2) * nObs * log(ssr);

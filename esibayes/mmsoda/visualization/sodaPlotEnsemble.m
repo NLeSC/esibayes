@@ -1,29 +1,79 @@
-function varargout = sodaPlotEnsemble(conf,stateValuesKFPrior,stateValuesKFPert,stateValuesKFPost,obsPerturbed,varargin)
+function varargout = sodaPlotEnsemble(conf,evalResults,varargin)
 
 if nargin == 0
-    disp(['% % Usage is:',char(10),'% %  varargout = sodaPlotEnsemble(conf,stateValuesKFPrior',...
+    disp(['% % Usage is:',char(10),'% %  varargout = sodaPlotEnsemble(conf,stateValuesKFPrior,',...
         'stateValuesKFPert,stateValuesKFPost,obsPerturbed,varargin)'])
     return
 end
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+
 normalizeByObs = false;
 stateStyle = {'markersize',8,'markerfacecolor','none','linestyle','none'};
 colorObs = [1,0,1];
 colorSim = [0,0,0];
 colorPost = [0,0.5,0];
 connStyle = {'linewidth',1.5};
-iParset = 1;
+iParset = size(evalResults,1);
 iMember = 1;
 iStateKF = 1;
+% iPrior = 1:conf.nPrior;
+showLegend = true;
+showiMember = true;
+showiParset = true;
+showiStateKF = true;
 
 authorizedOptions = {'normalizeByObs','stateStyle','colorObs','colorSim',...
                      'colorPost','connStyle','iParset','iMember','iStateKF',...
-                     'connWidth'};
+                     'connWidth','showLegend','showiMember','showiParset','showiStateKF'};
 sodaParsePairs()
 
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+
+vecParsets = iParset;
+vecMembers = iMember;
+vecStatesKF = iStateKF;
+vecPrior = 1:numel(conf.priorTimes);
+
+clear iParset
+clear iMember
+clear iStateKF
+
+
+nParsets = numel(vecParsets);
+nMembers = conf.nMembers;
+nStatesKF = conf.nStatesKF;
+nPrior = conf.nPrior;
+
+nanArray = repmat(NaN,[nParsets,nMembers,nStatesKF,nPrior]);
+
+stateValuesKFPrior = nanArray;
+stateValuesKFPert = nanArray;
+stateValuesKFPost = nanArray;
+obsPerturbed = nanArray;
+
+for ip=1:nParsets
+
+    [tmp1,tmp2,tmp3,tmp4] = loadFromFile(conf,vecParsets(ip),evalResults);
+       
+    stateValuesKFPrior(ip,1:nMembers,1:nStatesKF,1:nPrior) = tmp1;
+    stateValuesKFPert(ip,1:nMembers,1:nStatesKF,1:nPrior) = tmp2;
+    stateValuesKFPost(ip,1:nMembers,1:nStatesKF,1:nPrior) = tmp3;
+    obsPerturbed(ip,1:nMembers,1:nStatesKF,1:nPrior) = tmp4;
+
+end
 
 
 
-[nParsets,nMembers,nStatesKF,nDASteps] = size(stateValuesKFPost);
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+
 
 if normalizeByObs
     normBy = repmat(shiftdim(conf.obsState,-2),[nParsets,nMembers,nStatesKF,1]);
@@ -41,14 +91,14 @@ stateValuesKFPost = stateValuesKFPost-normBy;
 obsPerturbed = obsPerturbed-normBy;
 
 
-vecParsets = iParset;
-vecMembers = iMember;
-vecStatesKF = iStateKF;
-vecPrior = 1:numel(conf.priorTimes);
+% vecParsets = 1:nParsets;
+% vecMembers = iMember;
+% vecStatesKF = iStateKF;
+% vecPrior = 1:numel(conf.priorTimes);
 
 XSim = [];
 YSim = [];
-for iParset = vecParsets
+for iParset = 1:nParsets
     for iMember = vecMembers
         for iStatesKF = vecStatesKF
             for iPrior = vecPrior
@@ -102,7 +152,7 @@ end
 
 XObs = [];
 YObs = [];
-for iParset = vecParsets
+for iParset = 1:nParsets
     for iMember = vecMembers
         for iStatesKF = vecStatesKF
             for iPrior = vecPrior
@@ -160,7 +210,7 @@ H.connSim = plot(XSim,YSim,'-','color',whiten(colorSim,0),connStyle{:});
 hold on
 H.connObs = plot(XObs,YObs,'-','color',whiten(colorObs,0),connStyle{:});
 
-for iParset = vecParsets
+for iParset = 1:nParsets
     for iMember = vecMembers
         for iStatesKF = vecStatesKF
 
@@ -183,8 +233,51 @@ for iParset = vecParsets
 end
 
 
+
+titleStr = '';
+if showiParset
+    if isscalar(vecParsets)
+        titleStr = [titleStr,'parset = ',sprintf('%d; ',vecParsets)];
+    else
+        titleStr = [titleStr,'parsets = ',sprintf(['[',repmat('%d,',[1,numel(vecParsets)-1]),'%d',']; '],vecParsets)];
+    end
+end
+if showiMember
+    if isscalar(vecMembers)
+        titleStr = [titleStr,'member = ',sprintf('%d; ',vecMembers)];
+    else
+        titleStr = [titleStr,'members = ',sprintf(['[',repmat('%d,',[1,numel(vecMembers)-1]),'%d',']; '],vecMembers)];
+    end
+end
+if showiStateKF
+    if isscalar(vecStatesKF)
+        titleStr = [titleStr,'state = ',sprintf('%d; ',vecStatesKF)];
+    else
+        titleStr = [titleStr,'states = ',sprintf(['[',repmat('%d,',[1,numel(vecStatesKF)-1]),'%d',']; '],vecStatesKF)];
+    end
+end
+
+title(titleStr)
+
+
+if showLegend
+    
+    legend([H.obs(1),H.obsPert(1),H.statesPrior(1),H.statesPert(1),H.statesPost(1)],...
+        'obs','obs,pert','sim,prior','sim,pert','posterior')
+    
+end
+
+
+hold off
+
 if nargout == 1
     varargout{1} = H;
+elseif nargout == 2
+    varargout{1} = H;
+    varargout{2} = {'stateValuesKFPrior',tmp1;...
+                     'stateValuesKFPert',tmp2;...
+                     'stateValuesKFPost',tmp3;...
+                     'obsPerturbed',tmp4};
 else
     varargout = {};
 end
@@ -238,5 +331,30 @@ function colorOut = whiten(colorIn,degree)
 
 
 colorOut = colorIn + degree*([1,1,1]-colorIn);
+
+
+function [tmp1,tmp2,tmp3,tmp4] = loadFromFile(conf,iParset,evalResults)
+
+start = [1,conf.nSamples+1:conf.nOffspring:size(evalResults,1)];
+finish = [conf.nSamples,conf.nSamples+conf.nOffspring:conf.nOffspring:size(evalResults,1)];
+ix = find((start<=iParset) & (iParset<=finish));
+formatStr = './results/%s-results-enkf-evals-%d-%d.mat';
+fn = sprintf(formatStr,conf.modeStr,start(ix),finish(ix));
+
+try
+    disp(sprintf('Loading parameter set %d from ''%s''.',iParset,fn))    
+    load(fn,'stateValuesKFPrior','stateValuesKFPert','stateValuesKFPost','obsPerturbed')
+catch err
+    warning(sprintf('Error trying to load parameter set %d from ''%s''.',iParset,fn))
+    rethrow(err)
+end
+    
+
+s = iParset - start(ix) + 1;
+
+tmp1 = stateValuesKFPrior(s,:,:,:);
+tmp2 = stateValuesKFPert(s,:,:,:);
+tmp3 = stateValuesKFPost(s,:,:,:);
+tmp4 = obsPerturbed(s,:,:,:);
 
 

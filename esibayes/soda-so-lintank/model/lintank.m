@@ -1,29 +1,13 @@
-function [stateValuesKFNew,valuesNOKFNew] = lintank(conf,constants,stateValuesKFOld,valuesNOKFOld,parVec,priorTimes)
+function modelOutput = lintank(conf,constants,init,parVec,priorTimes)
 
-
-% nStatesKF = conf.nStatesKF;
-% nNOKF = conf.nNOKF;
-% nPriorChunk = numel(timeVecPrior);
-% 
-% stateValuesKFNew = repmat(NaN,[nStatesKF,nPriorChunk]);
-% valuesNOKFNew = repmat(NaN,[nNOKF,nPriorChunk]);
-% 
-% if any(strcmp(conf.modeStr,{'soda','reset'}))
-%     % map the KF states values to their respective variables:
-%     simWaterLevel = stateValuesKFOld(1,1);
-% end
-% % map the constants values to their respective variables:
-% for iConstant=1:size(mConstants,1)
-%     eval([mConstants{iConstant,1},'=mConstants{iConstant,2};'])
-% end
-% % map the parameter values to their respective variables:
-% R = parVec(1);
 
 sodaUnpack()
 
 
 for iPrior=2:numel(priorTimes)
-    pause(0.1);
+    
+    
+    
 
     timeNow = priorTimes(iPrior-1);
 
@@ -51,3 +35,6 @@ for iPrior=2:numel(priorTimes)
     valuesNOKFNew(1:conf.nNOKF,iPrior) = [rand;Q];
     
 end
+
+
+modelOutput = [stateValuesKFNew;valuesNOKFNew];

@@ -22,10 +22,6 @@
 
   \indexspace
 
-  \item daemon, \hyperpage{21}
-
-  \indexspace
-
   \item embarassingly parallel, \hyperpage{18}
 
   \indexspace
@@ -36,7 +32,7 @@
 
   \item Ganglia, \hyperpage{14}
   \item Gigabit, \hyperpage{3}
-  \item graphical programs, \hyperpage{24}
+  \item graphical programs, \hyperpage{35}
 
   \indexspace
 
@@ -55,21 +51,19 @@
     \subitem \texttt{cat}, \hyperpage{9}
     \subitem \texttt{cd}, \hyperpage{7}
     \subitem \texttt{checkjob}, \hyperpage{16}
+    \subitem \texttt  {chmod}, \hyperpage{27}
     \subitem copy, \hyperpage{10}
     \subitem \texttt{cp}, \hyperpage{10}
-    \subitem \texttt{echo \$DISPLAY}, \hyperpage{27}
-    \subitem \texttt{grep}, \hyperpage{21}
-    \subitem \texttt{kill}, \hyperpage{21}
+    \subitem \texttt{echo \$DISPLAY}, \hyperpage{38}
     \subitem \texttt{logout}, \hyperpage{7}
     \subitem \texttt{ls}, \hyperpage{7}
+    \subitem \texttt  {make}, \hyperpage{26}
     \subitem \texttt{man}, \hyperpage{9}
     \subitem \texttt{mkdir}, \hyperpage{7, 8}
     \subitem move, \hyperpage{10}
     \subitem \texttt{mv}, \hyperpage{10}
     \subitem \texttt{nano}, \hyperpage{11}
     \subitem \texttt{octave}, \hyperpage{11}
-    \subitem \texttt{piped}, \hyperpage{21}
-    \subitem \texttt{ps}, \hyperpage{21}
     \subitem \texttt{pwd}, \hyperpage{7}
     \subitem \texttt{qdel}, \hyperpage{16}
     \subitem \texttt{qstat}, \hyperpage{14}
@@ -84,10 +78,11 @@
 
   \indexspace
 
+  \item Makefile, \hyperpage{26}
   \item Master-Slave paradigm, \hyperpage{19}
   \item Master-Worker paradigm, \hyperpage{19}
-  \item MATLAB Compiler Runtime, \hyperpage{29}
-  \item MCR, \hyperpage{29}
+  \item MATLAB Compiler Runtime, \hyperpage{40}
+  \item MCR, \hyperpage{40}
   \item Message Passing Interface, \hyperpage{21}
   \item MPI, \hyperpage{21}
 
@@ -106,7 +101,7 @@
   \item parallelization, \hyperpage{2}
   \item PBS, \hyperpage{14}
   \item permission, \hyperpage{7}
-  \item permission bits, \hyperpage{8}
+  \item permission bits, \hyperpage{8}, \hyperpage{27}
   \item PuTTY, \hyperpage{6}
 
   \indexspace
@@ -130,7 +125,9 @@
   \item SFTP, \hyperpage{4}
   \item shell, \hyperpage{9}
   \item SSH, \hyperpage{4}
+  \item SSR, \hyperpage{32}
   \item standard output, \hyperpage{13, 14}
+  \item sum of squared residuals, \hyperpage{32}
 
   \indexspace
 
@@ -144,9 +141,9 @@
 
   \indexspace
 
-  \item X, \hyperpage{24}
-    \subitem forwarding over SSH, \hyperpage{24}
-  \item X11, \hyperpage{27}
-  \item Xming, \hyperpage{24}
+  \item X, \hyperpage{35}
+    \subitem forwarding over SSH, \hyperpage{35}
+  \item X11, \hyperpage{38}
+  \item Xming, \hyperpage{35}
 
 \end{theindex}

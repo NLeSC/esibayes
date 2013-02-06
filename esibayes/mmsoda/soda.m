@@ -39,43 +39,8 @@ elseif isempty(varargin)
     % verify the integrity of conf's fieldnames:
     sodaVerifyFieldNames(conf,'check')
 
-    % % These parameters can be derived from the existing settings:
-    % Number of parameters to be optimized:
-    conf.nOptPars = numel(conf.parNames);
-    if any(strcmp(conf.modeStr,{'soda','reset'}))
-        conf.nStatesKF = numel(conf.stateNamesKF);
-        if ~isfield(conf,'namesNOKF')
-            conf.namesNOKF = {};
-        end
-        conf.nNOKF = numel(conf.namesNOKF);
-        conf.nPrior = numel(conf.priorTimes);
-        if ~isfield(conf,'assimilate')
-            conf.assimilate = repmat(true,[1,conf.nPrior]);
-        end
-        conf.nDASteps = sum(conf.assimilate);
-        conf.obsStateTime = conf.priorTimes(conf.assimilate);
-        if ~isfield(conf,'saveEnKFResults')
-            conf.saveEnKFResults = true;
-        end
-    elseif strcmp(conf.modeStr,'scemua')
-        conf.nStatesKF = 0;%numel(conf.stateNamesKF);
-        conf.nNOKF = numel(conf.namesNOKF);
-        conf.nDASteps = 0; % so that you can use the same code as for soda and reset modes
-        conf.nPrior = numel(conf.priorTimes);
-        if ~isfield(conf,'assimilate')
-            conf.assimilate = repmat(false,[1,conf.nPrior]);
-        end
-        if ~isfield(conf,'saveEnKFResults')
-            conf.saveEnKFResults = true;
-        end
-    elseif strcmp(conf.modeStr,'bypass')
-        conf.nStatesKF = 0;
-        conf.nNOKF = 0;
-        conf.nDASteps = 0;
-        conf.nPrior = 0;
-    else
-        % do nothing 
-    end
+    conf.nOptPars = numel(conf.parNames);    
+    
     % load default settings from file:
     if isfield(conf,'useIniFile')
         fileStr = fullfile(sodaroot,conf.useIniFile);
@@ -190,15 +155,14 @@ elseif isempty(varargin)
     clear varName
     clear varList
 
-    sodaStartTime = now;
     if conf.isMultiObjective
         soMoStr = '-mo';
     elseif conf.isSingleObjective
         soMoStr = '-so';
     else
     end
-    disp([char(10),upper([conf.modeStr,soMoStr]),' run started on: ',datestr(sodaStartTime,...
-        'mmmm dd, yyyy'),' ',datestr(sodaStartTime,'HH:MM:SS')])
+    disp([char(10),upper([conf.modeStr,soMoStr]),' run started on: ',datestr(conf.optStartTime,...
+        'mmmm dd, yyyy'),' ',datestr(conf.optStartTime,'HH:MM:SS')])
     clear s
 
 
@@ -300,7 +264,7 @@ elseif isempty(varargin)
 
     try
         while sodaContinue(conf,nModelEvals)
-
+            
             propChildren = repmat(NaN,[conf.nOffspringPerCompl,conf.objCol,conf.nCompl]);
             for iCompl=1:conf.nCompl
 
@@ -460,12 +424,9 @@ elseif isempty(varargin)
 
 
 
-    catch
+    catch err
 
-        % there is still a minor bug here somewhere, since the software
-        % does not seem to ever reach the catch part.
-
-        disp([lasterr,char(10),...
+        disp([err.message,char(10),...
             upper([conf.modeStr,soMoStr]),': Attempting to return the results that have been collected so far...'])
 
         varargout = prepOutput(nargout,evalResults,critGelRub,sequences,metropolisRejects,conf);
@@ -512,6 +473,49 @@ elseif all(nOut>[2:5])
         '[evalResults,critGelRub,conf] = soda()',char(10),...
         '[evalResults,critGelRub,sequences,conf] = soda()',char(10),...
         '[evalResults,critGelRub,sequences,metropolisRejects,conf] = soda()',char(10)])
+end
+
+
+% % These parameters can be derived from the existing settings:
+% Number of parameters to be optimized:
+
+if any(strcmp(conf.modeStr,{'soda','reset'}))
+    conf.nStatesKF = numel(conf.stateNamesKF);
+    if ~isfield(conf,'namesNOKF')
+        conf.namesNOKF = {};
+    end
+    conf.nNOKF = numel(conf.namesNOKF);
+    conf.nPrior = numel(conf.priorTimes);
+    if ~isfield(conf,'assimilate')
+        conf.assimilate = repmat(true,[1,conf.nPrior]);
+    end
+    conf.nDASteps = sum(conf.assimilate);
+    conf.obsStateTime = conf.priorTimes(conf.assimilate);
+    if ~isfield(conf,'saveEnKFResults')
+        conf.saveEnKFResults = true;
+    end
+elseif strcmp(conf.modeStr,'scemua')
+    conf.nStatesKF = 0;
+    conf.nNOKF = 0;
+    conf.nDASteps = 0; % so that you can use the same code as for soda and reset modes
+    conf.nPrior = numel(conf.priorTimes);
+    if ~isfield(conf,'assimilate')
+        conf.assimilate = repmat(false,[1,conf.nPrior]);
+    end
+    if ~isfield(conf,'saveEnKFResults')
+        conf.saveEnKFResults = true;
+    end
+elseif strcmp(conf.modeStr,'bypass')
+    conf.nStatesKF = 0;
+    conf.nNOKF = 0;
+    conf.nDASteps = 0;
+    conf.nPrior = 0;
+else
+    % do nothing 
+end
+
+if strcmp(conf.modeStr,'scemua') & ~isfield(conf,'nOutputs')
+    error('When ''modeStr'' is ''scemua'', there needs to be a configuration variable ''nOutputs''.')
 end
 
 if conf.nCompl<2
@@ -596,6 +600,7 @@ switch conf.modeStr
                     'initMethodNOKF';...
                     'initValuesKF';...
                     'initValuesNOKF';...
+                    'namesNOKF';...
                     'obsState';...
                     'stateNamesKF';...
                     'stateSpaceLoBound';...
@@ -630,6 +635,12 @@ for k=1:size(rmFields,1)
 end
 clear k
 clear rmFields
+
+if any(strcmp(conf.modeStr,{'bypass','reset','soda'}))
+   if isfield(conf,'nOutputs')
+       error(['nOutputs is not allowed in ',char(39),conf.modeStr,char(39), 'mode.'])
+   end
+end
 
 
 mustBeCellOfStr = {'namesNOKF','objCallStrs','objTexNames','parNames','parNamesTex','stateNamesKF'};
