@@ -16,7 +16,7 @@ echo
 
 echo "Starting MPI job on node "`hostname`
 ncpus=`cat /proc/cpuinfo | grep processor | wc -l`
-((nprocs=11))
+((nprocs=5))
 echo
 
 echo "I detected that "`hostname`" has "$ncpus" processors. I'll start "$nprocs" processes."
@@ -38,17 +38,17 @@ echo
 
 module list
 
-if [ -d "$TMPDIR/mmsoda_P9I8-X6IZ-XNMB-H6MW" ]; then
-    echo "Directory "$TMPDIR/mmsoda_P9I8-X6IZ-XNMB-H6MW" already exists...emptying contents."
-    rm -rf "$TMPDIR/mmsoda_P9I8-X6IZ-XNMB-H6MW"
+if [ -d "$TMPDIR/mmsoda_36E6-WDKT-88F8-8R2F" ]; then
+    echo "Directory "$TMPDIR/mmsoda_36E6-WDKT-88F8-8R2F" already exists...emptying contents."
+    rm -rf "$TMPDIR/mmsoda_36E6-WDKT-88F8-8R2F"
     echo
 fi
-echo "Making directory: $TMPDIR/mmsoda_P9I8-X6IZ-XNMB-H6MW"
-mkdir "$TMPDIR/mmsoda_P9I8-X6IZ-XNMB-H6MW"
+echo "Making directory: $TMPDIR/mmsoda_36E6-WDKT-88F8-8R2F"
+mkdir "$TMPDIR/mmsoda_36E6-WDKT-88F8-8R2F"
 echo
 
-echo "Setting MCR_CACHE_ROOT to: $TMPDIR/mmsoda_P9I8-X6IZ-XNMB-H6MW"
-export MCR_CACHE_ROOT="$TMPDIR/mmsoda_P9I8-X6IZ-XNMB-H6MW"
+echo "Setting MCR_CACHE_ROOT to: $TMPDIR/mmsoda_36E6-WDKT-88F8-8R2F"
+export MCR_CACHE_ROOT="$TMPDIR/mmsoda_36E6-WDKT-88F8-8R2F"
 echo
 
 echo "The current MCR_CACHE_ROOT is:"
@@ -58,4 +58,4 @@ echo
 echo "Starting MPI run"
 echo
 
-mpirun -n $nprocs ./matlabprog -v 0 -b 5000 
+mpirun -n $nprocs ./matlabprog -v 0 -b 5000 -t
