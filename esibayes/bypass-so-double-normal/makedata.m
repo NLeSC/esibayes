@@ -8,7 +8,7 @@ obsDens = repmat(NaN,size(obsX));
 for k=1:numel(obsX)
 
     parVec = obsX(k);
-    obsDens(k) = calcLikelihood(conf,constants,[],[],parVec);
+    obsDens(k) = calcLikelihood(conf,constants,[],parVec);
 
 end
 

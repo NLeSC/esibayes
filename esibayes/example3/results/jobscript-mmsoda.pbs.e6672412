@@ -1,0 +1,27 @@
+Message from module openmpi/gnu/1.6.3: 
+This module is now default. If you encounter problems:
+recompile or use the 1.4.5 module. 
+More info:
+https://www.sara.nl/systems/lisa/news/2012-11-02-ompi1.4-ompi1.6
+ldd: ./matlabprog: No such file or directory
+ldd: ./libmmpi.so: No such file or directory
+Currently Loaded Modulefiles:
+ 1) libgfortran/32/1   4) licenses/default   7) openmpi/gnu/1.6.3 
+ 2) stdenv/1.1         5) sara/1             8) mcr/64/v718       
+ 3) compilerwrappers   6) ofed/64/1.5.2     
+Error using mmsoda (line 30)
+I can't find the *.mat file that holds the SODA configuration.
+
+Error in runmpirank1 (line 3)
+
+
+
+Error in matlabmain (line 26)
+
+
+
+=>> PBS: job killed: walltime 633 exceeded limit 600
+mpirun: killing job...
+
+mpirun: abort is already in progress...hit ctrl-c again to forcibly terminate
+

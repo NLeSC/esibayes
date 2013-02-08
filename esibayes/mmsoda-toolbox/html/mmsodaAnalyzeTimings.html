@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+
+   <title>MMSODA Toolbox for MATLAB - mmsodaAnalyzeTimings</title>
+
+   <meta name="keywords" content="mmsodaAnalyzeTimings">
+
+   <meta name="description" content="mmsodaAnalyzeTimings">
+
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+   <meta name="robots" content="index, follow">
+
+   <meta author="Jurriaan H. Spaaks">
+
+   <link type="text/css" rel="stylesheet" href="styles/mmsoda-styles.css">
+
+</head>
+
+
+
+<body>
+<a name="_top"></a>
+
+<div class="linkheader">
+<a href="matlab:edit(fullfile(mmsodaroot,'visualization','mmsodaAnalyzeTimings'))">View source code of the function <span style="font-family:monospace">mmsodaAnalyzeTimings()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(mmsodaroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+</div>
+
+<div class="spacer">
+</div>
+
+
+<div class="h1">
+mmsodaAnalyzeTimings
+</div>
+
+<div class="h2">
+Syntax
+</div>
+
+<div class="txt">
+<p>
+<span style="font-family:monospace">mmsodaAnalyzeTimings()</span>
+</p>
+<p>
+<span style="font-family:monospace">mmsodaAnalyzeTimings(...)</span>
+</p>
+</div>
+
+<div class="h2">
+Description
+</div>
+
+<div class="txt">
+<p>
+<span style="font-family:monospace">mmsodaAnalyzeTimings()</span>
+</p>
+<p>
+<span style="font-family:monospace">mmsodaAnalyzeTimings</span> analyzes the timings files and visually presents the information contained in them so that network traffic and load balancing may be analyzed posterior to the optimization. Note that this does require the timings flag to be set in the jobscript (see also <a href="matlab:web(fullfile(mmsodaroot,'html','mmsodaWriteJobscript.html'),'-helpbrowser')">mmsodaWriteJobscript</a>).
+</p>
+
+<p>
+The figure below gives an impression of what the <span style="font-family:monospace">mmsodaAnalyzeTimings()</span> result looks like (for a very fine-grained problem).</p>
+<p>
+<img src="images/mmsodaAnalyzeTimings.png" width="700px">
+</p>
+
+
+</div>
+
+<div class="txt">
+
+<p>
+<span style="font-family:monospace">mmsodaAnalyzeTimings(...)</span>
+</p>
+
+<p>
+The behavior may be tweaked using various options (see <a href="#_mmsodaAnalyzeTimingsOptions">table below</a>).
+</p>
+
+<p>
+<a id="_mmsodaAnalyzeTimingsOptions"></a>
+<table>
+<tr>
+    <td valign="top" nowrap><b>Option</b></td>
+    <td valign="top"><b>Description</b></td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'bgColor'</span></span></td>
+    <td valign="top">Controls the figure's background color. Default is <span style="font-family:monospace">[0.12,0.18,0.24]</span>.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'bottomLayerHeight'</span></span></td>
+    <td valign="top">Controls the vertical size of the least detailed patch objects. Default is <span style="font-family:monospace">0.7</span>.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'colorTable'</span></span></td>
+    <td valign="top">Defines the default colors with which the different activities are visualized. Default is:
+    <pre>
+[0.3,0.5,0.7;...
+ 0.7,0.5,0.3;...
+ 1.0,1.0,0.0;...
+ 1.0,0.0,1.0;...
+ 0.9,0.9,0.9;...
+ 0.7,0.7,0.7;...
+ 0.5,0.5,0.5;...
+ 1.0,1.0,1.0];
+</pre>
+    </td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'endAt'</span></span></td>
+    <td valign="top">Defines the end time in seconds for which the timings will be retrieved from the timings_*.mat files. Default is <span style="font-family:monospace">10.0</span>.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'showLegend'</span></span></td>
+    <td valign="top">Whether to include a legend. Default is <span style="font-family:monospace">true</span>.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'startFrom'</span></span></td>
+    <td valign="top">Defines the start time in seconds for which the timings will be retrieved from the timings_*.mat files. Default is <span style="font-family:monospace">0.0</span>.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'topLayerHeight'</span></span></td>
+    <td valign="top">Controls the vertical size of the most detailed patch objects. Default is <span style="font-family:monospace">0.3</span>.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'vertSep'</span></span></td>
+    <td valign="top">Controls the vertical separation between bands pertaining to individual processes. Default is <span style="font-family:monospace">0.3</span>.</td>
+</tr>
+
+</table>
+</p>
+
+</div>
+
+
+<div class="footer">
+</div>
+
+
+<div class="spacer">
+</div>
+
+
+<a name="_bottom"></a>
+
+
+</body>
+
+</html>

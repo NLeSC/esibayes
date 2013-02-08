@@ -1,6 +1,6 @@
 function modelOutput  = lintank(conf,constants,init,parVec,priorTimes)
 
-sodaUnpack()
+mmsodaUnpack()
 
 nPriorChunk = numel(priorTimes);
 nStatesKF = conf.nStatesKF;

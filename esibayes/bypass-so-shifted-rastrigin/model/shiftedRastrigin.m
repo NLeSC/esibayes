@@ -1,7 +1,7 @@
 function objScore = shiftedRastrigin(conf,constants,modelOutput,parVec)
 % 9.Shifted Rastrign's Function
 
-sodaUnpack()
+mmsodaUnpack()
 
 x = [x1,x2];
 

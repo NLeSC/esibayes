@@ -21,7 +21,7 @@ conf.nNOKF = 0;
 % conf.namesNOKF = {'output'};
 conf.nOutputs = 1;
 conf.priorTimes = numTime([iStart,iStart+wu:iEnd]);
-
+conf.modeStr = 'scemua';
 
 % fake constants variable:
 constants.wu = wu;

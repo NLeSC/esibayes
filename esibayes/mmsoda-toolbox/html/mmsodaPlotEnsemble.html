@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+
+   <title>MMSODA Toolbox for MATLAB - mmsodaPlotEnsemble</title>
+
+   <meta name="keywords" content="mmsodaPlotEnsemble">
+
+   <meta name="description" content="mmsodaPlotEnsemble">
+
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+   <meta name="robots" content="index, follow">
+
+   <meta author="Jurriaan H. Spaaks">
+
+   <link type="text/css" rel="stylesheet" href="styles/mmsoda-styles.css">
+
+</head>
+
+
+
+<body>
+<a name="_top"></a>
+
+
+<div class="linkheader">
+<a href="matlab:edit(fullfile(mmsodaroot,'visualization','mmsodaPlotEnsemble'))">View source code of the function <span style="font-family:monospace">mmsodaPlotEnsemble()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(mmsodaroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+</div>
+
+<div class="spacer">
+</div>
+
+
+
+<div class="h1">
+mmsodaPlotEnsemble
+</div>
+
+<div class="h2">
+Syntax
+</div>
+
+<div class="txt">
+    <p>
+        <span style="font-family:monospace">mmsodaPlotEnsemble(conf,evalResults)</span>
+    </p>
+    <p>
+        <span style="font-family:monospace">mmsodaPlotEnsemble(conf,evalResults,<span style="keyword">...</span>)</span>
+    </p>
+    <p>
+        <span style="font-family:monospace">handles = mmsodaPlotEnsemble(conf,evalResults,<span style="keyword">...</span>)</span>
+    </p>
+</div>
+
+<div class="h2">
+Description
+</div>
+
+
+<div class="txt">
+    <p>
+        <span style="font-family:monospace">mmsodaPlotEnsemble(conf,evalResults)</span>
+    </p>
+    <p>
+        This function can be used to visualize the dynamics of selected combinations fo parameter set, ensemble member, and state. It requires that the Ensemble Kalman Filter results are stored in the `./results' subdirectory. For each combination of parameter set, member, and state, <span style="font-family:monospace">mmsodaPlotEnsemble()</span> shows how each observation was perturbed, how each model prediction was perturbed, and how they were combined into a posterior state. Multiple parameter sets, members, and states may be visualized (see <a href="#_mmsodaPlotEnsemble_authorizedoptions">table below</a>). By default, the first member and first state of the last parameter set is visualized.
+    </p>
+
+</div>
+
+
+<div class="txt">
+    <p>
+        <span style="font-family:monospace">mmsodaPlotEnsemble(conf,evalResults,<span style="keyword">...</span>)</span>
+    </p>
+    <p>
+        The <span style="font-family:monospace">mmsodaPlotEnsemble()</span> function may be called with various options for more detailed control of its behavior. See <a href="#_mmsodaPlotEnsemble_authorizedoptions">table below</a> for an overview of the authorized options. As an example, here's how to visualize the first state of the 10-th member of the 983-rd parameter set:
+    </p>
+
+    <p>
+        <span style="font-family:monospace">mmsodaPlotEnsemble(conf,evalResults,<span class="string">'iParset'</span>,983,<span class="string">'iMember'</span>,10)</span>
+    </p>
+
+
+    <p>
+        which, depending on the model at hand, may result in:
+    </p>
+
+    <p>
+        <img src="images/mmsodaPlotEnsemble-983-10-1.png" width="700px">
+    </p>
+
+
+
+
+</div>
+
+
+<div class="txt">
+    <p>
+        <span style="font-family:monospace">handles = mmsodaPlotEnsemble(conf,evalResults,<span style="keyword">...</span>)</span>
+    </p>
+    <p>
+        When called like this, <span style="font-family:monospace">mmsodaPlotEnsemble()</span> returns the handles to the figure objects after plotting.
+    </p>
+</div>
+
+
+<div class="txt">
+    <p>
+        <span style="font-family:monospace">[handles,data] = mmsodaPlotEnsemble(conf,evalResults,<span style="keyword">...</span>)</span>
+    </p>
+    <p>
+        When called like this, <span style="font-family:monospace">mmsodaPlotEnsemble()</span> returns the handles to the figure objects after plotting, as well as a cell array containing the concatenated values of the  model prediction (<span style="font-family:monospace">stateValuesKFPrior</span>), the perturbed predictions (<span style="font-family:monospace">stateValuesKFPert</span>), the posterior states (<span style="font-family:monospace">stateValuesKFPost</span>), and the perturbed observations (<span style="font-family:monospace">obsPerturbed</span>).
+    </p>
+</div>
+
+
+
+
+<a id="_mmsodaPlotEnsemble_authorizedoptions"></a>
+<div class="txt">
+
+    <p>The table below lists the authorized options with which <span style="font-family:monospace">mmsodaPlotEnsemble</span> may be called.</p>
+<table>
+
+<tr>
+    <td valign="top"><b>Option</b></td>
+    <td valign="top"><b>Description</b></td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'colorObs'</span></span></td>
+    <td valign="top">1x3 vector defining with which color the observations should be displayed. Default is <span style="font-family:monospace">[1,0,1]</span>.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'colorPost'</span></span></td>
+    <td valign="top">1x3 vector defining with which color the posterior states should be displayed. Default is <span style="font-family:monospace">[0,0.5,0]</span>.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'colorSim'</span></span></td>
+    <td valign="top">1x3 vector defining with which color the prior states should be displayed. Default is <span style="font-family:monospace">[0,0,0]</span>.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'connStyle'</span></span></td>
+    <td valign="top">Cell array containing the connectors' style properties. Default is <span style="font-family:monospace">{<span class="string">'linewidth'</span>,1.5}</span>.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'connWidth'</span></span></td>
+    <td valign="top">Horizontal extent of the connectors, measured in units of the horizontal axis.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'iMember'</span></span></td>
+    <td valign="top">Integer scalar or vector, defining which member(s) should be displayed.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'iParset'</span></span></td>
+    <td valign="top">Integer scalar or vector, defining which parameter combination(s) should be displayed.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'iStateKF'</span></span></td>
+    <td valign="top">Integer scalar or vector, defining which ensemble Kalman Filter state(s) should be displayed.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'normalizeByObs'</span></span></td>
+    <td valign="top">Scalar logical indicating whether the contents of the plot should be normalized by the observations or not. Can be useful when the system is characterized by strong dynamics.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'showiParset'</span></span></td>
+    <td valign="top">Logical scalar defining whether or not to show the <span style="font-family:monospace"><span class="string">'iParset'</span></span> value in the title. Default is <span style="font-family:monospace">true</span>.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'showiMember'</span></span></td>
+    <td valign="top">Logical scalar defining whether or not to show the <span style="font-family:monospace"><span class="string">'iMember'</span></span> value in the title. Default is <span style="font-family:monospace">true</span>.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'showiStateKF'</span></span></td>
+    <td valign="top">Logical scalar defining whether or not to show the <span style="font-family:monospace"><span class="string">'showiStateKF'</span></span> value in the title. Default is <span style="font-family:monospace">true</span>.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'showLegend'</span></span></td>
+    <td valign="top">Logical scalar defining whether or not to show a legend. Default is <span style="font-family:monospace">true</span>.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'stateStyle'</span></span></td>
+    <td valign="top">Cell array containing the states' style properties. Default is <span style="font-family:monospace">{<span class="string">'markersize'</span>,8</span>,<span style="font-family:monospace"><span class="string">'markerfacecolor'</span>,<span class="string">'none'</span></span>,<span style="font-family:monospace"><span class="string">'linestyle'</span>,<span class="string">'none'</span></span>}.</td>
+</tr>
+
+
+</table>
+
+
+</div>
+
+<!--
+showLegend = true;
+showiMember = true;
+showiParset = true;
+showiStateKF = true;
+-->
+
+
+
+
+<div class="footer">
+</div>
+
+
+
+<div class="spacer">
+</div>
+
+
+<a name="_bottom"></a>
+
+
+</body>
+
+</html>

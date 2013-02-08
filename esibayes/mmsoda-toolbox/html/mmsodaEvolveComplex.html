@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+
+   <title>MMSODA Toolbox for MATLAB - mmsodaEvolveComplex</title>
+
+   <meta name="keywords" content="mmsodaEvolveComplex">
+
+   <meta name="description" content="mmsodaEvolveComplex">
+
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+   <meta name="robots" content="index, follow">
+
+   <meta author="Jurriaan H. Spaaks">
+
+   <link type="text/css" rel="stylesheet" href="styles/mmsoda-styles.css">
+
+</head>
+
+
+
+<body>
+<a name="_top"></a>
+
+<div class="linkheader">
+<a href="matlab:edit(fullfile(mmsodaroot,'mmsodaEvolveComplex'))">View source code of the function <span style="font-family:monospace">mmsodaEvolveComplex()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(mmsodaroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+</div>
+
+<div class="spacer">
+</div>
+
+
+<div class="h1">
+mmsodaEvolveComplex
+</div>
+
+<div class="h2">
+Syntax
+</div>
+
+<div class="txt">
+<pre>[curCompl,acceptedChild] = mmsodaEvolveComplex(conf,curCompl,propChild)</pre>
+</div>
+
+<div class="h2">
+Description
+</div>
+
+<div class="txt">
+This function evolves a complex through a Metropolis annealing scheme, that is by accepting or rejecting a proposed child based on (1) the objective score of that child and (2) a uniform random draw. Output variable <span style="font-family:monospace">curCompl</span> contains the updated complex. Depending on how the annealing works out, <span style="font-family:monospace">acceptedChild</span> contains either the proposed child <span style="font-family:monospace">propChild</span>, or the member of <span style="font-family:monospace">curSeq</span> that has the maximum evaluation number (column <span style="font-family:monospace">conf.evalCol</span>). <span style="font-family:monospace">acceptedChild</span> is an output argument because it needs to be added to the <span style="font-family:monospace">sequences</span> variable later on.
+</div>
+
+
+<div class="footer">
+</div>
+
+
+
+<div class="spacer">
+</div>
+
+
+<a name="_bottom"></a>
+
+
+</body>
+
+</html>

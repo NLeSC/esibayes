@@ -1,12 +1,12 @@
-function objScore = calcLikelihoodFlow(conf,constants,modelOutputs,parVec)
+function objScore = calcLikelihoodFlow(conf,constants,modelOutput,parVec)
 
-sodaUnpack()
+mmsodaUnpack()
 
 nPrior = conf.nPrior;
 
 obs = dailyDischarge([iStart+wu:iEnd])';
 
-sim = modelOutputs(1,2:nPrior);
+sim = modelOutput(1,2:nPrior);
 
 nObs = nPrior-1;
 

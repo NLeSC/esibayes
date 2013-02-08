@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+
+   <title>MMSODA Toolbox for MATLAB - mmsodaSubplotScreen</title>
+
+   <meta name="keywords" content="mmsodaSubplotScreen">
+
+   <meta name="description" content="mmsodaSubplotScreen">
+
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+   <meta name="robots" content="index, follow">
+
+   <meta author="Jurriaan H. Spaaks">
+
+   <link type="text/css" rel="stylesheet" href="styles/mmsoda-styles.css">
+
+</head>
+
+
+
+<body>
+<a name="_top"></a>
+
+<div class="linkheader">
+<a href="matlab:edit(fullfile(mmsodaroot,'tools','mmsodaSubplotScreen'))">View source code of the function <span style="font-family:monospace">mmsodaSubplotScreen()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(mmsodaroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+</div>
+
+<div class="spacer">
+</div>
+
+
+<div class="h1">
+mmsodaSubplotScreen</div>
+
+<div class="h2">
+Syntax
+</div>
+
+<div class="txt">
+    <p>
+        <span style="font-family:monospace">mmsodaSubplotScreen(A,B,C)</span>
+    </p>
+    <p>
+        <span style="font-family:monospace">mmsodaSubplotScreen()</span>
+    </p>
+    <p>
+        <span style="font-family:monospace">mmsodaSubplotScreen(A,B,C,<span class="string">'figureNumber'</span>,D)</span>
+    </p>
+
+</div>
+
+<div class="h2">
+Description
+</div>
+
+<div class="txt">
+    <p>
+        <span style="font-family:monospace">mmsodaSubplotScreen(A,B,C)</span>
+    </p>
+    <p>
+        does for figures what MATLAB's built-in <a href="matlab: doc subplot">subplot</a> does for axes. For example:
+    </p>
+    <p>
+        <span style="font-family:monospace">mmsodaSubplotScreen(1,2,1)</span>
+    </p>
+    <p>
+        creates a empty figure window on the left side of the screen. Similarly
+    </p>
+
+<pre>
+for k=1:6
+   mmsodaSubplotScreen(3,2,k)
+end
+</pre>
+
+    <p>
+        creates 6 empty figure windows, arranged in 3 rows and 2 columns on the screen.
+    </p>
+
+</div>
+
+
+<div class="txt">
+    <p>
+        <span style="font-family:monospace">mmsodaSubplotScreen()</span>
+    </p>
+    <p>
+        If no input arguments are supplied, <span style="font-family:monospace">mmsodaSubplotScreen(1,1,1)</span> is assumed.
+    </p>
+
+</div>
+
+
+
+
+<div class="txt">
+    <p>
+        <span style="font-family:monospace">mmsodaSubplotScreen(A,B,C,<span class="string">'figureNumber'</span>,D)</span>
+    </p>
+    <p>
+        You can use the <span style="font-family:monospace"><span class="string">'figureNumber'</span></span>option to identify a certain figure. For example:
+    </p>
+    <p>
+<pre>
+for k=1:6
+   mmsodaSubplotScreen(3,2,k,<span style="font-family:monospace"><span class="string">'figureNumber'</span></span>,1000+k)
+end
+</pre>
+    </p>
+    <p>
+        creates figures 1001:1:1006.
+    </p>
+
+
+
+</div>
+
+
+
+<div class="footer">
+</div>
+
+
+<div class="spacer">
+</div>
+
+
+<a name="_bottom"></a>
+
+
+</body>
+
+</html>

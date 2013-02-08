@@ -1,0 +1,119 @@
+Current dir is: /home/jspaaks
+Changing into 
+Current dir is: /home/jspaaks
+Result of 'ls -l' is:
+total 17256
+-rwxr--r--  1 jspaaks jspaaks 17546096 Sep 14 08:42 2012-adelaide.zip
+drwxr-xr-x  2 jspaaks jspaaks       17 Aug 21 11:22 bin
+drwxr-xr-x  4 jspaaks jspaaks       93 Jan 31 11:24 gitrepo
+drwxr-xr-x  3 jspaaks jspaaks       22 Aug 21 11:22 ibis-testing
+drwxr-xr-x  8 jspaaks jspaaks      127 Aug 21 11:23 lisa-test-06
+drwxr-xr-x  8 jspaaks jspaaks      149 Aug 21 11:23 lisa-test-07
+drwxr-xr-x  8 jspaaks jspaaks     4096 Aug 21 11:23 lisa-test-08-pbs-lintank
+drwxr-xr-x  9 jspaaks jspaaks     4096 Aug 21 11:25 lisa-test-09-mo-soda-pbs-lintank
+drwxr-xr-x  3 jspaaks jspaaks       46 Jan 14 16:26 matlab
+-rw-rw-r--  1 jspaaks jspaaks     9102 Feb  4 17:33 matlab_crash_dump.2102-1
+-rw-rw-r--  1 jspaaks jspaaks     9102 Feb  4 17:33 matlab_crash_dump.2105-1
+-rw-rw-r--  1 jspaaks jspaaks     9102 Feb  4 17:33 matlab_crash_dump.2107-1
+-rw-rw-r--  1 jspaaks jspaaks     9075 Jan 21 14:34 matlab_crash_dump.24801-1
+-rw-rw-r--  1 jspaaks jspaaks     9075 Jan 21 14:34 matlab_crash_dump.24802-1
+-rw-rw-r--  1 jspaaks jspaaks     9102 Feb  4 16:39 matlab_crash_dump.29537-1
+-rw-rw-r--  1 jspaaks jspaaks     9102 Feb  4 16:40 matlab_crash_dump.29539-1
+-rw-rw-r--  1 jspaaks jspaaks     9102 Feb  4 16:40 matlab_crash_dump.29541-1
+-rw-rw-r--  1 jspaaks jspaaks     9102 Feb  4 16:40 matlab_crash_dump.29542-1
+drwxr-xr-x  3 jspaaks jspaaks       21 Dec 18 16:38 nieuwestart
+drwxr-xr-x 10 jspaaks jspaaks      126 Jul 24  2012 piped-testing
+drwxr-xr-x  4 jspaaks jspaaks       93 Nov  7 17:47 plotensemble
+drwxr-xr-x  5 jspaaks jspaaks       60 Apr 19  2012 soda-ssp-mo-lintank-test
+drwxr-xr-x  5 jspaaks jspaaks       47 Aug 22 17:50 tutorial
+drwxr-xr-x  8 jspaaks jspaaks     4096 Aug 26 14:21 wb
+Unloading module matlab
+
+Loading module openmpi/gnu
+
+Loading module mcr
+
+Starting MPI job on node gb-r9n31.irc.sara.nl
+node gb-r9n31 has 8 CPUs.
+node gb-r13n4 has 12 CPUs.
+Starting interactive MPI job on 2 batch nodes with a total of 20 CPUs.
+gb-r9n31
+gb-r9n31
+gb-r9n31
+gb-r9n31
+gb-r9n31
+gb-r9n31
+gb-r9n31
+gb-r9n31
+gb-r13n4
+gb-r13n4
+gb-r13n4
+gb-r13n4
+gb-r13n4
+gb-r13n4
+gb-r13n4
+gb-r13n4
+gb-r13n4
+gb-r13n4
+gb-r13n4
+gb-r13n4
+
+Adding the current workdir to the library path environment variable
+
+Result of 'ldd matlabprog' is:
+
+Result of 'ldd libmmpi.so' is:
+
+The current LD_LIBRARY_PATH is:
+/sara/sw/mcr/64/v718/v80/runtime/glnxa64:/sara/sw/mcr/64/v718/v80/bin/glnxa64:/sara/sw/mcr/64/v718/v80/sys/os/glnxa64:/sara/sw/mcr/64/v718/v80/sys/java/jre/glnxa64/jre/lib/amd64/native_threads:/sara/sw/mcr/64/v718/v80/sys/java/jre/glnxa64/jre/lib/amd64/server:/sara/sw/mcr/64/v718/v80/sys/java/jre/glnxa64/jre/lib/amd64:/sara/sw/openmpi-gnu-1.6.3/lib:/sara/sw/ofed/1.5.2/64/lib64:/sara/sw/libgfortran/32/1/lib:/home/jspaaks/gitrepo/esibayes/example3
+
+Making directory: /scratch/6672412.batch1.irc.sara.nl/mmsoda_LLQP-M600-KU22-M10F
+
+Setting MCR_CACHE_ROOT to: /scratch/6672412.batch1.irc.sara.nl/mmsoda_LLQP-M600-KU22-M10F
+
+The current MCR_CACHE_ROOT is:
+/scratch/6672412.batch1.irc.sara.nl/mmsoda_LLQP-M600-KU22-M10F
+
+Starting MPI run
+Setting verbosity to level 0.
+Setting the buffer size to 5000 bytes.
+Timings will be saved.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+
+% This is a pre-alpha release of the SODA simultaneous 
+% parameter optimization and data assimilation software.
+
+Q: "...sara_stats": -------------------Begin of SARA epilogue----------------------------------
+Q: "...sara_stats": This output was generated by the SARA epilogue script
+Q: "...sara_stats": Your job [jobscript-mmsoda.pbs] has been executed in queue [parallel] with
+Q: "...sara_stats": the following PBS arguments:
+Q: "...sara_stats":    neednodes=2,nodes=2,walltime=00:10:00
+Q: "...sara_stats":    .
+Q: "...sara_stats": Resources used in job [6672412.batch1.irc.sara.nl] with name [jobscript-mmsoda.pbs]:
+Q: "...sara_stats":    cput=03:05:50,mem=2943604kb,vmem=21591564kb,walltime=00:10:33
+Q: "...sara_stats":    gb-r9n31 gb-r13n4
+Q: "...sara_stats":    .
+Q: "...sara_stats": Job start and end time:
+Q: "...sara_stats":   Job start time: Fri Feb  8 16:19:53 CET 2013
+Q: "...sara_stats":   Job end time  : Fri Feb  8 16:30:40 CET 2013
+Q: "...sara_stats": ---------------------End of SARA epilogue----------------------------------
+I: Last 14 quoted lines were generated by promiser "/var/spool/torque/mom_priv/epilogue.d/sara_stats"

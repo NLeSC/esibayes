@@ -1,0 +1,282 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+
+   <title>MMSODA Toolbox for MATLAB - mmsodaMatrixOfScatter</title>
+
+   <meta name="keywords" content="mmsodaMatrixOfScatter">
+
+   <meta name="description" content="mmsodaMatrixOfScatter">
+
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+   <meta name="robots" content="index, follow">
+
+   <meta author="Jurriaan H. Spaaks">
+
+   <link type="text/css" rel="stylesheet" href="styles/mmsoda-styles.css">
+
+</head>
+
+
+
+<body>
+<a name="_top"></a>
+
+<div class="linkheader">
+<a href="matlab:edit(fullfile(mmsodaroot,'visualization','mmsodaMatrixOfScatter'))">View source code of the function <span style="font-family:monospace">mmsodaMatrixOfScatter()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(mmsodaroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+</div>
+
+<div class="spacer">
+</div>
+
+
+<div class="h1">
+mmsodaMatrixOfScatter
+</div>
+
+<div class="h2">
+Syntax
+</div>
+
+<div class="txt">
+<p>
+    <span style="font-family:monospace">mmsodaMatrixOfScatter(conf,typeStr,sequences,metropolisRejects)</span>
+</p>
+<p>
+    <span style="font-family:monospace">handles = mmsodaMatrixOfScatter(conf,typeStr,sequences,metropolisRejects)</span>
+</p>
+<p>
+    <span style="font-family:monospace">mmsodaMatrixOfScatter(conf,typeStr,sequences,metropolisRejects,...)</span>
+</p>
+</div>
+
+<div class="h2">
+Description
+</div>
+
+<div class="txt">
+    <p>
+        <span style="font-family:monospace">mmsodaMatrixOfScatter()</span> can be used to visualize the contents of the <span style="font-family:monospace">sequences</span> and <span style="font-family:monospace">metropolisRejects</span> arrays that are created by <span style="font-family:monospace">mmsoda()</span>. As an example, <span style="font-family:monospace">mmsodaMatrixOfScatter()</span> may be used to generate scatterplots of the evaluation number (see <span style="font-family:monospace">evalCol</span> in the <a href="mmsoda.html#_mmsoda_options">table</a> of configuration variables) on the horizontal axes, versus the parameter value (see <span style="font-family:monospace">parCols</span> in the <a href="mmsoda.html#_mmsoda_options">table</a> of configuration variables) on the vertical axes by setting the <span style="font-family:monospace">typeStr</span> input argument (see <a href="#_mmsodaMatrixOfScatter_typestr">table below</a>) to <span style="font-family:monospace"><span class="string">'eval-par'</span></span>as follows:
+    </p>
+    <p>
+        <span style="font-family:monospace">mmsodaMatrixOfScatter(conf,<span class="string">'eval-par'</span>,sequences,metropolisRejects,<span class="string">'nHistory'</span>,<span class="string">'all'</span>)</span>
+    </p>
+    <p>which results in:</p>
+</div>
+<div class="txt">
+    <p>
+        <img src="images/mmsodaMatrixOfScatterEvalPar.png" width="700px">
+    </p>
+
+    <p>(the colors indicate which sequence a particular point is in).</p>
+</div>
+
+<div class="txt">
+    <p>
+        Another typical use case of <span style="font-family:monospace">mmsodaMatrixOfScatter()</span> is for plotting correlations between parameters by setting the <span style="font-family:monospace">typeStr</span> input argument to <span style="font-family:monospace"><span class="string">'par-par'</span></span>as follows:
+    </p>
+    <p>
+        <span style="font-family:monospace">mmsodaMatrixOfScatter(conf,<span class="string">'par-par'</span>,sequences,metropolisRejects,<span class="string">'nHistory'</span>,<span class="string">'all'</span>)</span>
+    </p>
+    <p>which results in:</p>
+</div>
+<div class="txt">
+    <p>
+        <img src="images/mmsodaMatrixOfScatterParPar.png" width="700px">
+    </p>
+</div>
+
+
+
+<a id="_mmsodaMatrixOfScatter_typestr"></a>
+<div class="txt">
+
+    <p>The table below lists the possible values that <span style="font-family:monospace">typeStr</span> can have, and what <span style="font-family:monospace">mmsodaMatrixOfScatter</span>'s behavior is with each.</p>
+<table>
+
+<tr>
+    <td valign="top"><b>Value of <span style="font-family:monospace">typeStr</span></b></td>
+    <td valign="top"><b>Description</b></td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'eval-par'</span></span></td>
+    <td valign="top">Model evaluation number on the horizontal axes versus the parameter value on the vertical axes.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'eval-ll'</span></span></td>
+    <td valign="top">Model evaluation number on the horizontal axes versus the log likelihood on the vertical axes.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'ll-eval'</span></span></td>
+    <td valign="top">Log likelihood on the horizontal axes versus the model evaluation number on the vertical axes.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'ll-par'</span></span></td>
+    <td valign="top">Log likelihood on the horizontal axes versus the parameter value on the vertical axes.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'ll-ll'</span></span></td>
+    <td valign="top">Log-likelihood on the horizontal axes versus the log-likelihood on the vertical axes (multi-objective only).</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'ll-pareto'</span></span></td>
+    <td valign="top">Log-likelihood on the horizontal axes versus the Pareto score on the vertical axes (multi-objective only).</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'par-eval'</span></span></td>
+    <td valign="top">Parameter value on the horizontal axes versus the model evaluation number on the vertical axes.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'par-par'</span></span></td>
+    <td valign="top">Parameter value on the horizontal axes versus the parameter value on the vertical axes.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'par-ll'</span></span></td>
+    <td valign="top">Parameter value on the horizontal axes versus the log likelihood on the vertical axes.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'par-pareto'</span></span></td>
+    <td valign="top">Parameter value on the horizontal axes versus the Pareto score on the vertical axes (multi-objective only).</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'pareto-par'</span></span></td>
+    <td valign="top">Pareto score on the horizontal axes versus the parameter value on the vertical axes (multi-objective only).</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'pareto-ll'</span></span></td>
+    <td valign="top">Pareto score on the horizontal axes versus the log likelihood on the vertical axes.</td>
+</tr>
+
+
+</table>
+
+
+</div>
+
+
+
+
+<a id="_mmsodaMatrixOfScatter_authorizedoptions"></a>
+<div class="txt">
+
+    <p>The table below lists the authorized options with which <span style="font-family:monospace">mmsodaMatrixOfScatter</span> may be called.</p>
+<table>
+
+<tr>
+    <td valign="top"><b>Option</b></td>
+    <td valign="top"><b>Description</b></td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'bgColor'</span></span></td>
+    <td valign="top">1x3 vector with background color for the axes.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'colorList'</span></span></td>
+    <td valign="top">Nx3 list of colors for differentiating between the sequences.</td>
+</tr>
+<!--
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'excludeDiag'</span></span></td>
+    <td valign="top"></td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'excludeTriup'</span></span></td>
+    <td valign="top">.</td>
+</tr>
+-->
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'fontsize'</span></span></td>
+    <td valign="top">Font size of the axes labels.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'hideBadScore'</span></span></td>
+    <td valign="top">Ignore any bad scores (see badScore) in scaling the axes.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'objTexNames'</span></span></td>
+    <td valign="top">Cell array of string in which you can store TeX formatted strings to describe the objective function.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'linestyleRej'</span></span></td>
+    <td valign="top">The line style with which the Metropolis-rejected points are connected.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'linestyleSeq'</span></span></td>
+    <td valign="top">The line style with which the Metropolis-accepted points are connected.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'markerRej'</span></span></td>
+    <td valign="top">The marker with which the Metropolis-rejected points are displayed.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'markerSeq'</span></span></td>
+    <td valign="top">The marker with which the Metropolis-accepted points are displayed.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'markersizeRej'</span></span></td>
+    <td valign="top">The marker size with which the Metropolis-rejected points are displayed.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'markersizeSeq'</span></span></td>
+    <td valign="top">The marker size with which the Metropolis-accepted points are displayed.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'nHistory'</span></span></td>
+    <td valign="top">This option is used to select a subset of the record in visualization. Valid values are<span style="font-family:monospace"><span class="string">'all'</span></span> (use all available data), <span style="font-family:monospace"><span class="string">'nSamples'</span></span> (use the last <span style="font-family:monospace">nSamples</span> samples), <span style="font-family:monospace"><span class="string">'noinit'</span></span> (use all available data except those from the initialization), <span style="font-family:monospace"><span class="string">'50%+'</span></span> (use the last half of the data record), <span style="font-family:monospace"><span class="string">'H2'</span></span> (use the last half of the data record), <span style="font-family:monospace"><span class="string">'75%+'</span></span> (use the last quarter of the data record), and <span style="font-family:monospace"><span class="string">'Q4'</span></span> (use the last quarter of the data record). The default behavior is to use the last <span style="font-family:monospace">5*nSamples</span> samples.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'showNumberOfPoints'</span></span></td>
+    <td valign="top">Show the number of points that were used in constructing the figure as part of the   title. </td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'showRejects'</span></span></td>
+    <td valign="top">Show the Metropolis-rejected samples.</td>
+</tr>
+<!--
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'xTrue'</span></span></td>
+    <td valign="top">.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'yTrue'</span></span></td>
+    <td valign="top">.</td>
+</tr>
+-->
+
+
+
+</table>
+
+
+</div>
+
+
+
+
+
+<div class="footer">
+</div>
+
+
+<div class="spacer">
+</div>
+
+
+<a name="_bottom"></a>
+
+
+</body>
+
+</html>

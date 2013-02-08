@@ -1,7 +1,7 @@
 function modelOutput = lintank(conf,constants,init,parVec,priorTimes)
 
 
-sodaUnpack()
+mmsodaUnpack()
 
 
 for iPrior=2:numel(priorTimes)

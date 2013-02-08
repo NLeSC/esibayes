@@ -17,6 +17,6 @@ drawInterval = 50;
 doPlot = false
 nSamples = 100;
 
-
+nModelEvalsMax = 2000;
 
 save('./results/conf.mat')

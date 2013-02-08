@@ -2,7 +2,7 @@ function modelOutput = hymod_batch(conf,constants,init,parVec,priorTimes)
 
 % Runs the HYMOD model
 
-sodaUnpack()
+mmsodaUnpack()
 
 tStart = priorTimes(1);
 tEnd = priorTimes(end);

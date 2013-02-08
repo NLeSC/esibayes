@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+
+   <title>MMSODA Toolbox for MATLAB - mmsodaMargHist</title>
+
+   <meta name="keywords" content="mmsodaMargHist">
+
+   <meta name="description" content="mmsodaMargHist">
+
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+   <meta name="robots" content="index, follow">
+
+   <meta author="Jurriaan H. Spaaks">
+
+   <link type="text/css" rel="stylesheet" href="styles/mmsoda-styles.css">
+
+</head>
+
+
+
+<body>
+<a name="_top"></a>
+
+
+<div class="linkheader">
+<a href="matlab:edit(fullfile(mmsodaroot,'visualization','mmsodaMargHist'))">View source code of the function <span style="font-family:monospace">mmsodaMargHist()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(mmsodaroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+</div>
+
+<div class="spacer">
+</div>
+
+
+
+<div class="h1">
+mmsodaMargHist
+</div>
+
+<div class="h2">
+Syntax
+</div>
+
+<div class="txt">
+<pre>mmsodaMargHist(conf,evalResults)</pre>
+<pre>mmsodaMargHist(conf,evalResults,...)</pre>
+</div>
+
+<div class="h2">
+Description
+</div>
+
+<div class="txt">
+    <p>
+        <span style="font-family:monospace">mmsodaMargHist(conf,evalResults)</span>
+    </p>
+    <p>
+        This function displays histograms of each optimized parameter.
+    </p>
+</div>
+
+<div class="txt">
+    <p>
+        <span style="font-family:monospace">mmsodaMargHist(conf,evalResults,...)</span>
+    </p>
+    <p>
+        Various aspects of the function can be tweaked by including parameter value pairs (see <a href="#_mmsodaMargHist_options">table below</a>).
+    </p>
+</div>
+
+
+<div class="txt">
+<a id="_mmsodaMargHist_options"></a>
+
+<table>
+
+<tr>
+    <td valign="top"><b>Parameter</b></td>
+    <td valign="top"><b>Description</b></td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace" class="string">'histMode'</span></td>
+    <td valign="top">String argument <span style="font-family:monospace" class="string">'absolute'</span> or <span style="font-family:monospace" class="string">'relative'</span> defines whether the vertical axis of the histogram shows absolute numbers or relative numbers, respectively. The y-axis label will show <span style="font-family:monospace">count</span> when <span style="font-family:monospace" class="string">'histMode'</span>
+    is <span style="font-family:monospace" class="string">'absolute'</span> or <span style="font-family:monospace">frequency</span> when <span style="font-family:monospace" class="string">'histMode'</span>
+    is <span style="font-family:monospace" class="string">'relative'</span>.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace" class="string">'nBins'</span></td>
+    <td valign="top"> Integer scalar defines how many bins should be used in constructing the histogram. </td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace" class="string">'iterSelection'</span></td>
+    <td valign="top"> Vector of integers specifying which model evaluations should be used in constructing the histogram.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace" class="string">'faceColor'</span></td>
+    <td valign="top">Color value of the bin faces. Example: <span style="font-family:monospace">mmsodaMargHist(conf,evalResults,<span class="string">'faceColor'</span>,[0,0,1])</span> for blue colored bin faces. </td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace" class="string">'edgeColor'</span></td>
+    <td valign="top">Color value of the bin edges. Example: <span style="font-family:monospace">mmsodaMargHist(conf,evalResults,<span class="string">'edgeColor'</span>,[0,0.5,0])</span> for olive colored bin edges. </td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace" class="string">'fixedBinEdges'</span></td>
+    <td valign="top"> Logical scalar indicating whether the bin edges should be fixed to the lower and upper limits of the parameter space, or whether the bin edges should zoom to the minimum and maximum values in the histogram. </td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace" class="string">'showNumberOfPoints'</span></td>
+    <td valign="top">Logical scalar. If set to <span style="font-family:monospace">true</span>, the number of points that were used in constructing the histogram is displayed in the plot's title.</td>
+</tr>
+
+
+<!--
+<tr>
+    <td valign="top"><span style="font-family:monospace" class="string">'xScale'</span></td>
+    <td valign="top"> deprecated </td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace" class="string">'yScale'</span></td>
+    <td valign="top"> deprecated </td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace" class="string">'printToFile'</span></td>
+    <td valign="top"> deprecated </td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace" class="string">'printToPNG'</span></td>
+    <td valign="top"> deprecated </td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace" class="string">'printToEPS'</span></td>
+    <td valign="top"> deprecated </td>
+</tr>
+-->
+
+
+</table>
+
+
+
+</div>
+
+
+</div>
+
+<div class="txt">
+
+<img src="images/marghist.png">
+</div>
+
+
+<div class="footer">
+</div>
+
+
+
+<div class="spacer">
+</div>
+
+
+<a name="_bottom"></a>
+
+
+</body>
+
+</html>

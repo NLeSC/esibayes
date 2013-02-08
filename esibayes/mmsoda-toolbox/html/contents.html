@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+
+   <title>MMSODA Toolbox for MATLAB - Contents</title>
+
+   <meta name="keywords" content="contents">
+
+   <meta name="description" content="Contents of the SODA Toolbox">
+
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+   <meta name="robots" content="index, follow">
+
+   <meta author="Jurriaan H. Spaaks">
+
+   <link type="text/css" rel="stylesheet" href="styles/mmsoda-styles.css">
+
+</head>
+
+
+
+<body>
+<a name="_top"></a>
+
+<div class="h1">
+Contents
+</div>
+
+<div class="h2">
+<name="algorithm">
+Algorithm
+</div>
+
+<div class="txt">
+<table>
+<tr><td valign="top"><a href="mmsodaAbortOptim.html">mmsodaAbortOptim</a></td><td>Determines whether all parameters have sufficiently converged</td></tr>
+<tr><td valign="top"><a href="mmsodaAllComb.html">mmsodaAllComb</a></td><td>Computes all combinations of the elements of the input arguments. Implemented by Jos van der Geest. See <a href="matlab:mmsodaOpenBrowser('http://www.mathworks.com/matlabcentral/fileexchange/loadFile.do?objectId=10064&objectType=FILE')">www.mathworks.com</a>. </td></tr>
+<tr><td valign="top"><a href="mmsodaCalcObjScore.html">mmsodaCalcObjScore</a></td><td>Runs the model and evaluates the objective function</td></tr>
+<tr><td valign="top"><a href="mmsodaContinue.html">mmsodaContinue</a></td><td>Determine whether the optimization algorithm should still go on</td></tr>
+<tr><td valign="top"><a href="mmsodaEvolveComplex.html">mmsodaEvolveComplex</a></td><td>Applies a Metropolis annealing method to evolve complexes</td></tr>
+<tr><td valign="top"><a href="mmsodaGelmanRubin.html">mmsodaGelmanRubin</a></td><td>Calculates the Gelman-Rubin potential scale reduction statistic </td></tr>
+<tr><td valign="top"><a href="mmsodaGenerateOffspring.html">mmsodaGenerateOffspring</a></td><td>Proposes new offspring</td></tr>
+<tr><td valign="top"><a href="mmsodaInitialize.html">mmsodaInitialize</a></td><td>Processes text-based options to the mmsoda algortihm</td></tr>
+<tr><td valign="top"><a href="mmsodaPartComplexes.html">mmsodaPartComplexes</a></td><td>Partitions the evaluated points into complexes based on objective score</td></tr>
+<tr><td valign="top"><a href="mmsodaPrepSeqArray.html">mmsodaPrepSeqArray</a></td><td>Prepares the 3D sequences array for new offspring</td></tr>
+<tr><td valign="top"><a href="mmsodaPrepRejArray.html">mmsodaPrepRejArray</a></td><td>Prepares the 3D metropolisRejects array for rejected offspring</td></tr>
+<tr><td valign="top"><a href="mmsoda.html">mmsoda</a></td><td>Main program of optimization algorithm</td></tr>
+<tr><td valign="top"><a href="mmsodaStratDraw.html">mmsodaStratDraw</a></td><td>Stratified sampling</td></tr>
+<tr><td valign="top"><a href="mmsodaStratRandDraw.html">mmsodaStratRandDraw</a></td><td>Stratified random sampling</td></tr>
+<tr><td valign="top"><a href="mmsodaUnifRandDraw.html">mmsodaUnifRandDraw</a></td><td>Uniform random sampling</td></tr>
+
+<tr><td valign="top"><a href="mmsodaCalcEnsembleCov.html">enkf/mmsodaCalcEnsembleCov</a></td><td>Calculates the covariance of the prior predictions</td></tr>
+<tr><td valign="top"><a href="mmsodaCalcInnovations.html">enkf/mmsodaCalcInnovations</a></td><td>Calculates the innovations</td></tr>
+<tr><td valign="top"><a href="mmsodaCalcKalmanGain.html">enkf/mmsodaCalcKalmanGain</a></td><td>Calculates the Kalman gain matrix</td></tr>
+<tr><td valign="top"><a href="mmsodaCalcMeasErrCov.html">enkf/mmsodaCalcMeasErrCov</a></td><td>Calculates the covariance of the perturbed observations</td></tr>
+<tr><td valign="top"><a href="mmsodaEnKF.html">enkf/mmsodaEnKF</a></td><td>Main function for the EnKF part</td></tr>
+<tr><td valign="top"><a href="mmsodaProcessBundle.html">enkf/mmsodaProcessBundle</a></td><td>Helper function that process a bundle of tasks; bundles can consist of model tasks or of objective function tasks.</td></tr>
+<tr><td valign="top"><a href="mmsodaUpdateStates.html">enkf/mmsodaUpdateStates</a></td><td>Update the a priori state values with the innovations</td></tr>
+<tr><td valign="top"><a href="mmsodaCalcPareto.html">mo/mmsodaCalcPareto</a></td><td>Calculate the Pareto scores given a set of objective scores for a popluation of parameter sets</td></tr>
+<tr><td valign="top"><a href="mmsodaRecalcPareto.html">mo/mmsodaRecalcPareto</a></td><td>Recalculate the Pareto scores</td></tr>
+
+
+</table>
+</div>
+
+<div class="h2">
+Visualization
+</div>
+
+<div class="txt">
+<table>
+<tr><td valign="top"><a href="mmsodaAnalyzeTimings.html">mmsodaAnalyzeTimings</a></td><td>Visual aid for analyzing network traffic overhead and load balancing between worker nodes.</td></tr>
+<tr><td valign="top"><a href="mmsodaMargHist.html">mmsodaMargHist</a></td><td>Visualizes the multidimensional density distribution using marginal 1D histograms</td></tr>
+<tr><td valign="top"><a href="mmsodaMatrixOfScatter.html">mmsodaMatrixOfScatter</a></td><td>Visualizes the multidimensional density distribution using a matrix of marginal 2D scatter plots</td></tr>
+<!--
+<tr><td valign="top"><a href="mmsodaPlotConv.html">mmsodaPlotConv</a></td><td>Visualizes how parameter values converge with iteration</td></tr>
+-->
+<tr><td valign="top"><a href="mmsodaPlotEnsemble.html">mmsodaPlotEnsemble</a></td><td>Visualizes the trace of selected members through state space</td></tr>
+<tr><td valign="top"><a href="mmsodaPlotGelmanRubin.html">mmsodaPlotGelmanRubin</a></td><td>Visualizes how the Gelman-Rubin scale reduction criterion varies with each generation</td></tr>
+<!--
+<tr><td valign="top"><a href="mmsodaPlotObj.html">mmsodaPlotObj</a></td><td>Visualizes how the objective score changes with iteration</td></tr>
+-->
+<tr><td valign="top"><a href="mmsodaPlotPaCo.html">mmsodaPlotPaCo</a></td><td>Creates a parallel coordinates plot of the parameters</td></tr>
+<tr><td valign="top"><a href="mmsodaPlotSeq.html">mmsodaPlotSeq</a></td><td>Visualizes how sequences are shuffled collections of parameters</td></tr>
+<tr><td valign="top"><a href="mmsodaVisualization1.html">mmsodaVisualization1</a></td><td>Dynamic visualization script, displaying information on marginal parameter distributions and Gelman-Rubin convergence</td></tr>
+<tr><td valign="top"><a href="mmsodaVisualization2.html">mmsodaVisualization2</a></td><td>Dynamic visualization script, displaying information on marginal parameter distributions, objective score, Gelman-Rubin convergence, and Markov chains</td></tr>
+<tr><td valign="top"><a href="mmsodaVisualization3.html">mmsodaVisualization3</a></td><td>Dynamic visualization script, displaying information on marginal parameter distributions, objective score and Markov chains</td></tr>
+<tr><td valign="top"><a href="mmsodaVisualization4.html">mmsodaVisualization4</a></td><td>Dynamic visualization script, displaying information on Gelman-Rubin convergence, 2-D marginal parameter distributions, and Markov chains</td></tr>
+<tr><td valign="top"><a href="mmsodaVisualization5.html">mmsodaVisualization5</a></td><td>Dynamic visualization script, displaying information on 1-D marginal parameter distributions, Gelman-Rubin convergence, obective function score, and 2-D marginal parameter distributions</td></tr>
+</table>
+</div>
+
+
+<div class="h2">
+Tools
+</div>
+
+<div class="txt">
+<table>
+<tr><td valign="top"><a href="mmsodaCopyMakefile.html">mmsodaCopyMakefile</a></td><td>Copies the default Makefile to the current directory.</td></tr>
+<tr><td valign="top"><a href="mmsodaDiffStruct.html">mmsodaDiffStruct</a></td><td>Function that analyzes two configuration structs and checks if they amount to the same type of optimization. Useful for resuming an aborted optimization.</td></tr>
+<tr><td valign="top"><a href="mmsodaLoadSettings.html">mmsodaLoadSettings</a></td><td>Reads default values to configuration variables which the user hasn't specified but which are needed.</td></tr>
+<tr><td valign="top"><a href="mmsodaOpenBrowser.html">mmsodaOpenBrowser</a></td><td>Opens an external web browser.</td></tr>
+<tr><td valign="top"><a href="mmsodaOpenPdf.html">mmsodaOpenPdf</a></td><td>Opens a PDF document in an external PDF viewer.</td></tr>
+<tr><td valign="top"><a href="mmsodaParsePairs.html">mmsodaParsePairs</a></td><td>Parses optional input parameter to various functions.</td></tr>
+<tr><td valign="top"><a href="mmsodaPrepParallelFiles.html">mmsodaPrepParallelFiles</a></td><td>Calls <a href="mmsodaCopyMakefile.html">mmsodaCopyMakefile</a> and <a href="mmsodaWriteJobscript.html">mmsodaWriteJobscript</a>.</td></tr>
+<tr><td valign="top"><a href="mmsodaroot.html">mmsodaroot</a></td><td>Returns the root of the MMSODA Toolbox for MATLAB.</td></tr>
+<tr><td valign="top"><a href="mmsodaSubplotScreen.html">mmsodaSubplotScreen</a></td><td>Provides functionality similar to MATLAB's built in subplot, but acting on figures instead of on axes within a figure.</td></tr>
+<tr><td valign="top"><a href="mmsodaUnpack.html">mmsodaUnpack</a></td><td>Unpacks information from the model and objective function m-files, and assigns it to the right variables.</td></tr>
+<tr><td valign="top"><a href="mmsodaVerifyFieldNames.html">mmsodaVerifyFieldNames</a></td><td>Verifies whether the configuration variables are all valid and consistent.</td></tr>
+<tr><td valign="top"><a href="mmsodaWriteJobscript.html">mmsodaWriteJobscript</a></td><td>Helps you to construct PBS jobscripts and shell scripts.</td></tr>
+<tr><td valign="top"><a href="subaxes.html">subaxes</a></td><td>Provides similar functionality as subplot, except with higher information content; less whitespace in between axes.</td></tr>
+<tr><td valign="top"><a href="uimatlab.html">uimatlab</a></td><td>Returns true if the code is executed in MATLAB.</td></tr>
+<tr><td valign="top"><a href="uioctave.html">uioctave</a></td><td>Returns true if the code is executed in <a href="matlab:mmsodaOpenBrowser('http://www.gnu.org/software/octave')">Octave</a>.</td></tr>
+</table>
+</div>
+
+<div class="h2">
+Other
+</div>
+
+<div class="txt">
+<table>
+<tr><td valign="top"><a href="the-dynamic-model.html">The dynamic model</a></td><td>About the model.</td></tr>
+<tr><td valign="top"><a href="the-objective-function.html">The objective function</a></td><td>About the objective function.</td></tr>
+</table>
+</div>
+
+
+<div class="footer">
+</div>
+
+<div class="spacer">
+</div>
+
+
+<a name="_bottom"></a>
+
+
+</body>
+
+</html>

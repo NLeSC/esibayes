@@ -42,7 +42,7 @@ realPartOnly = true;
 saveInterval = 0; %dont' save for performance
 saveEnKFResults = false % not used in scemua but whatever
 
-visualizationCall = 'sodaVisualization5';
+visualizationCall = 'mmsodaVisualization5';
 
 if doPlot
    figure

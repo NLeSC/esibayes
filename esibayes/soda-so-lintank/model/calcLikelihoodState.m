@@ -1,6 +1,6 @@
 function objScore = calcLikelihoodState(conf,constants,modelOutput,parVec)
 
-sodaUnpack()
+mmsodaUnpack()
 
 
 [nOutputs,nDASteps,nMembers,tmp] = size(modelOutput);

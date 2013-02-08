@@ -1,5 +1,5 @@
-function objScore = calcLikelihood(conf,constants,allStateValuesKF,allValueNOKF,parVec)
-sodaUnpack()
+function objScore = calcLikelihood(conf,constants,modelOutput,parVec)
+mmsodaUnpack()
 
 
 dens = (1/(sqrt(2*pi*parSigma1^2))*exp(-(1/2)*((x-parMu1)/parSigma1)^2) + ...

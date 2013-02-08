@@ -1,0 +1,1331 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+
+   <title>MMSODA Toolbox for MATLAB - mmsoda</title>
+
+   <meta name="keywords" content="mmsoda">
+
+   <meta name="description" content="mmsoda">
+
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+   <meta name="robots" content="index, follow">
+
+   <meta author="Jurriaan H. Spaaks">
+
+   <link type="text/css" rel="stylesheet" href="styles/mmsoda-styles.css">
+
+</head>
+
+
+
+<body>
+<a id="_top"></a>
+
+
+<div class="linkheader">
+<a href="matlab:edit(fullfile(mmsodaroot,'mmsoda'))">View source code of the function <span style="font-family:monospace">mmsoda()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(mmsodaroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+</div>
+
+<div class="spacer">
+</div>
+
+
+<div class="h1">
+mmsoda</div>
+
+<div class="h2">
+Syntax
+</div>
+
+<div class="txt">
+<pre>
+mmsoda <span class="string">--addtools</span>
+mmsoda <span class="string">--addtools --quiet</span>
+mmsoda <span class="string">--builddb</span>
+mmsoda <span class="string">--docinstall</span>
+mmsoda <span class="string">--docinstall --quiet</span>
+mmsoda <span class="string">--help</span>
+mmsoda <span class="string">--showoptions</span>
+mmsoda <span class="string">--rmpath</span>
+mmsoda <span class="string">--root</span>
+evalResults = mmsoda()
+[evalResults,critGelRub] = mmsoda()
+[evalResults,critGelRub,sequences] = mmsoda()
+[evalResults,critGelRub,sequences,conf] = mmsoda()
+[evalResults,critGelRub,sequences,metropolisRejects,conf] = mmsoda()
+</pre>
+</div>
+
+<div class="h2">
+Description
+</div>
+
+<div class="txt">
+<p>
+   <span style="font-family:monospace">mmsoda <span class="string">--addtools</span></span>
+</p>
+
+<p>
+   If the MMSODA software is run offline (as opposed to being run compiled on the cluster), this command adds the
+   <span style="font-family:monospace">./model</span>,
+   <span style="font-family:monospace">../mmsoda/comms</span>,
+   <span style="font-family:monospace">../mmsoda/enkf</span>,
+   <span style="font-family:monospace">../mmsoda/mo</span>,
+   <span style="font-family:monospace">../mmsoda/mmlib</span>,
+   <span style="font-family:monospace">../mmsoda/tools</span>,
+   <span style="font-family:monospace">../mmsoda/visualization</span> directories to the MATLAB search path.
+</p>
+</div>
+
+
+
+<div class="txt">
+<p>
+   <span style="font-family:monospace">mmsoda <span class="string">--addtools --quiet</span></span>
+</p>
+
+<p>
+   Same as <span style="font-family:monospace">mmsoda <span class="string">--addtools</span></span>, but without any verbose feedback.
+</p>
+</div>
+
+<div class="txt">
+<span style="font-family:monospace">mmsoda <span class="string">--builddb</span></span>
+<p>
+   Builds the database that is used by the <a href="matlab:doc docsearch">docsearch</a> command. See also <a href="matlab:doc builddocsearchdb">builddocsearchdb</a>. Only used offline.
+</p>
+
+</div>
+
+<div class="txt">
+<span style="font-family:monospace">mmsoda <span class="string">--docinstall</span></span>
+<p>
+   Installs the documentation by writing the 'mmsoda-styles.css' style sheet file using the user-specific styles; adds the necessary directories to the MATLAB search path by calling <span style="font-family:monospace">mmsoda <span class="string">--addtools --quiet</span></span>; builds the the <a href="matlab:doc docsearch">docsearch</a> documentation by calling <span style="font-family:monospace">mmsoda <span class="string">--builddb</span></span>. Only used offline.
+</p>
+
+</div>
+
+<div class="txt">
+<p>
+   <span style="font-family:monospace">mmsoda <span class="string">--docinstall --quiet</span></span>
+</p>
+<p>
+   Same as <span style="font-family:monospace">mmsoda <span class="string">--docinstall</span></span>, but without any verbose feedback.
+</p>
+</div>
+
+<div class="txt">
+<p>
+   <span style="font-family:monospace">mmsoda <span class="string">--help</span></span>
+</p>
+<p>
+   Prints a help message to the screen.
+</p>
+</div>
+
+
+<div class="txt">
+<p>
+   <span style="font-family:monospace">mmsoda <span class="string">--showoptions</span></span>
+</p>
+<p>
+   Prints a list of all authorized options for the mmsoda configuration. See also <a href="#_mmsoda_options">table below</a>.
+</p>
+</div>
+
+
+<div class="txt">
+<p>
+   <span style="font-family:monospace">mmsoda <span class="string">--rmpath</span></span>
+</p>
+<p>
+   Removes the MMSODA directories from the MATLAB search path.
+</p>
+</div>
+
+<div class="txt">
+<p>
+   <span style="font-family:monospace">mmsoda <span class="string">--root</span></span>
+</p>
+<p>
+   Prints the root directory of the MMSODA Toolbox for MATLAB.
+</p>
+</div>
+
+
+
+<div class="txt">
+<p>
+   <span style="font-family:monospace">evalResults = mmsoda()</span><br>
+   <span style="font-family:monospace">[evalResults,critGelRub] = mmsoda()</span><br>
+   <span style="font-family:monospace">[evalResults,critGelRub,sequences] = mmsoda()</span><br>
+   <span style="font-family:monospace">[evalResults,critGelRub,sequences,conf] = mmsoda()</span><br>
+   <span style="font-family:monospace">[evalResults,critGelRub,sequences,metropolisRejects,conf] = mmsoda()</span><br>
+</p>
+
+<p>
+Calls the SODA parameter optimization algorithm. <span style="font-family:monospace">mmsoda()</span> expects 3 directories to be present in the current working directory, some of which need to contain particular files. Furthermore, the current working directory should contain a copy of `Makefile' to be able to compile the MATLAB code into an executable, which can then be run on the cluster. It further requires an executable script 'run-mmsoda.sh' or a PBS jobscript 'jobscript-mmsoda.pbs'.</p>
+
+<p>So the general structure of files and folders is as follows:
+
+<ol>
+<span style="list-style-type:none">
+<li><b>mmsoda</b> (directory)</li>
+<li><i>&lt;current working directory&gt;</i> (directory)</li>
+<li><ol>
+    <span style="list-style-type:none">
+    <li><b>data</b> (directory)</li>
+        <ul>
+        <span style="list-style-type:none">
+        <li ><b>constants.mat</b> (binary file containing the model constants)</li>
+        </span>
+        </ul>
+    <li><b>model</b> (directory)</li>
+        <ul>
+        <span style="list-style-type:none">
+        <li><i>&lt;user's model m-files&gt;</i></li>
+        <li><i>&lt;user's objective function m-files&gt;</i></li>
+        </span>
+        </ul>
+    <li><b>results</b> (directory)
+        <ul>
+        <span style="list-style-type:none">
+        <li><b>conf.mat</b> (binary file containing mmsoda's configuration variables)</li>
+        <li><b>X-Y-tempstate.mat</b> (file)</li>
+        <li><b>X-results-enkf-evals-Z-Z.mat</b> (file)</li>
+        <li><b>X-results.mat</b> (file)</li>
+        </span>
+        </ul>
+    <li><b>Makefile</b> (file)</li>
+    <li>run-mmsoda.sh (file) and/or jobscript-mmsoda.pbs (file)</li>
+    </ol>
+    </span>
+</li>
+</span>
+</ol>
+
+
+
+
+</p>
+
+<p>
+    Note that in the above list, X can be one of four strings 'bypass', 'scemua', 'reset', or 'soda', depending on the type of optimization that is being performed; Y is a string 'so' or 'mo', depending on whether the optimization is single-objective or multi-objective; Z is a number indicating which parameter combinations are contained in the file.
+</p>
+
+<p>
+Note that the 'mmsoda' folder must be located at the same level as the current working directory.
+</p>
+
+<p>
+    Further note that 'X-Y-tempstate.mat', 'X-results-enkf-evals-Z-Z.mat', and 'X-results.mat' are output files and are therefore generated by the SODA software (as opposed to by the user). In contrast, 'constants.mat' and 'conf.mat' must be created by the user prior to starting the optimization.
+</p>
+
+<p>
+The 'data', 'model', and 'results' directories must be located in the directory that the <span style="font-family:monospace">mmsoda()</span> function is called from (which usually is the current working directory). All three folders must be present, even though your specific setup may not require all three to have anything in them. You must adhere to the naming convention as displayed above, at least with regard to the folder names and file names that are displayed in bold.
+</p>
+
+<p>
+<a href="#_mmsoda_output">Further down</a> you'll find an overview of the meaning of <span style="font-family:monospace">mmsoda()</span>'s output variables. In the meantime, the <a href="#_mmsoda_options">table below</a> lists what configuration variables can be included in <span style="font-family:monospace">conf.mat</span> and what their intended purpose is. Individual configuration variables may or may not be required, depending on what type of optimization you are doing:
+<ul>
+    <li>R: always required configuration variable.</li>
+    <li>R*: sometimes required configuration variable.</li>
+</ul>
+Furthermore, some configuration variables are not intended to be user-settable, while others are:
+<ul>
+    <li>U: can be set by the user;</li>
+    <li>N: should not be set by the user;</li>
+</ul>
+
+
+Configuration variables that are not assigned by the user will be assigned their default values, either from the file &#0039;<span style="font-family:monospace">mmsoda/mmsoda-default-settings.ini</span>&#0039; or in the file as specified by the <span style="font-family:monospace">useIniFile</span> configuration variable.
+</p>
+
+
+</div>
+
+<a id="_mmsoda_options"></a>
+
+<div class="txt">
+<table>
+
+<tr>
+    <td valign="top"><b>Configuration variable</b></td>
+    <td valign="top"><b>bypass</b></td>
+    <td valign="top"><b>scemua</b></td>
+    <td valign="top"><b>reset</b></td>
+    <td valign="top"><b>soda</b></td>
+    <td valign="top"><b>Description</b></td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">assimilate</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">Logical row vector with the same number of elements as <span style="font-family:monospace">conf.priorTimes</span>. True values indicate at which times data assimilation should occur.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">avgWalltimePerParSet</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">This field is used to record how long it took on average to evaluate one parameter combination.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">badScore</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">This value is assigned as objective score when an error occurs during evaluation of the model. This opion is useful when certain parts of the parameter space result in model crashes, for instance due to integration errors.</td>
+</tr>
+
+
+<!--
+<tr>
+    <td valign="top"><span style="font-family:monospace">cBeta</span></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top">deprecated</td>
+</tr>
+-->
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">convMaxDiff</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">This scalar value is used in determining whether the optimization has converged. Is a more stringent criterion than just assuming that convergence has been achieved when the Gelman-Rubin values in the <span style="font-family:monospace">critGelRub</span> array are less than 1.2. Its default value is 0.001.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">convUseLastFraction</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">This scalar real valued option determines what fraction of the record of samples is used in determining whether the optimization has converged.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">converged</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">Logical scalar indicating which whether the optimization has converged acording to the Gelman-Rubin criterion.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">covModelPert</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">U,R</td>
+    <td valign="top">Covariance of the model perturbations (white noise).</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">covObsPert</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">U,R</td>
+    <td valign="top">Covariance of the observation perturbations (white noise).</td>
+</tr>
+
+
+<!--
+<tr>
+    <td valign="top"><span style="font-family:monospace">crashAndBurn</span></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top">deprecated</td>
+</tr>
+-->
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">critGelRubConvd</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">The Gelman-Rubin criterion must be less that <span style="font-family:monospace">conf.critGelRubConvd</span> for convergence to be achieved. Its default value is 1.2. See also <span style="font-family:monospace">convMaxDiff</span>.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">drawInterval</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">This scalar integer value determines how often the call to the visualization script is made. It is measured in generations, not model evaluations.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">doPlot</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top"><p>This logical scalar detemines whether any visualization is performed. Note that <span style="font-family:monospace">doPlot</span> can be <span style="font-family:monospace">true</span> even when running compiled on a remote cluster, but that this only works when X forwarding has been enabled for your SSH connection to the cluster and that it requires an X environment to run on your local machine. Since Windows does not use X for its graphics, Windows users need an additional program (for instance <a href="matlab:mmsodaOpenBrowser('http://sourceforge.net/projects/xming/')">Xming</a>) to be able to view any MATLAB figures over SSH.</p><p>See also <span style="font-family:monospace">drawInterval</span>.</p></td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">evalCol</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">This scalar integer value holds the column in <span style="font-family:monospace">evalResults</span>, <span style="font-family:monospace">sequences</span>, and <span style="font-family:monospace">metropolisRejects</span> that contains the model evaluation number.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">executeInParallel</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">This logical scalar indicates whether the optimization is executed in parallel or not.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">initMethodKF</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">This string option determines what method is used to initialize the state variables that are subject to Ensemble Kalman Filter updating. Currently, only <span style="font-family:monospace" class="string">&#0039;reference&#0039;</span> is implemented.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">initValuesKF</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">When <span style="font-family:monospace">conf.initMethodKF</span> is set to <span style="font-family:monospace" class="string">&#0039;reference&#0039;</span>, <span style="font-family:monospace">initValuesKF</span> contains the initial values of the state variables that are subject to state updating by the Ensemble Kalman Filter.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">initMethodNOKF</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">This string option determines what method is used to initialize the variables that are not subject to Ensemble Kalman Filter updating, but that are unique to individual ensemble members. Currently, only <span style="font-family:monospace" class="string">&#0039;reference&#0039;</span> is implemented.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">initValuesNOKF</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">When <span style="font-family:monospace">conf.initMethodNOKF</span> is set to <span style="font-family:monospace" class="string">&#0039;reference&#0039;</span>, <span style="font-family:monospace">initValuesNOKF</span> contains the initial values of the variables that are not  subject to state updating by the Ensemble Kalman Filter, but that are unique to individual ensemble members.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">isSingleObjective</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">Logical scalar indicating whether the optimization is single-objective or not. Note that its value is always the opposite of <span style="font-family:monospace">conf.isMultiObjective</span>.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">isMultiObjective</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">Logical scalar indicating whether the optimization is multi-objective or not. Note that its value is always the opposite of <span style="font-family:monospace">conf.isSingleObjective</span>.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">jumpRate</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">This scalar real value acts as a scaler on the covariance matrix that is used to generate new samples in <span style="font-family:monospace">mmsodaGenerateOffspring</span>. Its default value is <span style="font-family:monospace">2.4*sqrt(conf.nOptPars)</span>.</td>
+</tr>
+
+
+<!--
+<tr>
+    <td valign="top"><span style="font-family:monospace">kurt</span></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top">deprecated</td>
+</tr>
+-->
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">llCols</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">For single-objective optimization, <span style="font-family:monospace">llCols</span> is a scalar integer that indicates which column in <span style="font-family:monospace">evalResults</span>, <span style="font-family:monospace">sequences</span>, and <span style="font-family:monospace">metropolisRejects</span> holds the log likelihood information. For multi-objective optimization, <span style="font-family:monospace">llCols</span> is a row vector of integers, that indicates which columns in <span style="font-family:monospace">evalResults</span>, <span style="font-family:monospace">sequences</span>, and <span style="font-family:monospace">metropolisRejects</span> hold the objective scores (which need not necessarily be all log likelihood values).</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">modeGelRub</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top"><p>This string option determines how the Gelman-Rubin criterion is calculated. If set to <span style="font-family:monospace" class="string">&#0039;strict&#0039;</span>, the SODA algorithm will calculate the second term from the equation from the paper as is, i.e. </p>
+                     <p><span style="font-family:monospace">2*(((m+1)*(n-1))/(m*n^2))</span></p>
+                     <p>If set to <span style="font-family:monospace" class="string">&#0039;loose&#0039;</span>, the SODA algorithm will use a slightly different version, viz. </p>
+                     <p><span style="font-family:monospace">2*(((m+1)*(n-1))/(m*n)^2)</span>,</p>
+                     <p>the difference being in the placement of the parentheses in the denominator. Default is <span style="font-family:monospace" class="string">&#0039;loose&#0039;</span>.</p>
+    </td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">modeStr</span></td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">This string option can be one of the following: <span style="font-family:monospace" class="string">&#0039;bypass&#0039;</span>, <span style="font-family:monospace" class="string">&#0039;scemua&#0039;</span>, <span style="font-family:monospace" class="string">&#0039;reset&#0039;</span>, or <span style="font-family:monospace" class="string">&#0039;soda&#0039;</span>. It determines what kind of optimization will be performed.
+    <p>If <span style="font-family:monospace">modeStr</span> is set to <span style="font-family:monospace" class="string">&#0039;bypass&#0039;</span>, than the call to the model function file is bypassed, hence the name. This is useful if the objective function calculates the log-likelihood directly, for instance on known probability distributions (benchmark functions).</p>
+    <p>If <span style="font-family:monospace">modeStr</span> is set to <span style="font-family:monospace" class="string">&#0039;scemua&#0039;</span>, the SODA algorithm does not do any state updating, and thus behaves like SCEM-UA (hence the name).</p>
+    <p>If <span style="font-family:monospace">modeStr</span> is set to <span style="font-family:monospace" class="string">&#0039;reset&#0039;</span>, the SODA algorithm does perform state updating, but with full confidence on the measurements. In this mode the ensemble consists of just one member, and is therefore cheaper in terms of computation time.</p>
+    <p>If <span style="font-family:monospace">modeStr</span> is set to <span style="font-family:monospace" class="string">&#0039;soda&#0039;</span>, the SODA algorithm does perform state updating according to an Ensemble Kalman Filter.</p>
+    <p>Depending on what mode is selected, the algorithm will remove fields from  <span style="font-family:monospace">conf</span> or reset some of its fields. Also, the required fields are not the same for each mode; for instance, in <span style="font-family:monospace" class="string">&#0039;bypass&#0039;</span> mode, there is no need for the <span style="font-family:monospace">modelName</span> field.</p>
+
+    </td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">modelName</span></td>
+    <td valign="top">N</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">Name of the model whose parameters are calibrated. Note that the model should be located in a subfolder <span style="font-family:monospace"> ./model</span>.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">namesNOKF</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">U,R*</td>
+    <td valign="top">U,R*</td>
+    <td valign="top">Cell array of strings, listing the names of the variables that are not subject to state updating, but that are unique to individual members in the ensemble. (R*: required if there are variables with values that are unique for individual ensemble members).</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">nCompl</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">Number of complexes to be used in the optimization.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">nDASteps</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">Number of data assimilation steps.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">nGelRub</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">Minimum number of generations for convergence to be achieved.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">nMembers</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">U</td>
+    <td valign="top">Number of members to be used for the Ensemble Kalman Filter. For SCEM-UA and RESET modes, its value is 1. Not needed for BYPASS mode.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">nModelEvalsMax</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">Maximum number of parameter combinations to be evaluated.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">nOffspring</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">Number of offspring that is generated in a generation. Calculated as <span style="font-family:monospace">conf.nOffspringFraction * conf.nSamples</span>.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">nOffspringFraction</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">Fraction of <span style="font-family:monospace">conf.nSamples</span>, used to calculate how many offspring there are per generation.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">nOffspringPerCompl</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">Number of offspring that each complex has.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">nOptPars</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">Number of parameters that are optimized.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">nNOKF</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">Number of values that are not part of the state updating by the Ensemble Kalman Filter, but are nevertheless unique to individual members. Equal to <span style="font-family:monospace">numel(conf.namesNOKF)</span>.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">nObjs</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">Number of objectives to be used in the optimization. Equal to 1 for single-objective optimization.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">nOutputs</span></td>
+    <td valign="top">N</td>
+    <td valign="top">R</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">Only used for <span style="font-family:monospace">modeStr = <span class="string">'scemua'</span></span>. Number of outputs that MMSODA can expect from the model at a given time. For example if your model simulates the behavior of a system with 3 states and 2 flows, then <span style="font-family:monospace">nOutputs</span> must be 3+2=5.</td>
+</tr>
+
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">nPrior</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">Number of times at which a prior prediction should be generated for a given parameter set. Equal to <span style="font-family:monospace">numel(conf.priorTimes)</span>.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">nSamples</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">Number of samples in a generation.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">nSamplesPerCompl</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">Number of samples in a generation, divided by the number of complexes.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">nStatesKF</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">Number of states that are subject to state updating by the Ensemble Kalman Filter.</td>
+</tr>
+
+
+<!--
+<tr>
+    <td valign="top"><span style="font-family:monospace">nStatesNOKF</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">deprecated</td>
+</tr>
+-->
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">nWorkers</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">Integer spefifying how many workers are used, if the optimization is executed in parallel. One CPU core counts as one worker. Workers can be distributed over multiple nodes.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">objCallStr</span></td>
+    <td valign="top">U,R*</td>
+    <td valign="top">U,R*</td>
+    <td valign="top">U,R*</td>
+    <td valign="top">U,R*</td>
+    <td valign="top">String argument specifies the name of the function that calculates the log likelihood objective score. Only used in single-objective optimization. Note that only the function name is specified, the input and output arguments are prescribed by the SODA algorithm, implying that the objective functions must adhere to a prescribed format. (R*: required for single-objective optimization).</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">objCallStrs</span></td>
+    <td valign="top">U,R*</td>
+    <td valign="top">U,R*</td>
+    <td valign="top">U,R*</td>
+    <td valign="top">U,R*</td>
+    <td valign="top">Cell array of strings, specifiying the names of the objective functions. Individual elements of <span style="font-family:monospace">objCallStrs</span> are subject to the same rules as those listed under its single-objective counterpart, <span style="font-family:monospace">objCallStr</span>. (R*: required for multi-objective optimization).</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">objCol</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">This scalar integer defines which column in <span style="font-family:monospace">evalResults</span>, <span style="font-family:monospace">sequences</span>, and <span style="font-family:monospace">metropolisRejects</span> holds the objective score. For single-objective optimization, it is equal to <span style="font-family:monospace">conf.llCol</span> (the column that holds the log-likelihood), while for multi-objective optimization, it is equal to <span style="font-family:monospace">conf.paretoCol</span> (the column that holds the Pareto score).</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">obsState</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">2-D array containing the observed state values. Size of the array should be <span style="font-family:monospace">conf.nStatesKF</span> rows by <span style="font-family:monospace">conf.nDASteps</span> columns.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">obsStateTime</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">Calculated as <span style="font-family:monospace">conf.obsStateTime = conf.priorTimes(conf.assimilate)</span>.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">objTexName</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">For single-objective optimization, this field contains the name of the objective function for use in visualization, as a TeX formatted string.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">objTexNames</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">For multi-objective optimization, this field contains the names of the objective functions for use in visualization, as a cell array of TeX formatted strings.</td>
+</tr>
+
+
+<!--
+<tr>
+    <td valign="top"><span style="font-family:monospace">omegaBeta</span></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top">deprecated</td>
+</tr>
+-->
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">optEndTime</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">This field contains a serial date number. If the built-in <span style="font-family:monospace">now</span> function returns a value greater than that listed in <span style="font-family:monospace">optEndTime</span>, no new offspring will be generated, and the optimization stops.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">optStartTime</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">At the start of the optimization, the date and time are stored in this field as a serial date number.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">parCols</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">Row vector of integers that specify which columns in <span style="font-family:monospace">evalResults</span>, <span style="font-family:monospace">sequences</span>, and <span style="font-family:monospace">metropolisRejects</span> hold parameter combinations.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">paretoCol</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">For multi-objective optimization, this scalar integer value specifies which column in <span style="font-family:monospace">evalResults</span>, <span style="font-family:monospace">sequences</span>, and <span style="font-family:monospace">metropolisRejects</span> holds the Pareto score.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">paretoMethod</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">This string value specifies which method is used to calculate the Pareto scores in <span style="font-family:monospace">evalResults</span> and <span style="font-family:monospace">sequences</span>. Valid strings are <span class="string" style="font-family:monospace">&#0039;g&#0039;</span> for Goldberg (1989) ranking, <span class="string" style="font-family:monospace">&#0039;z&#0039;</span> for Zitzler and Thiele (1999) ranking, and <span class="string" style="font-family:monospace">&#0039;v&#0039;</span> for Vrugt (2003) ranking.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">parNames</span></td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">Cell array of strings containing the names of the parameters as used in the model.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">parNamesTex</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">Cell array of strings containing the TeX formatted names of the parameters for use in visualiation.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">parSpaceHiBound</span></td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">Row vector containing the upper bounds of the parameter space for each parameter.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">parSpaceLoBound</span></td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">Row vector containing the lower bounds of the parameter space for each parameter.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">priorTimes</span></td>
+    <td valign="top">N</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">Row vector containing the times for which the model should generate a prior prediction. </td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">randSeed</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">Random seed to be used in the optimization.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">realPartOnly</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">In generating the jumping distance from the covariance of the complex in <span style="font-family:monospace">mmsodaGenerateOffspring</span>, it can sometimes happen that complex numbers are generated. Setting <span style="font-family:monospace">realPartOnly</span> to <span style="font-family:monospace">true</span> forces the SODA algorithm to ignore the complex part. Default value is <span style="font-family:monospace">true</span>.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">sampleDrawMode</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">This field contains either one of the following strings: <span style="font-family:monospace" class="string">&#0039;stratified random&#0039;</span> or <span style="font-family:monospace" class="string">&#0039;stratified&#0039;</span>. Default is <span style="font-family:monospace" class="string">&#0039;stratified random&#0039;</span>, but sometimes <span style="font-family:monospace" class="string">&#0039;stratified&#0039;</span> is useful for making response surfaces (if <span style="font-family:monospace">conf.nSamples</span> is equal to <span style="font-family:monospace">conf.nModelEvalsMax</span>, and <span style="font-family:monospace">conf.nModelEvalsMax.^(1/conf.nOptPars)</span> is an integer. For example, if the parameter space is 5-dimensional, the number of samples could be 10^5 for a response surface that has 10 elements in each dimension.)</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">saveEnKFResults</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">Logical scalar that indicates whether the (unaggregated) results of all ensemble members of all parameter combinations should be saved to file.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">saveInterval</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">Scalar integer that indicates the interval at which the optimization algorithm saves the preliminary results to file. Note that this does not include the information pertaining to individual ensemble memebers. Further note that it is measured in generations, not model evaluations.</td>
+</tr>
+
+<!--
+<tr>
+    <td valign="top"><span style="font-family:monospace">simTime</span></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top"></td>
+    <td valign="top">deprecated</td>
+</tr>
+-->
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">startFromUniform</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">Scalar logical value that indicates whether the optimization should start from a uniform prior (i.e. the optimization is a new one) or that the run will be a continuation of a previous run. In the latter case, SODA will look for the file <span style="font-family:monospace">./results/tempstate.mat</span>.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">stateNamesKF</span></td>
+    <td valign="top">N</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">Row cell array of strings that contains the names of the state variables as used in the model, for which state updating is performed when <span style="font-family:monospace">modeStr</span> is set to <span style="font-family:monospace"><span class="string">'reset'</span></span> or <span style="font-family:monospace"><span class="string">'soda'</span></span>.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">stateSpaceHiBound</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">Row vector containing the upper bound of the state space for each state for which state updating is performed.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">stateSpaceLoBound</span></td>
+    <td valign="top">N</td>
+    <td valign="top">N</td>
+    <td valign="top">U,R</td>
+    <td valign="top">U,R</td>
+    <td valign="top">Row vector containing the lower bound of the state space for each state for which state updating is performed.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">thresholdL</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">Threshold likelihood ratio that is (very rarely) used in the Metropolis scheme.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">useIniFile</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">String that specifies from which file the required options are read if the user does not specify them explicitly.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">verboseOutput</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">Set to <span style="font-family:monospace">true</span> for (more) verbose output.</td>
+</tr>
+
+
+<tr>
+    <td valign="top"><span style="font-family:monospace">visualizationCall</span></td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">U</td>
+    <td valign="top">This string is called every so often depending on <span style="font-family:monospace">doPlot</span> and <span style="font-family:monospace">drawInterval</span> options. By default its value is <span style="font-family:monospace">mmsodaVisualization3</span>, which is a script that comes with MMSODA. It visualizes the Markov chains, as well as the marginal parameter distributions and the objective score.</td>
+</tr>
+
+
+
+<!---
+<tr>
+    <td valign="top"><span class="string">&#0039;Cb&#0039;</span></td>
+    <td valign="top">N</td>
+    <td valign="top">Parameter related to the kurtosis (aka peakedness) of the exponential power distribution. See also <span style="font-family:monospace">&#0039;conf.kurt&#0039;</span>.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;Wb&#0039;</span></td>
+    <td valign="top">N</td>
+    <td valign="top">Parameter related to the kurtosis (aka peakedness) of the exponential power distribution. See also <span style="font-family:monospace">&#0039;conf.kurt&#0039;</span>.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;constNames&#0039;</span></td>
+    <td valign="top">U,R</td>
+    <td valign="top">Cell array of strings containing the names of variables which must be imported as constants during the optimization procedure.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;convMaxDiff&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">If the last <span style="font-family:monospace">conf.nGelRub</span> rows from <span style="font-family:monospace">critGelRub</span> are less than <span style="font-family:monospace">convMaxDiff</span> apart, <a href="convergence.html">convergence</a> has been achieved.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;convUseLastFraction&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Indicates what fraction of <span style="font-family:monospace">sequences</span> should be used to calculate the Gelman-Rubin scale reduction criterion <span style="font-family:monospace">critGelRub</span>.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;converged&#0039;</span></td>
+    <td valign="top">N</td>
+    <td valign="top">Signifies whether the optimization has converged (<span style="font-family:monospace">true</span>) or not (<span style="font-family:monospace">false</span>). Default is <span style="font-family:monospace">false</span>.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;critGelRubConvd&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Convergence can only be achieved if all rows in <span style="font-family:monospace">critGelRub</span> are smaller than <span style="font-family:monospace">conf.critGelRubConvd</span>.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;drawInterval&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Indicates after how many generations the dynamic visualization script is called. See also: <span style="font-family:monospace">&#0039;conf.visualizationCall&#0039;</span></td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;evalCol&#0039;</span></td>
+    <td valign="top">N</td>
+    <td valign="top">Indicates which column in <span style="font-family:monospace">evalResults</span> contains the &#0039;evaluated&#0039; flag. This flag is set to <span style="font-family:monospace">true</span> if the parameter on the current row has been evaluated, and is <span style="font-family:monospace">false</span> otherwise.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;iterCol&#0039;</span></td>
+    <td valign="top">N</td>
+    <td valign="top">Indicates which column in <span style="font-family:monospace">evalResults</span> is used to store the iteration number. Each parameter set is assigned its own iteration number.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;jumpRate&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">A scaling factor imposed on the covariance matrix. The product of these two, together with an n-dimensional random normal draw is used to calculate the jumping distance.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;kurt&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Measure of kurtosis (peakedness) of the exponential power probability distribution. The probability is Gaussian if kurtosis equals zero, double exponential if kurtosis is equal to one, and tends to a uniform distribution as kurtosis approaches -1. Default is 0.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;measNames&#0039;</span></td>
+    <td valign="top">U,(R)</td>
+    <td valign="top">Cell array of strings containing the names of variables which must be imported as measurements during the optimization procedure. Required only when <span style="font-family:monospace">conf.optMethod</span> has been set to &#0039;<span style="font-family:monospace">error minimization</span>&#0039;.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;modeGelRub&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Flag indicating the method according to which the Gelman-Rubin scale reduction criterion should be calculated.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;modelCallStr&#0039;</span></td>
+    <td valign="top">U,R</td>
+    <td valign="top">Character array containing the call to the model function.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;nCompl&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Number of Markov chains, or equivalently, number of complexes or number of sequences.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;nGelRub&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Indicates how many rows of <span style="font-family:monospace">critGelRub</span> should be used to determine if <a href="convergence.html">convergence</a> has been achieved.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;nMeasurements&#0039;</span></td>
+    <td valign="top">U,(R)</td>
+    <td valign="top">Number of observations. Required only when <span style="font-family:monospace">conf.optMethod</span> has been set to &#0039;<span style="font-family:monospace">error minimization</span>&#0039;.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;nModelEvalsMax&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Maximum number of model evaluations to be executed by SCEM-UA.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;nOffspring&#0039;</span></td>
+    <td valign="top">N</td>
+    <td valign="top">Number of offspring per generation.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;nOffspringFraction&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Fraction of the number of samples (<span style="font-family:monospace">conf.nSamples</span>).</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;nOffspringPerCompl&#0039;</span></td>
+    <td valign="top">N</td>
+    <td valign="top">Number of offspring per complex.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;nOptPars&#0039;</span></td>
+    <td valign="top">N</td>
+    <td valign="top">The number of optimized parameters.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;nSamples&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Number of samples.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;nSamplesPerCompl&#0039;</span></td>
+    <td valign="top">N</td>
+    <td valign="top">Number of samples per complex.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;objCallStr&#0039;</span></td>
+    <td valign="top">U,R</td>
+    <td valign="top">Character array containing the call to the <a href="objective-function.html">objective function</a>.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;objCol&#0039;</span></td>
+    <td valign="top">N</td>
+    <td valign="top">Signifies which column of <span style="font-family:monospace">evalResults</span> stores the objective score.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;optEndTime&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">The time at which the optimization procedure should be aborted, even if convergence has not been achieved.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;optMethod&#0039;</span></td>
+    <td valign="top">U,R</td>
+    <td valign="top">Signifies what kind of optimization should be performed.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;parCols&#0039;</span></td>
+    <td valign="top">N</td>
+    <td valign="top">Signifies which columns of <span style="font-family:monospace">evalResults</span> store the parameter sets.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;parMap&#0039;</span></td>
+    <td valign="top">U,R</td>
+    <td valign="top">Cell array of strings containing the names of variables which must be imported as parameters during the optimization procedure.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;parMapTex&#0039;</span></td>
+    <td valign="top">U,R</td>
+    <td valign="top">Cell array of TeX strings used in dynamic visualization.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;plotYN&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Logical flag indicating whether or not visualization should be performed during optimization.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;randSeed&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Random seed for MATLAB's <span style="font-family:monospace">rand()</span> and <span style="font-family:monospace">randn()</span> functions.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;rangeMax&#0039;</span></td>
+    <td valign="top">U,R</td>
+    <td valign="top">Maximum allowed values for all optimized parameters.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;rangeMin&#0039;</span></td>
+    <td valign="top">U,R</td>
+    <td valign="top">Minimum allowed values for all optimized parameters.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;realPartOnly&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">If set to true, this option makes the SCEM-UA algorithm ignore the complex part of results generated by the <a href="matlab:doc sqrtm">sqrtm</a> function in <a href="generateoffspring.html">generateoffspring</a>.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span class="string">&#0039;startFromUniform&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Logical flag indicating if the prior probability distribution is uniform or not.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;thresholdL&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Threshold likelihood used in the generation of offspring as well as in the Metropolis-Hastings annealing procedure.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;useIniFile&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">File from which to read SCEM-UA's default settings.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;verboseOutput&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Logical flag indicating if verbose feedback should be output to the screen.</td>
+</tr>
+<tr>
+    <td valign="top"><span class="string">&#0039;visualizationCall&#0039;</span></td>
+    <td valign="top">U,O</td>
+    <td valign="top">Character array containing the call to the visualization script.</td>
+</tr>
+
+-->
+</table>
+
+<a id="_mmsoda_output"></a>
+<table>
+<tr>
+    <td valign="top" nowrap><b>Output argument</b></td>
+    <td valign="top"><b>Description</b></td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace">evalResults</span></td>
+    <td valign="top"><p>This 2-D array is ordered as follows:</p><p>For single-objective optimization, column <span style="font-family:monospace">conf.evalCol</span> holds the model evaluation number; columns <span style="font-family:monospace">conf.parCols</span> hold the parameter combination; column <span style="font-family:monospace">conf.llCols</span> holds the log-likelihood score.</p><p>For multi-objective optimization, column <span style="font-family:monospace">conf.evalCol</span> holds the model evaluation number; columns <span style="font-family:monospace">conf.parCols</span> hold the parameter combination; columns <span style="font-family:monospace">conf.llCols</span> hold the log-likelihood scores (or other types of scores) associated with each objective function. Column <span style="font-family:monospace">conf.paretoCol</span> hold the Pareto score.</p></td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace">critGelRub</span></td>
+    <td valign="top">This array holds the Gelman-Rubin convergence information. The scale reduction criterion is calculated after every generation. Column 1 in <span style="font-family:monospace">critGelRub</span> holds the iteration number of the last model evaluation before the Gelman-Rubin scale reduction criterion was assessed; columns 1+1:N hold the value of the Gelman-Rubin scale reduction criterion for each parameter, with N the number of calibration parameters.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace">sequences</span></td>
+    <td valign="top">Rows and columns of this array hold the exact same information as <span style="font-family:monospace">evalResults</span>, but divided over <span style="font-family:monospace">conf.nCompl</span> Markov chains.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace">metropolisRejects</span></td>
+    <td valign="top">This array has the same size and dimensions as the <span style="font-family:monospace">sequences</span> array, but instead it holds the parameter space samples that were rejected by the Metropolis scheme.</td>
+</tr>
+<tr>
+    <td valign="top"><span style="font-family:monospace">conf</span></td>
+    <td valign="top">This <a href="matlab:doc struct">structure array</a> holds the configuration variables as specified by the user, with some fields added by the SODA algorithm.</td>
+</tr>
+
+</table>
+
+</div>
+
+
+
+<div class="footer">
+</div>
+
+
+<div class="spacer">
+</div>
+
+
+<a name="_bottom"></a>
+
+
+</body>
+
+</html>

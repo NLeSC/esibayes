@@ -1,7 +1,7 @@
 function objScore = shiftedSphere(conf,constants,modelOutput,parVec)
 % 1.Shifted Sphere Function 
 
-sodaUnpack()
+mmsodaUnpack()
 
 x = [x1,x2];
 

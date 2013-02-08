@@ -1,7 +1,7 @@
 function objScore = shiftedRosenbrock(conf,constants,modelOutput,parVec)
 % 3.Shifted Rosenbrock Function
 
-sodaUnpack()
+mmsodaUnpack()
 
 x = [x1,x2];
 

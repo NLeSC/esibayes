@@ -1,13 +1,11 @@
-function [stateValuesKFNew,valuesNOKFNew] = lintank(conf,constants,stateValuesKFOld,valuesNOKFOld,parVec,priorTimes)
-sodaUnpack()
+function modelOutput = <modelname>(conf,constants,init,parVec,priorTimes)
+mmsodaUnpack()
 % first lines are always the same
 
 % directly go to the dynamic part of the model,
 % iterate over the elements of variables 'priorTimes'
 % this is the main body of the model file.
 
-% after the dynamic part the variables of interest are 'stateValuesKFNew' and 
-% 'valuesNOKFNew'. The former contains the prior predictions of the states,
-% while the latter contains the values of other variables that are eitehr unique to
-% the ensemble member (reset and soda modes) or need to be passed on to the objective 
-% function (typical example would be a system output).
+% after the dynamic part, there needs to be an array modelOutput of size 
+% nOutput x nPrior for modeStr=='scemua' or of size (nStatesKF + nNOKF) 
+% x nPrior for 'reset' and 'soda' modes.
