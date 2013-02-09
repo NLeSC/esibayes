@@ -26,8 +26,10 @@ end
 nParSets = size(parsets,1);
 first = parsets(1,evalCol);
 last = parsets(nParSets,evalCol);
+
 str = sprintf('Evaluating parameter sets %d-%d',first,last);
-disp(str)
+elapsed = etime(datevec(now),datevec(conf.optStartTime));
+disp(['+',s2ddhhmmss(elapsed),': ',str])
 
 % call the ensemble Kalman Filter:
 parsets = mmsodaEnKF(conf,parsets);
@@ -56,3 +58,24 @@ end
 
 
 
+function str = s2ddhhmmss(durationSeconds)
+
+durationDays = durationSeconds/86400;
+accForDays = 0;
+nDays = floor((durationDays-accForDays)*1);
+accForDays = accForDays+nDays*1;
+nHours = floor((durationDays-accForDays)*24);
+accForDays = accForDays+nHours/24;
+nMins = floor((durationDays-accForDays)*24*60);
+accForDays = accForDays+nMins/24/60;
+nSecs = floor((durationDays-accForDays)*24*60*60);
+
+if durationSeconds<60
+    str=sprintf('%02ds',nSecs);
+elseif durationSeconds<60*60
+    str=sprintf('%02dm %02ds',nMins,nSecs);
+elseif durationSeconds<60*60*24
+    str=sprintf('%02dh %02dm %02ds',nHours,nMins,nSecs);
+else
+    str=sprintf('%dd %02dh %02dm %02ds',nDays,nHours,nMins,nSecs);
+end
