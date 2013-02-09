@@ -16,7 +16,7 @@ echo
 
 echo "Starting MPI job on node "`hostname`
 ncpus=`cat /proc/cpuinfo | grep processor | wc -l`
-((nprocs=2))
+((nprocs=5))
 echo
 
 echo "I detected that "`hostname`" has "$ncpus" processors. I'll start "$nprocs" processes."
@@ -38,17 +38,17 @@ echo
 
 module list
 
-if [ -d "$TMPDIR/mmsoda_Z9S7-SVFU-JJPX-WLBI" ]; then
-    echo "Directory "$TMPDIR/mmsoda_Z9S7-SVFU-JJPX-WLBI" already exists...emptying contents."
-    rm -rf "$TMPDIR/mmsoda_Z9S7-SVFU-JJPX-WLBI"
+if [ -d "$TMPDIR/mmsoda_L6H4-ZNTT-ZSE1-O8KJ" ]; then
+    echo "Directory "$TMPDIR/mmsoda_L6H4-ZNTT-ZSE1-O8KJ" already exists...emptying contents."
+    rm -rf "$TMPDIR/mmsoda_L6H4-ZNTT-ZSE1-O8KJ"
     echo
 fi
-echo "Making directory: $TMPDIR/mmsoda_Z9S7-SVFU-JJPX-WLBI"
-mkdir "$TMPDIR/mmsoda_Z9S7-SVFU-JJPX-WLBI"
+echo "Making directory: $TMPDIR/mmsoda_L6H4-ZNTT-ZSE1-O8KJ"
+mkdir "$TMPDIR/mmsoda_L6H4-ZNTT-ZSE1-O8KJ"
 echo
 
-echo "Setting MCR_CACHE_ROOT to: $TMPDIR/mmsoda_Z9S7-SVFU-JJPX-WLBI"
-export MCR_CACHE_ROOT="$TMPDIR/mmsoda_Z9S7-SVFU-JJPX-WLBI"
+echo "Setting MCR_CACHE_ROOT to: $TMPDIR/mmsoda_L6H4-ZNTT-ZSE1-O8KJ"
+export MCR_CACHE_ROOT="$TMPDIR/mmsoda_L6H4-ZNTT-ZSE1-O8KJ"
 echo
 
 echo "The current MCR_CACHE_ROOT is:"

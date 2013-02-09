@@ -38,7 +38,7 @@ else
 end
 
 if savetimings == 1
-    fn=sprintf('timing_%03d.mat',mpirank);
+    fn=sprintf('./results/timing_%03d.mat',mpirank);
     timing = evalin('base','timing');
     save(fn,'timing');
 end

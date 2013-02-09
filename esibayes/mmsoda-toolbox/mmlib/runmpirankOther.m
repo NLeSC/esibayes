@@ -1,6 +1,6 @@
 
 
-confFile = './results/conf.mat';
+confFile = './results/conf-out.mat';
 constantsFile = './data/constants.mat';
 
 if isdeployed

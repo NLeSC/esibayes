@@ -144,7 +144,7 @@ elseif isempty(varargin)
             warning(['Variable ''',varName,''' is not a valid configuration variable.'])
         end
     end
-    save('./results/conf.mat','-struct','conf',saveList{:})
+    save('./results/conf-out.mat','-struct','conf',saveList{:})
     if conf.executeInParallel
         bcastvar(0,conf);
     end
@@ -492,7 +492,7 @@ if any(strcmp(conf.modeStr,{'soda','reset'}))
     conf.nDASteps = sum(conf.assimilate);
     conf.obsStateTime = conf.priorTimes(conf.assimilate);
     if ~isfield(conf,'saveEnKFResults')
-        conf.saveEnKFResults = true;
+        conf.saveEnKFResults = false;
     end
 elseif strcmp(conf.modeStr,'scemua')
     conf.nStatesKF = 0;
@@ -503,7 +503,7 @@ elseif strcmp(conf.modeStr,'scemua')
         conf.assimilate = repmat(false,[1,conf.nPrior]);
     end
     if ~isfield(conf,'saveEnKFResults')
-        conf.saveEnKFResults = true;
+        conf.saveEnKFResults = false;
     end
 elseif strcmp(conf.modeStr,'bypass')
     conf.nStatesKF = 0;

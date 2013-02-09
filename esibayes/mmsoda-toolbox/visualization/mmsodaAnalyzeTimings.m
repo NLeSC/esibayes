@@ -37,21 +37,21 @@ function mmsodaAnalyzeTimings(varargin)
 
 
 
-bottomLayerHeight = 0.7;
-topLayerHeight = 0.3;
-vertSep = 0.3;
+bottomLayerHeight = 0.8;
+topLayerHeight = 0.2;
+vertSep = 0.2;
 bgColor = [0.12,0.18,0.24];
 showLegend = true;
-colorTable = [...
-    0.3,0.5,0.7;... %  1: code 1 to code 2
-    0.7,0.5,0.3;... %  2: code 3 to code 4
-    1.0,1.0,0.0;... %  5: code 31 to code 32
-    1.0,0.0,1.0;... %  6: code 33 to code 34
-    0.9,0.9,0.9;... %  7: code 35 to code 36, waiting==0
-    0.7,0.7,0.7;... %  8: code 35 to code 36, waiting==1
-    0.5,0.5,0.5;... %  9: code 35 to code 36, waiting==2
-    1.0,1.0,1.0;... % 10: code 37 to code 38
-];    
+ 
+colorTable = [ 0.51, 0.17, 0.00;...
+               0.75, 0.04, 0.38;...
+               0.12, 0.15, 0.79;...
+               0.92, 0.98, 0.12;...
+               1.00, 0.59, 0.04;...
+               0.39, 0.64, 0.17;...
+               0.10, 0.98, 0.66;...
+               0.27, 0.80, 0.84];
+
 
 startFrom = 0.0;
 endAt = 10.0;
@@ -70,8 +70,8 @@ mmsodaParsePairs()
 colorTable = cat(1,colorTable,bgColor);
 if showLegend
     
-    h2 = axes('Position',[0.1,0.81,0.85,0.15]);
-    h1 = axes('Position',[0.1,0.1,0.85,0.7]);
+    h2 = axes('Position',[0.12,0.81,0.85,0.15]);
+    h1 = axes('Position',[0.12,0.1,0.85,0.7]);
 
 else
     
@@ -84,29 +84,16 @@ end
 
 bandHeight = (max([topLayerHeight,bottomLayerHeight]) + vertSep);
 
-% reply = input('Please enter the lower boundary [secs] ','s');
-% if isempty(reply)
-%     reply='0.0';
-% end
-% min_time=str2double(reply);
-% 
-% reply = input('Please enter the upper boundary [secs] ','s');
-% if isempty(reply)
-%     reply='10.0';
-% end
-% max_time=str2double(reply);
-
 min_time = startFrom;
 max_time = endAt;
 
 counter=0;
 anotherfile=true;
 while anotherfile
-    fn = sprintf('timing_%03d.mat',counter);
+    fn = sprintf('./results/timing_%03d.mat',counter);
     try
         load(fn);
         if counter==0
-            % not the neatest way of storing the reference time:
             reftime = timing.starttimeStr;
             xOffset = 0;
         else

@@ -11,7 +11,7 @@ end
 
 screenRect = get(0,'screensize');
 
-f = 0.4;
+f = 0.45;
 hw = floor(f*screenRect(3));
 hh = floor(f*screenRect(4));
 mw = floor(0.5*screenRect(3));

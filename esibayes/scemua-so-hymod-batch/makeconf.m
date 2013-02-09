@@ -33,7 +33,7 @@ nSamples = 20*nCompl;
 % define the number of ensemble members to use in the EnKF
 nMembers = 1;
 % specify if soda should visualize the results as they become available (requires X forwarding over ssh)
-doPlot = true;
+doPlot = false;
 % specify how the parameter space is sampled ('stratified', 'stratified random'), useful for making imagescs of sensitivity
 sampleDrawMode = 'stratified';
 startFromUniform = true;

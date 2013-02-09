@@ -15,9 +15,6 @@ switch mmsodaOptions{1}
             mmsoda('--addtools','--quiet')
         end
         
-        % build searchable help database
-        mmsoda('--builddb')
-        
         try
             if uimatlab
 

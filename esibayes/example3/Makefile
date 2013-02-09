@@ -29,7 +29,10 @@ clean:
 	rm -f matlabprog libmmpi.* mccExcludedFiles.log readme.txt ./../mmsoda-toolbox/comms/*.mexa64
 
 purge:
-	rm -f results/*-results-*
+	rm -f results/*-results*
+	rm -f results/*.pbs.*
+	rm -f results/conf-out.mat
+	rm -f results/timing_???.mat
 
 rmhostfile:
 	#if [ -z "$ PBS_ENVIRONMENT"]; then

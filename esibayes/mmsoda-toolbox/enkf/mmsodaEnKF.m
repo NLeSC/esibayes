@@ -23,6 +23,28 @@ if strcmp(conf.modeStr,'scemua')
 end
 
 
+emptyCellModelBundle = cell(ceil((nParSets*nMembers)/nWorkers),1);
+modelBundleTemplate = struct('type',emptyCellModelBundle,...
+                             'iEval',emptyCellModelBundle,...
+                             'iParSet',emptyCellModelBundle,...
+                             'iMember',emptyCellModelBundle,...
+                             'iDAStep',emptyCellModelBundle,...
+                             'parVec',emptyCellModelBundle,...
+                             'stateValuesKFPost',emptyCellModelBundle,...
+                             'stateValuesKFPrior',emptyCellModelBundle,...
+                             'valuesNOKF',emptyCellModelBundle,...
+                             'priorTimes',emptyCellModelBundle);
+clear emptyCellModelBundle
+
+emptyCellObjectiveBundle = cell(ceil(nParSets/nWorkers),1);
+objectiveBundleTemplate = struct('type',emptyCellObjectiveBundle,...
+                                 'iEval',emptyCellObjectiveBundle,...
+                                 'iParSet',emptyCellObjectiveBundle,...
+                                 'parVec',emptyCellObjectiveBundle,...
+                                 'allStateValuesKFPrior',emptyCellObjectiveBundle,...
+                                 'allValuesNOKF',emptyCellObjectiveBundle);
+clear emptyCellObjectiveBundle
+
 nanArrayKF = repmat(NaN,[nParSets,nMembers,nStatesKF,nPrior]);
 nanArrayNOKF = repmat(NaN,[nParSets,nMembers,nNOKF,nPrior]);
 
@@ -101,26 +123,6 @@ switch conf.modeStr
         
         % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
-% 
-%         for iParSet=1:nParSets
-%             for iMember=1:nMembers
-%                 switch conf.initMethodKF
-%                     case 'reference'
-%                         stateValuesKFPost(iParSet,iMember,1:nStatesKF,1) = conf.initValuesKF;
-%                     otherwise
-%                         error('no other method than ''reference'' available yet')
-%                 end
-%                 switch conf.initMethodNOKF
-%                     case 'reference'
-%                         valuesNOKF(iParSet,iMember,1:nNOKF,1) = conf.initValuesNOKF;
-%                     otherwise
-%                         error('no other method than ''reference'' available yet')
-%                 end
-%             end
-%         end
-
-
-
         for iDAStep = 1:nDASteps+1
 
             if iDAStep == 1
@@ -139,10 +141,11 @@ switch conf.modeStr
             
             priorTimesChunk = conf.priorTimes(s:e);
             nPriorChunk = numel(priorTimesChunk);
+
             
-%             clear s 
-%             clear e
             
+            % use the template for preallocation
+            bundle = modelBundleTemplate;
 
             % submit tasks:
             iTask = 0;
@@ -163,14 +166,20 @@ switch conf.modeStr
                     bundle(iTask).priorTimes = priorTimesChunk;
 
                     if iTask==ceil((nParSets*nMembers)/nWorkers) || (iParSet==nParSets && iMember==nMembers)
+                        nTasks = iTask;
                         if conf.executeInParallel
                             iWorker = iWorker + 1;
-                            sendvar(iWorker,bundle);
+                            sendvar(iWorker,bundle(1:nTasks));
                             iTask = 0;
                         else
-                            trPool.result = runmpirankOtherFun(conf,bundle);
+                            trPool.result = runmpirankOtherFun(conf,bundle(1:nTasks));
                         end
+                        clear nTasks
                         clear bundle
+                        if ~(iParSet==nParSets && iMember==nMembers)
+                            % use the template for preallocation
+                            bundle = modelBundleTemplate;
+                        end
                     end
                 end
             end
@@ -257,6 +266,10 @@ switch conf.modeStr
     otherwise
 end
 
+
+% use the template for preallocation
+bundle = objectiveBundleTemplate;
+
 % now submit the objective tasks:
 iTask = 0;
 iWorker = 0;
@@ -281,14 +294,20 @@ for iParSet=1:nParSets
     bundle(iTask).allValuesNOKF = permute(tmp,[3,4,2,1]);
 
     if iTask==ceil(nParSets/nWorkers) || iParSet==nParSets
+        nTasks = iTask;
         if conf.executeInParallel
             iWorker = iWorker + 1;
-            sendvar(iWorker,bundle);
+            sendvar(iWorker,bundle(1:nTasks));
             iTask = 0;
         else
-            trPool.result = runmpirankOtherFun(conf,bundle);
+            trPool.result = runmpirankOtherFun(conf,bundle(1:nTasks));
         end
         clear bundle
+        clear nTasks
+        if iParSet<nParSets
+            % use the template for preallocation
+            bundle = objectiveBundleTemplate;
+        end
     end
 end
 nActiveWorkers = iWorker; 
