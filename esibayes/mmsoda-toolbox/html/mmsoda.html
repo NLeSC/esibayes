@@ -442,9 +442,9 @@ Configuration variables that are not assigned by the user will be assigned their
     <td valign="top"><span style="font-family:monospace">initMethodNOKF</span></td>
     <td valign="top">N</td>
     <td valign="top">N</td>
-    <td valign="top">U,R</td>
-    <td valign="top">U,R</td>
-    <td valign="top">This string option determines what method is used to initialize the variables that are not subject to Ensemble Kalman Filter updating, but that are unique to individual ensemble members. Currently, only <span style="font-family:monospace" class="string">&#0039;reference&#0039;</span> is implemented.</td>
+    <td valign="top">U,R*</td>
+    <td valign="top">U,R*</td>
+    <td valign="top">This string option determines what method is used to initialize the variables that are not subject to Ensemble Kalman Filter updating, but that are unique to individual ensemble members. Currently, only <span style="font-family:monospace" class="string">&#0039;reference&#0039;</span> is implemented. Required when <span style="font-family:monospace">namesNOKF</span> is not empty.</td>
 </tr>
 
 
@@ -452,12 +452,14 @@ Configuration variables that are not assigned by the user will be assigned their
     <td valign="top"><span style="font-family:monospace">initValuesNOKF</span></td>
     <td valign="top">N</td>
     <td valign="top">N</td>
-    <td valign="top">U,R</td>
-    <td valign="top">U,R</td>
-    <td valign="top">When <span style="font-family:monospace">conf.initMethodNOKF</span> is set to <span style="font-family:monospace" class="string">&#0039;reference&#0039;</span>, <span style="font-family:monospace">initValuesNOKF</span> contains the initial values of the variables that are not  subject to state updating by the Ensemble Kalman Filter, but that are unique to individual ensemble members.</td>
+    <td valign="top">U,R*</td>
+    <td valign="top">U,R*</td>
+    <td valign="top">When <span style="font-family:monospace">conf.initMethodNOKF</span> is set to <span style="font-family:monospace" class="string">&#0039;reference&#0039;</span>, <span style="font-family:monospace">initValuesNOKF</span> contains the initial values of the variables that are not subject to state updating by the Ensemble Kalman Filter, but that are unique to individual ensemble members. Required when <span style="font-family:monospace">initMethodNOKF</span> is <span style="font-family:monospace" class="string">'reference'</span>.</td>
 </tr>
 
-
+<!--
+the model output contains variables that are not subject to EnKF updating but that are unique to individual ensemble members
+-->
 <tr>
     <td valign="top"><span style="font-family:monospace">isSingleObjective</span></td>
     <td valign="top">N</td>
@@ -597,7 +599,7 @@ Configuration variables that are not assigned by the user will be assigned their
     <td valign="top">N</td>
     <td valign="top">N</td>
     <td valign="top">N</td>
-    <td valign="top">U</td>
+    <td valign="top">U,R</td>
     <td valign="top">Number of members to be used for the Ensemble Kalman Filter. For SCEM-UA and RESET modes, its value is 1. Not needed for BYPASS mode.</td>
 </tr>
 

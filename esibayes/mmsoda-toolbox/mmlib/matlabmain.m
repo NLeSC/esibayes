@@ -12,11 +12,17 @@ timing.counter = uint32(0);
 timing.starttime = tic;
 
 % from "http://stackoverflow.com/questions/12661862/converting-epoch-to-date-in-matlab"
-time_unix = timing.starttime; 
+time_unix = timing.starttime;
 time_reference = datenum('1970', 'yyyy');
 time_matlab = time_reference + double(time_unix) / 8.64e7/1e3;
 time_matlab_string = datestr(time_matlab, 'mmm dd, yyyy HH:MM:SS.FFF');
 timing.starttimeStr = time_matlab_string;
+
+[~,s] = system('hostname');
+timing.host = s(1:end-1);
+
+[~,s] = system('echo $$');
+timing.pid = s(1:end-1);
 
 assignin('base','timing',timing);
 

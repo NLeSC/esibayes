@@ -95,7 +95,9 @@ switch conf.modeStr
                         switch conf.initMethodKF
                             case 'reference'
                                 stateValuesKFPost(iParSet,iMember,1:nStatesKF,1) = conf.initValuesKF;
-                                valuesNOKF(iParSet,iMember,1:nNOKF,1) = conf.initValuesNOKF;
+                                if ~isempty(conf.initValuesNOKF)
+                                    valuesNOKF(iParSet,iMember,1:nNOKF,1) = conf.initValuesNOKF;
+                                end
                             otherwise
                                 error('no other method than ''reference'' available yet')
                         end
@@ -111,7 +113,9 @@ switch conf.modeStr
                         switch conf.initMethodNOKF
                             case 'reference'
                                 stateValuesKFPost(iParSet,iMember,1:nStatesKF,1) = conf.initValuesKF;
-                                valuesNOKF(iParSet,iMember,1:nNOKF,1) = conf.initValuesNOKF;
+                                if ~isempty(conf.initValuesNOKF)
+                                    valuesNOKF(iParSet,iMember,1:nNOKF,1) = conf.initValuesNOKF;
+                                end
                             otherwise
                                 error('no other method than ''reference'' available yet')
                         end

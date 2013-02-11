@@ -128,6 +128,10 @@ elseif isempty(varargin)
     end
 
     conf.optStartTime = now;
+    
+    if isfield(conf,'walltime')
+        conf.optEndTime = conf.optStartTime + conf.walltime;
+    end
 
     %initialize the gelman-rubin statistic record:
     critGelRub = [];
@@ -202,7 +206,7 @@ elseif isempty(varargin)
         else
             s = 'mo';
         end
-        load([thisconf.modeStr,'-',s,'-tempstate.mat'],...
+        load(['./results/',thisconf.modeStr,'-',s,'-tempstate.mat'],...
             'conf','critGelRub','evalResults','metropolisRejects',...
             'sequences','complexes')
 
@@ -211,7 +215,7 @@ elseif isempty(varargin)
         ignoreFields = {'startFromUniform','nModelEvalsMax','optStartTime',...
                         'saveInterval','verboseOutput','doPlot','executeInParallel',...
                         'saveEnKFResults','drawInterval','optEndTime',...
-                        'visualizationCall'};
+                        'visualizationCall','nWorkers'};
         if ~isempty(mmsodaDiffStruct(thisconf,thatconf,ignoreFields))
             error('Configuration is different from last time. Aborting.')
         else
@@ -682,8 +686,8 @@ end
 clear shouldBeRowList TMP k
 
 if any(strcmp(conf.modeStr,{'soda','reset'}))
-    if ~(isvector(conf.obsState) && isrow(conf.obsState))
-        error('conf.obsState should be row vector')
+    if ~isequal(size(conf.obsState),[conf.nStatesKF,conf.nPrior])%~(isvector(conf.obsState) && isrow(conf.obsState))
+        error('conf.obsState should be of size [conf.nStatesKF,conf.nPrior].')
     end
 end
 C ={'doPlot','realPartOnly','startFromUniform',...
@@ -761,13 +765,29 @@ switch conf.modeStr
 end
 
 
-if isfield(conf,'initValuesNOKF') && ~iscolumn(conf.initValuesNOKF)
+if isfield(conf,'initValuesNOKF') && ~isempty(conf.initValuesNOKF) && ~iscolumn(conf.initValuesNOKF)
     error('''conf.initValuesNOKF'' should be a column vector.')
 end
 
-if isfield(conf,'initValuesKF') && ~iscolumn(conf.initValuesKF)
-    error('''conf.conf.initValuesKF'' should be a column vector.')
+if isfield(conf,'initValuesKF') && ~isempty(conf.initValuesKF) && ~iscolumn(conf.initValuesKF)
+    error('''conf.initValuesKF'' should be a column vector.')
 end
+
+
+if any(strcmp(conf.modeStr,{'reset','soda'}))
+    
+    if xor(isfield(conf,'initMethodNOKF'),isfield(conf,'initValuesNOKF'))
+        error('You have to have both ''initMethodNOKF'' and ''initValuesNOKF'' for this to work.')
+    else
+        if ~isfield(conf,'initMethodNOKF') && ~isfield(conf,'initValuesNOKF')
+            disp('Setting ''initMethodNOKF'' to ''reference''.')
+            conf.initMethodNOKF = 'reference';
+            disp('Setting ''initValuesNOKF'' to [].')
+            conf.initValuesNOKF = [];
+        end
+    end
+end
+
 
 
 

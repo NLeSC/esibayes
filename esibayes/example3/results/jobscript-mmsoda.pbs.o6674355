@@ -1,0 +1,260 @@
+Current dir ($PWD) is:
+/home/jspaaks
+Changing into $PBS_O_WORKDIR
+Current dir is ($PWD):
+/home/jspaaks/gitrepo/esibayes/example3
+Result of 'ls -l' is:
+total 212
+drwxr-xr-x 2 jspaaks jspaaks     48 Feb  8 15:05 data
+-rw-r--r-- 1 jspaaks jspaaks   1937 Feb 10 17:10 jobscript-mmsoda.pbs
+-rwxrwxr-x 1 jspaaks jspaaks 184078 Feb 10 16:57 libmmpi.so
+-rw-r--r-- 1 jspaaks jspaaks    331 Feb  8 15:06 makeconf.m
+-rw-r--r-- 1 jspaaks jspaaks    286 Jan 31 15:50 makeconstants.m
+-rw-rw-r-- 1 jspaaks jspaaks   1607 Feb  9 16:28 Makefile
+-rwxrwxr-x 1 jspaaks jspaaks  11969 Feb 10 16:57 matlabprog
+drwxr-xr-x 2 jspaaks jspaaks     50 Feb  1 14:57 model
+drwxrwxr-x 2 jspaaks jspaaks    152 Feb 10 16:58 results
+-rwxr-xr-x 1 jspaaks jspaaks   1322 Feb 10 16:13 run-mmsoda.sh
+Unloading module matlab
+
+Loading module openmpi/gnu
+
+Loading module mcr
+
+Starting MPI job on node gb-r41n4.irc.sara.nl
+node gb-r41n4 has 16 CPUs.
+node gb-r41n3 has 16 CPUs.
+Starting interactive MPI job on 2 batch nodes with a total of 32 CPUs.
+gb-r41n4
+gb-r41n4
+gb-r41n4
+gb-r41n4
+gb-r41n4
+gb-r41n4
+gb-r41n4
+gb-r41n4
+gb-r41n4
+gb-r41n4
+gb-r41n4
+gb-r41n4
+gb-r41n4
+gb-r41n4
+gb-r41n4
+gb-r41n4
+gb-r41n3
+gb-r41n3
+gb-r41n3
+gb-r41n3
+gb-r41n3
+gb-r41n3
+gb-r41n3
+gb-r41n3
+gb-r41n3
+gb-r41n3
+gb-r41n3
+gb-r41n3
+gb-r41n3
+gb-r41n3
+gb-r41n3
+gb-r41n3
+
+Adding the current workdir to the library path environment variable
+
+Result of 'ldd matlabprog' is:
+	linux-vdso.so.1 =>  (0x00007fffac733000)
+	libmwmclmcrrt.so.8.0 => /sara/sw/mcr/64/v718/v80/runtime/glnxa64/libmwmclmcrrt.so.8.0 (0x00002b403511a000)
+	libm.so.6 => /lib/libm.so.6 (0x00002b4035382000)
+	libmmpi.so => /home/jspaaks/gitrepo/esibayes/example3/libmmpi.so (0x00002b4035604000)
+	libmpi.so.1 => /sara/sw/openmpi-gnu-1.6.3/lib/libmpi.so.1 (0x00002b403580b000)
+	libpthread.so.0 => /lib/libpthread.so.0 (0x00002b4035db5000)
+	libc.so.6 => /lib/libc.so.6 (0x00002b4035fd1000)
+	libmwcpp11compat.so => /sara/sw/mcr/64/v718/v80/runtime/glnxa64/../../bin/glnxa64/libmwcpp11compat.so (0x00002b4036334000)
+	libdl.so.2 => /lib/libdl.so.2 (0x00002b403653d000)
+	libstdc++.so.6 => /sara/sw/mcr/64/v718/v80/runtime/glnxa64/../../sys/os/glnxa64/libstdc++.so.6 (0x00002b4036741000)
+	libgcc_s.so.1 => /sara/sw/mcr/64/v718/v80/runtime/glnxa64/../../sys/os/glnxa64/libgcc_s.so.1 (0x00002b4036a51000)
+	libibverbs.so.1 => /sara/sw/ofed/1.5.2/64/lib64/libibverbs.so.1 (0x00002b4036c67000)
+	libtorque.so.2 => /usr/lib/libtorque.so.2 (0x00002b4036e74000)
+	libnuma.so.1 => /usr/lib/libnuma.so.1 (0x00002b403718c000)
+	librt.so.1 => /lib/librt.so.1 (0x00002b4037394000)
+	libnsl.so.1 => /lib/libnsl.so.1 (0x00002b403759c000)
+	libutil.so.1 => /lib/libutil.so.1 (0x00002b40377b5000)
+	/lib64/ld-linux-x86-64.so.2 (0x00002b4034efa000)
+
+Result of 'ldd libmmpi.so' is:
+	linux-vdso.so.1 =>  (0x00007fff547b0000)
+	libmwmclmcrrt.so.8.0 => /sara/sw/mcr/64/v718/v80/runtime/glnxa64/libmwmclmcrrt.so.8.0 (0x00002ab08d48e000)
+	libm.so.6 => /lib/libm.so.6 (0x00002ab08d6f6000)
+	libpthread.so.0 => /lib/libpthread.so.0 (0x00002ab08d978000)
+	libc.so.6 => /lib/libc.so.6 (0x00002ab08db94000)
+	libmwcpp11compat.so => /sara/sw/mcr/64/v718/v80/runtime/glnxa64/../../bin/glnxa64/libmwcpp11compat.so (0x00002ab08def7000)
+	libdl.so.2 => /lib/libdl.so.2 (0x00002ab08e100000)
+	libstdc++.so.6 => /sara/sw/mcr/64/v718/v80/runtime/glnxa64/../../sys/os/glnxa64/libstdc++.so.6 (0x00002ab08e304000)
+	libgcc_s.so.1 => /sara/sw/mcr/64/v718/v80/runtime/glnxa64/../../sys/os/glnxa64/libgcc_s.so.1 (0x00002ab08e614000)
+	/lib64/ld-linux-x86-64.so.2 (0x00002ab08d065000)
+
+The current LD_LIBRARY_PATH is:
+/sara/sw/mcr/64/v718/v80/runtime/glnxa64:/sara/sw/mcr/64/v718/v80/bin/glnxa64:/sara/sw/mcr/64/v718/v80/sys/os/glnxa64:/sara/sw/mcr/64/v718/v80/sys/java/jre/glnxa64/jre/lib/amd64/native_threads:/sara/sw/mcr/64/v718/v80/sys/java/jre/glnxa64/jre/lib/amd64/server:/sara/sw/mcr/64/v718/v80/sys/java/jre/glnxa64/jre/lib/amd64:/sara/sw/openmpi-gnu-1.6.3/lib:/sara/sw/ofed/1.5.2/64/lib64:/sara/sw/libgfortran/32/1/lib:/home/jspaaks/gitrepo/esibayes/example3
+
+Making directory: /scratch/6674355.batch1.irc.sara.nl/mmsoda_MC16-3DHO-44W5-B634
+
+Setting MCR_CACHE_ROOT to: /scratch/6674355.batch1.irc.sara.nl/mmsoda_MC16-3DHO-44W5-B634
+
+The current MCR_CACHE_ROOT is:
+/scratch/6674355.batch1.irc.sara.nl/mmsoda_MC16-3DHO-44W5-B634
+
+Starting MPI run
+Setting verbosity to level 0.
+Setting the buffer size to 500000 bytes.
+Timings will be saved.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+
+% This is a pre-alpha release of the SODA simultaneous 
+% parameter optimization and data assimilation software.
+
+Setting value of 'conf.nMembers' to 1.
+
+SCEMUA-SO run started on: February 10, 2013 17:11:50
++00s: Evaluating parameter sets 1-100
++01s: Evaluating parameter sets 101-120
++01s: Evaluating parameter sets 121-140
++01s: Evaluating parameter sets 141-160
++02s: Evaluating parameter sets 161-180
++02s: Evaluating parameter sets 181-200
++02s: Evaluating parameter sets 201-220
++02s: Evaluating parameter sets 221-240
++02s: Evaluating parameter sets 241-260
++03s: Evaluating parameter sets 261-280
++03s: Evaluating parameter sets 281-300
++03s: Evaluating parameter sets 301-320
++03s: Evaluating parameter sets 321-340
++03s: Evaluating parameter sets 341-360
++04s: Evaluating parameter sets 361-380
++04s: Evaluating parameter sets 381-400
++04s: Evaluating parameter sets 401-420
++04s: Evaluating parameter sets 421-440
++04s: Evaluating parameter sets 441-460
++05s: Evaluating parameter sets 461-480
++05s: Evaluating parameter sets 481-500
++05s: Evaluating parameter sets 501-520
++05s: Evaluating parameter sets 521-540
++05s: Evaluating parameter sets 541-560
++06s: Evaluating parameter sets 561-580
++06s: Evaluating parameter sets 581-600
++06s: Evaluating parameter sets 601-620
++06s: Evaluating parameter sets 621-640
++06s: Evaluating parameter sets 641-660
++07s: Evaluating parameter sets 661-680
++07s: Evaluating parameter sets 681-700
++07s: Evaluating parameter sets 701-720
++07s: Evaluating parameter sets 721-740
++07s: Evaluating parameter sets 741-760
++08s: Evaluating parameter sets 761-780
++08s: Evaluating parameter sets 781-800
++08s: Evaluating parameter sets 801-820
++08s: Evaluating parameter sets 821-840
++08s: Evaluating parameter sets 841-860
++09s: Evaluating parameter sets 861-880
++09s: Evaluating parameter sets 881-900
++09s: Evaluating parameter sets 901-920
++09s: Evaluating parameter sets 921-940
++09s: Evaluating parameter sets 941-960
++10s: Evaluating parameter sets 961-980
++10s: Evaluating parameter sets 981-1000
++10s: Evaluating parameter sets 1001-1020
++10s: Evaluating parameter sets 1021-1040
++10s: Evaluating parameter sets 1041-1060
++11s: Evaluating parameter sets 1061-1080
++11s: Evaluating parameter sets 1081-1100
++11s: Evaluating parameter sets 1101-1120
++11s: Evaluating parameter sets 1121-1140
++12s: Evaluating parameter sets 1141-1160
++12s: Evaluating parameter sets 1161-1180
++12s: Evaluating parameter sets 1181-1200
++12s: Evaluating parameter sets 1201-1220
++12s: Evaluating parameter sets 1221-1240
++13s: Evaluating parameter sets 1241-1260
++13s: Evaluating parameter sets 1261-1280
++13s: Evaluating parameter sets 1281-1300
++13s: Evaluating parameter sets 1301-1320
++14s: Evaluating parameter sets 1321-1340
++14s: Evaluating parameter sets 1341-1360
++14s: Evaluating parameter sets 1361-1380
++14s: Evaluating parameter sets 1381-1400
++14s: Evaluating parameter sets 1401-1420
++15s: Evaluating parameter sets 1421-1440
++15s: Evaluating parameter sets 1441-1460
++15s: Evaluating parameter sets 1461-1480
++15s: Evaluating parameter sets 1481-1500
++15s: Evaluating parameter sets 1501-1520
++16s: Evaluating parameter sets 1521-1540
++16s: Evaluating parameter sets 1541-1560
++16s: Evaluating parameter sets 1561-1580
++16s: Evaluating parameter sets 1581-1600
++17s: Evaluating parameter sets 1601-1620
++17s: Evaluating parameter sets 1621-1640
++17s: Evaluating parameter sets 1641-1660
++17s: Evaluating parameter sets 1661-1680
++17s: Evaluating parameter sets 1681-1700
++18s: Evaluating parameter sets 1701-1720
++18s: Evaluating parameter sets 1721-1740
++18s: Evaluating parameter sets 1741-1760
++18s: Evaluating parameter sets 1761-1780
++18s: Evaluating parameter sets 1781-1800
++19s: Evaluating parameter sets 1801-1820
++19s: Evaluating parameter sets 1821-1840
++19s: Evaluating parameter sets 1841-1860
++19s: Evaluating parameter sets 1861-1880
++20s: Evaluating parameter sets 1881-1900
++20s: Evaluating parameter sets 1901-1920
++20s: Evaluating parameter sets 1921-1940
++20s: Evaluating parameter sets 1941-1960
++20s: Evaluating parameter sets 1961-1980
++21s: Evaluating parameter sets 1981-2000
+SCEMUA-SO run completed on: February 10, 2013 17:12:12
+The run took 0d 0h 0m 21s.
+Q: "...sara_stats": -------------------Begin of SARA epilogue----------------------------------
+Q: "...sara_stats": This output was generated by the SARA epilogue script
+Q: "...sara_stats": Your job [jobscript-mmsoda.pbs] has been executed in queue [express] with
+Q: "...sara_stats": the following PBS arguments:
+Q: "...sara_stats":    ncpus=1,neednodes=2,nodes=2,walltime=00:05:00
+Q: "...sara_stats":    .
+Q: "...sara_stats": Resources used in job [6674355.batch1.irc.sara.nl] with name [jobscript-mmsoda.pbs]:
+Q: "...sara_stats":    cput=00:14:01,mem=4482208kb,vmem=34419456kb,walltime=00:00:38
+Q: "...sara_stats":    gb-r41n4 gb-r41n3
+Q: "...sara_stats":    .
+Q: "...sara_stats": Job start and end time:
+Q: "...sara_stats":   Job start time: Sun Feb 10 17:11:37 CET 2013
+Q: "...sara_stats":   Job end time  : Sun Feb 10 17:12:25 CET 2013
+Q: "...sara_stats": ---------------------End of SARA epilogue----------------------------------
+I: Last 14 quoted lines were generated by promiser "/var/spool/torque/mom_priv/epilogue.d/sara_stats"

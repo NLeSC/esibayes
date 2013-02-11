@@ -1,0 +1,166 @@
+Current dir ($PWD) is:
+/home/jspaaks
+Changing into $PBS_O_WORKDIR
+Current dir is ($PWD):
+/home/jspaaks/gitrepo/esibayes/soda-so-lorenz
+Result of 'ls -l' is:
+total 400
+drwxr-xr-x 2 jspaaks jspaaks     40 Feb 10 14:41 data
+-rw-r--r-- 1 jspaaks jspaaks   1937 Feb 11 00:16 jobscript-mmsoda.pbs
+-rwxrwxr-x 1 jspaaks jspaaks 185287 Feb 11 00:05 libmmpi.so
+-rw-r--r-- 1 jspaaks jspaaks    791 Feb 11 00:06 makeconf.m
+-rw-r--r-- 1 jspaaks jspaaks     90 Feb 10 14:42 makeconstants.m
+-rw-r--r-- 1 jspaaks jspaaks    444 Feb 10 22:10 makedata.m
+-rw-rw-r-- 1 jspaaks jspaaks   1607 Feb  9 16:28 Makefile
+-rwxrwxr-x 1 jspaaks jspaaks  11969 Feb 11 00:05 matlabprog
+-rw-r--r-- 1 jspaaks jspaaks 182832 Feb 10 12:45 matode.pdf
+drwxr-xr-x 2 jspaaks jspaaks     66 Feb 10 16:34 model
+drwxr-xr-x 2 jspaaks jspaaks   4096 Feb 11 00:15 results
+Unloading module matlab
+
+Loading module openmpi/gnu
+
+Loading module mcr
+
+Starting MPI job on node gb-r3n12.irc.sara.nl
+node gb-r3n12 has 8 CPUs.
+node gb-r3n7 has 8 CPUs.
+Starting interactive MPI job on 2 batch nodes with a total of 16 CPUs.
+gb-r3n12
+gb-r3n12
+gb-r3n12
+gb-r3n12
+gb-r3n12
+gb-r3n12
+gb-r3n12
+gb-r3n12
+gb-r3n7
+gb-r3n7
+gb-r3n7
+gb-r3n7
+gb-r3n7
+gb-r3n7
+gb-r3n7
+gb-r3n7
+
+Adding the current workdir to the library path environment variable
+
+Result of 'ldd matlabprog' is:
+	linux-vdso.so.1 =>  (0x00007ffff8986000)
+	libmwmclmcrrt.so.8.0 => /sara/sw/mcr/64/v718/v80/runtime/glnxa64/libmwmclmcrrt.so.8.0 (0x00002b9dfde12000)
+	libm.so.6 => /lib/libm.so.6 (0x00002b9dfe07a000)
+	libmmpi.so => /home/jspaaks/gitrepo/esibayes/soda-so-lorenz/libmmpi.so (0x00002b9dfe2fc000)
+	libmpi.so.1 => /sara/sw/openmpi-gnu-1.6.3/lib/libmpi.so.1 (0x00002b9dfe503000)
+	libpthread.so.0 => /lib/libpthread.so.0 (0x00002b9dfeaad000)
+	libc.so.6 => /lib/libc.so.6 (0x00002b9dfecc9000)
+	libmwcpp11compat.so => /sara/sw/mcr/64/v718/v80/runtime/glnxa64/../../bin/glnxa64/libmwcpp11compat.so (0x00002b9dff02c000)
+	libdl.so.2 => /lib/libdl.so.2 (0x00002b9dff235000)
+	libstdc++.so.6 => /sara/sw/mcr/64/v718/v80/runtime/glnxa64/../../sys/os/glnxa64/libstdc++.so.6 (0x00002b9dff439000)
+	libgcc_s.so.1 => /sara/sw/mcr/64/v718/v80/runtime/glnxa64/../../sys/os/glnxa64/libgcc_s.so.1 (0x00002b9dff749000)
+	libibverbs.so.1 => /sara/sw/ofed/1.5.2/64/lib64/libibverbs.so.1 (0x00002b9dff95f000)
+	libtorque.so.2 => /usr/lib/libtorque.so.2 (0x00002b9dffb6c000)
+	libnuma.so.1 => /usr/lib/libnuma.so.1 (0x00002b9dffe84000)
+	librt.so.1 => /lib/librt.so.1 (0x00002b9e0008c000)
+	libnsl.so.1 => /lib/libnsl.so.1 (0x00002b9e00294000)
+	libutil.so.1 => /lib/libutil.so.1 (0x00002b9e004ad000)
+	/lib64/ld-linux-x86-64.so.2 (0x00002b9dfdbf2000)
+
+Result of 'ldd libmmpi.so' is:
+	linux-vdso.so.1 =>  (0x00007fffe0bff000)
+	libmwmclmcrrt.so.8.0 => /sara/sw/mcr/64/v718/v80/runtime/glnxa64/libmwmclmcrrt.so.8.0 (0x00002b1095d94000)
+	libm.so.6 => /lib/libm.so.6 (0x00002b1095ffc000)
+	libpthread.so.0 => /lib/libpthread.so.0 (0x00002b109627e000)
+	libc.so.6 => /lib/libc.so.6 (0x00002b109649a000)
+	libmwcpp11compat.so => /sara/sw/mcr/64/v718/v80/runtime/glnxa64/../../bin/glnxa64/libmwcpp11compat.so (0x00002b10967fd000)
+	libdl.so.2 => /lib/libdl.so.2 (0x00002b1096a06000)
+	libstdc++.so.6 => /sara/sw/mcr/64/v718/v80/runtime/glnxa64/../../sys/os/glnxa64/libstdc++.so.6 (0x00002b1096c0a000)
+	libgcc_s.so.1 => /sara/sw/mcr/64/v718/v80/runtime/glnxa64/../../sys/os/glnxa64/libgcc_s.so.1 (0x00002b1096f1a000)
+	/lib64/ld-linux-x86-64.so.2 (0x00002b109596b000)
+
+The current LD_LIBRARY_PATH is:
+/sara/sw/mcr/64/v718/v80/runtime/glnxa64:/sara/sw/mcr/64/v718/v80/bin/glnxa64:/sara/sw/mcr/64/v718/v80/sys/os/glnxa64:/sara/sw/mcr/64/v718/v80/sys/java/jre/glnxa64/jre/lib/amd64/native_threads:/sara/sw/mcr/64/v718/v80/sys/java/jre/glnxa64/jre/lib/amd64/server:/sara/sw/mcr/64/v718/v80/sys/java/jre/glnxa64/jre/lib/amd64:/sara/sw/openmpi-gnu-1.6.3/lib:/sara/sw/ofed/1.5.2/64/lib64:/sara/sw/libgfortran/32/1/lib:/home/jspaaks/gitrepo/esibayes/soda-so-lorenz
+
+Making directory: /scratch/6674707.batch1.irc.sara.nl/mmsoda_F5FW-E43U-OCZQ-Z594
+
+Setting MCR_CACHE_ROOT to: /scratch/6674707.batch1.irc.sara.nl/mmsoda_F5FW-E43U-OCZQ-Z594
+
+The current MCR_CACHE_ROOT is:
+/scratch/6674707.batch1.irc.sara.nl/mmsoda_F5FW-E43U-OCZQ-Z594
+
+Starting MPI run
+Setting verbosity to level 0.
+Setting the buffer size to 500000 bytes.
+Timings will be saved.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+
+% This is a pre-alpha release of the SODA simultaneous 
+% parameter optimization and data assimilation software.
+
+Setting 'initMethodNOKF' to 'reference'.
+Setting 'initValuesNOKF' to [].
+
+SODA-SO run started on: February 11, 2013 00:16:58
++00s: Evaluating parameter sets 1-50
++06m 12s: Evaluating parameter sets 51-60
++07m 38s: Evaluating parameter sets 61-70
++08m 55s: Evaluating parameter sets 71-80
++10m 13s: Evaluating parameter sets 81-90
++11m 33s: Evaluating parameter sets 91-100
++12m 55s: Evaluating parameter sets 101-110
++14m 20s: Evaluating parameter sets 111-120
++15m 49s: Evaluating parameter sets 121-130
++17m 17s: Evaluating parameter sets 131-140
++18m 43s: Evaluating parameter sets 141-150
++20m 10s: Evaluating parameter sets 151-160
++21m 38s: Evaluating parameter sets 161-170
++23m 08s: Evaluating parameter sets 171-180
++24m 40s: Evaluating parameter sets 181-190
++26m 12s: Evaluating parameter sets 191-200
++27m 45s: Evaluating parameter sets 201-210
++29m 26s: Evaluating parameter sets 211-220
++31m 04s: Evaluating parameter sets 221-230
++32m 43s: Evaluating parameter sets 231-240
++34m 22s: Evaluating parameter sets 241-250
++36m 04s: Evaluating parameter sets 251-260
++37m 47s: Evaluating parameter sets 261-270
++39m 31s: Evaluating parameter sets 271-280
++41m 17s: Evaluating parameter sets 281-290
++43m 05s: Evaluating parameter sets 291-300
++44m 54s: Evaluating parameter sets 301-310
++46m 45s: Evaluating parameter sets 311-320
++48m 37s: Evaluating parameter sets 321-330
++50m 32s: Evaluating parameter sets 331-340
++52m 28s: Evaluating parameter sets 341-350
++54m 24s: Evaluating parameter sets 351-360
+SODA-SO run completed on: February 11, 2013 01:13:20
+The run took 0d 0h 56m 21s.
+Q: "...sara_stats": -------------------Begin of SARA epilogue----------------------------------
+Q: "...sara_stats": This output was generated by the SARA epilogue script
+Q: "...sara_stats": Your job [jobscript-mmsoda.pbs] has been executed in queue [parallel] with
+Q: "...sara_stats": the following PBS arguments:
+Q: "...sara_stats":    neednodes=2,nodes=2,walltime=00:59:59
+Q: "...sara_stats":    .
+Q: "...sara_stats": Resources used in job [6674707.batch1.irc.sara.nl] with name [jobscript-mmsoda.pbs]:
+Q: "...sara_stats":    cput=14:59:40,mem=2649660kb,vmem=18437024kb,walltime=00:56:34
+Q: "...sara_stats":    gb-r3n12 gb-r3n7
+Q: "...sara_stats":    .
+Q: "...sara_stats": Job start and end time:
+Q: "...sara_stats":   Job start time: Mon Feb 11 00:16:52 CET 2013
+Q: "...sara_stats":   Job end time  : Mon Feb 11 01:13:28 CET 2013
+Q: "...sara_stats": ---------------------End of SARA epilogue----------------------------------
+I: Last 14 quoted lines were generated by promiser "/var/spool/torque/mom_priv/epilogue.d/sara_stats"
