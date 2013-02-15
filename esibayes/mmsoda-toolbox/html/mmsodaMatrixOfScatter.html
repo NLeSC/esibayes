@@ -234,15 +234,15 @@ Description
 </tr>
 <tr>
     <td valign="top"><span style="font-family:monospace"><span class="string">'nHistory'</span></span></td>
-    <td valign="top">This option is used to select a subset of the record in visualization. Valid values are<span style="font-family:monospace"><span class="string">'all'</span></span> (use all available data), <span style="font-family:monospace"><span class="string">'nSamples'</span></span> (use the last <span style="font-family:monospace">nSamples</span> samples), <span style="font-family:monospace"><span class="string">'noinit'</span></span> (use all available data except those from the initialization), <span style="font-family:monospace"><span class="string">'50%+'</span></span> (use the last half of the data record), <span style="font-family:monospace"><span class="string">'H2'</span></span> (use the last half of the data record), <span style="font-family:monospace"><span class="string">'75%+'</span></span> (use the last quarter of the data record), and <span style="font-family:monospace"><span class="string">'Q4'</span></span> (use the last quarter of the data record). The default behavior is to use the last <span style="font-family:monospace">5*nSamples</span> samples.</td>
+    <td valign="top">This option is used to select the last part of the record in visualization. Valid values are positive integer scalar, or you can use any of the following strings: <span style="font-family:monospace"><span class="string">'all'</span></span> (use all available data), <span style="font-family:monospace"><span class="string">'nSamples'</span></span> (use the last <span style="font-family:monospace">nSamples</span> samples), <span style="font-family:monospace"><span class="string">'noinit'</span></span> (use all available data except those from the initialization), <span style="font-family:monospace"><span class="string">'50%+'</span></span> (use the last half of the data record), <span style="font-family:monospace"><span class="string">'H2'</span></span> (use the last half of the data record), <span style="font-family:monospace"><span class="string">'75%+'</span></span> (use the last quarter of the data record), and <span style="font-family:monospace"><span class="string">'Q4'</span></span> (use the last quarter of the data record). The default behavior is to use the last <span style="font-family:monospace">5*nSamples</span> samples.</td>
 </tr>
 <tr>
     <td valign="top"><span style="font-family:monospace"><span class="string">'showNumberOfPoints'</span></span></td>
-    <td valign="top">Show the number of points that were used in constructing the figure as part of the   title. </td>
+    <td valign="top">Show the number of points that were used in constructing the figure as part of the   title. Default is <span style="font-family:monospace">true</span>.</td>
 </tr>
 <tr>
     <td valign="top"><span style="font-family:monospace"><span class="string">'showRejects'</span></span></td>
-    <td valign="top">Show the Metropolis-rejected samples.</td>
+    <td valign="top">Show the Metropolis-rejected samples. Default is <span style="font-family:monospace">true</span>.</td>
 </tr>
 <!--
 <tr>

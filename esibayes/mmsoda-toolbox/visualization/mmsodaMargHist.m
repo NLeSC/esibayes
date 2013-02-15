@@ -36,10 +36,52 @@ authorizedOptions = {'histMode',...
                      'yScale',...
                      'printToFile',...
                      'printToPNG',...
-                     'printToEPS'};
+                     'printToEPS',...
+                     'nHistory',...
+                     'showNumberOfPoints'};
 
 % overrule default options with user-specified options:
 mmsodaParsePairs()
+
+
+
+if ischar(nHistory)
+    % nHistory is the number of parameter sets that will
+    % be included, counting from the end of the record. The
+    % switch below converts any textual value to the corresponding
+    % number.
+    switch nHistory
+        case 'all'
+            nHistory = size(evalResults,1);
+            numberOfPointsStr = [char(39),'all parameter sets',char(39), ' (N = ',num2str(nHistory),')'];
+        case 'nSamples'
+            nHistory = conf.nSamples;
+            numberOfPointsStr = [char(39),'last ',num2str(nHistory),' parameter sets',char(39)];
+        case 'noinit'
+            nHistory = size(evalResults,1)-conf.nSamples;
+            numberOfPointsStr = [char(39),'all parameter sets except burn-in',char(39), ' (N = ',num2str(nHistory),')'];
+        case {'50%+','H2'}
+            nHistory = floor(size(evalResults,1)*0.50);
+            numberOfPointsStr = [char(39),'H2-parameter sets',char(39), ' (N = ',num2str(nHistory),')'];
+        case {'75%+','Q4'}
+            nHistory = floor(size(evalResults,1)*(1.00-0.75));
+            numberOfPointsStr = [char(39),'Q4-parameter sets',char(39), ' (N = ',num2str(nHistory),')'];
+    end
+else
+    numberOfPointsStr = [char(39),'last ',num2str(nHistory),' parameter sets',char(39)];
+end
+
+
+rStart = size(evalResults,1)-nHistory+1;
+rEnd = size(evalResults,1);
+
+if rStart>rEnd
+    % this happens when the visualization routine is called for
+    % the first time when nHistory is 'noinit' or 0
+    return
+end
+
+iterSelection = rStart:rEnd;
 
 nPoints = numel(iterSelection);
 
@@ -102,13 +144,13 @@ for p=conf.parCols-1
             numel(conf.parNamesTex)>=p&&...
             ~isempty(conf.parNamesTex{p})
         if showNumberOfPoints
-            title([conf.parNamesTex{p},' (N = ',num2str(nPoints),')'],'interpreter','tex')
+            title([conf.parNamesTex{p},' ',numberOfPointsStr],'interpreter','tex')
         else
             title(conf.parNamesTex{p},'interpreter','tex')
         end
     else
         if showNumberOfPoints
-            title([conf.parNames{p},' (N = ',num2str(nPoints),')'],'interpreter','none')
+            title([conf.parNames{p},' ',numberOfPointsStr],'interpreter','none')
         else
             title(conf.parNames{p},'interpreter','none')
         end

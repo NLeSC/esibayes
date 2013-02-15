@@ -1,5 +1,4 @@
-function setmpistuff(mpisize,mpirank,mpibuffersize)
+function setmpistuff(mpisize,mpirank)
 
 assignin('base','mpisize',mpisize);
 assignin('base','mpirank',mpirank);
-assignin('base','mpibuffersize',mpibuffersize);

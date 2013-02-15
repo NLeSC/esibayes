@@ -16,7 +16,7 @@ echo
 
 echo "Starting MPI job on node "`hostname`
 ncpus=`cat /proc/cpuinfo | grep processor | wc -l`
-((nprocs=4))
+((nprocs=5))
 echo
 
 echo "I detected that "`hostname`" has "$ncpus" processors. I'll start "$nprocs" processes."
@@ -38,17 +38,9 @@ echo
 
 module list
 
-if [ -d "$TMPDIR/mmsoda_Q6YL-IGW9-R254-XVG6" ]; then
-    echo "Directory "$TMPDIR/mmsoda_Q6YL-IGW9-R254-XVG6" already exists...emptying contents."
-    rm -rf "$TMPDIR/mmsoda_Q6YL-IGW9-R254-XVG6"
-    echo
-fi
-echo "Making directory: $TMPDIR/mmsoda_Q6YL-IGW9-R254-XVG6"
-mkdir "$TMPDIR/mmsoda_Q6YL-IGW9-R254-XVG6"
-echo
-
-echo "Setting MCR_CACHE_ROOT to: $TMPDIR/mmsoda_Q6YL-IGW9-R254-XVG6"
-export MCR_CACHE_ROOT="$TMPDIR/mmsoda_Q6YL-IGW9-R254-XVG6"
+mcrFolderName=`mktemp -d /scratch/mmsoda-XXXXXXXX`
+echo "Setting MCR_CACHE_ROOT to: $mcrFolderName"
+export MCR_CACHE_ROOT=$mcrFolderName
 echo
 
 echo "The current MCR_CACHE_ROOT is:"
@@ -58,4 +50,4 @@ echo
 echo "Starting MPI run"
 echo
 
-mpirun -n $nprocs ./matlabprog -v 0 -b 50000 -t
+mpirun -n $nprocs ./matlabprog -v 0 -t

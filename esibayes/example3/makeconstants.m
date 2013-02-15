@@ -3,7 +3,6 @@ function makeconstants()
 
 load('./data/lintank-obs.mat','obsTimes','obs')
 
-
 % initialize the value of the upper tank
 state1Init = 30.0;
 % initialize the value of the lower tank
