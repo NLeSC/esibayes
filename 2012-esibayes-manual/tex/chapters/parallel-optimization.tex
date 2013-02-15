@@ -1,5 +1,5 @@
 \chapter{Parallel optimization}
-
+\label{ch:parallel-optimization}
 
 Optimization algorithms such as SCEM-UA \citep{vrug-gupt-bout-soro-2003}, SODA \citep{vrug-diks-gupt-bout-vers-2005}, Differential Evolution \citep{stor-pric-1997}, or DREAM \citep{vrug-terb-diks-robi-hyma-higd-2009} repeatedly sample the parameter space. In this chapter, we look at how such a sampling algorithm may be parallelized, and we introduce a law that describes the speedup that can be expected from parallelizing\index{parallel} a particular piece of software.
 
@@ -10,24 +10,19 @@ S=\frac{1}{\alpha}
 \end{equation}
 in which $\alpha$ is the fraction of the program that cannot be parallelized.
 
-For the example in Figure~\ref{fig:walltime-comparison}, $\alpha$ is about 0.1 (not counting the overhead due to parallelization), therefore the theoretical maximum speedup is about 10x. For this example, a relatively large part of the time is spent in communication (`parallelization overhead'), the application is therefore \textit{fine-grained}\index{fine-grained}. If a parallel implementation of a program spends most of its time in calculation (as opposed to communication), it is said to be \textit{coarse-grained}\index{coarse-grained}. Most Monte-Carlo based optimization problems are coarse-grained, since the model CPU time is usually at least a few seconds, or sometimes even hours---in any case, much less than the time needed to send a parameter set over the network. Problems for which the communication time is negligible compared to the calculation time are said to be \textit{embarassingly parallel}\index{embarassingly parallel}.
-
-
+For the example in Figure~\ref{fig:walltime-comparison}, each task is about 10\% of the total walltime when executed sequentially, so $\alpha$ is about 0.1 (not counting the overhead due to parallelization), therefore the theoretical maximum speedup is about 10x. When executed in parallel, a relatively large part of the time is spent in communication (`parallelization overhead'). When this is the case, the application is said to be \textit{fine-grained}\index{fine-grained}. In contrast, if a parallel implementation of a program spends most of its time on calculation (as opposed to on communication), it is said to be \textit{coarse-grained}\index{coarse-grained}. Most Monte-Carlo based optimization problems are coarse-grained, since the model CPU time is usually at least a few seconds, or sometimes even hours---in any case, much less than the time needed to send a parameter set over the network. Problems for which the communication time is negligible compared to the calculation time are said to be \textit{embarassingly parallel}\index{embarassingly parallel}.
 
 
 \begin{figure}[htb]
   \centering
     \includegraphics[width=0.9\textwidth]{./../eps/serial-parallel-walltime.eps}
-  \caption{Walltime needed to complete 10 tasks 591--600 when evaluated in series or in parallel.}
+  \caption{Walltime needed to complete 10 tasks 591--600 when evaluated sequentially or in parallel. The actual speedup that is achieved in parallelizing this problem is less than the theoretical maximum speedup due to parallelization overhead. }
   \label{fig:walltime-comparison}
 \end{figure}
 
-
-
 \section{The Master-Worker paradigm}
 
-
-For Monte-Carlo type optimization, the Master-Worker paradigm\index{Master-Worker paradigm} (sometimes also referred to as Master-Slave\index{Master-Slave paradigm}) is the most common. In the Master-Worker paradigm, one of the available nodes is assigned the role of Master, while all the other nodes assume Worker roles.
+For Monte-Carlo type optimization, the Master-Worker paradigm\index{Master-Worker paradigm} (see Fig.~\ref{fig:master-worker-paradigm}; sometimes also referred to as Master-Slave paradigm\index{Master-Slave paradigm}) is the most common. In the Master-Worker paradigm, one of the available nodes is assigned the role of Master, while all the other nodes assume Worker roles.
 
 \subsection{Master side}
 

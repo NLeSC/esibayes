@@ -51,7 +51,7 @@ For the case where we have not just 1 observation, but instead have a time serie
 \begin{equation}\label{eq:heteroscedastic-normal-distribution-calibration}
 p\,(\,\hat{\mathbf{x}}\,|\,\tilde{\mathbf{x}},\boldsymbol\sigma\,) = \prod_{t=1}^{n_o} \frac{1}{\sqrt{2\pi\sigma_t^2}}\:\mathrm{exp}\left[{-\frac{1}{2}\left(\frac{\hat{x}_t-\tilde{x}_t}{\sigma_t}\right)^2}\right]\nonumber
 \end{equation}}:
-\begin{equation}\label{eq:normal-distribution-calibration}
+\begin{equation}\label{eq:normal-distribution-calibration-prod}
 p\,(\,\hat{\mathbf{x}}\,|\,\tilde{\mathbf{x}},\sigma\,) = \prod_{t=1}^{n_o} \frac{1}{\sqrt{2\pi\sigma^2}}\:\mathrm{exp}\left[{-\frac{1}{2}\left(\frac{\hat{x}_t-\tilde{x}_t}{\sigma}\right)^2}\right]
 \end{equation}
 Note that the multiplication of individual probabilities in Eq.~\ref{eq:normal-distribution-calibration} reflects the implicit assumption that the errors are independent---an assumption that is often violated.

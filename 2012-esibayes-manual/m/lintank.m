@@ -1,7 +1,7 @@
 function modelOutput = lintank(conf,constants,init,parVec,priorTimes)
 
 % unpack the information from the input arguments and assign it to the correct variables
-sodaUnpack()
+mmsodaUnpack()
 
 % initialize the current simulated time as the first entry in 'priorTimes'
 tNow = priorTimes(1);

@@ -30,7 +30,7 @@
 \usepackage[hang,flushmargin,multiple,perpage]{footmisc}
 \usepackage{float}
 \usepackage{longtable}
-
+\usepackage[titletoc]{appendix}
 
 \definecolor{orange}{rgb}{1,0.5,0}
 \definecolor{mkeywordcolor}{rgb}{0,0,1}
@@ -38,7 +38,7 @@
 \definecolor{mcommentcolor}{rgb}{0,0.5,0}
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
-\definecolor{lgray}{rgb}{0.93,0.93,0.93}
+\definecolor{lgray}{rgb}{0.9,0.9,0.9}
 \definecolor{darkgray}{rgb}{0.15,0.15,0.15}
 \definecolor{black}{rgb}{0,0,0}
 \definecolor{white}{rgb}{1,1,1}
@@ -195,14 +195,15 @@
    stringstyle=\color{mstringcolor},
 }
 
-\lstdefinestyle{bash}{basicstyle=\color{darkgray}\scriptsize\ttfamily,
+\lstdefinestyle{bash}{basicstyle=\color{black}\scriptsize\ttfamily,
                       language=bash,
                       keywords={},
-                      keywordstyle=\color{darkgray},
-                      commentstyle=\color{darkgray},
-                      stringstyle=\color{darkgray},
+                      keywordstyle=\color{black},
+                      commentstyle=\color{black},
+                      stringstyle=\color{black},
                       backgroundcolor=\color{lgray}
 }
+
 
 \lstdefinestyle{bashinline}{basicstyle=\color{black}\small\ttfamily,
                             language=bash,
@@ -214,8 +215,8 @@
 
 \lstdefinestyle{plaintext}{keywords={}}
 
-\lstset{language=matlab}
-\lstset{language=bash}
+%\lstset{language=matlab}
+%\lstset{language=bash}
 
 \newcommand{\insertemptypage}[0]{
 \vfill
@@ -244,15 +245,17 @@
 \input{./chapters/parallel-optimization}
 %\input{./chapters/piped}
 \input{./chapters/mmsoda}
-\input{./chapters/remote-graphical-applications.tex}
 
+
+\clearpage
+\addappheadtotoc
+\appendixpage
+\begin{appendices}
+\input{./chapters/remote-graphical-applications.tex}
 \input{./chapters/likelihood}
+\end{appendices}
 
 \backmatter
-
-%\input{./chapters/likelihood-definition-of-terms}
-
-
 
 \bibliographystyle{chicago}
 \bibliography{./../bib/literaturedb}
