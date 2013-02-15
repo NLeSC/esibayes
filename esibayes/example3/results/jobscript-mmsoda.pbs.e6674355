@@ -1,9 +1,0 @@
-Message from module openmpi/gnu/1.6.3: 
-This module is now default. If you encounter problems:
-recompile or use the 1.4.5 module. 
-More info:
-https://www.sara.nl/systems/lisa/news/2012-11-02-ompi1.4-ompi1.6
-Currently Loaded Modulefiles:
- 1) libgfortran/32/1   4) licenses/default   7) openmpi/gnu/1.6.3 
- 2) stdenv/1.1         5) sara/1             8) mcr/64/v718       
- 3) compilerwrappers   6) ofed/64/1.5.2     
