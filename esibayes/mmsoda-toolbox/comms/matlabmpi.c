@@ -1,19 +1,21 @@
 /*=================================================================
  *
- * matlabmpi - version 1.0
- *           - This program, including its separate functions,
- *             makes it possible for the MATLAB programmer to use
- *             MPI without calling MPI functions.
+ *  --- matlabmpi - version 1.0 ---
  *
- *             This program will always start a MATLAB function
- *             'matlabmain' with a verbosity parameter.
+ *  This program, including its separate functions, makes it
+ *  possible for the MATLAB programmer to use MPI without calling
+ *  MPI functions.
  *
- * Prerequisites:
+ *  This program will always start a MATLAB function 'matlabmain'
+ *  with a verbosity parameter and, if compiled with -DTIMINGS,
+ *  a "save timings" flag.
+ *
+ *  Prerequisites:
  *           - MATLAB (with compiler)
  *           - MCR (MATLAB Compiler Runtime) environment
  *           - MPI
  *
- * 2012-11-08 - Jeroen Engelberts (SARA)
+ * Copyright 2013 Jeroen Engelberts, SURFsara
  *=================================================================*/
 
 #include <stdio.h>
@@ -51,7 +53,7 @@ int run_main(int argc, char **argv)
     }
     else
     {
-    /* Call the library function */
+    /* Set mpisize, mpirank, verbosity and timings (on/off) */
         double *buf;
         MLmpi_size = mxCreateDoubleMatrix(1,1,mxREAL);
         buf = mxGetPr(MLmpi_size);
@@ -66,6 +68,7 @@ int run_main(int argc, char **argv)
         MLsavetimings = mxCreateDoubleMatrix(1,1,mxREAL);
         buf = mxGetPr(MLsavetimings);
         *buf = (double) savetimings;
+    /* Call the library function */
         mlfMatlabmain(MLverbosity,MLsavetimings);
     }
     /* Free the memory created */
