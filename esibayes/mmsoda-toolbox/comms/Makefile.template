@@ -1,4 +1,5 @@
 MPIINCLUDE=/sara/sw/openmpi-gnu-1.6.3/include
+LD_RUN_PATH=$(PWD)
 MFILES=./../mmsoda-toolbox/comms/*.m ./../mmsoda-toolbox/mmlib/*.m
 HELPER=./../mmsoda-toolbox/comms/helper.o
 MEXFILES=./../mmsoda-toolbox/comms/bcastvar.mexa64 ./../mmsoda-toolbox/comms/receivevar.mexa64 ./../mmsoda-toolbox/comms/sendvar.mexa64

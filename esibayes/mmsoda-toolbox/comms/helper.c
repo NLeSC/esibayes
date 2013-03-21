@@ -1,7 +1,11 @@
 /*=================================================================
- * The helper functions 
+ * --- helper.c - version 1.0 ---
  *
- * convvar 1.0 - completely in C
+ * This helper library contains three functions: DeserializeVar and
+ * SerializeVar are used to flatten MATLAB variables, even structs.
+ * SetTimeStamp is a function that is used for the timing options
+ * used in sendvar and receivar. This function will only be compiled
+ * when explicitely specified (-DTIMINGS).
  *
  * Copyright 2013 Jeroen Engelberts, SURFsara
  *	
@@ -12,12 +16,16 @@
 mxArray*
 DeserializeVar(const char *varin, unsigned long buflen)        
 {
-    char *tmpdir;
     char filename[2048];
+    char* tmpdir;
     mxArray *varout;
     MATFile* FPm;
     FILE *FPr;
 
+/* Check where a small file can be saved:
+ * 1. /dev/shm, if not try:
+ * 2. ${TMPDIR}, if set but not possible -> error; if not set, try:
+ * 3. /tmp, if not possible -> error */
     strcpy(filename,"/dev/shm/mmpi.XXXXXX");
     if ((mktemp(filename)==NULL) || ((FPr=fopen(filename,"w"))==NULL)) {
         tmpdir=getenv("TMPDIR");
@@ -34,9 +42,11 @@ DeserializeVar(const char *varin, unsigned long buflen)
             }
         }
     }
+/* Write flat data to temporary file and close it. */ 
     fwrite(varin, buflen, 1, FPr);
     fclose(FPr);
 
+/* Read temporary file as MATLAB.mat file */
     FPm = matOpen(filename,"r");
 	if (FPm==NULL){
         mexErrMsgTxt("Cannot open temporary file!");
@@ -60,6 +70,10 @@ SerializeVar(const mxArray *varin, unsigned long *buflen)
     MATFile* FPm;
     FILE *FPr;
 
+/* Check where a small file can be saved:
+ * 1. /dev/shm, if not try:
+ * 2. ${TMPDIR}, if set but not possible -> error; if not set, try:
+ * 3. /tmp, if not possible -> error */
     strcpy(filename,"/dev/shm/mmpi.XXXXXX");
     if ((mktemp(filename)==NULL) || ((FPm=matOpen(filename,"w"))==NULL)) {
         tmpdir=getenv("TMPDIR");
@@ -76,6 +90,7 @@ SerializeVar(const mxArray *varin, unsigned long *buflen)
             }
         }
     }
+/* Write input variable to MATLAB.mat temporary file */
     if (matPutVariable(FPm,"temp",varin)!=0){
         mexErrMsgTxt("Cannot write to temporary file!");
     }
@@ -83,6 +98,7 @@ SerializeVar(const mxArray *varin, unsigned long *buflen)
         mexErrMsgTxt("Cannot close temporary file!");
     }
     
+/* Read temporary file as flat file */
     FPr = fopen(filename,"rb");
 	if (FPr==NULL){
         mexErrMsgTxt("Cannot open raw temporary file!");
@@ -101,6 +117,7 @@ SerializeVar(const mxArray *varin, unsigned long *buflen)
 }
 
 #ifdef TIMINGS
+/* Special function for the eSiBayes project - for analysis of timings */
 int
 SetTimeStamp(uint8_T code)
 {
