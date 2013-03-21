@@ -1,23 +1,7 @@
 /*=================================================================
+ * The main routine analyzes all incoming (right-hand side) arguments 
  *
- * --- receivevar 1.0 - completely in C ---
- *
- * This function is used to receive a MATLAB variable from another
- * worker. 
- *
- * If no parameter is given, the worker listens for a variable from
- * *any* other worker. If a single parameter is given, it needs to
- * be the mpirank from the sender
- *
- * Example:
- * 
- * if (mpirank==0) then
- *   a=receivevar(1);
- * end
- * if (mpirank==1) then
- *   a=rand(5,5);
- *   sendvar(0,a);
- * end
+ * receivevar 1.0 - completely in C
  *
  * Copyright 2013 Jeroen Engelberts, SURFsara
  *	
@@ -61,7 +45,6 @@ mexFunction( int nlhs, mxArray *plhs[],
         mexErrMsgTxt("MPI is not initialized.");
     }
 #ifdef TIMINGS
-    /* Set timestamps 1 and 35 */
     ststruct=mexGetVariable("base","savetimings");
     if (ststruct!=NULL) {
         savetimings=(int)*mxGetPr(ststruct);
@@ -84,7 +67,6 @@ mexFunction( int nlhs, mxArray *plhs[],
     mpibuffer=malloc(mpibuffersize);
     MPI_Recv(mpibuffer,mpibuffersize,MPI_BYTE,source,102,MPI_COMM_WORLD,&status);
 #ifdef TIMINGS
-    /* Set timestamps 36 and 37 */
     if (savetimings==1) {
         SetTimeStamp(36);
         SetTimeStamp(37);
@@ -92,7 +74,6 @@ mexFunction( int nlhs, mxArray *plhs[],
 #endif
     plhs[0]=DeserializeVar(mpibuffer,mpibuffersize);
 #ifdef TIMINGS
-    /* Set timestamps 38 and 2 */
     if (savetimings==1) {
         SetTimeStamp(38);
         SetTimeStamp(2);

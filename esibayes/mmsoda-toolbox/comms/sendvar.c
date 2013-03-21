@@ -1,23 +1,7 @@
 /*=================================================================
+ * The main routine analyzes all incoming (right-hand side) arguments 
  *
- * --- sendvar 1.0 - completely in C ---
- *
- * This function is used to send a MATLAB variable to another
- * worker.
- *
- * This function requires two parameters. The first parameter is the
- * mpirank of the receiver (destination) of the variable. The second
- * parameter is the variable itself. 
- *
- * Example:
- * 
- * if (mpirank==0) then
- *   a=rand(5,5);
- *   sendvar(1,a);
- * end
- * if (mpirank==1) then
- *   a=receivevar;
- * end
+ * sendvar 1.0 - completely in C
  *
  * Copyright 2013 Jeroen Engelberts, SURFsara
  *	
@@ -66,7 +50,6 @@ mexFunction( int nlhs, mxArray *plhs[],
     dum=mxGetPr(prhs[0]);
     destination=(int)dum[0];
 #ifdef TIMINGS
-    /* Set timestamps 3 and 31 */
     ststruct=mexGetVariable("base","savetimings");
     if (ststruct!=NULL) {
         savetimings=(int)*mxGetPr(ststruct);
@@ -78,7 +61,6 @@ mexFunction( int nlhs, mxArray *plhs[],
 #endif
     mpibuffer=SerializeVar(prhs[1],&mpibuffersize);
 #ifdef TIMINGS
-    /* Set timestamps 32 and 33 */
     if (savetimings==1) {
         SetTimeStamp(32);
         SetTimeStamp(33);
@@ -87,7 +69,6 @@ mexFunction( int nlhs, mxArray *plhs[],
     MPI_Send(&mpibuffersize,1,MPI_UNSIGNED_LONG,destination,101,MPI_COMM_WORLD);
     MPI_Send(mpibuffer,mpibuffersize,MPI_BYTE,destination,102,MPI_COMM_WORLD);
 #ifdef TIMINGS
-    /* Set timestamps 34 and 4 */
     if (savetimings==1) {
         SetTimeStamp(34);
         SetTimeStamp(4);
