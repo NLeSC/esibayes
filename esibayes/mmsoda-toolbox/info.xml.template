@@ -3,7 +3,7 @@
 
 <matlabrelease>14</matlabrelease>
 
-<name>SODA</name>
+<name>MMSODA</name>
 
 <type>toolbox</type>
 
@@ -14,7 +14,7 @@
 <list>
    <listitem>
       <label>Help</label>
-      <callback>%shtml/contents.html</callback>
+      <callback>web(fullfile(mmsodaroot,'html','contents.html'),'-helpbrowser')</callback>
       <icon>$toolbox/matlab/icons/book_mat.gif</icon>
    </listitem>
 </list>

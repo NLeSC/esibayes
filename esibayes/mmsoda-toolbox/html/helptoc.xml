@@ -30,9 +30,7 @@
 
 <tocitem target="contents.html" >MMSODA Toolbox
 
-
    <tocitem image="$toolbox/matlab/icons/reficon.gif" target="contents.html">Toolbox Contents
-
 
       <tocitem image="$toolbox/matlab/icons/reficon.gif" target="contents-algorithm.html">algorithm
 
@@ -67,14 +65,8 @@
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="mmsodaAnalyzeTimings.html">mmsodaAnalyzeTimings</tocitem>
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="mmsodaMargHist.html">mmsodaMargHist</tocitem>
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="mmsodaMatrixOfScatter.html">mmsodaMatrixOfScatter</tocitem>
-<!--
-          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="mmsodaPlotConv.html">mmsodaPlotConv</tocitem>
--->
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="mmsodaPlotEnsemble.html">mmsodaPlotEnsemble</tocitem>
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="mmsodaPlotGelmanRubin.html">mmsodaPlotGelmanRubin</tocitem>
-<!--
-          <tocitem image="$toolbox/matlab/icons/help_fx.png" target="mmsodaPlotObj.html">mmsodaPlotObj</tocitem>
--->
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="mmsodaPlotPaCo.html">mmsodaPlotPaCo</tocitem>
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="mmsodaPlotSeq.html">mmsodaPlotSeq</tocitem>
           <tocitem image="$toolbox/matlab/icons/help_fx.png" target="mmsodaVisualization1.html">mmsodaVisualization1</tocitem>
@@ -114,8 +106,8 @@
 
    </tocitem>
 
-
    <tocitem image="$toolbox/matlab/icons/bookicon.gif" target="license.html">License</tocitem>
+
 
 
 

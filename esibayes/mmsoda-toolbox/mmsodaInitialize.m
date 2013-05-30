@@ -117,6 +117,23 @@ switch mmsodaOptions{1}
                         %'Start button->Desktop Tools->View Start Button Configuration Files...',...
                         %char(10),'...and click Refresh Start Button.'])
                 %end
+%                 
+%                 
+%                 lines = '';
+%                 fidr=fopen(fullfile(mmsodaroot,'info.xml.template'),'r');
+%                 tline = fgets(fidr);
+%                 while ischar(tline)
+%                     lines = [lines,tline];
+%                     tline = fgets(fidr);                    
+%                 end
+%                 fclose(fidr);
+%                 
+%                 fidw = fopen(fullfile(mmsodaroot,'info.xml'),'wt');
+%                 fprintf(fidw,lines,mmsodaroot);
+%                 status = fclose(fidw);
+%                 
+
+                
 
             else
                 if uioctave
