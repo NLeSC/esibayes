@@ -26,7 +26,7 @@ walltime = 55/60/24;
 nMembers = 5*3+1;  % rule of thumb: 5 times the number of states plus one
 doPlot = false
 drawInterval = 0
-startFromUniform = false;
+startFromUniform = true;
 saveInterval = 1;
 
 save('./results/conf.mat')
