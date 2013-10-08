@@ -1,7 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 
-<!---
+<!--
+
 % % LICENSE START
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % %                                                                           % %
@@ -23,8 +24,8 @@
 % %                                                                           % %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % % LICENSE END
--->
 
+-->
 
 
 <html>
@@ -89,19 +90,32 @@ Description
         <span style="font-family:monospace">paretoScores = mmsodaCalcPareto(objScores)</span>
     </p>
 <p>
-...
+This function calculates Pareto scores for a given list of N x M objective scores, N being the number of parameter samples that have been rated according to M objective functions.
 </p>
-
-</div>
-
-
-<div class="txt">
-    <p>
-        <span style="font-family:monospace">paretoScores = mmsodaCalcPareto(objScores,...)</span>
-    </p>
 <p>
-...
+The function supports 3 methods of calculating the Pareto scores:
+    <ol>
+        <li>Goldberg (1989)</li>
+        <li>Zitzler and Thiele (1999)</li>
+        <li>Vrugt (2003)</li>
+    </ol>
+    Which method is used is determined by an optional string argument like so:
 </p>
+<p>
+<span style="font-family:monospace">paretoScores = mmsodaCalcPareto(objScores,<span class="string">'g'</span>)</span>
+<p>
+<span style="font-family:monospace">paretoScores = mmsodaCalcPareto(objScores,<span class="string">'z'</span>)</span>
+<p>
+<span style="font-family:monospace">paretoScores = mmsodaCalcPareto(objScores,<span class="string">'v'</span>)</span>
+</p>
+<p>
+for Goldberg (1989), Zitzler and Thiele (1999), or Vrugt (2003) Pareto ranking, respectively. If no string argument is provided, <span style="font-family:monospace">paretoScores = mmsodaCalcPareto(objScores,<span class="string">'v'</span>)</span> is assumed.
+</p>
+
+<p>
+    Run <a href="matlab:mmsodaParetoPrinciple">this demo</a> to visually compare differences between methods.
+</p>
+
 
 </div>
 

@@ -1,7 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 
-<!---
+<!--
+
 % % LICENSE START
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % %                                                                           % %
@@ -23,8 +24,8 @@
 % %                                                                           % %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % % LICENSE END
--->
 
+-->
 
 
 <html>
@@ -86,7 +87,11 @@ Description
         <span style="font-family:monospace">[sequences,complexes,propChildren] = mmsodaRecalcPareto(conf,sequences,complexes,propChildren)</span>
     </p>
 <p>
-...
+    Pareto scores are fundamentally different from 'normal' objective scores, because their value changes as more points join the population. This means that the Pareto scores (but not the objective scores) need to be re-calculated every so often. This is why <span style="font-family:monospace">mmsodaRecalcPareto</span> differs from <span style="font-family:monospace">mmsodaCalcPareto</span>; although they are fundamentally the same, the latter does not take into account any existing Pareto scores, whereas the former does.
+</p>
+
+<p>
+Note that <span style="font-family:monospace">mmsodaRecalcPareto</span> takes a small liberty with calculating the Pareto scores: only the last rows of <span style="font-family:monospace">sequences</span> are included in recalculating the Pareto scores, since these are the relevant values in accepting or rejecting samples from <span style="font-family:monospace">propChildren</span> in the Metropolis scheme. While this greatly increases the efficiency of the optimization, it can lead to confusing Pareto scores in figures as well as in the output arguments. Note that this is easily mitigated by calling <span style="font-family:monospace">mmsodaRecalcPareto</span> once more before any visualization or analysis (but then using all rows of the <span style="font-family:monospace">sequences</span> array) instead of just <span style="font-family:monospace">sequences(end,:,:)</span>.
 </p>
 
 </div>

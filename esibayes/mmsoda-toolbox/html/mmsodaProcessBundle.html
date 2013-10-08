@@ -1,7 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 
-<!---
+<!--
+
 % % LICENSE START
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % %                                                                           % %
@@ -23,8 +24,8 @@
 % %                                                                           % %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % % LICENSE END
--->
 
+-->
 
 
 <html>
@@ -86,7 +87,10 @@ Description
         <span style="font-family:monospace">bundle = mmsodaProcessBundle(conf,constants,bundle)</span>
     </p>
 <p>
-...
+This function receives a bundle of tasks, which can either be a bundle of 'model' tasks, or a bundle of 'objective' tasks. <span style="font-family:monospace">mmsodaProcessBundle</span> then extracts the relevant information from the fields of the bundle-of-tasks structure array, and constructs the input arguments to either <a href="the-dynamic-model.html">the dynamic model</a>, or to <a href="the-objective-function.html">the objective function</a>. Once the input arguments have been constructed, <span style="font-family:monospace">mmsodaProcessBundle</span> calls either the model or one or more objective functions, then waits for the output, and fills in the relevant information in the bundle-of-tasks structure array. When all tasks have been evaluated, <span style="font-family:monospace">mmsodaProcessBundle</span> passes the bundle-of-tasks (or rather, a bundle-of-results) back to the 'Master' process (when running in parallel) or back to the caller function (when running sequentially).
+</p>
+<p>
+Note that when running sequentially, <span style="font-family:monospace">mmsodaProcessBundle</span> is part of the 'Master' process (i.e. it is a subfunction of <span style="font-family:monospace">mmsoda</span>), but when running in parallel, <span style="font-family:monospace">mmsodaProcessBundle</span> is a process in its own right (albeit a 'Worker' process).
 </p>
 
 </div>

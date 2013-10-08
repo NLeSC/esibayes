@@ -1,7 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 
-<!---
+<!--
+
 % % LICENSE START
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % %                                                                           % %
@@ -23,8 +24,8 @@
 % %                                                                           % %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % % LICENSE END
--->
 
+-->
 
 
 <html>
@@ -86,9 +87,28 @@ Description
         <span style="font-family:monospace">parsets = mmsodaEnKF(conf,parsets)</span>
     </p>
 <p>
-...
+This is the main function for the Ensemble Kalman Filter. It read the relevant data from the 4-D arrays holding information on the posterior states and ensemble member-specific variables, and subsequently constructs a bundle of model tasks. These tasks are sent off to the workers when running in parallel (or they are passed to a function when running sequentially). The workers (or function) receive the bundle of tasks, evaluate the model structure, starting from the posterior state and using the parameter vector as provided within the task's structure array.
 </p>
-
+<p>
+After all tasks have been evaluated, <span style="font-family:monospace">mmsodaEnKF</span> collects the results and inserts them at the right location in the 4-D arrays holding the prior state values and ensemble member-specific variables.
+ </p>
+<p>
+If <span style="font-family:monospace">conf.modeStr</span> is <span style="font-family:monospace">'scemua'</span>, no state updating is required and the model result provides a prediction for all time steps in <span style="font-family:monospace">conf.priorTimes</span>, after which <span style="font-family:monospace">mmsodaEnKF</span> continues with constructing a bundle of objective tasks (see below).
+ </p>
+<p>
+If <span style="font-family:monospace">conf.modeStr</span> is <span style="font-family:monospace">'reset'</span>, the prior states are reset to the value of the observations; the model result provides a prediction for the next few time steps in <span style="font-family:monospace">conf.priorTimes</span> (up to and including the time at which the next data assimilation needs to be performed, or <span style="font-family:monospace">assimAtIx(iDAStep)</span>, with <span style="font-family:monospace">assimAtIx = find(conf.assimilate)</span>). Once the prior states have been calculated, they are updated by resetting them to the value of the observation. The process of repeatedly evaluating the model for part of the <span style="font-family:monospace">conf.priorTimes</span> array continues until the end of <span style="font-family:monospace">conf.priorTimes</span>
+is reached, after which <span style="font-family:monospace">mmsodaEnKF</span> continues with constructing a bundle of objective tasks (see below).
+ </p>
+<p>
+If <span style="font-family:monospace">conf.modeStr</span> is <span style="font-family:monospace">'soda'</span>,  the model result provides a prediction for the next few time steps in <span style="font-family:monospace">conf.priorTimes</span> (up to and including the time at which the next data assimilation needs to be performed, or <span style="font-family:monospace">assimAtIx(iDAStep)</span>, with <span style="font-family:monospace">assimAtIx = find(conf.assimilate)</span>). Once the prior states have been calculated for a given ensemble member, the Ensemble Kalman Filter function are run in order to determine the magnitude of the innovations. The innovations are then used to update the prior perturbed state values to the posterior state values. The latter is used as the initial state for the next chunk of time steps. The process of repeatedly evaluating the model for part of the <span style="font-family:monospace">conf.priorTimes</span> array continues until the end of <span style="font-family:monospace">conf.priorTimes</span>
+is reached, after which <span style="font-family:monospace">mmsodaEnKF</span> continues with constructing a bundle of objective tasks (see below).
+ </p>
+<p>
+    At this point in the <span style="font-family:monospace">mmsodaEnKF</span> function, the prior state values have been determined for all ensemble members (of which there is just 1 if <span style="font-family:monospace">conf.modeStr</span> is <span style="font-family:monospace">'scemua'</span> or <span style="font-family:monospace">'reset'</span>), for all times in <span style="font-family:monospace">conf.priorTimes</span> except the first since that is the time of the (first) initial state, and for all parameter sets in the current generation.
+</p>
+<p>
+    <span style="font-family:monospace">mmsodaEnKF</span> subsequently constructs a bundle of 'objective' tasks. Each task contains the prior state values (as well as ensemble member-specific variables) for all time steps. The bundle of tasks is divided over the available workers (when running in parallel) or passed on to a function (when running sequentially). The workers (or function) receives the objective tasks, extracts the information necessary to evaluate the objective function, and returns one or more objective scores. The score(s) are then included in column number <span style="font-family:monospace">conf.llCols</span> in the output argument <span style="font-family:monospace">parsets</span>. Each sample of the parameter space thus becomes associated with one or more scores.
+</p>
 </div>
 
 
