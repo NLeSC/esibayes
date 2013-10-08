@@ -1,0 +1,41 @@
+
+
+# This file contains command line calls to various programs, such as
+# a PDF viewer and a browser. Uncomment or edit lines that apply to your 
+# system. Currently, MMSODA can handle 'browser=' and 'pdfviewer='. Note 
+# that these keywords 'browser=' and 'pdfviewer=' must start at the first 
+# character on the line for this to work properly.
+# 
+# Empty lines and lines starting with a '#' are ignored.
+
+########################################################################
+##                         browser calls:                             ##
+########################################################################
+
+# Firefox on Linux:
+#browser=firefox %s
+
+
+# Firefox on Windows (default install folder):
+#browser="C:\Program Files (x86)\Mozilla Firefox\Firefox.exe" %s
+
+
+# Microsoft Internet Explorer on Windows (default install folder):
+#browser="C:\Program Files (x86)\Internet Explorer\iexplore.exe" "%s"
+
+
+########################################################################
+##                        pdfviewer calls:                            ##
+########################################################################
+
+# On Linux, some people use 'evince' to view PDF:
+#pdfviewer=evince %s
+
+
+# Adobe Acrobat Reader 10.0 on Windows (default install folder):
+# (You may have to change the version as Adobe updates its Reader).
+#pdfviewer="C:\Program Files (x86)\Adobe\Reader 10.0\Reader\AcroRd32.exe" /n "%s"
+
+
+# SumatraPDF on Windows (default install folder):
+#pdfviewer="C:\Program Files (x86)\SumatraPDF\SumatraPDF.exe" "%s"
