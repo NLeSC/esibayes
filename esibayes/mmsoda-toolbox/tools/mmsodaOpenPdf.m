@@ -1,7 +1,8 @@
 function mmsodaOpenPdf(url)
 % <a href="matlab:web(fullfile(mmsodaroot,'html','mmsodaOpenPdf.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>
 
-% % 
+
+% %
 
 % % LICENSE START
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
@@ -27,40 +28,61 @@ function mmsodaOpenPdf(url)
 
 
 
+disp(['Function ''',mfilename,''' is looking up the ''pdfviewer='' information',char(10),...
+    'to open the PDF in an external viewer. If unsuccessful, you need to edit',char(10),...
+    '''',fullfile(mmsodaroot,'helper-apps.txt'),'''.',char(10),...
+    'See also <a href="matlab:doc ',mfilename,'">doc ',mfilename,'</a>.'])
+
+
 s = 'pdfviewer=';
 
+showOnErr = 'pdfviewer-not-set.html';
+
 fid = fopen(fullfile(mmsodaroot,'helper-apps.txt'),'rt');
+try
+    if fid~=-1
 
-if fid~=-1
-
-    line='';
-    while ~strncmp(line,s,numel(s))
-        line = fgetl(fid);
-    end
-    status = fclose(fid);
-
-    if numel(line)>numel(s)
-        
-        oldpath = getenv('LD_LIBRARY_PATH');
-        newpath = getenv('PATH');
-        
-        try
-            setenv('LD_LIBRARY_PATH',newpath);
-            % select the part after 'pdfviewer=':
-            formatStr = line(numel(s)+1:end);
-            % escape any backslashes:
-            formatStr = strrep(formatStr,'\','\\');
-            % append & to detach the system process from the MATLAB process:
-            formatStr = [formatStr,' &'];
-            system(sprintf(formatStr,url));
-            setenv('LD_LIBRARY_PATH',oldpath);
-        catch
-            setenv('LD_LIBRARY_PATH',oldpath);
+        line='';
+        while ~strncmp(line,s,numel(s))
+            line = fgetl(fid);
+            if ~ischar(line)
+                status = fclose(fid);
+                error(['No entry found for ''',s,'''.'])
+            end
         end
-    else
-        web(fullfile(mmsodaroot,'html','pdfviewer-not-set.html'),'-helpbrowser')
-    end
+        status = fclose(fid);
 
-else
-    error(['I dont''t see the ''helper-apps.txt'' file in ',mmsodaroot,'. Aborting.'])
+        if numel(line)>numel(s)
+
+            oldpath = getenv('LD_LIBRARY_PATH');
+            newpath = getenv('PATH');
+
+            try
+                setenv('LD_LIBRARY_PATH',newpath);
+                % select the part after 'browser=':
+                formatStr = line(numel(s)+1:end);
+                % escape any backslashes:
+                formatStr = strrep(formatStr,'\','\\');
+                % append & to detach the system process from the MATLAB process:
+                formatStr = [formatStr,' &'];
+                str = sprintf(formatStr,url);
+                [status,tmp] = system(str);
+                if status~=0
+                    web(fullfile(mmsodaroot,'html',showOnErr),'-helpbrowser')
+                end
+                setenv('LD_LIBRARY_PATH',oldpath);
+            catch
+                setenv('LD_LIBRARY_PATH',oldpath);
+            end
+        else
+            web(fullfile(mmsodaroot,'html',showOnErr),'-helpbrowser')
+        end
+
+    else
+        error(['I dont''t see the ''helper-apps.txt'' file in ',mmsodaroot,'. Aborting.'])
+    end
+catch
+    web(fullfile(mmsodaroot,'html',showOnErr),'-helpbrowser')
 end
+
+
