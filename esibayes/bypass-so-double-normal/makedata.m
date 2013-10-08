@@ -28,6 +28,8 @@ function makedata()
 constants = load('./data/constants.mat');
 conf = load('./results/conf.mat')
 
+conf.nOptPars = numel(conf.parNames);
+
 obsX = -20:0.1:20;
 obsDens = repmat(NaN,size(obsX));
 for k=1:numel(obsX)
