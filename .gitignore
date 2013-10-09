@@ -16,4 +16,11 @@ mcode/bypass-so-shifted-rastrigin/results/bypass-so-tempstate.mat
 mcode/bypass-so-shifted-rastrigin/results/conf-out.mat
 mcode/bypass-so-shifted-rastrigin/results/conf.mat
 
+mcode/bypass-so-shifted-rosenbrock/data/constants.mat
+mcode/bypass-so-shifted-rosenbrock/results/bypass-so-results.mat
+mcode/bypass-so-shifted-rosenbrock/results/bypass-so-tempstate.mat
+mcode/bypass-so-shifted-rosenbrock/results/conf-out.mat
+mcode/bypass-so-shifted-rosenbrock/results/conf.mat
+
+
 mcode/mmsoda-toolbox/helper-apps.txt
