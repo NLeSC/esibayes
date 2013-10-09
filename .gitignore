@@ -30,11 +30,16 @@ mcode/bypass-so-shifted-sphere/results/conf.mat
 
 mcode/scemua-so-hymod-batch/data/constants.mat
 mcode/scemua-so-hymod-batch/data/leafriver-art.mat
-mcode/scemua-so-hymod-batch/results/bypass-so-results.mat
-mcode/scemua-so-hymod-batch/results/bypass-so-tempstate.mat
+mcode/scemua-so-hymod-batch/results/scemua-so-results.mat
 mcode/scemua-so-hymod-batch/results/conf-out.mat
 mcode/scemua-so-hymod-batch/results/conf.mat
 
+mcode/soda-mo-lintank/data/constants.mat
+mcode/soda-mo-lintank/data/obs.mat
+mcode/soda-mo-lintank/results/soda-mo-results.mat
+mcode/soda-mo-lintank/results/soda-mo-tempstate.mat
+mcode/soda-mo-lintank/results/conf-out.mat
+mcode/soda-mo-lintank/results/conf.mat
 
 
 mcode/mmsoda-toolbox/helper-apps.txt
