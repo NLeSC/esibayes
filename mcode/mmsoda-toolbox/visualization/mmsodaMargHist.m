@@ -38,6 +38,7 @@ histMode='absolute';
 nBins = min([50,round(conf.nSamples/5)]);
 N = min([size(evalResults,1),5*conf.nSamples]);
 iterSelection = size(evalResults,1)+(-N+1:0);
+nHistory = 5*conf.nSamples;
 clear N
 %faceColor = [0.42,0.84,0];
 faceColor = [0.9373,0.6863,0.1608];
@@ -97,7 +98,7 @@ else
 end
 
 
-rStart = size(evalResults,1)-nHistory+1;
+rStart = max(1,size(evalResults,1)-nHistory+1);
 rEnd = size(evalResults,1);
 
 if rStart>rEnd
