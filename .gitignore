@@ -1,6 +1,9 @@
-mcode/mmsoda-toolbox/helper-apps.txt
+bypass-mo-triangle/results/bypass-mo-results.mat
+bypass-mo-triangle/results/bypass-mo-tempstate.mat
+bypass-mo-triangle/results/conf-out.mat
+bypass-mo-triangle/results/conf.mat
 mcode/bypass-so-double-normal/data/constants.mat
 mcode/bypass-so-shifted-rastrigin/data/constants.mat
 mcode/bypass-so-shifted-rosenbrock/data/constants.mat
 mcode/bypass-so-shifted-sphere/data/constants.mat
-
+mcode/mmsoda-toolbox/helper-apps.txt
