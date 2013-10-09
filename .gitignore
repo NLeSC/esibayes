@@ -48,5 +48,12 @@ mcode/soda-so-lintank/results/soda-so-tempstate.mat
 mcode/soda-so-lintank/results/conf-out.mat
 mcode/soda-so-lintank/results/conf.mat
 
+mcode/soda-so-lorenz/data/constants.mat
+mcode/soda-so-lorenz/data/obs.mat
+mcode/soda-so-lorenz/results/soda-so-results.mat
+mcode/soda-so-lorenz/results/soda-so-tempstate.mat
+mcode/soda-so-lorenz/results/conf-out.mat
+mcode/soda-so-lorenz/results/conf.mat
+
 
 mcode/mmsoda-toolbox/helper-apps.txt
