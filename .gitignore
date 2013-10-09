@@ -1,1 +1,6 @@
 mcode/mmsoda-toolbox/helper-apps.txt
+mcode/bypass-so-double-normal/data/constants.mat
+mcode/bypass-so-shifted-rastrigin/data/constants.mat
+mcode/bypass-so-shifted-rosenbrock/data/constants.mat
+mcode/bypass-so-shifted-sphere/data/constants.mat
+
