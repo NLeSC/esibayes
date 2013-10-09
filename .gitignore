@@ -31,6 +31,7 @@ mcode/bypass-so-shifted-sphere/results/conf.mat
 mcode/scemua-so-hymod-batch/data/constants.mat
 mcode/scemua-so-hymod-batch/data/leafriver-art.mat
 mcode/scemua-so-hymod-batch/results/scemua-so-results.mat
+mcode/scemua-so-hymod-batch/results/scemua-so-tempstate.mat
 mcode/scemua-so-hymod-batch/results/conf-out.mat
 mcode/scemua-so-hymod-batch/results/conf.mat
 
