@@ -1,30 +1,20 @@
 function varargout = mmsoda(varargin)
-% % Serial/parallel, single-objective/multi-objective SCEM-UA and SODA using MPI
-% %
-% % <a href="matlab:web(fullfile(mmsodaroot,'html','mmsoda.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>
-% %
-% % Before you can access MMSODA's functionality, you need to run the
-% % following command once (per MATLAB session):
-% % >> mmsoda --docinstall
-% % <a href="matlab:mmsoda --docinstall">Install documentation now</a>
-% %
-% %
-% % Also, make sure to check out the <a href="matlab:mmsodaOpenPdf(fullfile(mmsodaroot,'pdf','2013-mmsoda-manual.pdf'))">manual</a> (link requires 'pdfviewer=' to be set
-% % in <a href="matlab:edit(fullfile(mmsodaroot,'helper-apps.txt'))">helper-apps.txt</a>; see <a href="matlab:web(fullfile(mmsodaroot,'html','mmsodaOpenPdf.html'),'-helpbrowser')">doc mmsodaOpenPdf</a>).
-% %
-% %
-% % This software is based on sequential and parallel implementations of
-% % single-objective and multi-objective versions of SCEM-UA and SODA
-% % algorithms by J.A. Vrugt
-% %
-% %
-% % Author         : Jurriaan H. Spaaks
-% % Date           : March 2013
-% % Matlab release : 2008a on Windows 7 64-bit
-% %                  2012a on Lubuntu Linux 12.04 64-bit
+% Serial and parallel SCEM-UA, MOSCEM-UA and SODA using MPI
+%
+% <a href="matlab:web(fullfile(mmsodaroot,'html','mmsoda.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>
+%
+% If you haven't used the SODA documentation before, you need to
+% install it by running >> mmsoda --docinstall
+% <a href="matlab:mmsoda --docinstall">Install documentation now</a>
+%
+%
+% based on SCEM-UA, MOSCEMUA and SODA algorithms by J.A. Vrugt
+%
+% Author         : Jurriaan H. Spaaks
+% Date           : July 2012
+% Matlab release : 2012a on Win7/64 and Octave 3.2 on Lubuntu 12.04 64-bit
 
-
-% %
+% % 
 
 % % LICENSE START
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
@@ -49,13 +39,6 @@ function varargout = mmsoda(varargin)
 % % LICENSE END
 
 
-
-
-if nargin ==0 && nargout ==0
-    mmsoda --help
-    return
-end
-
 if ~isempty(varargin) && ischar(varargin{1})
 
     mmsodaInitialize(varargin)
@@ -65,38 +48,23 @@ elseif isempty(varargin)
     % display disclaimer:
     disp_disclaimer
 
-    try
+    try 
         conf = load('./results/conf.mat');
     catch
         error('I can''t find the *.mat file that holds the SODA configuration.')
     end
 
-    if ~isdeployed
-        try
-            % add constants variables to the base workspace such that the
-            % runmpirankOther can retrieve it from there
-            evalin('base','constants = load(''./data/constants.mat'');')
-        catch
-            if ~strcmp(conf.modeStr,'bypass')
-                disp('I don''t see the constants file...attempting to proceed without it.')
-            end
-        end
-    end
-
-
     % define whether the run is parallel or sequential
     conf.executeInParallel = isdeployed;
     if conf.executeInParallel
-        %disp('DEBUG: before verbosity')
         verbosity = evalin('caller','verbosity');
-        %disp('DEBUG: after verbosity')
     end
 
     % verify the integrity of conf's fieldnames:
     mmsodaVerifyFieldNames(conf,'check')
 
-    conf.nOptPars = numel(conf.parNames);
-
+    conf.nOptPars = numel(conf.parNames);    
+    
     % load default settings from file:
     if isfield(conf,'useIniFile')
         fileStr = fullfile(mmsodaroot,conf.useIniFile);
@@ -133,6 +101,16 @@ elseif isempty(varargin)
     end
 
 
+
+    % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+    % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+    % % % % % %                                             % % % % % %
+    % % % % % %      SODA  INITIALIZATION FINISHED          % % % % % %
+    % % % % % %                                             % % % % % %
+    % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+    % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+
     % check if any inconsistencies can be identified from conf's fields:
     conf = check_input_integrity(conf,nargout);
     checkIfFoldersExist();
@@ -150,33 +128,31 @@ elseif isempty(varargin)
     % Indicate the meaning of each column in 'evalResults':
     if conf.isSingleObjective
         conf.evalCol = 1;                                     % model evaluation counter
-        conf.parCols = conf.evalCol+(1:conf.nOptPars);        % model parameters
-        conf.llCols = conf.parCols(end)+1;                    % log likelihood
+        conf.parCols = conf.evalCol+(1:conf.nOptPars);  % model parameters
+        conf.llCols = conf.parCols(end)+1;                 % log likelihood
         conf.paretoCol = NaN;                                 % pareto score not defined for single-objective
-        conf.objCol = conf.llCols(1);                         % SCEM-UA's decision-mkaing is based on this col
+        conf.objCol = conf.llCols(1);                      % SCEM-UA's decision-mkaing is based on this col
     elseif conf.isMultiObjective
         conf.evalCol = 1;                                     % model evaluation counter
-        conf.parCols = conf.evalCol+(1:conf.nOptPars);        % model parameters
-        conf.llCols = conf.parCols(end)+(1:conf.nObjs);       % log likelihoods
-        conf.paretoCol = conf.llCols(end)+1;                  % pareto score
-        conf.objCol = conf.paretoCol;                         % SCEM-UA's decision-mkaing is based on this col
+        conf.parCols = conf.evalCol+(1:conf.nOptPars);  % model parameters
+        conf.llCols = conf.parCols(end)+(1:conf.nObjs); % log likelihoods
+        conf.paretoCol = conf.llCols(end)+1;               % pareto score
+        conf.objCol = conf.paretoCol;                      % SCEM-UA's decision-mkaing is based on this col
     else
     end
 
     if conf.executeInParallel
         % specify the number of workers
-        %disp('DEBUG: before mpisize')
         if ~(exist('mpisize','var')==1)
             whoami()
         end
-        %disp('DEBUG: after verbosity')
         conf.nWorkers = mpisize-1;
     else
         conf.nWorkers = 1;
     end
 
     conf.optStartTime = now;
-
+    
     if isfield(conf,'walltime')
         conf.optEndTime = conf.optStartTime + conf.walltime;
     end
@@ -196,20 +172,10 @@ elseif isempty(varargin)
             warning(['Variable ''',varName,''' is not a valid configuration variable.'])
         end
     end
-
-
-
     save('./results/conf-out.mat','-struct','conf',saveList{:})
-
-    % check if there are any results in ./result that are inconsistent with
-    % the current configuration:
-    mmsodaCheckForOldResults(conf);
-
-
     if conf.executeInParallel
         bcastvar(0,conf);
     end
-
     clear authorizedFieldNames
     clear iVar
     clear nVars
@@ -226,14 +192,6 @@ elseif isempty(varargin)
     disp([char(10),upper([conf.modeStr,soMoStr]),' run started on: ',datestr(conf.optStartTime,...
         'mmmm dd, yyyy'),' ',datestr(conf.optStartTime,'HH:MM:SS')])
     clear s
-
-    % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-    % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-    % % % % % %                                             % % % % % %
-    % % % % % %      SODA  INITIALIZATION FINISHED          % % % % % %
-    % % % % % %                                             % % % % % %
-    % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-    % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
 
     if conf.startFromUniform
@@ -277,11 +235,11 @@ elseif isempty(varargin)
             'sequences','complexes')
 
         thatconf = conf;
-
+        
         ignoreFields = {'startFromUniform','nModelEvalsMax','optStartTime',...
                         'saveInterval','verboseOutput','doPlot','executeInParallel',...
                         'saveEnKFResults','drawInterval','optEndTime',...
-                        'visualizationCall','nWorkers','avgWalltimePerParSet'};
+                        'visualizationCall','nWorkers'};
         if ~isempty(mmsodaDiffStruct(thisconf,thatconf,ignoreFields))
             error('Configuration is different from last time. Aborting.')
         else
@@ -292,31 +250,34 @@ elseif isempty(varargin)
             clear s
         end
 
-        nModelEvals = evalResults(end,conf.evalCol);
+        nModelEvals = evalResults(end,1)
         if conf.verboseOutput
             disp([upper(conf.modeStr),' run continues at ',num2str(nModelEvals+1), ' model evaluations.'])
         end
 
 
-%         % temporarily reset the value of 'conf.startFromUniform' in
-%         % order to invoke an additional test in 'check_input_integrity'
-%         conf.startFromUniform = true;
-%         check_input_integrity(conf,nargout)
-%         % restore the old value
-%         conf.startFromUniform = false;
+        % temporarily reset the value of 'conf.startFromUniform' in
+        % order to invoke an additional test in 'check_input_integrity'
+        conf.startFromUniform = true;
+        check_input_integrity(conf,nargout)
+        % restore the old value
+        conf.startFromUniform = false;
 
     end
     conf = orderfields(conf);
-
+    
     iGeneration  = (size(evalResults,1)-conf.nSamples)/conf.nOffspring;
-
 
     if conf.saveInterval>0
         save(['./results/',conf.modeStr,soMoStr,'-tempstate.mat'],'-mat',...
                             'evalResults','critGelRub','sequences','metropolisRejects','conf','complexes')
     end
     if conf.doPlot
-        eval(conf.visualizationCall)
+        if ~isempty(getenv('DISPLAY'))
+            eval(conf.visualizationCall)
+        else
+            warning('DISPLAY variable not set-- can''t plot anything.')
+        end
     end
 
 
@@ -331,7 +292,7 @@ elseif isempty(varargin)
 
     try
         while mmsodaContinue(conf,nModelEvals)
-
+            
             propChildren = repmat(NaN,[conf.nOffspringPerCompl,conf.objCol,conf.nCompl]);
             for iCompl=1:conf.nCompl
 
@@ -358,11 +319,8 @@ elseif isempty(varargin)
 
             if conf.isMultiObjective
                 % recalculate the global pareto scores based on the objectives
-                % scores of the last row in each sequence, plus all scores in
-                % complexes, plus all scores in propChildren:
-                lastRowsOfSequences = sequences(end,:,:);
-                [lastRowsOfSequences,complexes,propChildren] = mmsodaRecalcPareto(conf,lastRowsOfSequences,complexes,propChildren);
-                sequences = cat(1,sequences(1:end-1,:,:),lastRowsOfSequences);
+                % scores for all points evaluated so far:
+                [sequences,complexes,propChildren] = mmsodaRecalcPareto(conf,sequences,complexes,propChildren);
             end
 
             sequences = mmsodaPrepSeqArray(conf,sequences);
@@ -417,10 +375,10 @@ elseif isempty(varargin)
 
             if conf.doPlot &&...
                 (mod(iGeneration,conf.drawInterval)==0)
-                if isunix && isempty(getenv('DISPLAY'))
-                    warning('DISPLAY variable not set-- can''t plot anything.')
-                else
+                if ~isempty(getenv('DISPLAY'))
                     eval(conf.visualizationCall)
+                else
+                    warning('DISPLAY variable not set-- can''t plot anything.')
                 end
             end
 
@@ -461,8 +419,6 @@ elseif isempty(varargin)
         end
         conf.avgWalltimePerParSet = {v,u};
 
-        conf = orderfields(conf);
-
         disp([upper([conf.modeStr,soMoStr]),' run completed on: ',datestr(conf.optEndTime,...
             'mmmm dd, yyyy'),' ',datestr(conf.optEndTime,'HH:MM:SS')])
 
@@ -471,9 +427,6 @@ elseif isempty(varargin)
 
         % save the results
         save(['./results/',conf.modeStr,soMoStr,'-results.mat'],...
-             'evalResults','critGelRub','sequences','metropolisRejects','conf','complexes')
-
-        save(['./results/',conf.modeStr,soMoStr,'-tempstate.mat'],'-mat',...
              'evalResults','critGelRub','sequences','metropolisRejects','conf','complexes')
 
 
@@ -541,7 +494,7 @@ if nOut<2
         '[evalResults,critGelRub,conf] = mmsoda()',char(10),...
         '[evalResults,critGelRub,sequences,conf] = mmsoda()',char(10),...
         '[evalResults,critGelRub,sequences,metropolisRejects,conf] = mmsoda()',char(10)])
-
+    
 elseif all(nOut>[2:5])
     error(['Function ',39,mfilename,39,' should have at most 5 output arguments.',char(10),...
         '[evalResults,critGelRub] = mmsoda()',char(10),...
@@ -586,7 +539,7 @@ elseif strcmp(conf.modeStr,'bypass')
     conf.nDASteps = 0;
     conf.nPrior = 0;
 else
-    % do nothing
+    % do nothing 
 end
 
 if strcmp(conf.modeStr,'scemua') & ~isfield(conf,'nOutputs')
@@ -625,7 +578,8 @@ if conf.convUseLastFraction>1
     error(['Value of parameter ',39,'conf.convUseLastFraction',39,' should be smaller than or equal to 1.'])
 end
 
-if mod((conf.nModelEvalsMax-conf.nSamples),conf.nOffspring)~=0
+if conf.startFromUniform &&...
+        mod((conf.nModelEvalsMax-conf.nSamples),conf.nOffspring)~=0
 
     suggestedValue = conf.nSamples+ceil((conf.nModelEvalsMax-...
         conf.nSamples)/conf.nOffspring)*conf.nOffspring;
@@ -712,7 +666,7 @@ clear rmFields
 
 if any(strcmp(conf.modeStr,{'bypass','reset','soda'}))
    if isfield(conf,'nOutputs')
-       error(['Configuration variable ''nOutputs'' is not allowed in ',char(39),conf.modeStr,char(39),' mode.'])
+       error(['nOutputs is not allowed in ',char(39),conf.modeStr,char(39), 'mode.'])
    end
 end
 
@@ -755,14 +709,9 @@ for k=1:numel(shouldBeRowList)
 end
 clear shouldBeRowList TMP k
 
-% if any(strcmp(conf.modeStr,{'soda','reset'}))
-%     if ~isequal(size(conf.obsState),[conf.nStatesKF,conf.nPrior])%~(isvector(conf.obsState) && isrow(conf.obsState))
-%         error('conf.obsState should be of size [conf.nStatesKF,conf.nPrior].')
-%     end
-% end
 if any(strcmp(conf.modeStr,{'soda','reset'}))
-    if ~isequal(size(conf.obsState),[conf.nStatesKF,conf.nDASteps])
-        error('conf.obsState should be of size [conf.nStatesKF,conf.nDASteps].')
+    if ~isequal(size(conf.obsState),[conf.nStatesKF,conf.nPrior])%~(isvector(conf.obsState) && isrow(conf.obsState))
+        error('conf.obsState should be of size [conf.nStatesKF,conf.nPrior].')
     end
 end
 C ={'doPlot','realPartOnly','startFromUniform',...
@@ -790,7 +739,7 @@ switch conf.modeStr
             conf.nMembers = 1;
         end
     case 'soda'
-
+        
         if size(conf.covModelPert,1) ~= conf.nStatesKF
             error('size(covModelPert,1) is not equal to conf.nStatesKF')
         end
@@ -816,7 +765,7 @@ switch conf.modeStr
         if size(conf.covObsPert,3) ~= conf.nDASteps
             error('size(conf.covObsPert,3) ~= conf.nDASteps')
         end
-
+        
     case {'reset'}
         if ~isfield(conf,'nMembers')
             disp(['Setting value of ',char(39),'conf.nMembers',char(39),' to 1.'])
@@ -826,26 +775,12 @@ switch conf.modeStr
             disp(['Resetting value of ',char(39),'conf.nMembers',char(39),' to 1.'])
             conf.nMembers = 1;
         end
-
-        if ~isfield(conf,'covObsPert')
-            disp(['Setting value of ',char(39),'conf.covObsPert',char(39),' to 0.'])
-            conf.covObsPert = zeros(conf.nStatesKF,conf.nStatesKF);
-        end
-        if isfield(conf,'covObsPert') && ~isequal(conf.covObsPert,0)
+        if conf.covObsPert~=0
             disp(['Resetting value of ',char(39),'conf.covObsPert',char(39),' to 0.'])
-            conf.covObsPert = zeros(conf.nStatesKF,conf.nStatesKF);
+            conf.covObsPert = 0;
         end
         if size(conf.covObsPert,3) == 1
             conf.covObsPert = repmat(conf.covObsPert,[1,1,conf.nDASteps]);
-        end
-
-        if ~isfield(conf,'covModelPert')
-            disp(['Setting value of ',char(39),'conf.covModelPert',char(39),' to 0.'])
-            conf.covModelPert = zeros(conf.nStatesKF,conf.nStatesKF);
-        end
-        if isfield(conf,'covModelPert') && ~isequal(conf.covModelPert,0)
-            disp(['Resetting value of ',char(39),'conf.covModelPert',char(39),' to 0.'])
-            conf.covModelPert = zeros(conf.nStatesKF,conf.nStatesKF);
         end
         if size(conf.covModelPert,3) == 1
             conf.covModelPert = repmat(conf.covModelPert,[1,1,conf.nDASteps]);
@@ -854,17 +789,17 @@ switch conf.modeStr
 end
 
 
-if isfield(conf,'initValuesNOKF') && ~isempty(conf.initValuesNOKF) && ~mmsodaIsColumn(conf.initValuesNOKF)
+if isfield(conf,'initValuesNOKF') && ~isempty(conf.initValuesNOKF) && ~iscolumn(conf.initValuesNOKF)
     error('''conf.initValuesNOKF'' should be a column vector.')
 end
 
-if isfield(conf,'initValuesKF') && ~isempty(conf.initValuesKF) && ~mmsodaIsColumn(conf.initValuesKF)
+if isfield(conf,'initValuesKF') && ~isempty(conf.initValuesKF) && ~iscolumn(conf.initValuesKF)
     error('''conf.initValuesKF'' should be a column vector.')
 end
 
 
 if any(strcmp(conf.modeStr,{'reset','soda'}))
-
+    
     if xor(isfield(conf,'initMethodNOKF'),isfield(conf,'initValuesNOKF'))
         error('You have to have both ''initMethodNOKF'' and ''initValuesNOKF'' for this to work.')
     else
@@ -878,19 +813,13 @@ if any(strcmp(conf.modeStr,{'reset','soda'}))
 end
 
 
-if isunix && isempty(getenv('DISPLAY')) && conf.doPlot
-    warning('DISPLAY variable not set-- can''t plot anything.')
-    disp('Resetting ''conf.doPlot'' to ''false''.')
-    conf.doPlot = false;
-end
-
 
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 function disp_disclaimer
 
 disp([10,...
-    '% This is a pre-alpha release of the MMSODA simultaneous ',10,...
+    '% This is a pre-alpha release of the SODA simultaneous ',10,...
     '% parameter optimization and data assimilation software.',10])
 
 if uimatlab
