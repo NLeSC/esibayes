@@ -1,4 +1,6 @@
 
+# Local updates on this file are ignored by git. To enable tracking changes, do
+# git update-index --no-assume-unchanged
 
 # This file contains command line calls to various programs, such as
 # a PDF viewer and a browser. Uncomment or edit lines that apply to your 
