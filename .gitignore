@@ -69,3 +69,4 @@ mcode/soda-so-lorenz/results/soda-so-tempstate.mat
 mcode/soda-so-lorenz/results/conf-out.mat
 mcode/soda-so-lorenz/results/conf.mat
 
+*.m~
