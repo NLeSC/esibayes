@@ -198,6 +198,8 @@ elseif isempty(varargin)
     end
 
 
+    conf = orderfields(conf);
+    saveList = sort(saveList);
 
     save('./results/conf-out.mat','-struct','conf',saveList{:})
 
