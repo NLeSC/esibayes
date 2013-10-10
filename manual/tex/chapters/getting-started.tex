@@ -32,9 +32,9 @@ The LISA cluster currently\footnote{LISA's hardware is subject to regular upgrad
 
 \section{Transferring files to and from the LISA cluster}
 
-This section documents the necessary steps for connecting to the LISA cluster from a local Windows machine. First, make sure that you have an account for accessing LISA\footnote{You can get an account by following the instructions from \burl{https://www.surfsara.nl/systems/lisa/account}}. In order to use the cluster effectively, you need to be able to copy files to and from your user directory on the cluster. The LISA cluster is set up such that it exclusively allows connections that are secure, such as Secure File Transfer Protocol (SFTP\index{SFTP}) connections or Secure Shell (SSH\index{SSH}) connections. There are many programs that can establish secure connections, but we will use WinSCP\index{WinSCP}.
+This section documents the necessary steps for connecting to the LISA cluster from a local Windows machine. First, make sure that you have an account for accessing LISA\footnote{You can get an account by following the instructions from \burl{https://www.surfsara.nl/systems/lisa/account}.}. In order to use the cluster effectively, you need to be able to copy files to and from your user directory on the cluster. The LISA cluster is set up such that it exclusively allows connections that are secure, such as Secure File Transfer Protocol (SFTP\index{SFTP}) connections or Secure Shell (SSH\index{SSH}) connections. There are many programs that can establish secure connections, but we will use WinSCP\footnote{If you elect not to use WinSCP, make sure that your alternative program can handle file permissions correctly when transferring between Windows and Linux. Also make sure that line endings are converted properly. Check \burl{http://en.wikipedia.org/wiki/Newline} for an interesing read on the many ways in which end-of-line characters may cause you trouble. Finally, if you have a text file with Windows-style line endings (CR/LF) and you want to convert it to Linux-style line endings (LF), make sure to check out the free, open-source, Notepad++\index{Notepad++} editor at \burl{http://notepad-plus-plus.org/}. This excellent program lets you convert between line endings in just a few mouse clicks.}\index{WinSCP}.
 
-\smallq{Download WinSCP from \burl{http://sourceforge.net/projects/winscp/files/WinSCP/4.3.7/winscp437.zip/download}\footnote{By the time you read this, there may be a more recent version available---just substitute `4.3.7' and `437' from the address with the version you want. For an overview of available versions, look here: \burl{http://sourceforge.net/projects/winscp/files/WinSCP/}.}\footnote{Life is somewhat easier for Linux users. Most Linux distributions come with built-in support for secure connections. Just start up your regular file browser (e.g. PCManFM, Thunar, Nautilus, etc) and type in the address bar \burl{sftp://jspaaks@lisa.sara.nl/home/jspaaks}. Don't forget to substitute your own username. This should automatically establish a connection between your machine and the remote system (i.e. the cluster). Fill in your credentials when prompted.}. Unzip into your local home directory or a USB drive. Double-click on `WinSCP.exe' to start the WinSCP program. The program will prompt you for some input (see Fig.~\ref{fig:winscp-session-dialog}). Under `Host name:', fill in `lisa.sara.nl'. Make sure that the port number is set to `22'. Under `User name:', fill in your LISA cluster username. You can leave the `Password' field blank, the program will prompt you later. Make sure `SFTP' is selected as the file protocol. Click on `Save...' to store these settings if you like. Then press the `Login' button to establish the SFTP connection to the LISA cluster. The program will throw a warning about the RSA key fingerprint file. The number shown in the warning dialog should be the same as the number posted at \burl{https://www.surfsara.nl/systems/shared/ssh} (table at the bottom of the web page). If it is, press `Yes' and then `Continue' in the next dialog box. As a final step, fill in your password when prompted. You should now see two panes, one for the local machine on the left and one for the remote machine, i.e. the LISA cluster, on the right (see Fig.~\ref{fig:winscp-two-panes}).}
+\smallq{Download WinSCP from \burl{http://sourceforge.net/projects/winscp/files/WinSCP/4.3.7/winscp437.zip/download}\footnote{By the time you read this, there may be a more recent version available---just substitute `4.3.7' and `437' from the address with the version you want. For an overview of available versions, look here: \burl{http://sourceforge.net/projects/winscp/files/WinSCP/}.}\footnote{Life is somewhat easier for Linux users. Most Linux distributions come with built-in support for secure connections. Just start up your regular file browser (e.g. PCManFM, Thunar, Nautilus, etc) and type in the address bar \burl{sftp://jspaaks@lisa.surfsara.nl/home/jspaaks}. Don't forget to substitute your own username. This should automatically establish a connection between your machine and the remote system (i.e. the cluster). Fill in your credentials when prompted.}. Unzip into your local home directory or a USB drive. Double-click on `WinSCP.exe' to start the WinSCP program. The program will prompt you for some input (see Fig.~\ref{fig:winscp-session-dialog}). Under `Host name:', fill in `lisa.surfsara.nl'. Make sure that the port number is set to `22'. Under `User name:', fill in your LISA cluster username. You can leave the `Password' field blank, the program will prompt you later. Make sure `SFTP' is selected as the file protocol. Click on `Save...' to store these settings if you like. Then press the `Login' button to establish the SFTP connection to the LISA cluster. The program will throw a warning about the RSA key fingerprint file. The number shown in the warning dialog should be the same as the number posted at \burl{https://www.surfsara.nl/systems/shared/ssh} (table at the bottom of the web page). If it is, press `Yes' and then `Continue' in the next dialog box. As a final step, fill in your password when prompted. You should now see two panes, one for the local machine on the left and one for the remote machine, i.e. the LISA cluster, on the right (see Fig.~\ref{fig:winscp-two-panes}).}
 
 \begin{figure}[htbp]
   \centering
@@ -50,7 +50,7 @@ This section documents the necessary steps for connecting to the LISA cluster fr
   \label{fig:winscp-two-panes}
 \end{figure}
 
-\smallq{Download `tutorial.zip' from \url{http:\\www.????.??} and unzip into your (local) home directory or a USB drive.\index{todo}}
+\smallq{You should have received `tutorial.zip' with this document. Unzip it into your (local) home directory or a USB drive.}
 
 \smallq{In WinSCP, use the left pane to navigate to the directory where you unzipped the tutorial files. Copy the `tutorial' folder to the remote directory by selecting it on the left and pressing the F5 button. The tutorial folder should now be present in the right pane as well.}
 
@@ -59,7 +59,7 @@ This section documents the necessary steps for connecting to the LISA cluster fr
 This section covers how you can issue commands from your local machine, which then get executed by the remote system (LISA). Issuing commands on the LISA cluster can be accomplished through a so-called \textit{terminal emulator} program\index{terminal emulator}. A terminal emulator provides you with a prompt at which you can type commands which are then executed on the remote system. It doesn't matter whether the remote system is located just across the street or halfway around the world, you can still operate the remote system through the terminal emulator. However, it is important to note that the LISA cluster, like virtually all clusters\footnote{See \burl{http://www.top500.org/statistics/} for concurrent statistics on the World's top 500 of supercomputers.}, runs under the Linux operating system. The commands that you type at the terminal emulator prompt therefore need to be Linux commands, which, as you will see later, are somewhat different from the Windows commands that you may be familiar with.
 
 %
-Let's first download the terminal emulator PuTTY\index{PuTTY} from \url{http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html} into your home directory. Double-click the executable to run the program. You should now see the dialog from Fig.~\ref{fig:putty-session-dialog}. Under `Host name (or IP address)', fill in `lisa.sara.nl' and press the `Open' button. PuTTY first prompts you for your username and then for your password. Fill in your LISA credentials.\footnote{On Linux, bring up a terminal (Ctrl-Alt-t on most distributions) and type in \texttt{ssh jspaaks@lisa.sara.nl}, substituing your own username in stead of \texttt{jspaaks}. Fill in your credentials when prompted.}
+Let's first download the terminal emulator PuTTY\index{PuTTY} from \url{http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html} into your home directory. Double-click the executable to run the program. You should now see the dialog from Fig.~\ref{fig:putty-session-dialog}. Under `Host name (or IP address)', fill in `lisa.surfsara.nl' and press the `Open' button. PuTTY first prompts you for your username and then for your password. Fill in your LISA credentials.\footnote{On Linux, bring up a terminal (Ctrl-Alt-t on most distributions) and type in \texttt{ssh jspaaks@lisa.surfsara.nl}\index{Linux commands!ssh@\texttt{ssh}}, substituing your own username in stead of \texttt{jspaaks}. Fill in your credentials when prompted.}
 
 \begin{figure}[htbp]
   \centering
@@ -76,7 +76,7 @@ jspaaks@login2:~$
 where \texttt{jspaaks} is the username and \texttt{login2}\index{login2@\texttt{login2}} is the name of the remote machine. There are, in fact, two machines on which you can log in remotely: besides \lstinline[style=bashinline]{login2}, there's also \lstinline[style=bashinline]{login1}\index{login1@\texttt{login1}}. For our intents and purposes, it doesn't matter whether you are logged in to \lstinline[style=bashinline]{login1} or \lstinline[style=bashinline]{login2}, but if you want to change from one to the other, you can do so with:
 \begin{lstlisting}[style=basic,style=bash]
 jspaaks@login2:~$ ssh login1
-\end{lstlisting}
+\end{lstlisting}\index{Linux commands!ssh@\texttt{ssh}}
 
 When you're done with the terminal, you can close the connection using:
 \index{Linux commands!logout@\texttt{logout}}
@@ -96,7 +96,7 @@ which returns:
 It is worth noting that a list of useful commands and terms has been included in the Index section at the back of this document (under `Linux commands').
 
 So, \texttt{pwd} currently returns \texttt{/home/jspaaks/}. \texttt{/home/jspaaks/} is the user's home directory; it is the Linux equivalent of `C:\textbackslash{}Users\textbackslash{}jspaaks' on Windows. Note that on Linux the directory separator \index{/@\texttt{/} (directory separator, Linux)} is the forward slash `/' sign, whereas~Windows uses the backslash `\textbackslash{}'\index{\textbackslash{}@\texttt{\char`\\
-} (directory separator, Windows)} sign. You may be wondering why there isn't a `C:\textbackslash{}' in the address returned by \texttt{pwd}. The reason is simple: Linux uses `/'\index{/@\texttt{/} (file system root, Linux)}\index{root@root (file system)} instead of `C:\textbackslash{}' \footnote{Somewhat confusingly, the account that has Administrator privileges is also referred to as `root' on Linux systems, but this account has no relation with the root of the file system.\index{root@root (system administrator)}}. The first forward slash in the address is referred to as the `file system root'. Under the file system root is a directory `home', which contains a subdirectory `jspaaks' in which the user `jspaaks' keeps all his personal files. As a matter of fact, \texttt{/home/jspaaks} is the only place on this file system that user `jspaaks' is permitted to write anything, meaning that Linux will not allow you to save any files in other users' home directories (although you are allowed to read some of them, depending on how the \textit{permissions}\index{permission} on that directory are set. More about permissions later).
+} (directory separator, Windows)} sign. You may be wondering why there isn't a `C:\textbackslash{}' in the address returned by \texttt{pwd}. The reason is simple: Linux uses `/'\index{/@\texttt{/} (file system root, Linux)}\index{root@root (file system)} instead of `C:\textbackslash{}'. The first forward slash in the address is referred to as the `file system root'\footnote{Somewhat confusingly, the account that has Administrator privileges is also referred to as `root' on Linux systems, but this account has no relation with the root of the file system.\index{root@root (system administrator)}}. Under the file system root is a directory `home', which contains a subdirectory `jspaaks' in which the user `jspaaks' keeps all his personal files. As a matter of fact, \texttt{/home/jspaaks} is the only place on this file system that user `jspaaks' is permitted to write anything, meaning that Linux will not allow you to save any files in other users' home directories (although you are allowed to read some of them, depending on how the \textit{permissions}\index{permission} on that directory are set. More about permissions later).
 
 You can view the contents of the current directory using the \texttt{ls} (short for `list') command:\index{Linux commands!ls@\texttt{ls}}
 \begin{lstlisting}[style=basic,style=bash]
@@ -136,9 +136,9 @@ jspaaks@login2:~$ ls
 anewdir   aNewDir   tutorial
 jspaaks@login2:~$
 \end{lstlisting}
-The different approaches that Windows and Linux take in regard to case-sensitivity of their respective file systems can lead to errors, especially when copying back and forth between Windows and Linux systems. For example, the contents of \lstinline{anewdir} and \lstinline{aNewDir} may get merged when they are copied to a Windows system, since Windows regards the folders as being one and the same. To avoid these kinds of errors, the naming convention on Linux is to use only lower caps names for files and folders, so \lstinline{anewdir} is preferable to  \lstinline{aNewDir}.
+The different approaches that Windows and Linux take regarding case-sensitivity of their respective file systems can lead to errors, especially when copying back and forth between Windows and Linux systems. For example, the contents of \lstinline{anewdir} and \lstinline{aNewDir} may get merged when they are copied to a Windows system, since Windows regards the folders as being one and the same. To avoid these kinds of errors, the naming convention on Linux is to use only lower caps names for files and folders, so \lstinline{anewdir} is preferable to  \lstinline{aNewDir}.
 
-Regardless of your native operating system, your code will be more robust and more portable if you stick to these 2~simple rules when naming your files:
+Regardless of your native operating system, your code will be more robust and more portable if you stick to these 2~simple rules when naming your files and directories:
 \begin{enumerate}
 \item{don't use spaces;}
 \item{limit yourself to the following subset of characters:\\ \lstinline[style=bashinline]{abcdefghijklmnopqrstuvwxyz_-.0123456789},\\ and, if you must, \lstinline[style=bashinline]{ABCDEFGHIJKLMNOPQRSTUVWXYZ} .}\footnote{You'll thank me later!}
@@ -155,6 +155,15 @@ or like this if you want to remove multiple directories:
 jspaaks@login2:~$ rmdir anewdir aNewDir
 \end{lstlisting}
 
+
+You can delete a file using the \texttt{rm} command:
+\begin{lstlisting}[style=basic,style=bash]
+jspaaks@login2:~$ rm the-file-you-want-removed.txt
+\end{lstlisting}\index{Linux commands!rm@\texttt{rm}}
+or like this if you want to remove multiple files:
+\begin{lstlisting}[style=basic,style=bash]
+jspaaks@login2:~$ rm first-file.txt second-file.zip third-file.m etcetera.exe
+\end{lstlisting}
 
 For many commands, you can specify options. Options to a given command must generally be provided directly after the command itself, i.e.~before any other argument such as input or output files.  The option argument consists of one dash followed by one (case-sensitive) letter. For example, if you want \texttt{ls} to list the contents of the current directory in more detail, you can use the \texttt{-l} option (that is the letter~\textit{l} for `long', not the number~1):
 \begin{lstlisting}[style=basic,style=bash]
@@ -255,6 +264,8 @@ Now suppose we don't want to move a file but we want to copy it. This can be don
 jspaaks@login2:~$ cp with-a-file-in-it.txt copy-of-the-text-file
 \end{lstlisting}
 The copy command \lstinline[style=bashinline]{cp} expects the file-to-be-copied as its first argument, and the name of the file-to-copy-to as its second argument. Further note that you don't have to specify extensions such as `.txt' in the filename for the operating system to know that \lstinline[style=bashinline]{copy-of-the-text-file} is a text file, as you would normally do on Windows. Nevertheless, including the extension in the file name allows easy identification of the type of file, for example when listing the contents of a directory with \lstinline[style=bashinline]{ls}, especially when combined with wildcards such as \lstinline[style=bashinline]{*}:
+
+\Needspace{12\baselineskip}
 
 \begin{lstlisting}[style=basic,style=bash]
 jspaaks@login2:~/tutorial/a$ ls -l
@@ -414,10 +425,11 @@ jspaaks@login2:~$
 
 \section{Jobscripts and the scheduler}
 
-So far, we've executed all our commands on just one machine, `login2'. As long as the task at hand is a small one, this isn't a problem, but if the task takes a long time to run, it can be advantageous to divide the task into smaller parts, and let each part be computed by a separate machine. The way this works on LISA is as follows: you write a small text file, referred to as a  \textit{jobscript}\index{jobscript}. The jobscript lays out the requirements of the task,  such as the number of nodes that is needed, the program that you want to run, and where the necessary data can be found. The jobscript is then sent to a program known as the \textit{scheduler}\index{scheduler}. The scheduler runs on LISA and manages the requests from all users, such that the computation resources are used in an optimal way, while taking into account things like different priority levels, the number and type of nodes that are needed, and so on.
+So far, we've executed all our commands on just one machine, `login2'. As long as the task at hand is a small one, this isn't a problem, but if the task takes a long time to run, it can be advantageous to divide the task into smaller parts, and let each part be computed by a separate machine. The way this works on LISA is as follows: you write a small text file, referred to as a  \textit{jobscript}\index{jobscript}. The jobscript lays out the requirements of the task, such as the number of nodes that are needed, the program that you want to run, and where the necessary data can be found. The jobscript is then sent to a program known as the \textit{scheduler}\index{scheduler}. The scheduler runs on LISA and manages the requests from all users, such that the computation resources are used in an optimal way, while taking into account things like different priority levels, the number and type of nodes that are needed, and so on.
 
 Listing~\ref{list:pbs-example-script} is an example of a simple jobscript.
 
+\Needspace{12\baselineskip}
 
 \begin{lstlisting}[style=basic,style=bash,style=numbered,caption={Example of a jobscript.},label=list:pbs-example-script]
 #PBS -lwalltime=00:05:00
@@ -434,17 +446,17 @@ echo `date`: job ends
 exit
 \end{lstlisting}
 
-This jobscript asks the scheduler for a time slot of 5 minutes (\lstinline[style=bashinline]{lwalltime=00:05:00}), and will be using one machine (\lstinline[style=bashinline]{lnodes=1}) with 8 cores in its CPU (\lstinline[style=bashinline]{cores8}). Only one of these cores will actually be doing something though, because the number of processes per node is just~1 (\lstinline[style=bashinline]{ppn=1}). The next line tells the scheduler that the rest of the jobscript is written in a scripting language called `bash'\index{bash}, which is a very common scripting language on Linux. As a matter of fact, you already know it, since the shell program you have been using is bash. The script then echoes the current date and time plus the message `: job starts' to the standard output\index{standard output} (more about standard input and standard output later\index{todo}).  Line 8 is the core of the script, in that it specifies what program needs to be run. In our case, it says that it wants to start an instance of the Octave software (\lstinline[style=bashinline]{octave}) and that this instance needs to be started with the \lstinline[style=bashinline]{--silent} and \lstinline[style=bashinline]{--no-window-system} options, such that it will not display the usual welcome message and that it will not use any of the graphical output methods (i.e.\, Octave's \lstinline[style=bashinline]{figure} command will not yield the usual output). The string following the \lstinline[style=bashinline]{--eval} option specifies the Octave command that will be run by the Octave software. Here, it is simply the \lstinline[style=bashinline]{disp('hello world')} command, but it could be any string that qualifies as valid Octave code, including function names and script names. (In a minute, it will become apparent why I added  the \lstinline[style=bashinline]{pause(90)}). The \lstinline[style=bashinline]{disp} command always writes to the standard output, which normally equates to saying that it outputs to your screen, but on the LISA system it actually is a file which we will check later. The script then echoes the current date and time plus the message `: job ends' to the standard output\index{standard output}, before exiting the script.
+This jobscript asks the scheduler for a time slot of 5 minutes (\lstinline[style=bashinline]{lwalltime=00:05:00}), and will be using one machine (\lstinline[style=bashinline]{lnodes=1}) with 8 cores in its CPU (\lstinline[style=bashinline]{cores8}). Only one of these cores will actually be doing something though, because the number of processes per node is just~1 (\lstinline[style=bashinline]{ppn=1}). The next line tells the scheduler that the rest of the jobscript is written in a scripting language called `bash'\index{bash}\label{word:bash}, which is a very common scripting language on Linux. Incidentally, you already know it, since the shell program you have been using is in fact bash. The script then echoes the current date and time plus the message `: job starts' to the standard output\index{standard output} (more about standard output later).  Line 8 is the core of the script, in that it specifies what program needs to be run. In our case, it says that it wants to start an instance of the Octave software (\lstinline[style=bashinline]{octave}) and that this instance needs to be started with the \lstinline[style=bashinline]{--silent} and \lstinline[style=bashinline]{--no-window-system} options, such that it will not display the usual welcome message and that it will not use any of the graphical output methods (i.e.\, Octave's \lstinline[style=bashinline]{figure} command will not yield the usual output). The string following the \lstinline[style=bashinline]{--eval} option specifies the Octave command that will be run by the Octave software. Here, it is simply the \lstinline[style=bashinline]{disp('hello world')} command, but it could be any string that qualifies as valid Octave code, including function names and script names. (In a minute, it will become apparent why I added  the \lstinline[style=bashinline]{pause(90)}). The \lstinline[style=bashinline]{disp} command always writes to the standard output, which normally equates to saying that it outputs to your screen, but on the LISA system it actually is a file which we will check later. The script then echoes the current date and time plus the message `: job ends' to the standard output\index{standard output}, before exiting the script.
 
 OK, so now that we have a jobscript file (which I saved as `\textasciitilde{}/tutorial/simple-batch/jobscript.pbs'---LISA uses the OpenPBS/Torque scheduler\footnote{\burl{http://www.adaptivecomputing.com/products/open-source/torque/}}\index{OpenPBS}\index{PBS}\index{Torque}, so I usually save my jobscripts as *.pbs), let's send it to the scheduler with the \lstinline[style=bashinline]{qsub}\index{Linux commands!qsub@\texttt{qsub}} command (\lstinline[style=bashinline]{qsub} is an abbreviation for `submit to the queue'\index{scheduler!queue}, the queue in question being the scheduler's):
 \begin{lstlisting}[style=basic,style=bash]
 jspaaks@login2:~/tutorial/simple-batch$ qsub jobscript.pbs
-6388734.batch1.irc.sara.nl
+6388734.batch1.irc.surfsara.nl
 jspaaks@login2:~/tutorial/simple-batch$
 \end{lstlisting}
 
 As you can see above, \lstinline[style=bashinline]{qsub} prints a number \lstinline[style=bashinline]{6388734} to the shell. This number is referred to as the \textit{job id}\index{job id}.
-You can check the status of the job by typing the \lstinline[style=bashinline]{qstat} command, followed by the job id, like so:
+You can check the status of the job by typing the \lstinline[style=bashinline]{qstat} command, followed by the job id, like so:\index{Linux commands!qstat@\texttt{qstat}}
 \begin{lstlisting}[style=basic,style=bash]
 jspaaks@login2:~/tutorial/simple-batch$ qstat 6388734
 Job id                    Name             User            Time Use S Queue
@@ -466,48 +478,52 @@ The \lstinline[style=bashinline]{S} column lists the \underline{s}tatus of the j
 \begin{lstlisting}[style=basic,style=bash]
 jspaaks@login2:~/tutorial/simple-batch$ qstat -u jspaaks -n
 
-batch1.irc.sara.nl:
+batch1.irc.surfsara.nl:
                                                                 Req'd  Req'd   Elap
 Job ID            Username Queue   Jobname       SessID NDS TSK Memory Time  S Time
 ----------------- -------- ------- -------------------- --- --- ------ ----- - -----
 6388734.batch1.i  jspaaks  express jobscript.pbs 15291    1   1    --  00:05 R 00:00
    gb-r2n14/0
 jspaaks@login2:~/tutorial/simple-batch$
-\end{lstlisting}\index{Linux commands!qstat@\texttt{qstat}}
-You can look up statistics for a given node at  \burl{https://ganglia.surfsara.nl/?r=hour&cs=&ce=&c=LISA+Cluster&h=gb-r2n14.irc.sara.nl&tab=m&vn=&mc=2&z=small&metric_group=ALLGROUPS}\index{Ganglia}, for example if you want to check its performance (see also Fig.~\ref{fig:ganglia-screenshot}).
+\end{lstlisting}
+You can look up statistics for a given node at  \burl{https://ganglia.surfsara.nl/?r=hour&cs=&ce=&s=by+name&c=LISA%2520Cluster&tab=m&vn=}\index{Ganglia}, for example if you want to check its performance (see also Fig.~\ref{fig:ganglia-screenshot}).
 
 Because \lstinline[style=bashinline]{6388734} is such a tiny job in terms of walltime and number of nodes, the scheduler adds the job to the `express queue'\index{queue!express}. Depending on the requirements layed out in the jobscript, your job may end up in one of 3 different queues:
 \begin{enumerate}
 \item{the express queue}\index{queue!express}
-\item{the batch queue}\index{queue!batch}
-\item{the interactive queue}\index{queue!interactive}
+\item{the serial queue}\index{queue!serial}
+\item{the parallel queue}\index{queue!parallel}
 \end{enumerate}
 
-\begin{figure}[hbt]
+\begin{figure}[hbtp]
   \centering
-    \includegraphics[width=0.9\textwidth]{./../eps/ganglia-screenshot.eps}
+    \includegraphics[width=\textwidth]{./../eps/ganglia-screenshot.eps}
   \caption{Ganglia visualizes a wide array of performance indices for the LISA system. The plots can be viewed in a web browser such as Firefox.}
   \label{fig:ganglia-screenshot}
 \end{figure}
 
 
-Your job ends up in the express queue if it asks for less than 15~minutes walltime and doesn't use more than one node. If the system is not too busy, jobs in the express queue are usually executed without delay. In contrast, jobs that are in the batch queue can take a long time to start, but when they finally do, you can unleash the full computing power of the cluster. The interactive queue is primarily meant for development work that requires multiple machines. Submitting your job to the interactive queue is accomplished by the \lstinline[style=bashinline]{-I} option:
+Your job ends up in the express queue if it asks for less than 5~minutes walltime and doesn't use more than one node. If the system is not too busy, jobs in the express queue are usually executed without delay. The express queue is primarily meant for development work. If your job asks for more than 5 minutes on one node, you end up in the serial queue. Despite its name, you can still run parallel jobs, but they will be limited to the cores of the one node that was allocated to you (in LISA's current configuration, that means a maximum of 16 parallel processes). Your job ends up in the parallel queue if you ask for more than one node. Jobs that are in the serial or parallel queues can take a long time to start, but when they finally do, you can unleash the full computing power of the cluster, without performance loss due to other users.
+
+\Needspace{5\baselineskip}
+
+If you need to develop software that requires testing on multiple machines, you can start an interactive session using the \lstinline[style=bashinline]{-I} option as follows:
 \begin{lstlisting}[style=basic,style=bash]
-jspaaks@login2:~/tutorial$ qsub -I -lnodes=2:cores8:ppn=1 -lwalltime=00:03:00
-qsub: waiting for job 6388157.batch1.irc.sara.nl to start
+jspaaks@login2:~/tutorial$ qsub -I -lnodes=2:cores8 -lwalltime=00:59:00
+qsub: waiting for job 6388157.batch1.irc.surfsara.nl to start
 \end{lstlisting}
-The above command asks for an interactive session with 2 nodes of the core8 type, each of which will only be running 1 process. Note that the information that is normally passed to \lstinline[style=bashinline]{qsub} through the first few lines in a jobscript (i.e.~the lines that start with \texttt{\#PBS}) must now be entered as options. After a delay, you will get a prompt on a different machine, in this case `gb-r7n32':
+The above command asks for a 59-minute session with 2 nodes of the core8 type. Note that the information that is normally passed to \lstinline[style=bashinline]{qsub} through the first few lines in a jobscript (i.e.~the lines that start with \texttt{\#PBS}) must now be entered as options. After a delay, you will get a prompt on a different machine, in this case `gb-r7n32':
 
 \begin{lstlisting}[style=basic,style=bash]
-qsub: job 6388157.batch1.irc.sara.nl ready
+qsub: job 6388157.batch1.irc.surfsara.nl ready
 
 jspaaks@gb-r7n32:~$
 \end{lstlisting}
-At this prompt, you can manually enter your commands, just like you were doing earlier, except you're no longer on `login2' anymore, but on one of the computing nodes within the cluster. Furthermore, the login nodes have many users on them at any given time, whereas the nodes that you get through the \texttt{qsub} command are exclusively yours (at least for a limited time). This means that you can take full advantage of the computing power and available memory.
+At this prompt, you can manually enter your commands, just like you were doing earlier, except you're no longer on `login2' anymore, but on one of the computing nodes within the cluster. Either one of the login nodes may have many users on them at any given time, whereas the nodes that you get through the \texttt{qsub} command are exclusively yours (at least for a limited time). This means that you can take full advantage of the computing power and available memory.
 
 When your time is up, the following message will appear:
 \begin{lstlisting}[style=basic,style=bash]
-jspaaks@gb-r7n32:~$ echo $PBS_O=>> PBS: job killed: walltime 215 exceeded limit 180
+jspaaks@gb-r7n32:~$ echo $PBS_O=>> PBS: job killed: walltime 3575 exceeded limit 3540
 \end{lstlisting}
 and you will return to `login2' (or `login1' if that's where you were before).
 
@@ -542,7 +558,7 @@ Some other commands that come in handy from time to time are:
 \begin{lstlisting}[style=basic,style=bash]
 jspaaks@login2:~/tutorial/simple-batch$ qdel 6388079
 \end{lstlisting}\index{Linux commands!qdel@\texttt{qdel}}
-This deletes job \lstinline[style=bashinline]{6388079} from the queue. Very useful if you accidentally requested too many nodes, or if your job crashed after like one second because you made a mistake. It's not possible to delete a job that was not submitted by you, so you don't have to worry about accidentally deleting other people's jobs if you type the job id wrong.
+This deletes job \lstinline[style=bashinline]{6388079} from the queue. Very useful if you accidentally requested too many nodes, or when you realize you made a mistake in your program but the job was submitted already. It's not possible to delete a job that was not submitted by you, so you don't have to worry about accidentally deleting other people's jobs if you type the job id wrong.
 
 \vspace{1em}
 
@@ -585,6 +601,10 @@ Finding out when your job is scheduled to start can be accomplished with the \te
 showstart 6388079
 \end{lstlisting}
 \index{Linux commands!showstart@\texttt{showstart}}
+
+
+If you want to check how much computing time your \textbf{acc}ount has \textbf{use}d, you can use the \texttt{accuse}\index{Linux commands!accuse@\texttt{accuse}} command, or the \textbf{acc}ount \textbf{info}rmation (\texttt{accinfo}\index{Linux commands!accinfo@\texttt{accinfo}}) command.
+
 
 This concludes the Linux tutorial part of this manual. The next chapters cover the general concept of parallel optimization (Chapter~\ref{ch:parallel-optimization}) and the MMSODA software (Chapter~\ref{ch:mmsoda}).
 

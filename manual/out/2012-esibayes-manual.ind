@@ -7,33 +7,41 @@
 
   \indexspace
 
-  \item Amdahl's Law, \hyperpage{18}
+  \item Amdahl's Law, \hyperpage{19}
+  \item analysis state, \hyperpage{53}
 
   \indexspace
 
   \item bash, \hyperpage{14}
-  \item binary, \hyperpage{26}
+  \item binary, \hyperpage{29}
 
   \indexspace
 
   \item cluster computer, \hyperpage{2}
-  \item coarse-grained, \hyperpage{18}
+  \item coarse-grained, \hyperpage{19}
+  \item conf.mat, \hyperpage{24}
+  \item constants.mat, \hyperpage{24}
   \item core, \hyperpage{2}
 
   \indexspace
 
-  \item embarassingly parallel, \hyperpage{18}
-  \item executable, \hyperpage{26}
+  \item deserializing, \hyperpage{45}
 
   \indexspace
 
-  \item fine-grained, \hyperpage{18}
+  \item embarassingly parallel, \hyperpage{19}
+  \item executable, \hyperpage{29}
+
+  \indexspace
+
+  \item fine-grained, \hyperpage{19}
+  \item forecast state, \hyperpage{50}
 
   \indexspace
 
   \item Ganglia, \hyperpage{15}
   \item Gigabit, \hyperpage{3}
-  \item graphical programs, \hyperpage{38}
+  \item graphical programs, \hyperpage{57}
 
   \indexspace
 
@@ -42,23 +50,26 @@
   \indexspace
 
   \item job id, \hyperpage{14}
-  \item jobscript, \hyperpage{13}, \hyperpage{26}
+  \item jobscript, \hyperpage{13}, \hyperpage{28}
 
   \indexspace
 
   \item LAN, \hyperpage{3}
   \item Linux commands
+    \subitem \texttt{accinfo}, \hyperpage{18}
+    \subitem \texttt{accuse}, \hyperpage{18}
     \subitem autocompletion, \hyperpage{9}
     \subitem \texttt{cat}, \hyperpage{9}
     \subitem \texttt{cd}, \hyperpage{7}
-    \subitem \texttt{checkjob}, \hyperpage{17}
-    \subitem \texttt  {chmod}, \hyperpage{28}
+    \subitem \texttt{checkjob}, \hyperpage{18}
+    \subitem \texttt  {chmod}, \hyperpage{30}
     \subitem copy, \hyperpage{10}
     \subitem \texttt{cp}, \hyperpage{10}
-    \subitem \texttt{echo \$DISPLAY}, \hyperpage{41}
+    \subitem \texttt{echo \$DISPLAY}, \hyperpage{60}
+    \subitem \texttt{ldd}, \hyperpage{40}
     \subitem \texttt{logout}, \hyperpage{7}
     \subitem \texttt{ls}, \hyperpage{7}
-    \subitem \texttt  {make}, \hyperpage{27}
+    \subitem \texttt  {make}, \hyperpage{29}
     \subitem \texttt{man}, \hyperpage{9}
     \subitem \texttt{mkdir}, \hyperpage{8}
     \subitem move, \hyperpage{10}
@@ -67,88 +78,122 @@
     \subitem \texttt{octave}, \hyperpage{11}
     \subitem \texttt{pwd}, \hyperpage{7}
     \subitem \texttt{qdel}, \hyperpage{17}
-    \subitem \texttt{qstat}, \hyperpage{15}
+    \subitem \texttt{qstat}, \hyperpage{14}
     \subitem \texttt{qsub}, \hyperpage{14}
     \subitem rename, \hyperpage{10}
+    \subitem \texttt{rm}, \hyperpage{8}
     \subitem \texttt{rmdir}, \hyperpage{8}
-    \subitem \texttt{showq}, \hyperpage{16}
-    \subitem \texttt{showstart}, \hyperpage{17}
+    \subitem \texttt{showq}, \hyperpage{17}
+    \subitem \texttt{showstart}, \hyperpage{18}
+    \subitem \texttt  {ssh}, \hyperpage{6}
+    \subitem \texttt{ssh}, \hyperpage{7}
   \item LISA, \hyperpage{3}
   \item \texttt{login1}, \hyperpage{7}
   \item \texttt{login2}, \hyperpage{7}
 
   \indexspace
 
-  \item Makefile, \hyperpage{26, 27}
-  \item Master-Slave paradigm, \hyperpage{19}
-  \item Master-Worker paradigm, \hyperpage{19}
-  \item MATLAB Compiler Runtime, \hyperpage{43}
-  \item MCR, \hyperpage{43}
-  \item Message Passing Interface, \hyperpage{21}
-  \item MPI, \hyperpage{21}
-    \subitem OpenMPI/GNU, \hyperpage{21}
+  \item makeconf.m, \hyperpage{24}
+  \item makeconstants.m, \hyperpage{25}
+  \item Makefile, \hyperpage{28, 29}
+  \item Master-Slave paradigm, \hyperpage{20}
+  \item Master-Worker paradigm, \hyperpage{20}
+  \item MATLAB Compiler Runtime, \hyperpage{62}
+  \item MCR, \hyperpage{62}
+  \item Message Passing Interface, \hyperpage{22}
+  \item MMSODA
+    \subitem bypass mode, \hyperpage{25}
+    \subitem reset mode, \hyperpage{50}
+    \subitem scemua mode, \hyperpage{31}
+    \subitem soda mode, \hyperpage{53}
+  \item MMSODA functions
+    \subitem \texttt  {mmsoda}, \hyperpage{27}
+    \subitem \texttt  {mmsodaAnalyzeTimings}, \hyperpage{45}
+    \subitem \texttt  {mmsodaCalcUncertInts}, \hyperpage{52}
+    \subitem \texttt{mmsodaMargHist}, \hyperpage{27}
+    \subitem \texttt  {mmsodaPlotEnsemble}, \hyperpage{51}
+    \subitem \texttt  {mmsodaPlotSeq}, \hyperpage{27}
+    \subitem \texttt  {mmsodaPrepParallelFiles}, \hyperpage{28}
+    \subitem \texttt{mmsodaSubplotScreen}, \hyperpage{27}
+    \subitem \texttt  {mmsodaUnpack}, \hyperpage{26}
+  \item MPI, \hyperpage{22}
+    \subitem OpenMPI/GNU, \hyperpage{22}
 
   \indexspace
 
   \item node, \hyperpage{3}
+  \item Notepad++, \hyperpage{4}
 
   \indexspace
 
   \item Octave, \hyperpage{11}
-  \item OpenMPI/GNU, \hyperpage{21}
+  \item OpenMPI/GNU, \hyperpage{22}
   \item OpenPBS, \hyperpage{14}
 
   \indexspace
 
-  \item parallel, \hyperpage{18}
+  \item parallel, \hyperpage{19}
   \item parallelization, \hyperpage{2}
   \item PBS, \hyperpage{14}
   \item permission, \hyperpage{7}
-  \item permission bits, \hyperpage{9}, \hyperpage{27}
+  \item permission bits, \hyperpage{9}, \hyperpage{29}
+  \item posterior state, \hyperpage{53}
+  \item prior state, \hyperpage{50}, \hyperpage{53}
   \item PuTTY, \hyperpage{6}
 
   \indexspace
 
   \item queue
-    \subitem batch, \hyperpage{15}
     \subitem express, \hyperpage{15}
-    \subitem interactive, \hyperpage{15}
+    \subitem parallel, \hyperpage{15}
+    \subitem serial, \hyperpage{15}
 
   \indexspace
 
   \item root (file system), \hyperpage{7}
   \item root (system administrator), \hyperpage{7}
+  \item run-mmsoda.sh, \hyperpage{29, 30}
 
   \indexspace
 
   \item scheduler, \hyperpage{13}
     \subitem queue, \hyperpage{14}
-  \item sequential, \hyperpage{18}
-  \item serial, \hyperpage{18}
+  \item sequential, \hyperpage{19}
+  \item serial, \hyperpage{19}
+  \item serializing, \hyperpage{45}
   \item SFTP, \hyperpage{4}
   \item shell, \hyperpage{9}
   \item SSH, \hyperpage{4}
-  \item SSR, \hyperpage{34}
+  \item SSR, \hyperpage{37}
+  \item standard error file, \hyperpage{39}
   \item standard output, \hyperpage{14}
-  \item sum of squared residuals, \hyperpage{34}
+  \item standard output file, \hyperpage{39}
+  \item state
+    \subitem analysis, \hyperpage{53}
+    \subitem forecast, \hyperpage{50}
+    \subitem innovation, \hyperpage{53}
+    \subitem posterior, \hyperpage{53}
+    \subitem prior, \hyperpage{50}, \hyperpage{53}
+    \subitem update, \hyperpage{53}
+  \item sum of squared residuals, \hyperpage{37}
+  \item SURFsara, \hyperpage{1}
 
   \indexspace
 
   \item terminal emulator, \hyperpage{6}
-  \item todo, \hyperpage{4}, \hyperpage{14}, \hyperpage{22}, 
-		\hyperpage{26}, \hyperpage{28}, \hyperpage{34}
   \item Torque, \hyperpage{14}
 
   \indexspace
 
   \item walltime, \hyperpage{2}
+  \item white noise, \hyperpage{71}
   \item WinSCP, \hyperpage{4}
 
   \indexspace
 
-  \item X, \hyperpage{38}
-    \subitem forwarding over SSH, \hyperpage{38}
-  \item X11, \hyperpage{41}
-  \item Xming, \hyperpage{38}
+  \item X, \hyperpage{57}
+    \subitem forwarding over SSH, \hyperpage{57}
+  \item X11, \hyperpage{60}
+  \item Xming, \hyperpage{57}
 
 \end{theindex}

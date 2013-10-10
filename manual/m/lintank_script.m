@@ -46,10 +46,10 @@ while tNow < tEnd
     % integrate the discharge from the first tank over the interval dtSim
     dState = Q * dtSim;
 
-    % decrease the volume in the first tank by dV (which is negative, hence the + sign)
+    % decrease the volume in the first tank by dState (which is negative, hence the + sign)
     state1 = state1 + dState;
 
-    % increase the volume in the first tank by dV (which is negative, hence the - sign)
+    % increase the volume in the first tank by dState (which is negative, hence the - sign)
     state2 = state2 - dState;
 
     % increment the current time by the model integration time step

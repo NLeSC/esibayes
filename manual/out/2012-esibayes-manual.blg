@@ -1,47 +1,45 @@
 This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: ./../out/2012-esibayes-manual.aux
-The style file: chicago.bst
+The style file: plainnat.bst
 Database file #1: ./../bib/literaturedb.bib
-Warning--I didn't find a database entry for ""
-You've used 5 entries,
-            2861 wiz_defined-function locations,
-            644 strings with 6243 characters,
-and the built_in function-call counts, 4351 in all, are:
-= -- 322
-> -- 432
-< -- 0
-+ -- 138
-- -- 140
-* -- 464
-:= -- 808
-add.period$ -- 15
-call.type$ -- 5
-change.case$ -- 47
-chr.to.int$ -- 5
-cite$ -- 5
-duplicate$ -- 88
-empty$ -- 212
-format.name$ -- 160
-if$ -- 800
-int.to.chr$ -- 1
-int.to.str$ -- 0
-missing$ -- 5
-newline$ -- 28
-num.names$ -- 50
-pop$ -- 32
+You've used 11 entries,
+            2773 wiz_defined-function locations,
+            666 strings with 7768 characters,
+and the built_in function-call counts, 5955 in all, are:
+= -- 516
+> -- 418
+< -- 3
++ -- 143
+- -- 129
+* -- 559
+:= -- 949
+add.period$ -- 42
+call.type$ -- 11
+change.case$ -- 75
+chr.to.int$ -- 8
+cite$ -- 22
+duplicate$ -- 228
+empty$ -- 429
+format.name$ -- 144
+if$ -- 1209
+int.to.chr$ -- 4
+int.to.str$ -- 1
+missing$ -- 12
+newline$ -- 72
+num.names$ -- 44
+pop$ -- 127
 preamble$ -- 1
-purify$ -- 77
+purify$ -- 65
 quote$ -- 0
-skip$ -- 91
+skip$ -- 170
 stack$ -- 0
-substring$ -- 190
-swap$ -- 28
+substring$ -- 227
+swap$ -- 17
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 100
+type$ -- 116
 warning$ -- 0
-while$ -- 40
+while$ -- 47
 width$ -- 0
-write$ -- 67
-(There was 1 warning)
+write$ -- 167

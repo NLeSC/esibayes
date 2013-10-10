@@ -66,6 +66,8 @@ rec = rec';
 c = ismember(rec(1,:),priorTimes);
 % extract those columns from 'rec' and assign to the output argument 'modelOutput'
 modelOutput = rec(2:3,c);
+% overwrite with NaN to comply with what MMSODA expects
+modelOutput(1:conf.nStatesKF,1) = NaN;
 
 
 

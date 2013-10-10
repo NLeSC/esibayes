@@ -1,0 +1,68 @@
+
+\chapter{Colored noise}
+\label{ch:colored-noise-derivation}
+
+The general equation for a discrete-time auto-correlated random walk is:
+\begin{equation}
+\label{eq:autocorrelated-random-walk}
+\begin{align}
+w_{k}&\leftarrow{}\mathcal{N}(\mu=0,\sigma^2=1) &\\
+q_{k}&=\begin{cases}w_{k}&\quad{}\mathrm{for}\:k=1 \\
+q_{k-1} + w_{k} &\quad{} \mathrm{for}\:k>1
+\end{cases}\\
+\end{align}
+\end{equation}
+with $k$ the discrete time index. With (\ref{eq:autocorrelated-random-walk}), the variance of $q_{k}$ grows with increasing $k$. To satisfy the conditions of the Ensemble Kalman Filter however, the variance of $q_{k}$ must remain constant. The variance growth over time can be controlled by introducing two weighting factors $\alpha$ and $\beta$ that describe how much of $q_{k-1}$ and $w_{k}$ is carried over to $q_{k}$. The altered auto-correlated random walk thus takes the following form:
+\begin{equation}
+\label{eq:autocorrelated-random-walk-weights}
+\begin{align}
+w_{k}&\leftarrow{}\mathcal{N}(\mu=0,\sigma^2=1) &\\
+q_{k}&=\begin{cases}w_{k}&\quad{}\mathrm{for}\:k=1 \\
+\alpha{}\cdot{}q_{k-1} + \beta\cdot{}w_{k} &\quad{} \mathrm{for}\:k>1
+\end{cases}\\
+\alpha&\in[0,1]&\\
+\beta&\in[0,1]&\\
+\end{align}
+\end{equation}
+For example, with $\alpha{}=0$ and $\beta=1$, (\ref{eq:autocorrelated-random-walk}) generates a sequence of uncorrelated numbers $\mathbf{q}$ (i.e. $\mathbf{q}$ is said to be `white noise'\index{white noise}), whereas for $\alpha=1$ and $\beta=0$, $\mathbf{q}$ is random but constant over time.
+
+Given that the variance $\sigma^2$ of $w_{k}$ is equal to 1, multiplying $q_{k-1}$ by $\alpha$ implies that the variance of $\alpha\cdot{}q_{k-1}$ is equal to $\alpha^2$.  $\beta$ must therefore be chosen such that the variance of $\beta\cdot{}w_k$ is equal to 1~minus the variance of $\alpha\cdot{}q_{k-1}$, or equivalently, equal to $1-\alpha^2$. This is accomplished by
+\begin{equation}
+\label{eq:beta-constant-variance}
+\beta = \sqrt{1-\alpha^2}.
+\end{equation}
+
+
+Continuous-time damping of correlation:
+\begin{equation}
+\frac{dq}{dt} = - \frac{1}{\tau} q
+\end{equation}
+
+
+Discrete-time damping of correlation:
+\begin{equation}
+\frac{\Delta{}q}{\Delta{}t} = - \frac{1}{\tau}\:q_{k-1}
+\end{equation}
+
+
+Integrate the rate of change of $q$ over the time interval $\Delta{}t$ to get the change in $q$:
+\begin{equation}
+\Delta{}q = - \frac{1}{\tau}\:q_{k-1} \cdot{} \Delta{}t
+\end{equation}
+
+The value of $q$ at the next time step $k$ is equal to the value of $q$ at time step $k-1$ plus the rate of change of $q$ integrated over the time interval $\Delta{}t$:
+\begin{equation}
+q_{k} = q_{k-1} + - \frac{1}{\tau}\:q_{k} \cdot{} \Delta{}t
+\end{equation}
+
+The right hand side can be written in the $y = ax+bx$ form as follows:
+\begin{equation}
+q_{k} = 1 \cdot{} q_{k-1} + - \frac{\Delta{}t}{\tau}\:q_{k}
+\end{equation}
+
+And since $ax+bx = (a+b)x$, the equation can be simplified to:
+\begin{equation}
+q_{k} = (1 - \frac{\Delta{}t}{\tau})\:q_{k-1}
+\end{equation}
+
+

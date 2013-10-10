@@ -1,3 +1,4 @@
+\indexentry{SURFsara|hyperpage}{1}
 \indexentry{cluster computer|hyperpage}{2}
 \indexentry{core|hyperpage}{2}
 \indexentry{parallelization|hyperpage}{2}
@@ -10,11 +11,13 @@
 \indexentry{SFTP|hyperpage}{4}
 \indexentry{SSH|hyperpage}{4}
 \indexentry{WinSCP|hyperpage}{4}
-\indexentry{todo|hyperpage}{4}
+\indexentry{Notepad++|hyperpage}{4}
 \indexentry{terminal emulator|hyperpage}{6}
 \indexentry{PuTTY|hyperpage}{6}
+\indexentry{Linux commands!ssh@\texttt  {ssh}|hyperpage}{6}
 \indexentry{login2@\texttt{login2}|hyperpage}{7}
 \indexentry{login1@\texttt{login1}|hyperpage}{7}
+\indexentry{Linux commands!ssh@\texttt{ssh}|hyperpage}{7}
 \indexentry{Linux commands!logout@\texttt{logout}|hyperpage}{7}
 \indexentry{Linux commands!pwd@\texttt{pwd}|hyperpage}{7}
 \indexentry{/@\texttt{/} (directory separator, Linux)|hyperpage}{7}
@@ -28,6 +31,7 @@
 \indexentry{Linux commands!mkdir@\texttt{mkdir}|hyperpage}{8}
 \indexentry{Linux commands!mkdir@\texttt{mkdir}|hyperpage}{8}
 \indexentry{Linux commands!rmdir@\texttt{rmdir}|hyperpage}{8}
+\indexentry{Linux commands!rm@\texttt{rm}|hyperpage}{8}
 \indexentry{permission bits|hyperpage}{9}
 \indexentry{Linux commands!man@\texttt{man}|hyperpage}{9}
 \indexentry{shell|hyperpage}{9}
@@ -45,7 +49,6 @@
 \indexentry{scheduler|hyperpage}{13}
 \indexentry{bash|hyperpage}{14}
 \indexentry{standard output|hyperpage}{14}
-\indexentry{todo|hyperpage}{14}
 \indexentry{standard output|hyperpage}{14}
 \indexentry{OpenPBS|hyperpage}{14}
 \indexentry{PBS|hyperpage}{14}
@@ -53,48 +56,83 @@
 \indexentry{Linux commands!qsub@\texttt{qsub}|hyperpage}{14}
 \indexentry{scheduler!queue|hyperpage}{14}
 \indexentry{job id|hyperpage}{14}
-\indexentry{Linux commands!qstat@\texttt{qstat}|hyperpage}{15}
+\indexentry{Linux commands!qstat@\texttt{qstat}|hyperpage}{14}
 \indexentry{Ganglia|hyperpage}{15}
 \indexentry{queue!express|hyperpage}{15}
 \indexentry{queue!express|hyperpage}{15}
-\indexentry{queue!batch|hyperpage}{15}
-\indexentry{queue!interactive|hyperpage}{15}
-\indexentry{Linux commands!showq@\texttt{showq}|hyperpage}{16}
+\indexentry{queue!serial|hyperpage}{15}
+\indexentry{queue!parallel|hyperpage}{15}
+\indexentry{Linux commands!showq@\texttt{showq}|hyperpage}{17}
 \indexentry{Linux commands!qdel@\texttt{qdel}|hyperpage}{17}
-\indexentry{Linux commands!checkjob@\texttt{checkjob}|hyperpage}{17}
-\indexentry{Linux commands!showstart@\texttt{showstart}|hyperpage}{17}
-\indexentry{parallel|hyperpage}{18}
-\indexentry{serial|hyperpage}{18}
-\indexentry{sequential|hyperpage}{18}
-\indexentry{Amdahl's Law|hyperpage}{18}
-\indexentry{fine-grained|hyperpage}{18}
-\indexentry{coarse-grained|hyperpage}{18}
-\indexentry{embarassingly parallel|hyperpage}{18}
-\indexentry{Master-Worker paradigm|hyperpage}{19}
-\indexentry{Master-Slave paradigm|hyperpage}{19}
-\indexentry{Message Passing Interface|hyperpage}{21}
-\indexentry{MPI|hyperpage}{21}
-\indexentry{MPI!OpenMPI/GNU|hyperpage}{21}
-\indexentry{OpenMPI/GNU|hyperpage}{21}
-\indexentry{todo|hyperpage}{22}
-\indexentry{todo|hyperpage}{26}
-\indexentry{Makefile|hyperpage}{26}
-\indexentry{jobscript|hyperpage}{26}
-\indexentry{binary|hyperpage}{26}
-\indexentry{executable|hyperpage}{26}
-\indexentry{Linux commands!make@\texttt  {make}|hyperpage}{27}
-\indexentry{Makefile|hyperpage}{27}
-\indexentry{permission bits|hyperpage}{27}
-\indexentry{Linux commands!chmod@\texttt  {chmod}|hyperpage}{28}
-\indexentry{todo|hyperpage}{28}
-\indexentry{sum of squared residuals|hyperpage}{34}
-\indexentry{SSR|hyperpage}{34}
-\indexentry{todo|hyperpage}{34}
-\indexentry{graphical programs|hyperpage}{38}
-\indexentry{X!forwarding over SSH|hyperpage}{38}
-\indexentry{X|hyperpage}{38}
-\indexentry{Xming|hyperpage}{38}
-\indexentry{X11|hyperpage}{41}
-\indexentry{Linux commands!echo \char`\$ DISPLAY@\texttt{echo \$DISPLAY}|hyperpage}{41}
-\indexentry{MATLAB Compiler Runtime|hyperpage}{43}
-\indexentry{MCR|hyperpage}{43}
+\indexentry{Linux commands!checkjob@\texttt{checkjob}|hyperpage}{18}
+\indexentry{Linux commands!showstart@\texttt{showstart}|hyperpage}{18}
+\indexentry{Linux commands!accuse@\texttt{accuse}|hyperpage}{18}
+\indexentry{Linux commands!accinfo@\texttt{accinfo}|hyperpage}{18}
+\indexentry{parallel|hyperpage}{19}
+\indexentry{serial|hyperpage}{19}
+\indexentry{sequential|hyperpage}{19}
+\indexentry{Amdahl's Law|hyperpage}{19}
+\indexentry{fine-grained|hyperpage}{19}
+\indexentry{coarse-grained|hyperpage}{19}
+\indexentry{embarassingly parallel|hyperpage}{19}
+\indexentry{Master-Worker paradigm|hyperpage}{20}
+\indexentry{Master-Slave paradigm|hyperpage}{20}
+\indexentry{Message Passing Interface|hyperpage}{22}
+\indexentry{MPI|hyperpage}{22}
+\indexentry{MPI!OpenMPI/GNU|hyperpage}{22}
+\indexentry{OpenMPI/GNU|hyperpage}{22}
+\indexentry{conf.mat|hyperpage}{24}
+\indexentry{constants.mat|hyperpage}{24}
+\indexentry{makeconf.m|hyperpage}{24}
+\indexentry{MMSODA!bypass mode|hyperpage}{25}
+\indexentry{makeconstants.m|hyperpage}{25}
+\indexentry{MMSODA functions!mmsodaUnpack@\texttt  {mmsodaUnpack}|hyperpage}{26}
+\indexentry{MMSODA functions!mmsoda@\texttt  {mmsoda}|hyperpage}{27}
+\indexentry{MMSODA functions!mmsodaSubplotScreen@\texttt{mmsodaSubplotScreen}|hyperpage}{27}
+\indexentry{MMSODA functions!mmsodaMargHist@\texttt{mmsodaMargHist}|hyperpage}{27}
+\indexentry{MMSODA functions!mmsodaPlotSeq@\texttt  {mmsodaPlotSeq}|hyperpage}{27}
+\indexentry{Makefile|hyperpage}{28}
+\indexentry{jobscript|hyperpage}{28}
+\indexentry{MMSODA functions!mmsodaPrepParallelFiles@\texttt  {mmsodaPrepParallelFiles}|hyperpage}{28}
+\indexentry{binary|hyperpage}{29}
+\indexentry{executable|hyperpage}{29}
+\indexentry{Linux commands!make@\texttt  {make}|hyperpage}{29}
+\indexentry{Makefile|hyperpage}{29}
+\indexentry{permission bits|hyperpage}{29}
+\indexentry{run-mmsoda.sh|hyperpage}{29}
+\indexentry{run-mmsoda.sh|hyperpage}{30}
+\indexentry{Linux commands!chmod@\texttt  {chmod}|hyperpage}{30}
+\indexentry{MMSODA!scemua mode|hyperpage}{31}
+\indexentry{sum of squared residuals|hyperpage}{37}
+\indexentry{SSR|hyperpage}{37}
+\indexentry{standard output file|hyperpage}{39}
+\indexentry{standard error file|hyperpage}{39}
+\indexentry{Linux commands!ldd@\texttt{ldd}|hyperpage}{40}
+\indexentry{serializing|hyperpage}{45}
+\indexentry{deserializing|hyperpage}{45}
+\indexentry{MMSODA functions!mmsodaAnalyzeTimings@\texttt  {mmsodaAnalyzeTimings}|hyperpage}{45}
+\indexentry{prior state|hyperpage}{50}
+\indexentry{state!prior|hyperpage}{50}
+\indexentry{forecast state|hyperpage}{50}
+\indexentry{state!forecast|hyperpage}{50}
+\indexentry{MMSODA!reset mode|hyperpage}{50}
+\indexentry{MMSODA functions!mmsodaPlotEnsemble@\texttt  {mmsodaPlotEnsemble}|hyperpage}{51}
+\indexentry{MMSODA functions!mmsodaCalcUncertInts@\texttt  {mmsodaCalcUncertInts}|hyperpage}{52}
+\indexentry{MMSODA!soda mode|hyperpage}{53}
+\indexentry{prior state|hyperpage}{53}
+\indexentry{state!prior|hyperpage}{53}
+\indexentry{state!innovation|hyperpage}{53}
+\indexentry{state!update|hyperpage}{53}
+\indexentry{posterior state|hyperpage}{53}
+\indexentry{state!posterior|hyperpage}{53}
+\indexentry{analysis state|hyperpage}{53}
+\indexentry{state!analysis|hyperpage}{53}
+\indexentry{graphical programs|hyperpage}{57}
+\indexentry{X!forwarding over SSH|hyperpage}{57}
+\indexentry{X|hyperpage}{57}
+\indexentry{Xming|hyperpage}{57}
+\indexentry{X11|hyperpage}{60}
+\indexentry{Linux commands!echo \char`\$ DISPLAY@\texttt{echo \$DISPLAY}|hyperpage}{60}
+\indexentry{MATLAB Compiler Runtime|hyperpage}{62}
+\indexentry{MCR|hyperpage}{62}
+\indexentry{white noise|hyperpage}{71}
