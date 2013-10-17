@@ -6,17 +6,24 @@ addpath(fullfile('src','mmsoda-toolbox'))
 
 fname = 'src/mmsoda-toolbox/mmsoda.m';
 
-msg = checkcode(fname);
+msg = checkcode(fname,'-cyc');
 
 nMsgs = numel(msg);
 
-fid = fopen('checkcode.log','wt');
+fidLog = fopen('checkcode.log','wt');
+fidComplexity = fopen('mccabe-complexity.log','wt');
 
 for iMsg=1:nMsgs
-    nChars = fprintf(fid,'%s:%d:%d: E1 %s\n',fname,msg(iMsg).line,msg(iMsg).column(1),msg(iMsg).message);
+    
+    if ~isempty(strfind(msg(iMsg).message,'The McCabe complexity of '))
+        nChars = fprintf(fidComplexity,'%s:%d:%d: E1 %s\n',fname,msg(iMsg).line,msg(iMsg).column(1),msg(iMsg).message);
+    else
+        nChars = fprintf(fidLog,'%s:%d:%d: E1 %s\n',fname,msg(iMsg).line,msg(iMsg).column(1),msg(iMsg).message);
+    end
 end
 
 
-fclose(fid);
+fclose(fidLog);
+fclose(fidComplexity);
 
 exit(0)
