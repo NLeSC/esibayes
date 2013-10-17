@@ -4,7 +4,7 @@
 
 addpath(fullfile('src','mmsoda-toolbox'))
 
-fname = 'src/mmsoda-toolbox/mmsoda';
+fname = 'src/mmsoda-toolbox/mmsoda.m';
 
 msg = checkcode(fname);
 
