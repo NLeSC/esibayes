@@ -74,3 +74,5 @@ src/soda-so-lorenz/results/conf.mat
 testreport.xml
 
 checkcode.log
+
+mccabe-complexity.log
