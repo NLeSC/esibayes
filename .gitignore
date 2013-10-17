@@ -72,3 +72,5 @@ src/soda-so-lorenz/results/conf.mat
 *.m~
 
 testreport.xml
+
+checkcode.log

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-matlab -nodisplay -r "startEsibayesTesting"
+matlab -nodisplay -r 'startEsibayesTesting'
