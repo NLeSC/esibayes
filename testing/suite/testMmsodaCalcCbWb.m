@@ -3,9 +3,6 @@ function testMmsodaCalcCbWb()
 
 
 
-addpath(fullfile('..','src','mmsoda-toolbox'))
-
-
 profile resume
 
 conf.kurt = 0; % (normal distribution kurtosis)
