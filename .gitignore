@@ -78,3 +78,7 @@ checkcode.log
 mccabe-complexity.log
 
 profiler-results/
+
+cobertura.xml
+
+testing/how-to-start-jenkins-slave.txt

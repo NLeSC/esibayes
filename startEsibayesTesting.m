@@ -17,6 +17,9 @@ relativeDirNames = {fullfile('src','mmsoda-toolbox'),...
         fullfile('src','mmsoda-toolbox','visualization'),...
         };
 
+totalLines = 0;
+totalLinesCovered = 0;
+    
     
 nDirs = numel(relativeDirNames);
 
@@ -69,10 +72,10 @@ end
 
 try
     addpath(fullfile(pwd,'testing','xunit','xunit'))
-
-    system('rm ./profiler-results/file*.html');
     
-    profile on
+%     system('rm ./profiler-results/file*.html');
+    
+    profile clear
     
     runtests testing/ -xmlfile testreport.xml
     
@@ -85,4 +88,8 @@ catch Ex
     quit(1)
 end
 quit(0)
+
+
+
+
 

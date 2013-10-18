@@ -19,11 +19,12 @@ WbExpected = mvnpdf(0,0,1);
 
 tolerance = 1e-10;
 
+profile off
+
+
 assertTrue(abs(CbActual-CbExpected)<tolerance);
 
 assertTrue(abs(WbActual-WbExpected)<tolerance);
 
-
-profile off
 
 
