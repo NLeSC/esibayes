@@ -1,7 +1,7 @@
 function testMmsodaCalcCbWb()
 % testMmsodaCalcCbWb Unit test for mmsodaCalcCbWb 
 
-
+disp(['in ',mfilename])
 
 profile resume
 

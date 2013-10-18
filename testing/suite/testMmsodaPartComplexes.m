@@ -1,6 +1,7 @@
 function testMmsodaPartComplexes()
 % testMmsodaPartComplexes is a unit test for mmsodaPartComplexes
 
+disp(['in ',mfilename])
 
 profile resume
 
@@ -18,7 +19,7 @@ conf.nSamples = 6;
 conf.evalCol = 1;
 conf.objCol = 5;
 
-% complexes = mmsodaPartComplexes(conf,evalResults);
+complexes = mmsodaPartComplexes(conf,evalResults);
 
 profile off
 

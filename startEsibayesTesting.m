@@ -2,10 +2,6 @@
 
 
 
-% addpath(fullfile(pwd,'src'))
-
-
-
 
 relativeDirNames = {fullfile('src','mmsoda-toolbox'),...
         fullfile('src','mmsoda-toolbox','comms'),...
