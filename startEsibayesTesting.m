@@ -23,8 +23,8 @@ totalLinesCovered = 0;
     
 nDirs = numel(relativeDirNames);
 
-fidLog = fopen('checkcode.log','wt');
-fidComplexity = fopen('mccabe-complexity.log','wt');
+fidLog = fopen('code-quality-metrics/checkcode.log','wt');
+fidComplexity = fopen('code-quality-metrics/mccabe-complexity.log','wt');
 
 
 for iDir=1:nDirs
@@ -73,15 +73,15 @@ end
 try
     addpath(fullfile(pwd,'testing','xunit','xunit'))
     
-%     system('rm ./profiler-results/file*.html');
+    system('rm ./code-quality-metrics/profiler-results/file*.html');
     
     profile clear
     
-    runtests testing/ -xmlfile testreport.xml
+    runtests testing/ -xmlfile code-quality-metrics/testreport.xml
     
     profileStruct = profile('info');
     
-    profsave(profileStruct,'profiler-results')
+    profsave(profileStruct,'code-quality-metrics/profiler-results')
     
 catch Ex
     fprintf(2, Ex.getReport())
