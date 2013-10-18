@@ -27,6 +27,8 @@ fidLog = fopen('code-quality-metrics/checkcode.log','wt');
 fidComplexity = fopen('code-quality-metrics/mccabe-complexity.log','wt');
 
 
+pwd
+
 for iDir=1:nDirs
 
     relativeDirName = relativeDirNames{iDir};
