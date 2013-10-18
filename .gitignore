@@ -71,14 +71,11 @@ src/soda-so-lorenz/results/conf.mat
 
 *.m~
 
-testreport.xml
+code-quality-metrics/testreport.xml
+code-quality-metrics/checkcode.log
+code-quality-metrics/mccabe-complexity.log
+code-quality-metrics/cobertura.xml
+code-quality-metrics/profiler-results/
 
-checkcode.log
-
-mccabe-complexity.log
-
-profiler-results/
-
-cobertura.xml
 
 testing/how-to-start-jenkins-slave.txt
