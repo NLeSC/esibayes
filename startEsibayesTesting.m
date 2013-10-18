@@ -85,6 +85,9 @@ try
     
     profsave(profileStruct,'code-quality-metrics/profiler-results')
     
+    
+    
+    
 catch Ex
     fprintf(2, Ex.getReport())
     quit(1)
