@@ -6,6 +6,8 @@ function testMmsodaCalcCbWb()
 addpath(fullfile('..','src','mmsoda-toolbox'))
 
 
+profile resume
+
 conf.kurt = 0; % (normal distribution kurtosis)
 
 
@@ -20,5 +22,8 @@ tolerance = 1e-10;
 assertTrue(abs(CbActual-CbExpected)<tolerance);
 
 assertTrue(abs(WbActual-WbExpected)<tolerance);
+
+
+profile off
 
 
