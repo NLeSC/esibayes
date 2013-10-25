@@ -1,37 +1,38 @@
+MMSODATOOLBOX=%s
 MPIINCLUDE=/sara/sw/openmpi-gnu-1.6.3/include
 LD_RUN_PATH=$(PWD)
-MFILES=./../mmsoda-toolbox/comms/*.m ./../mmsoda-toolbox/mmlib/*.m
-HELPER=./../mmsoda-toolbox/comms/helper.o
-MEXFILES=./../mmsoda-toolbox/comms/bcastvar.mexa64 ./../mmsoda-toolbox/comms/receivevar.mexa64 ./../mmsoda-toolbox/comms/sendvar.mexa64
+MFILES=${MMSODATOOLBOX}comms/*.m ${MMSODATOOLBOX}mmlib/*.m
+HELPER=${MMSODATOOLBOX}comms/helper.o
+MEXFILES=${MMSODATOOLBOX}comms/bcastvar.mexa64 ${MMSODATOOLBOX}comms/receivevar.mexa64 ${MMSODATOOLBOX}comms/sendvar.mexa64
 USERMODELFILES=model/*.m
-MMSODAMFILES=./../mmsoda-toolbox/*.m ./../mmsoda-toolbox/tools/*.m ./../mmsoda-toolbox/visualization/*.m ./../mmsoda-toolbox/enkf/*.m  ./../mmsoda-toolbox/mo/*.m
-MMSODAOTHERFILES=-a ./../mmsoda-toolbox/mmsoda-default-settings.ini
+MMSODAMFILES=${MMSODATOOLBOX}*.m ${MMSODATOOLBOX}tools/*.m ${MMSODATOOLBOX}visualization/*.m ${MMSODATOOLBOX}enkf/*.m  ${MMSODATOOLBOX}mo/*.m
+MMSODAOTHERFILES=-a ${MMSODATOOLBOX}mmsoda-default-settings.ini
 VERBOSITY=-v
 #VERBOSITY=
 
 
 all: lib matlabprog
 
-./../mmsoda-toolbox/comms/helper.o:
-	gcc -DTIMINGS -O3 -fPIC -c -o ./../mmsoda-toolbox/comms/helper.o ./../mmsoda-toolbox/comms/helper.c
+${MMSODATOOLBOX}comms/helper.o:
+	gcc -DTIMINGS -O3 -fPIC -c -o ${MMSODATOOLBOX}comms/helper.o ${MMSODATOOLBOX}comms/helper.c
 
-./../mmsoda-toolbox/comms/%.mexa64: ./../mmsoda-toolbox/comms/%.c $(HELPER)
-	mex -DTIMINGS -I$(MPIINCLUDE) -lmpi $(VERBOSITY) -o $@ $< ./../mmsoda-toolbox/comms/helper.o
+${MMSODATOOLBOX}comms/%%.mexa64: ${MMSODATOOLBOX}comms/%%.c $(HELPER)
+	mex -DTIMINGS -I$(MPIINCLUDE) -lmpi $(VERBOSITY) -o $@ $< ${MMSODATOOLBOX}comms/helper.o
 
 lib: $(MFILES) $(MEXFILES)
 	mcc -B csharedlib:libmmpi $(MFILES) $(MEXFILES) $(USERMODELFILES) $(MMSODAMFILES) $(MMSODAOTHERFILES) $(VERBOSITY)
 
 matlabprog: lib
-	mbuild -output matlabprog ./../mmsoda-toolbox/comms/matlabmpi.c -L. -I. -I$(MPIINCLUDE) -lmmpi -lmpi $(VERBOSITY)
+	mbuild -output matlabprog ${MMSODATOOLBOX}comms/matlabmpi.c -L. -I. -I$(MPIINCLUDE) -lmmpi -lmpi $(VERBOSITY)
 	# move some files to mmsoda-toolbox/mmlib to avoid cluttering the user's dir.
-	mv libmmpi.c ./../mmsoda-toolbox/mmlib/
-	mv libmmpi.exports ./../mmsoda-toolbox/mmlib/
-	mv libmmpi.h ./../mmsoda-toolbox/mmlib/
-	mv mccExcludedFiles.log ./../mmsoda-toolbox/mmlib/
-	mv readme.txt ./../mmsoda-toolbox/mmlib/
+	mv libmmpi.c ${MMSODATOOLBOX}mmlib/
+	mv libmmpi.exports ${MMSODATOOLBOX}mmlib/
+	mv libmmpi.h ${MMSODATOOLBOX}mmlib/
+	mv mccExcludedFiles.log ${MMSODATOOLBOX}mmlib/
+	mv readme.txt ${MMSODATOOLBOX}mmlib/
 
 clean:
-	rm -f matlabprog libmmpi.* mccExcludedFiles.log readme.txt ./../mmsoda-toolbox/comms/*.mexa64 ./../mmsoda-toolbox/comms/helper.o
+	rm -f matlabprog libmmpi.* mccExcludedFiles.log readme.txt ${MMSODATOOLBOX}comms/*.mexa64 ${MMSODATOOLBOX}comms/helper.o
 
 purge:
 	rm -f results/*-results*
