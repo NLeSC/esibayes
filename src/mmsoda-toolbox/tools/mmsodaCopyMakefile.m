@@ -27,10 +27,28 @@ function mmsodaCopyMakefile()
 
 
 source = fullfile(mmsodaroot,'comms','Makefile.template');
-destination = './Makefile';
+destination = 'Makefile';
 
-disp('Copying Makefile...')
+disp('Creating Makefile...')
 
-copyfile(source,destination);
 
-disp('Copying Makefile...Done.')
+makefileStr = '';
+fid = fopen(source,'rt');
+while true
+    tline = fgets(fid);
+    if ~ischar(tline)
+        break
+    end
+    makefileStr = [makefileStr,tline];
+end
+fclose(fid);
+
+
+ 
+fid = fopen(destination,'wt');
+fprintf(fid,'%s',sprintf(makefileStr,mmsodaroot));
+fclose(fid);
+
+
+
+disp('Creating Makefile...Done.')
