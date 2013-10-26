@@ -26,11 +26,25 @@ function mmsodaPrepParallelFiles()
 % % LICENSE END
 
 
+% check that we are indeed running on the Lisa cluster (needed for having 
+% the filenames as they are used on the cluster).
+[status,msg] = system('hostname');
+
 % copy the Makefile from the mmsoda root directory to the current
 % directory:
-mmsodaCopyMakefile()
+if strcmp(msg(end-16:end),'lisa.surfsara.nl')
+
+    mmsodaCopyMakefile()
+    
+    
+    % ask a bunch of questions and write the job script according to the
+    % answers:
+    mmsodaWriteJobscript()
+    
+    
+else
+    warning(['The ''',mfilename,''' function needs to be run while on the LISA cluster, otherwise ',...
+        'it cannot find the correct locations of your files.']);
+end
 
 
-% ask a bunch of questions and write the job script according to the
-% answers:
-mmsodaWriteJobscript()

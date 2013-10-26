@@ -44,7 +44,6 @@ end
 fclose(fid);
 
 
- 
 fid = fopen(destination,'wt');
 fprintf(fid,'%s',sprintf(makefileStr,mmsodaroot));
 fclose(fid);
