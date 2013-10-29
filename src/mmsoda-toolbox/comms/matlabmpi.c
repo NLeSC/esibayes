@@ -1,6 +1,6 @@
 /*=================================================================
  *
- *  --- matlabmpi - version 1.0 ---
+ *  --- matlabmpi - version 1.1 ---
  *
  *  This program, including its separate functions, makes it
  *  possible for the MATLAB programmer to use MPI without calling
@@ -34,16 +34,6 @@ int savetimings=0;
 int run_main(int argc, char **argv)
 {
     mxArray *MLmpi_size, *MLmpi_rank, *MLverbosity, *MLsavetimings;
-
-    /* Call the mclInitializeApplication routine. Make sure that the application
-     * was initialized properly by checking the return status. This initialization
-     * has to be done before calling any MATLAB API's or MATLAB Compiler generated
-     * shared library functions.  */
-    if( !mclInitializeApplication(NULL,0) )
-    {
-        fprintf(stderr, "Could not initialize the application.\n");
-    	return -1;
-    }
     
     /* Call the library intialization routine and make sure that the
      * library was initialized properly. */
@@ -89,7 +79,8 @@ int main(int argc, char *argv[])
 {
     int rc;
     int ch;
-    MPI_Init(&argc, &argv);
+    int provided;
+    MPI_Init_thread(&argc, &argv, MPI_THREAD_SINGLE, &provided);
     MPI_Comm_rank(MPI_COMM_WORLD,&mpi_rank);
     MPI_Comm_size(MPI_COMM_WORLD,&mpi_size);
     while ((ch = getopt(argc, argv, "htv:")) !=-1) {
@@ -124,6 +115,20 @@ int main(int argc, char *argv[])
         printf("\nThis program can only be run on more than one processor!\n");
         rc=7;
     } else {
+        const char* options[3];
+        options[0] = "-nojvm";
+        options[1] = "-nodisplay";
+        options[2] = "-singleCompThread";
+    /* Call the mclInitializeApplication routine. Make sure that the application
+     * was initialized properly by checking the return status. This initialization
+     * has to be done before calling any MATLAB API's or MATLAB Compiler generated
+     * shared library functions.  */
+
+        if( !mclInitializeApplication(options,3) )
+        {
+            fprintf(stderr, "Could not initialize the application.\n");
+        	return -1;
+        }
         mclmcrInitialize();
         rc=mclRunMain((mclMainFcnType)run_main,0,NULL);
     }
