@@ -32,7 +32,12 @@ matlabprog: lib
 	mv readme.txt ${MMSODATOOLBOX}mmlib/
 
 clean:
-	rm -f matlabprog libmmpi.* mccExcludedFiles.log readme.txt ${MMSODATOOLBOX}comms/*.mexa64 ${MMSODATOOLBOX}comms/helper.o
+	rm -f matlabprog
+	rm -f libmmpi.*
+	rm -f mccExcludedFiles.log 
+	rm -f readme.txt
+	rm -f ${MMSODATOOLBOX}comms/*.mexa64 
+	rm -f ${MMSODATOOLBOX}comms/helper.o
 
 purge:
 	rm -f results/*-results*
