@@ -84,7 +84,6 @@ clear nMsgs
 
 
 try
-
     
     addpath(fullfile(pwd,'testing','xunit','xunit'))
     addpath(fullfile(pwd,'testing'))
