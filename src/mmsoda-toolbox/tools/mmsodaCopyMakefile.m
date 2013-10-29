@@ -29,7 +29,8 @@ function mmsodaCopyMakefile(varargin)
 if nargin==0
     if mmsodaHostnameReturnsLisa()
         mmsodaDir = mmsodaroot;
-        disp(['I don''t see any input argument. I''ll assume you want to use the MMSODA Toolbox from this location: ',10,'"',mmsodaDir,'".'])
+        disp(['I don''t see any input argument. I''ll assume you want to use the MMSODA Toolbox from this ',10,...
+              'location I found on the MATLAB path: ',10,'"',mmsodaDir,'".'])
     else
         warning('Unable to create the Makefile. On the Lisa cluster, where is the MMSODA toolbox located?')
         return
