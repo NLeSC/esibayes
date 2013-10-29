@@ -1,10 +1,10 @@
 MMSODATOOLBOX=%s
-MPIINCLUDE=/sara/sw/openmpi-gnu-1.6.3/include
+MPIINCLUDE=/sara/sw/openmpi-gnu-1.6.5/lib
 LD_RUN_PATH=$(PWD)
 MFILES=${MMSODATOOLBOX}comms/*.m ${MMSODATOOLBOX}mmlib/*.m
 HELPER=${MMSODATOOLBOX}comms/helper.o
 MEXFILES=${MMSODATOOLBOX}comms/bcastvar.mexa64 ${MMSODATOOLBOX}comms/receivevar.mexa64 ${MMSODATOOLBOX}comms/sendvar.mexa64
-USERMODELFILES=$(shell find ./model -type f -name *.m)
+USERMODELFILES=$(shell find ./model -type f -name '*.m')
 MMSODAMFILES=${MMSODATOOLBOX}*.m ${MMSODATOOLBOX}tools/*.m ${MMSODATOOLBOX}visualization/*.m ${MMSODATOOLBOX}enkf/*.m  ${MMSODATOOLBOX}mo/*.m
 MMSODAOTHERFILES=-a ${MMSODATOOLBOX}mmsoda-default-settings.ini
 VERBOSITY=-v
@@ -23,7 +23,7 @@ lib: $(MFILES) $(MEXFILES)
 	mcc -B csharedlib:libmmpi $(MFILES) $(MEXFILES) $(USERMODELFILES) $(MMSODAMFILES) $(MMSODAOTHERFILES) $(VERBOSITY)
 
 matlabprog: lib
-	mbuild -output matlabprog ${MMSODATOOLBOX}comms/matlabmpi.c -L. -I. -I$(MPIINCLUDE) -lmmpi -lmpi $(VERBOSITY)
+	mbuild -output matlabprog ${MMSODATOOLBOX}comms/matlabmpi.c -L. -I. -I$(MPIINCLUDE) -lmpi -lmmpi $(VERBOSITY)
 	# move some files to mmsoda-toolbox/mmlib to avoid cluttering the user's dir.
 	mv libmmpi.c ${MMSODATOOLBOX}mmlib/
 	mv libmmpi.exports ${MMSODATOOLBOX}mmlib/
