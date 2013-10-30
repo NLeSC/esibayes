@@ -32,6 +32,7 @@ if ~(exist('mpisize','var')==1)
     whoami()
 end
 
+timing.mpirank = mpirank;
 timing.code(1) = uint8(0);
 timing.timer(1) = double(0);
 timing.counter = uint32(0);
@@ -63,6 +64,7 @@ else
     runmpirankOther
 
 end
+
 
 if savetimings == 1
     fn=sprintf([getenv('PBS_O_WORKDIR'),'/results/timing_%03d.mat'],mpirank);
