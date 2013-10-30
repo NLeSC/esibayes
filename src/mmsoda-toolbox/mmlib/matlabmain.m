@@ -56,11 +56,6 @@ if mpirank == 0
     % run the MPI server in a while loop as process with mpirank 0
     runmpirank1
 
-%elseif mpirank == 1
-%
-%    % run the task-generating process (i.e. the optimization algorithm)
-%    runmpirank1
-%
 else
 
     % all others are task-receiving processes
@@ -69,7 +64,7 @@ else
 end
 
 if savetimings == 1
-    fn=sprintf('./results/timing_%03d.mat',mpirank);
+    fn=sprintf([getenv('PBS_O_WORKDIR'),'/results/timing_%03d.mat'],mpirank);
     timing = evalin('base','timing');
     save(fn,'timing');
 end
