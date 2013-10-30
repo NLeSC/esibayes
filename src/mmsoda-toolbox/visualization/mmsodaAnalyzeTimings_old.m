@@ -2,38 +2,40 @@ function mmsodaAnalyzeTimings(varargin)
 % <a href="matlab:web(fullfile(mmsodaroot,'html','mmsodaAnalyzeTimings.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>
 
 % 0 matlabmain start in matlabmain.m
-%
-% 1 receivevar start in receivevar.m
-% 2 receivevar end in receivevar.m
-%
-% 3 sendvar start in sendvar.m
-% 4 sendvar end in sendvar.m
-%
-% 5 gettask start in gettask.m
-% 6 gettask end in gettask.m
-%
-% 7 puttask start in puttask.m
-% 8 puttask end in puttask.m
-%
-% 9 putresult start in putresult.m
-% 10 putresult end in putresult.m
-%
-% 31 hlp_serialize start in sendvar.m
-% 32 hlp_serialize end in sendvar.m
-% 33 mm_send start in sendvar.m
-% 34 mm_send end in sendvar.m
-%
-% 35 mm_receive start in receivevar.m
-% 36 mm_receive end in receivevar.m
-% 37 hlp_deserialize start in receivevar.m
-% 38 hlp_deserialize end in receivevar.m
-%
-% 39 wait start in gettask.m
-% 40 wait end in gettask.m
-%
+% 1 receivevar start in receivevar.c
+% 2 receivevar end in receivevar.c
+% 3 sendvar start in sendvar.c
+% 4 sendvar end in sendvar.c
+% 31 SerializeVar start in sendvar.c
+% 32 SerializeVar end in sendvar.c
+% 33 MPI_Send start in sendvar.c
+% 34 MPI_Send end in sendvar.c
+% 35 MPI_Recv start in receivevar.c
+% 36 MPI_Recv end in receivevar.c
+% 37 DeserializeVar start in receivevar.c
+% 38 DeserializeVar end in receivevar.c
 % 41 receivevar start in runmpirank0.m
 % 42 receivevar end in runmpirank0.m
-%
+
+% events:
+% 
+% 1-2 c 
+% 3-4 c 
+% 31-32 c 
+% 33-34 c
+% 35-36 c
+% 37-38 c
+% 41-42 m
+
+
+% 5 gettask start in gettask.m
+% 6 gettask end in gettask.m
+% 7 puttask start in puttask.m
+% 8 puttask end in puttask.m
+% 9 putresult start in putresult.m
+% 10 putresult end in putresult.m
+% 39 wait start in gettask.m
+% 40 wait end in gettask.m
 
 
 % % 
@@ -79,7 +81,7 @@ colorTable = [ 0.51, 0.17, 0.00;...
 
 
 startFrom = 0.0;
-endAt = 10.0;
+endAt = 100.0;
 showHost = true;
 showPID = true;
 
