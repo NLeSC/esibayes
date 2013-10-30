@@ -26,6 +26,7 @@ function matlabmain(verbosity,savetimings)
 
 
 assignin('base','verbosity',verbosity);
+assignin('base','savetimings',savetimings);
 
 if ~(exist('mpisize','var')==1)
     whoami()
