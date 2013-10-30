@@ -69,6 +69,25 @@ src/soda-so-lorenz/results/soda-so-tempstate.mat
 src/soda-so-lorenz/results/conf-out.mat
 src/soda-so-lorenz/results/conf.mat
 
+
+src/mmsoda-toolbox/comms/bcastvar.mexa64
+src/mmsoda-toolbox/comms/helper.o
+src/mmsoda-toolbox/comms/receivevar.mexa64
+src/mmsoda-toolbox/comms/sendvar.mexa64
+src/mmsoda-toolbox/mmlib/libmmpi.c
+src/mmsoda-toolbox/mmlib/libmmpi.exports
+src/mmsoda-toolbox/mmlib/libmmpi.h
+src/mmsoda-toolbox/mmlib/mccExcludedFiles.log
+src/mmsoda-toolbox/mmlib/readme.txt
+
+
+src/soda-so-lintank/Makefile
+src/soda-so-lintank/jobscript-mmsoda.pbs
+src/soda-so-lintank/libmmpi.so
+src/soda-so-lintank/matlabprog
+src/soda-so-lintank/results/jobscript-mmsoda.pbs.e*
+src/soda-so-lintank/results/jobscript-mmsoda.pbs.o*
+
 *.m~
 
 code-quality-metrics/testreport.xml

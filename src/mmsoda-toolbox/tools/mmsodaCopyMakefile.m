@@ -1,4 +1,4 @@
-function mmsodaCopyMakefile()
+function mmsodaCopyMakefile(varargin)
 % <a href="matlab:web(fullfile(mmsodaroot,'html','mmsodaCopyMakeFile.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>
 % % 
 
@@ -24,6 +24,23 @@ function mmsodaCopyMakefile()
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % % LICENSE END
 
+
+
+if nargin==0
+    if mmsodaHostnameReturnsLisa()
+        mmsodaDir = mmsodaroot;
+        disp(['I don''t see any input argument. I''ll assume you want to use the MMSODA Toolbox from this ',10,...
+              'location I found on the MATLAB path: ',10,'"',mmsodaDir,'".'])
+    else
+        warning('Unable to create the Makefile. On the Lisa cluster, where is the MMSODA toolbox located?')
+        return
+    end
+elseif nargin ==1
+    mmsodaDir = varargin{1};
+    disp(['Using the MMSODA Toolbox from this location: ',10,'"',mmsodaDir,'".'])
+else
+    error('Function takes only one argument.')
+end
 
 
 source = fullfile(mmsodaroot,'comms','Makefile.template');
