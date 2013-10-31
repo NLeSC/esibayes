@@ -12,63 +12,69 @@ manual/out/2013-mmsoda-manual.log
 manual/out/2013-mmsoda-manual.toc
 
 
-src/bypass-mo-triangle/results/bypass-mo-results.mat
-src/bypass-mo-triangle/results/bypass-mo-tempstate.mat
-src/bypass-mo-triangle/results/conf-out.mat
-src/bypass-mo-triangle/results/conf.mat
+examples/bypass-mo-triangle/results/bypass-mo-results.mat
+examples/bypass-mo-triangle/results/bypass-mo-tempstate.mat
+examples/bypass-mo-triangle/results/conf-out.mat
+examples/bypass-mo-triangle/results/conf.mat
 
-src/bypass-so-double-normal/data/constants.mat
-src/bypass-so-double-normal/data/obs.mat
-src/bypass-so-double-normal/results/bypass-so-results.mat
-src/bypass-so-double-normal/results/bypass-so-tempstate.mat
-src/bypass-so-double-normal/results/conf-out.mat
-src/bypass-so-double-normal/results/conf.mat
+examples/bypass-so-double-normal/data/constants.mat
+examples/bypass-so-double-normal/data/obs.mat
+examples/bypass-so-double-normal/results/bypass-so-results.mat
+examples/bypass-so-double-normal/results/bypass-so-tempstate.mat
+examples/bypass-so-double-normal/results/conf-out.mat
+examples/bypass-so-double-normal/results/conf.mat
 
-src/bypass-so-shifted-rastrigin/data/constants.mat
-src/bypass-so-shifted-rastrigin/results/bypass-so-results.mat
-src/bypass-so-shifted-rastrigin/results/bypass-so-tempstate.mat
-src/bypass-so-shifted-rastrigin/results/conf-out.mat
-src/bypass-so-shifted-rastrigin/results/conf.mat
+examples/bypass-so-shifted-rastrigin/data/constants.mat
+examples/bypass-so-shifted-rastrigin/results/bypass-so-results.mat
+examples/bypass-so-shifted-rastrigin/results/bypass-so-tempstate.mat
+examples/bypass-so-shifted-rastrigin/results/conf-out.mat
+examples/bypass-so-shifted-rastrigin/results/conf.mat
 
-src/bypass-so-shifted-rosenbrock/data/constants.mat
-src/bypass-so-shifted-rosenbrock/results/bypass-so-results.mat
-src/bypass-so-shifted-rosenbrock/results/bypass-so-tempstate.mat
-src/bypass-so-shifted-rosenbrock/results/conf-out.mat
-src/bypass-so-shifted-rosenbrock/results/conf.mat
+examples/bypass-so-shifted-rosenbrock/data/constants.mat
+examples/bypass-so-shifted-rosenbrock/results/bypass-so-results.mat
+examples/bypass-so-shifted-rosenbrock/results/bypass-so-tempstate.mat
+examples/bypass-so-shifted-rosenbrock/results/conf-out.mat
+examples/bypass-so-shifted-rosenbrock/results/conf.mat
 
-src/bypass-so-shifted-sphere/data/constants.mat
-src/bypass-so-shifted-sphere/results/bypass-so-results.mat
-src/bypass-so-shifted-sphere/results/bypass-so-tempstate.mat
-src/bypass-so-shifted-sphere/results/conf-out.mat
-src/bypass-so-shifted-sphere/results/conf.mat
+examples/bypass-so-shifted-sphere/data/constants.mat
+examples/bypass-so-shifted-sphere/results/bypass-so-results.mat
+examples/bypass-so-shifted-sphere/results/bypass-so-tempstate.mat
+examples/bypass-so-shifted-sphere/results/conf-out.mat
+examples/bypass-so-shifted-sphere/results/conf.mat
 
-src/scemua-so-hymod-batch/data/constants.mat
-src/scemua-so-hymod-batch/data/leafriver-art.mat
-src/scemua-so-hymod-batch/results/scemua-so-results.mat
-src/scemua-so-hymod-batch/results/scemua-so-tempstate.mat
-src/scemua-so-hymod-batch/results/conf-out.mat
-src/scemua-so-hymod-batch/results/conf.mat
+examples/scemua-so-hymod-batch/data/constants.mat
+examples/scemua-so-hymod-batch/data/leafriver-art.mat
+examples/scemua-so-hymod-batch/results/scemua-so-results.mat
+examples/scemua-so-hymod-batch/results/scemua-so-tempstate.mat
+examples/scemua-so-hymod-batch/results/conf-out.mat
+examples/scemua-so-hymod-batch/results/conf.mat
 
-src/soda-mo-lintank/data/constants.mat
-src/soda-mo-lintank/data/obs.mat
-src/soda-mo-lintank/results/soda-mo-results.mat
-src/soda-mo-lintank/results/soda-mo-tempstate.mat
-src/soda-mo-lintank/results/conf-out.mat
-src/soda-mo-lintank/results/conf.mat
+examples/soda-mo-lintank/data/constants.mat
+examples/soda-mo-lintank/data/obs.mat
+examples/soda-mo-lintank/results/soda-mo-results.mat
+examples/soda-mo-lintank/results/soda-mo-tempstate.mat
+examples/soda-mo-lintank/results/conf-out.mat
+examples/soda-mo-lintank/results/conf.mat
 
-src/soda-so-lintank/data/constants.mat
-src/soda-so-lintank/results/soda-so-results.mat
-src/soda-so-lintank/results/soda-so-tempstate.mat
-src/soda-so-lintank/results/conf-out.mat
-src/soda-so-lintank/results/conf.mat
+examples/soda-so-lintank/data/constants.mat
+examples/soda-so-lintank/results/soda-so-results.mat
+examples/soda-so-lintank/results/soda-so-tempstate.mat
+examples/soda-so-lintank/results/conf-out.mat
+examples/soda-so-lintank/results/conf.mat
 
-src/soda-so-lorenz/data/constants.mat
-src/soda-so-lorenz/data/obs.mat
-src/soda-so-lorenz/results/soda-so-results.mat
-src/soda-so-lorenz/results/soda-so-tempstate.mat
-src/soda-so-lorenz/results/conf-out.mat
-src/soda-so-lorenz/results/conf.mat
+examples/soda-so-lorenz/data/constants.mat
+examples/soda-so-lorenz/data/obs.mat
+examples/soda-so-lorenz/results/soda-so-results.mat
+examples/soda-so-lorenz/results/soda-so-tempstate.mat
+examples/soda-so-lorenz/results/conf-out.mat
+examples/soda-so-lorenz/results/conf.mat
 
+examples/soda-so-lintank/Makefile
+examples/soda-so-lintank/jobscript-mmsoda.pbs
+examples/soda-so-lintank/libmmpi.so
+examples/soda-so-lintank/matlabprog
+examples/soda-so-lintank/results/jobscript-mmsoda.pbs.e*
+examples/soda-so-lintank/results/jobscript-mmsoda.pbs.o*
 
 src/mmsoda-toolbox/comms/bcastvar.mexa64
 src/mmsoda-toolbox/comms/helper.o
@@ -79,14 +85,6 @@ src/mmsoda-toolbox/mmlib/libmmpi.exports
 src/mmsoda-toolbox/mmlib/libmmpi.h
 src/mmsoda-toolbox/mmlib/mccExcludedFiles.log
 src/mmsoda-toolbox/mmlib/readme.txt
-
-
-src/soda-so-lintank/Makefile
-src/soda-so-lintank/jobscript-mmsoda.pbs
-src/soda-so-lintank/libmmpi.so
-src/soda-so-lintank/matlabprog
-src/soda-so-lintank/results/jobscript-mmsoda.pbs.e*
-src/soda-so-lintank/results/jobscript-mmsoda.pbs.o*
 
 *.m~
 
