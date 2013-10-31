@@ -7,12 +7,19 @@ bottomLayerHeight = 0.8;
 topLayerHeight = 0.2;
 vertSep = 0.2;
 bgColor = [0.12,0.18,0.24];
+showHost = true;
+showPID = true;
+showRank = true;
 
-authorizedOptions = {'bottomLayerHeight',...
+
+authorizedOptions = {'showLegend',...
+    'bottomLayerHeight',...
     'topLayerHeight',...
     'vertSep',...
     'bgColor',...
-    'showLegend'};
+    'showHost',...
+    'showPID',...
+    'showRank'};
 
 
 mmsodaParsePairs()
@@ -23,6 +30,8 @@ magenta = [0.75, 0.04, 0.38];
 blue = [0.12, 0.15, 0.79];
 lightgray = [0.71,0.71,0.71];
 cyan = [ 0.27, 0.80, 0.84];
+textColor = [1,1,1];
+textColorBackground = [0,0,0];
 
 events = { 1, 2,'receivevar in receivevar.c',    0.4,{'FaceColor',olive,'EdgeColor',olive};... 
            3, 4,'sendvar in sendvar.c',          0.4,{'FaceColor',magenta,'EdgeColor',magenta};...
@@ -43,7 +52,7 @@ if showLegend
     
 else
     
-    h1 = axes('Position',[0.02,0.05,0.96,0.98],'Color',bgColor);
+    h1 = axes('Position',[0.02,0.05,0.96,0.93],'Color',bgColor);
     
 end
 
@@ -98,6 +107,35 @@ for iItem = 1:nItems
             end
         end
         
+        str = '';        
+        if showRank
+            str = [str,'RANK=',num2str(timing.mpirank)];
+        end
+        if showHost
+            str = [str,' HOST=',timing.host];
+        end
+        if showPID
+            str = [str,' PID=',timing.pid];
+        end
+        if any(eventOccurred)
+            text(0,timing.mpirank,str,...
+                'color',textColor,...
+                'BackgroundColor',textColorBackground,...
+                'horizontalalign','left',...
+                'verticalalign','middle',...
+                'Margin',1,...
+                'Interpreter','none')
+        else
+            text(0,timing.mpirank,[str,' no events'],...
+                'color',textColor,...
+                'BackgroundColor',textColorBackground,...
+                'horizontalalign','left',...
+                'verticalalign','middle',...
+                'Margin',1,...
+                'Interpreter','none')
+        end
+
+        
     end
     
 end
@@ -107,7 +145,8 @@ if IdontSeeTheTimingFiles
 end
 
 
-set(gca,'ylim',[mpiRankMin-0.5,mpiRankMax+0.5])
+set(gca,'ylim',[mpiRankMin-0.5,mpiRankMax+0.5],...
+    'ytick',[])
 
 for iEvent=1:nEvents
     if ~eventOccurred(iEvent)
@@ -115,9 +154,11 @@ for iEvent=1:nEvents
     end
     
 end
-      
+xlabel('time since reference [s]')
 
-drawLegend(h2,events,eventOccurred)
+if showLegend
+    drawLegend(h2,events,eventOccurred)
+end
 
 
 
