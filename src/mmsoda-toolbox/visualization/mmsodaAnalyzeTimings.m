@@ -36,8 +36,6 @@ magenta = [0.75, 0.04, 0.38];
 blue = [0.12, 0.15, 0.79];
 lightgray = [0.71,0.71,0.71];
 cyan = [ 0.27, 0.80, 0.84];
-textColor = [1,1,1];
-textColorBackground = [0,0,0];
 
 
 events = { 1, 2,'receivevar\n(receivevar.c)',    bottomLayerHeight/2,{'FaceColor',olive,'EdgeColor',olive};... 
@@ -131,16 +129,6 @@ for iItem = 1:nItems
         end
         yTickLabels{end+1} = str;
 
-%         text(0,timing.mpirank,str,...
-%             'color',textColor,...
-%             'BackgroundColor',textColorBackground,...
-%             'horizontalalign','left',...
-%             'verticalalign','middle',...
-%             'Margin',1,...
-%             'Interpreter','none')
-
-
-        
     end
     
 end
