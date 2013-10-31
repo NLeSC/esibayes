@@ -1,5 +1,5 @@
-function mmsodaCopyMakefile(varargin)
-% <a href="matlab:web(fullfile(mmsodaroot,'html','mmsodaCopyMakeFile.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>
+function mmsodaCreateMakefile(varargin)
+% <a href="matlab:web(fullfile(mmsodaroot,'html','mmsodaCreateMakeFile.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>
 % % 
 
 % % LICENSE START
@@ -37,6 +37,9 @@ if nargin==0
     end
 elseif nargin ==1
     mmsodaDir = varargin{1};
+    if mmsodaDir(end) ~= '/'
+        mmsodaDir = [mmsodaDir,'/'];
+    end
     disp(['Using the MMSODA Toolbox from this location: ',10,'"',mmsodaDir,'".'])
 else
     error('Function takes only one argument.')
@@ -62,7 +65,7 @@ fclose(fid);
 
 
 fid = fopen(destination,'wt');
-fprintf(fid,'%s',sprintf(makefileStr,mmsodaroot));
+fprintf(fid,'%s',sprintf(makefileStr,mmsodaDir));
 fclose(fid);
 
 
