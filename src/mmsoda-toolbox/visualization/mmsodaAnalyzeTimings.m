@@ -201,8 +201,6 @@ M = [1,2,1;...
      6,2,3];
 
 for iEvent = 1:nEvents
-%     iRow = floor((iEvent-1)/nCols);
-%     iCol = mod(iEvent-1,nCols)+1;
 
     iRow = M(iEvent,2);
     iCol = M(iEvent,3);
