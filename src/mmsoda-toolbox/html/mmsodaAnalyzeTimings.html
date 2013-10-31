@@ -91,7 +91,7 @@ Description
 </p>
 
 <p>
-The figure below gives an impression of what the <span style="font-family:monospace">mmsodaAnalyzeTimings()</span> result looks like. The figure shows results for a very fine-grained problem, executed on two 12-core nodes. Note that <span style="font-family:monospace">nOffspring</span> was 20, hence 3 cores remain unused).</p>
+The figure below gives an impression of what the <span style="font-family:monospace">mmsodaAnalyzeTimings()</span> result looks like. The figure shows results for a relatively fine-grained problem, executed on one 16-core node.</p>
 <p>
 <img src="images/mmsodaAnalyzeTimings.png" width="700px">
 </p>
@@ -124,6 +124,7 @@ The behavior may be tweaked using various options (see <a href="#_mmsodaAnalyzeT
     <td valign="top"><span style="font-family:monospace"><span class="string">'bottomLayerHeight'</span></span></td>
     <td valign="top">Controls the vertical size of the least detailed patch objects. Default is <span style="font-family:monospace">0.8</span>.</td>
 </tr>
+<!--
 <tr>
     <td valign="top"><span style="font-family:monospace"><span class="string">'colorTable'</span></span></td>
     <td valign="top">Defines the default colors with which the different activities are visualized. Default is:
@@ -139,9 +140,15 @@ The behavior may be tweaked using various options (see <a href="#_mmsodaAnalyzeT
 </pre>
     </td>
 </tr>
+-->
 <tr>
     <td valign="top"><span style="font-family:monospace"><span class="string">'endAt'</span></span></td>
-    <td valign="top">Defines the end time in seconds for which the timings will be retrieved from the timing_*.mat files. Default is <span style="font-family:monospace">10.0</span>.</td>
+    <td valign="top">Defines the end time in seconds for which the timings will be shown. Default is to include all data.</td>
+</tr>
+
+<tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'leftMargin'</span></span></td>
+    <td valign="top">Defines the margin on the left-hand side of the plot as a fraction of the whole figure width. Default is <span style="font-family:monospace">0.17</span>.</td>
 </tr>
 
 <tr>
@@ -157,16 +164,17 @@ The behavior may be tweaked using various options (see <a href="#_mmsodaAnalyzeT
     <td valign="top">Show the process ID as text. Default is <span style="font-family:monospace">true</span>.</td>
 </tr>
 <tr>
+    <td valign="top"><span style="font-family:monospace"><span class="string">'showRank'</span></span></td>
+    <td valign="top">Show the MPI rank as text. Default is <span style="font-family:monospace">true</span>.</td>
+</tr>
+
+<tr>
     <td valign="top"><span style="font-family:monospace"><span class="string">'startFrom'</span></span></td>
-    <td valign="top">Defines the start time in seconds for which the timings will be retrieved from the timing_*.mat files. Default is <span style="font-family:monospace">0.0</span>.</td>
+    <td valign="top">Defines the start time in seconds for which the timings will be shown. Default is to show all data.</td>
 </tr>
 <tr>
     <td valign="top"><span style="font-family:monospace"><span class="string">'topLayerHeight'</span></span></td>
     <td valign="top">Controls the vertical size of the most detailed patch objects. Default is <span style="font-family:monospace">0.2</span>.</td>
-</tr>
-<tr>
-    <td valign="top"><span style="font-family:monospace"><span class="string">'vertSep'</span></span></td>
-    <td valign="top">Controls the vertical separation between bands pertaining to individual processes. Default is <span style="font-family:monospace">0.2</span>.</td>
 </tr>
 
 </table>
