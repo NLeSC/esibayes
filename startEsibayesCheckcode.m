@@ -17,18 +17,18 @@ dirNames = {fullfile('src','mmsoda-toolbox'),...
 nDirs = numel(dirNames);
 
 
-fidLog = fopen('checkcode.log','wt');
-fidComplexity = fopen('mccabe-complexity.log','wt');
+fidLog = fopen(fullfile('code-quality-metrics','checkcode.log'),'wt');
+fidComplexity = fopen(fullfile('code-quality-metrics','mccabe-complexity.log'),'wt');
 
 
 for iDir=1:nDirs
 
     dirName = dirNames{iDir};
     
+    fnames = what(dirName);
+    
     addpath(dirName);
-    
-    fnames = what(fullfile(pwd,dirName));
-    
+
     nFiles = numel(fnames.m);
     
     for iFile = 1:nFiles
