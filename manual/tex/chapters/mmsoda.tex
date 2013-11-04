@@ -223,11 +223,11 @@ When you are satisfied with the way you set up MMSODA locally, you can run it on
 \smallq{Use PuTTY to start an SSH connection to the LISA cluster.}
 
 \smallq{In the PuTTY terminal, load the MATLAB program and MPI programs by typing:\\
-\texttt{module load matlab}\\
+\texttt{module load matlab/2013a}\\
 This command will not give any feedback on the success or otherwise of the command, but you could check by typing the following command:\\
 \texttt{module list}\\
 which should now include MATLAB. Next, type\\
-\texttt{module load openmpi/gnu}\\
+\texttt{module load openmpi/gnu/1.6.5}\\
 to load the MPI software.
 }
 
@@ -280,7 +280,7 @@ In normal English, this command translates to ``\texttt{Ch}ange the \texttt{mod}
 You can now use any of the MMSODA visualizations (or MATLAB visualizations for that matter), in just the same way as if the results had been calculated locally.}
 
 
-\smallq{Now that you know what information goes where for MMSODA in `bypass' mode, it may be useful to review some of the other examples in the `esibayes-master' directory. On your local machine, explore the configurations for a few of the other `bypass' mode directories. Try running MMSODA for those configurations, but make sure MATLAB is set to the correct working directory when \texttt{mmsoda} is started.}
+\smallq{Now that you know what information goes where for MMSODA in `bypass' mode, it may be useful to review some of the `bypass' examples in the `esibayes-master/examples' directory. Try running MMSODA for those configurations, but make sure MATLAB is set to the correct working directory when \texttt{mmsoda} is started.}
 
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
