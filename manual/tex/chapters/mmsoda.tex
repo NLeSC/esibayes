@@ -67,7 +67,7 @@ l=\mathrm{ln}\left(p\right)
 
 Before we actually start writing any code for this objective function however, let's first create the `conf.mat'\index{conf.mat} and `constants.mat'\index{constants.mat} files that are always needed for running \texttt{mmsoda()}.
 
-\smallq{Start a new text file in the MATLAB editor and save it as `makeconf.m'\index{makeconf.m} in the current working directory.}
+\smallq{Start a new text file in the MATLAB editor and save it as `makeconf.m'\index{makeconf.m} in the current working directory (`mmsoda-projects/example1').}
 
 \smallq{At the first line in `makeconf.m', add the following:\\
 \texttt{function makeconf()}\\}
@@ -132,7 +132,7 @@ Finally, we need to create the objective function m-file that implements equatio
 
 \smallq{As a second line, type: \\
 \texttt{mmsodaUnpack()}\index{MMSODA functions!mmsodaUnpack@\texttt{mmsodaUnpack}}\\
-This function uses the information from the input arguments to construct the variable \texttt{x} and to assign it a value based on the value of \texttt{parVec}. Similarly, it uses information from the \texttt{constants} variable to construct the model constants and to assign them the correct values.}
+\texttt{mmsodaUnpack} uses the information from the input arguments to construct the variable \texttt{x} and to assign it a value based on the value of \texttt{parVec}. Similarly, it uses information from the \texttt{constants} variable to construct the model constants and to assign them the correct values.}
 
 Now that we have \texttt{parMu1}, \texttt{parSigma1}, \texttt{parMu2}, \texttt{parSigma2}, and \texttt{x} we can calculate the probability density \texttt{dens} as follows:
 \begin{verbatim}
@@ -182,7 +182,7 @@ Let's explore the results by making a histogram of the occurence of certain para
 \end{figure}
 
 
-\smallq{Refer to the documentation on how to use \texttt{mmsodaPlotSeq}\index{MMSODA functions!mmsodaPlotSeq@\texttt{mmsodaPlotSeq}}. Create another figure on the right side of your screen, in which you visualize the record of sequences. Use the options to hide the samples that were rejected as part of the Metropolis scheme. You result should look like Fig.~\ref{fig:mmsodaPlotSeq}.}
+\smallq{Refer to the documentation on how to use \texttt{mmsodaPlotSeq}\index{MMSODA functions!mmsodaPlotSeq@\texttt{mmsodaPlotSeq}}. Create another figure on the right side of your screen, in which you visualize the record of sequences. Use the \texttt{\squote{showRejects}} option to hide the samples that were rejected as part of the Metropolis scheme. Your result should look like Fig.~\ref{fig:mmsodaPlotSeq}.}
 
 
 \begin{figure}[htb]
@@ -192,8 +192,7 @@ Let's explore the results by making a histogram of the occurence of certain para
   \label{fig:mmsodaPlotSeq}
 \end{figure}
 
-
-%\smallq{Refer back to the documentation on the \texttt{mmsoda} function; specifically, browse through some of the configuration options for running MMSODA in `bypass' mode. Alter your `makeconf.m' with the options that you find useful, and re-run the optimization.}
+\smallq{Refer back to the documentation on the \texttt{mmsoda} function; specifically, browse through some of the configuration options for running MMSODA in `bypass' mode. Alter your `makeconf.m' with the options that you find useful, and re-run the optimization.}
 
 \smallq{When you are satisfied with the way you set up MMSODA locally, you can make preparations for running it in parallel on the LISA cluster computer. Running on LISA requires a so-called `Makefile'\index{Makefile} as well as a jobscript\index{jobscript}, both of which are tricky to write yourself. Therefore, the MMSODA Toolbox for MATLAB comes with a function that helps you generate the correct files by asking a series of questions. At the MATLAB prompt, type:\\
 \texttt{>> mmsodaPrepParallelFiles()}\index{MMSODA functions!mmsodaPrepParallelFiles@\texttt{mmsodaPrepParallelFiles}} \\
