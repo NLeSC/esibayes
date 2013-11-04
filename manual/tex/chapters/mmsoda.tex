@@ -168,7 +168,7 @@ and wait for the optimization to finish. Input arguments to \texttt{mmsoda}\inde
 Once the optimization finishes, you should have 5 variables in your workspace: \texttt{evalResults}, \texttt{critGelRub}, \texttt{sequences}, \texttt{metropolisRejects}, and \texttt{conf}. Refer to the \texttt{mmsoda()} documentation for a description of what these variables are and how they are laid out.
 
 Let's explore the results by making a histogram of the occurence of certain parameter values. You could simply use MATLAB's built-in \texttt{hist()} function to do this, but it is often more convient to use a specialized function that comes pre-packaged with MMSODA like so:\\
-\texttt{ >> mmsodaSubplotScreen(1,2,1);}\index{MMSODA functions!mmsodaSubplotScreen@\texttt{mmsodaSubplotScreen}}\\
+\texttt{ >> mmsodaSubplotScreen(2,2,1);}\index{MMSODA functions!mmsodaSubplotScreen@\texttt{mmsodaSubplotScreen}}\\
 \texttt{ >> mmsodaMargHist(conf,evalResults);}\index{MMSODA functions!mmsodaMargHist@\texttt{mmsodaMargHist}}\\
 
 \smallq{Refer to the documentation of these two functions to see how they work and use the optional \texttt{\squote{nHistory}} argument to show the marginal histogram based on the last quarter of the \texttt{evalResults} record. Your result should look like Fig.~\ref{fig:mmsodaMargHist}.}
@@ -195,8 +195,10 @@ Let's explore the results by making a histogram of the occurence of certain para
 \smallq{Refer back to the documentation on the \texttt{mmsoda} function; specifically, browse through some of the configuration options for running MMSODA in `bypass' mode. Alter your `makeconf.m' with the options that you find useful, and re-run the optimization.}
 
 \smallq{When you are satisfied with the way you set up MMSODA locally, you can make preparations for running it in parallel on the LISA cluster computer. Running on LISA requires a so-called `Makefile'\index{Makefile} as well as a jobscript\index{jobscript}, both of which are tricky to write yourself. Therefore, the MMSODA Toolbox for MATLAB comes with a function that helps you generate the correct files by asking a series of questions. At the MATLAB prompt, type:\\
-\texttt{>> mmsodaPrepParallelFiles()}\index{MMSODA functions!mmsodaPrepParallelFiles@\texttt{mmsodaPrepParallelFiles}} \\
-and use the following information to answer its questions:\\
+\texttt{>> mmsodaPrepParallelFiles(\squote{s})}\index{MMSODA functions!mmsodaPrepParallelFiles@\texttt{mmsodaPrepParallelFiles}} \\
+but substitute \texttt{s} with the location of the MMSODA Toolbox for MATLAB as used on the LISA cluster. So for me, it would be:\\
+\texttt{>> mmsodaPrepParallelFiles(\squote{/home/jspaaks/esibayes-master/src/mmsoda-toolbox}}) \\
+Now use the following information to answer \texttt{mmsodaPrepParallelFiles}'s questions:\\
 \begin{enumerate}\label{li:answers-mmsodaPrepParallelFiles}
 \item{the optimization will run on one of the login nodes;}
 \item{we want not much verbal feedback from the program;}
