@@ -1,0 +1,13 @@
+#PBS -lwalltime=00:05:00
+#PBS -lnodes=1:cores8:ppn=1
+#PBS -S /bin/bash
+
+echo `date`: job starts
+
+# let octave execute the disp and pause commands:
+octave --silent --no-window-system --eval "disp('hello world');pause(90)"
+
+echo `date`: job ends
+
+exit
+
