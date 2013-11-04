@@ -1,4 +1,4 @@
-function mmsodaPrepParallelFiles()
+function mmsodaPrepParallelFiles(varargin)
 % <a href="matlab:web(fullfile(mmsodaroot,'html','mmsodaPrepParallelFiles.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>
 
 % % 
@@ -27,10 +27,14 @@ function mmsodaPrepParallelFiles()
 
 
 
-% copy the Makefile from the mmsoda root directory to the current
+% create the Makefile by copying from the mmsoda root directory to the current
 % directory:
-mmsodaCopyMakefile()
-
+if nargin==0
+    mmsodaCreateMakefile()
+elseif nargin==1
+   mmsodaCreateMakefile(varargin{1})
+else
+end
 
 % ask a bunch of questions and write the job script according to the
 % answers:
