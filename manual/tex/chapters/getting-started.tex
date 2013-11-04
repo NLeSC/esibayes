@@ -171,7 +171,7 @@ jspaaks@login2:~$ ls -l
 total 4
 drwxrwxr-x 2 jspaaks jspaaks 2 Jun 13 13:07 tutorial
 \end{lstlisting}
-which gives you, amongst other things, the \textit{permission bits}\index{permission bits} (i.e.\,\lstinline{drwxrwxr-x}), the owner of the item (\lstinline{jspaaks}), the item's size (\lstinline{2}) in bytes and the time when the item was last altered (\lstinline{Jun 13 13:07}). Note that, by default, \lstinline[style=bashinline]{ls} sorts the items in a directory based on the item's name, so directories and files will appear intermingled. You can easily tell whether an item is one or the other by looking at the permission bits: if the item is a folder, the first character that appears in the permission bits is the letter \lstinline[style=bashinline]{d}. For files, the first character in the permission bits is \lstinline[style=bashinline]{-}.
+which gives you, amongst other things, the \textit{permission bits}\index{permission bits} (i.e.\,\lstinline{drwxrwxr-x}), the owner of the item (\lstinline{jspaaks}), the item's size (\lstinline{2}) in bytes and the time when the item was last altered (\lstinline{Jun 13 13:07}). Note that, by default, \lstinline[style=bashinline]{ls} sorts the items in a directory based on the item's name, so directories and files will appear intermingled. You can easily tell whether an item is one or the other by looking at the permission bits: if the item is a directory, the first character that appears in the permission bits is the letter \lstinline[style=bashinline]{d}. For files, the first character in the permission bits is \lstinline[style=bashinline]{-}.
 
 Most Linux commands have at least a few optional arguments. If you want to know more about a particular command's usage, you can use the \texttt{man}\index{Linux commands!man@\texttt{man}} (short for `manual') command, which lists all the options for a given program including a short description of what each option does. For example, try:
 \begin{lstlisting}[style=basic,style=bash]
@@ -345,7 +345,7 @@ If you want to return to the normal shell, just type:
 octave:2> exit
 \end{lstlisting}
 
-From the example above, you can see that typing everything on the command line can be tricky, even for simple tasks. Wouldn't it be great to have an editor of some kind? You've guessed it, the shell can also be turned into a (very) basic editor, like so\footnote{For more complicated programs, it can be more convenient to do the editing on your local machine using your own tools, and then upload the file to the remote system using WinSCP}:
+From the example above, you can see that typing everything on the command line can be tricky, even for simple tasks. Wouldn't it be great to have an editor of some kind? You've guessed it, the shell can also be turned into a (very) basic editor, like so\footnote{For more complicated programs, it can be more convenient to do the editing on your local machine using your own tools, and then upload the file to the remote system using WinSCP.}:
 \begin{lstlisting}[style=basic,style=bash]
 jspaaks@login2:~$ nano
 \end{lstlisting}

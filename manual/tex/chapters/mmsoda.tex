@@ -15,26 +15,25 @@ The remainder of this chapter explains how to set up increasingly sophisticated 
 
 \section{MMSODA in `bypass' mode; sequential execution}
 
-\smallq{You should have received `esibayes.zip' with this document. Unzip it into a directory on your local machine.}
+\smallq{In your file explorer program, navigate to the directory where you unzipped the file from \burl{https://github.com/NLeSC/esibayes}.}
 
-As you can see, the `esibayes' directory contains a number of subdirectories. Among these, the `mmsoda-toolbox' directory is probably the most important: it contains the MATLAB toolbox that this chapter is about. Most of the other directories have names like `soda-so-something' or `bypass-mo-something'. The specific meaning of these names will become clear later; for now, it suffices to say that they are example projects of how to use the MMSODA toolbox for MATLAB with different models and different configurations. Finally there are two more directories, one labeled `template-project', and one labeled `other'. The former contains a rudimentary structure of an MMSODA project, whereas the latter contains some files that we will be using later on.
+As you can see, the `esibayes-master' directory contains a number of subdirectories. Among these, the `src/mmsoda-toolbox' and `examples' subdirectories are probably the most important: the former contains the MATLAB toolbox that this chapter is about, while the latter contains a couple of examples of how to use the MMSODA toolbox for MATLAB with different models and different configurations. There are a few other directories, such as `manual', `testing' and `code-quality-metrics'. The `manual' directory contains all the files pertaining to the document you have before you. The `testing' and `code-quality-metrics' directories are part of the software quality control process: whenever we change something in MMSODA's code, a number of tests from the `testing' directory are run automatically. The test results are subsequently posted in `code-quality-metrics'. With this so-called unit-testing, we can verify that updates to one part of the algorithm do not accidentally break other parts.
 
-\smallq{Let's get started by making a new directory next to the \texttt{mmsoda-toolbox} directory. Let's call this directory \texttt{example1}. Change directory into \texttt{example1}, and create three directories in it called \texttt{data}, \texttt{model}, and \texttt{results}. (We won't always use all three directories, but MMSODA expects all three to be present regardless of whether they are used). So now you have a directory somewhere on your local storage device that has at least the following subdirectories:
+\smallq{Let's get started by making a new directory that will hold all of our MMSODA projects. Let's call this directory `mmsoda-projects' (you can put this directory anywhere you have write access on your system). Change directory into `mmsoda-projects', create a subdirectory `example1', with three subdirectories in it called `data', `model', and `results'. (We won't always use all three directories, but MMSODA expects all three to be present regardless of whether they are used). So now you have a directory somewhere on your local storage device that has at least the following subdirectories:
 \begin{itemize}
-\item{\texttt{esibayes/example1}}
-\item{\texttt{esibayes/example1/data}}
-\item{\texttt{esibayes/example1/model}}
-\item{\texttt{esibayes/example1/results}}
-\item{\texttt{esibayes/mmsoda-toolbox} (which includes a bunch of subdirectories and subsubdirectories that are not relevant for the moment).}
+\item{mmsoda-projects/example1}
+\item{mmsoda-projects/example1/data}
+\item{mmsoda-projects/example1/model}
+\item{mmsoda-projects/example1/results}
 \end{itemize}
 }
 
-\smallq{Open MATLAB and set your working directory to \texttt{example1}.}
+\smallq{Open MATLAB and set your working directory to `example1'.}
 
 \smallq{Before we can use the functionality provided by the MMSODA Toolbox for MATLAB, we need to tell MATLAB about its existence by adding the main directory to the MATLAB search path. You must do this using the \texttt{addpath} command as follows:\\
 \texttt{>> addpath(\squote{s})}, in which \texttt{s} indicates the location of the MMSODA directory. For example, it could be:\\
-\texttt{>> addpath(\squote{C:\textbackslash{}Users\textbackslash{}jspaaks\textbackslash{}esibayes\textbackslash{}mmsoda-toolbox})}\\ on a Windows machine or \\
-\texttt{>> addpath(\squote{/home/jspaaks/esibayes/mmsoda-toolbox})}\\
+\texttt{>> addpath(\squote{C:\textbackslash{}Users\textbackslash{}jspaaks\textbackslash{}esibayes-master\textbackslash{}src\textbackslash{}mmsoda-toolbox})}\\ on a Windows machine or \\
+\texttt{>> addpath(\squote{/home/jspaaks/esibayes-master/src/mmsoda-toolbox})}\\
 on Linux.
 }
 \smallq{At the MATLAB prompt, type:\\
@@ -245,7 +244,7 @@ Starting the optimization requires that we adjust the `permission bits'\index{pe
 \Needspace{12\baselineskip}
 
 \begin{lstlisting}[style=basic,style=bash]
-jspaaks@login1:~/esibayes/example1$ ls -l
+jspaaks@login1:~/esibayes-master/example1$ ls -l
 total 204
 drwxr-xr-x 2 jspaaks jspaaks     26 Jan 16 16:09 data
 -rwxrwxr-x 1 jspaaks jspaaks 172792 Jan 18 11:57 libmmpi.so
@@ -256,7 +255,7 @@ drwxr-xr-x 2 jspaaks jspaaks     26 Jan 16 16:09 data
 drwxr-xr-x 2 jspaaks jspaaks     29 Jan 16 16:09 model
 drwxr-xr-x 2 jspaaks jspaaks   4096 Jan 16 17:36 results
 -rw-r--r-- 1 jspaaks jspaaks    580 Jan 18 13:26 run-mmsoda.sh
-jspaaks@login1:~/esibayes/example1$
+jspaaks@login1:~/esibayes-master/example1$
 \end{lstlisting}
 
 For `run-mmsoda.sh'\index{run-mmsoda.sh}, the permissions are set to \texttt{-rw-r--r--}. The first character \texttt{-} indicates that `run-mmsoda.sh' is a file (as opposed to a \texttt{d} which would indicate a directory). Characters 2, 3 and 4 (\texttt{rw-}) indicate what you, the currently logged-in user, is allowed to do with `run-mmsoda.sh'. Currently, you are allowed to read from (\texttt{r}) and write to (\texttt{w}) `run-mmsoda.sh'. The \texttt{-} character from the fourth column of \texttt{ls -l} indicates that you are currently not allowed to execute `run-mmsoda.sh' as a script.
@@ -280,7 +279,7 @@ In normal English, this command translates to ``\texttt{Ch}ange the \texttt{mod}
 You can now use any of the MMSODA visualizations (or MATLAB visualizations for that matter), in just the same way as if the results had been calculated locally.}
 
 
-\smallq{Now that you know what information goes where for MMSODA in `bypass' mode, it may be useful to review some of the other examples in the `esibayes' directory. On your local machine, explore the configurations for a few of the other `bypass' mode directories. Try running MMSODA for those configurations, but make sure MATLAB is set to the correct working directory when \texttt{mmsoda} is started.}
+\smallq{Now that you know what information goes where for MMSODA in `bypass' mode, it may be useful to review some of the other examples in the `esibayes-master' directory. On your local machine, explore the configurations for a few of the other `bypass' mode directories. Try running MMSODA for those configurations, but make sure MATLAB is set to the correct working directory when \texttt{mmsoda} is started.}
 
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
@@ -529,7 +528,7 @@ At this point, you are familiar with MMSODA in `bypass' mode and in `scemua' mod
 \end{figure}
 
 
-\smallq{Now that you know what information goes where for MMSODA in `scemua' mode, it may be useful to review some of the other examples in the `esibayes' directory. On your local machine, explore the configurations for a few of the other `scemua' mode directories. Run MMSODA for those configurations, but make sure MATLAB is set to the correct working directory when \texttt{mmsoda} is started.}
+\smallq{Now that you know what information goes where for MMSODA in `scemua' mode, it may be useful to review some of the other examples in the `esibayes-master' directory. On your local machine, explore the configurations for a few of the other `scemua' mode directories. Run MMSODA for those configurations, but make sure MATLAB is set to the correct working directory when \texttt{mmsoda} is started.}
 
 
 \section{MMSODA in `reset' mode; sequential execution}
