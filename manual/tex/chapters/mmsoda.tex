@@ -309,7 +309,7 @@ If the initial state of the system $V_{tank_1}(t_0)$ and $V_{tank_2}(t_0)$ is kn
   \label{fig:states-and-flows}
 \end{figure}
 
-It is quite common that not all the parameter values are known beforehand, so in order to make predictions with the model, it becomes necessary to estimate the model parameter values by comparing simulation results to observations of the system's states. The model must therefore be set up such that it returns the system's state at the times for which an observation is available, otherwise the comparison isn't much use. Since the time interval between observations $\Delta{}t_{obs}$ can be (much) larger than the model integration interval $\Delta{}t_{sim}$, multiple model integration steps are often needed in between observation times. Listing~\ref{list:lintank-script} shows a simple MATLAB script that implements the system depicted in Figure~\ref{fig:states-and-flows}.  A copy of the script has been included as `other/lintank\_script.m'.
+It is quite common that not all the parameter values are known beforehand, so in order to make predictions with the model, it becomes necessary to estimate the model parameter values by comparing simulation results to observations of the system's states. The model must therefore be set up such that it returns the system's state at the times for which an observation is available, otherwise the comparison isn't much use. Since the time interval between observations $\Delta{}t_{obs}$ can be (much) larger than the model integration interval $\Delta{}t_{sim}$, multiple model integration steps are often needed in between observation times. Listing~\ref{list:lintank-script} shows a simple MATLAB script that implements the system depicted in Figure~\ref{fig:states-and-flows}.  A copy of the script has been included as `esibayes-master/manual/other/lintank\_script.m'.
 
 \Needspace{7\baselineskip}
 
@@ -326,7 +326,7 @@ Over the next few exercises, we will:
 \smallq{Before we start, make sure you understand how the `lintank\_script.m' works by studying Listing~\ref{list:lintank-script} and running through it line-by-line using MATLAB's debugging capabilities.}
 
 \Needspace{64\baselineskip}
-\lstinputlisting[style=basic,style=matlab,style=numbered,style=spacious,caption={Simple MATLAB script that implements the system depicted in Figure~\ref{fig:states-and-flows}. A copy of this script has been included as `other/lintank\_script.m'.},label=list:lintank-script]{./../m/lintank_script.m}
+\lstinputlisting[style=basic,style=matlab,style=numbered,style=spacious,caption={Simple MATLAB script that implements the system depicted in Figure~\ref{fig:states-and-flows}. A copy of this script has been included as `esibayes-master/manual/other/lintank\_script.m'.},label=list:lintank-script]{./../m/lintank_script.m}
 
 \begin{figure}[htb]
   \centering
@@ -336,7 +336,7 @@ Over the next few exercises, we will:
 \end{figure}
 
 
-\smallq{Create a new directory structure with the required subdirectories just like you did before. Call the top directory `example2'. Verify that the `example2' directory is at the same level as the `mmsoda-toolbox' directory.}
+\smallq{Create a new directory `example2' in `mmsoda-projects'. Make sure that the `example2' directory has the required subdirectories just like you did before.}
 
 \smallq{Read the MMSODA documentation on `the dynamic model' (see Figure~\ref{fig:doc-the-dynamic-model}).}
 
@@ -380,9 +380,9 @@ Next, we need to make sure that the function returns the correct values---we wan
 
 
 
-\smallq{Now it's time to test if everything works so far. Make sure MATLAB is in the correct working directory (i.e.\,one level higher than your `data', `model', and `results' directories). At the MATLAB prompt type:\\
+\smallq{Now it's time to test if everything works so far. Make sure MATLAB is in the correct working directory (i.e.\,one level higher than your `data', `model', and `results' directories). Run \texttt{makeconstants} and \texttt{makeconf} in order to create the necessary configuration files. Then type:\\
 \texttt{>> [evalResults,critGelRub,sequences,metropolisRejects,conf] = mmsoda()}\\
-and press Enter. If all goes well, MMSODA will start printing various messages to your screen. You should see the message `\texttt{Evaluating parameter sets 1-100}', and if you haven't commented out the visualization part in `lintank.m', you should see 100 plots being made before MMSODA crashes with the following error:}
+and press Enter. If all goes well, MMSODA will start printing various messages to your screen. You should see the message `\texttt{Evaluating parameter sets 1-250}', and if you haven't commented out the visualization part in `lintank.m', you should see 250 plots being made before MMSODA crashes with the following error:}
 \begin{lstlisting}[style=basic,style=bash]
 Error using eval
 Undefined function 'calcLikelihoodState' for input arguments of type 'struct'.
@@ -453,10 +453,7 @@ Currently, \texttt{calcLikelihoodState} loads the observations from file every t
 
 \smallq{Cut the \texttt{load} statement from \texttt{calcLikelihoodState} and paste it into `makeconstants.m'. Make sure to re-run \texttt{makeconstants()}, otherwise `./data/constants.mat' will remain unchanged.}
 
-\smallq{Re-read the documentation on MMSODA's \texttt{mmsodaUnpack()} function. Go back to `calcLikelihoodState.m' and use \texttt{mmsodaUnpack()} to make the observations available in the objective function's workspace. Restart the optimization to check if everything works.}
-
-
-%\smallq{\textit{some interpretation of results}.\index{todo}}
+\smallq{Re-read the documentation on MMSODA's \texttt{mmsodaUnpack()} function. Go back to `calcLikelihoodState.m' and use \texttt{mmsodaUnpack()} to make the observations available in the objective function's workspace. Restart the optimization to check if everything works. The marginal parameter distribution should show a high density in a narrow band around \texttt{R = 333}. }
 
 \section{MMSODA in `scemua' mode; parallel execution}
 
