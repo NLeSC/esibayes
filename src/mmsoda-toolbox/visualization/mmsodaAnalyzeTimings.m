@@ -1,7 +1,7 @@
 function mmsodaAnalyzeTimings(varargin)
 % <a href="matlab:web(fullfile(mmsodaroot,'html','mmsodaAnalyzeTimings.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>
 
-
+disp('Started reading the timings files...')
 
 showLegend = true;
 bottomLayerHeight = 0.6;
@@ -218,5 +218,6 @@ hold off
 
 
 
+disp('Started reading the timings files...Done')
 
 
