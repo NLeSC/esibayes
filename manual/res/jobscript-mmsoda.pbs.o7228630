@@ -1,0 +1,1069 @@
+Current dir ($PWD) is:
+/home/jspaaks
+Changing into $PBS_O_WORKDIR
+Current dir is ($PWD):
+/home/jspaaks/tmp/mmsoda-projects/example2
+Result of 'ls -l' is:
+total 220
+drwxr-xr-x 2 jspaaks jspaaks     48 Nov  5 11:33 data
+-rw-r--r-- 1 jspaaks jspaaks   1941 Nov  5 11:38 jobscript-mmsoda.pbs
+-rwxrwxr-x 1 jspaaks jspaaks 189309 Nov  5 11:35 libmmpi.so
+-rw-r--r-- 1 jspaaks jspaaks    276 Nov  5 11:29 makeconf.m
+-rw-r--r-- 1 jspaaks jspaaks    271 Nov  4 19:19 makeconstants.m
+-rw-r--r-- 1 jspaaks jspaaks   1770 Nov  5 11:32 Makefile
+-rwxrwxr-x 1 jspaaks jspaaks  11832 Nov  5 11:35 matlabprog
+drwxr-xr-x 2 jspaaks jspaaks     50 Nov  5 11:33 model
+drwxr-xr-x 2 jspaaks jspaaks     51 Nov  5 11:40 results
+-rwxr--r-- 1 jspaaks jspaaks   1363 Nov  5 11:32 run-mmsoda.sh
+Unloading module matlab
+
+Loading module openmpi/gnu/1.6.5
+
+Loading module mcr/v81
+
+Starting MPI job on node r36n27.lisa.surfsara.nl
+node r36n27 has 12 CPUs.
+Starting interactive MPI job on 1 batch nodes with a total of 12 CPUs.
+r36n27
+r36n27
+r36n27
+r36n27
+r36n27
+r36n27
+r36n27
+r36n27
+r36n27
+r36n27
+r36n27
+r36n27
+
+Adding the current workdir to the library path environment variable
+
+The current LD_LIBRARY_PATH is:
+/sara/sw/mcr/64/v81/runtime/glnxa64:/sara/sw/mcr/64/v81/bin/glnxa64:/sara/sw/mcr/64/v81/sys/os/glnxa64:/sara/sw/mcr/64/v81/sys/java/jre/glnxa64/jre/lib/amd64/native_threads:/sara/sw/mcr/64/v81/sys/java/jre/glnxa64/jre/lib/amd64/server:/sara/sw/mcr/64/v81/sys/java/jre/glnxa64/jre/lib/amd64:/sara/sw/openmpi-gnu-1.6.5/lib:/sara/sw/ofed/1.5.2/64/lib64:/sara/sw/libgfortran/32/1/lib:/home/jspaaks/tmp/mmsoda-projects/example2
+
+Result of 'ldd matlabprog' is:
+    linux-vdso.so.1 =>  (0x00007fffe4af5000)
+    libmwmclmcrrt.so.8.1 => /sara/sw/mcr/64/v81/runtime/glnxa64/libmwmclmcrrt.so.8.1 (0x00002b00f760e000)
+    libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00002b00f787c000)
+    libmpi.so.1 => /sara/sw/openmpi-gnu-1.6.5/lib/libmpi.so.1 (0x00002b00f7afe000)
+    libmmpi.so => /home/jspaaks/tmp/mmsoda-projects/example2/libmmpi.so (0x00002b00f80a9000)
+    libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00002b00f82b1000)
+    libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00002b00f84cd000)
+    libmwcpp11compat.so => /sara/sw/mcr/64/v81/runtime/glnxa64/../../bin/glnxa64/libmwcpp11compat.so (0x00002b00f8858000)
+    libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00002b00f8a61000)
+    libstdc++.so.6 => /sara/sw/mcr/64/v81/runtime/glnxa64/../../sys/os/glnxa64/libstdc++.so.6 (0x00002b00f8c65000)
+    libgcc_s.so.1 => /sara/sw/mcr/64/v81/runtime/glnxa64/../../sys/os/glnxa64/libgcc_s.so.1 (0x00002b00f8f75000)
+    libibverbs.so.1 => /sara/sw/ofed/1.5.2/64/lib64/libibverbs.so.1 (0x00002b00f918b000)
+    libtorque.so.2 => /usr/lib/libtorque.so.2 (0x00002b00f9398000)
+    libnuma.so.1 => /usr/lib/libnuma.so.1 (0x00002b00f96a4000)
+    librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00002b00f98af000)
+    libnsl.so.1 => /lib/x86_64-linux-gnu/libnsl.so.1 (0x00002b00f9ab7000)
+    libutil.so.1 => /lib/x86_64-linux-gnu/libutil.so.1 (0x00002b00f9cd0000)
+    /lib64/ld-linux-x86-64.so.2 (0x00002b00f73ec000)
+
+Result of 'nm matlabprog' is:
+                 U MPI_Comm_rank
+                 U MPI_Comm_size
+                 U MPI_Finalize
+                 U MPI_Init_thread
+0000000000601540 d _DYNAMIC
+0000000000601788 d _GLOBAL_OFFSET_TABLE_
+0000000000401258 R _IO_stdin_used
+                 w _ITM_deregisterTMCloneTable
+                 w _ITM_registerTMCloneTable
+                 w _Jv_RegisterClasses
+0000000000401520 r __FRAME_END__
+0000000000601538 d __JCR_END__
+0000000000601538 d __JCR_LIST__
+0000000000601858 D __TMC_END__
+0000000000601858 A __bss_start
+0000000000601848 D __data_start
+0000000000400e80 t __do_global_dtors_aux
+0000000000601530 t __do_global_dtors_aux_fini_array_entry
+0000000000601850 D __dso_handle
+0000000000601528 t __frame_dummy_init_array_entry
+                 w __gmon_start__
+0000000000601530 t __init_array_end
+0000000000601528 t __init_array_start
+00000000004011b0 T __libc_csu_fini
+00000000004011c0 T __libc_csu_init
+                 U __libc_start_main@@GLIBC_2.2.5
+0000000000601858 A _edata
+0000000000601c88 A _end
+000000000040124c T _fini
+0000000000400c50 T _init
+0000000000400dc0 T _start
+0000000000400dec t call_gmon_start
+0000000000601c70 b completed.6092
+0000000000601848 W data_start
+0000000000400e10 t deregister_tm_clones
+0000000000400ea0 t frame_dummy
+                 U fwrite@@GLIBC_2.2.5
+                 U getopt@@GLIBC_2.2.5
+                 U libmmpiInitialize
+                 U libmmpiTerminate
+0000000000401010 T main
+                 U mclInitializeApplication_proxy
+                 U mclRunMain_proxy
+                 U mclTerminateApplication_proxy
+                 U mclmcrInitialize_proxy
+                 U mlfMatlabmain
+                 U mlfSetmpistuff
+0000000000601c7c B mpi_rank
+0000000000601c80 B mpi_size
+                 U mxCreateDoubleMatrix_730_proxy
+                 U mxDestroyArray_proxy
+                 U mxGetPr_proxy
+0000000000601860 B ompi_mpi_comm_world
+0000000000601c60 B optarg@@GLIBC_2.2.5
+                 U printf@@GLIBC_2.2.5
+                 U puts@@GLIBC_2.2.5
+0000000000400e40 t register_tm_clones
+0000000000400ed0 T run_main
+0000000000601c74 B savetimings
+0000000000601c68 B stderr@@GLIBC_2.2.5
+                 U strtol@@GLIBC_2.2.5
+0000000000601c78 B verbosity
+
+Result of 'ldd libmmpi.so' is:
+    linux-vdso.so.1 =>  (0x00007fff59d54000)
+    libmwmclmcrrt.so.8.1 => /sara/sw/mcr/64/v81/runtime/glnxa64/libmwmclmcrrt.so.8.1 (0x00002ba2f37b3000)
+    libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00002ba2f3a21000)
+    libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00002ba2f3ca3000)
+    libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00002ba2f3ebf000)
+    libmwcpp11compat.so => /sara/sw/mcr/64/v81/runtime/glnxa64/../../bin/glnxa64/libmwcpp11compat.so (0x00002ba2f424a000)
+    libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00002ba2f4453000)
+    libstdc++.so.6 => /sara/sw/mcr/64/v81/runtime/glnxa64/../../sys/os/glnxa64/libstdc++.so.6 (0x00002ba2f4658000)
+    libgcc_s.so.1 => /sara/sw/mcr/64/v81/runtime/glnxa64/../../sys/os/glnxa64/libgcc_s.so.1 (0x00002ba2f4967000)
+    /lib64/ld-linux-x86-64.so.2 (0x00002ba2f3388000)
+
+Result of 'nm libmmpi.so' is:
+0000000000206658 a _DYNAMIC
+0000000000206898 a _GLOBAL_OFFSET_TABLE_
+                 w _ITM_deregisterTMCloneTable
+                 w _ITM_registerTMCloneTable
+                 w _Jv_RegisterClasses
+0000000000006638 r __FRAME_END__
+0000000000206650 d __JCR_END__
+0000000000206650 d __JCR_LIST__
+0000000000206918 d __TMC_END__
+0000000000206918 A __bss_start
+                 w __cxa_finalize@@GLIBC_2.2.5
+0000000000002f20 t __do_global_dtors_aux
+0000000000206648 t __do_global_dtors_aux_fini_array_entry
+0000000000206910 d __dso_handle
+0000000000206640 t __frame_dummy_init_array_entry
+                 w __gmon_start__
+0000000000206918 A _edata
+0000000000206928 A _end
+0000000000004d70 T _fini
+0000000000002da8 T _init
+0000000000206920 b _mcr_inst
+0000000000002e90 t call_gmon_start
+0000000000206918 b completed.6092
+0000000000002eb0 t deregister_tm_clones
+0000000000002f60 t frame_dummy
+00000000000030d0 T libmmpiInitialize
+0000000000003034 T libmmpiInitializeWithHandlers
+000000000000310c T libmmpiPrintStackTrace
+00000000000030ec T libmmpiTerminate
+0000000000002fbb t mclDefaultErrorHandler
+0000000000002f90 t mclDefaultPrintHandler
+                 U mclDestroyStream_proxy
+                 U mclFeval_proxy
+                 U mclFreeStackTrace_proxy
+                 U mclGetEmbeddedCtfStream_proxy
+                 U mclGetStackTrace_proxy
+                 U mclInitializeComponentInstanceEmbedded_proxy
+                 U mclMlfFeval_proxy
+                 U mclTerminateInstance_proxy
+                 U mclWrite_proxy
+                 U mclmcrInitialize_proxy
+0000000000003e81 T mlfBcastvar
+0000000000003f68 T mlfCalcLikelihoodState
+0000000000003ce2 T mlfGetverbosity
+0000000000003f1a T mlfLintank
+0000000000003d7c T mlfMatlabmain
+00000000000041ca T mlfMmsoda
+0000000000003fac T mlfMmsodaAbortOptim
+0000000000003fe6 T mlfMmsodaAllComb
+00000000000047ab T mlfMmsodaAnalyzeTimings
+00000000000047df T mlfMmsodaAnalyzeTimings_old
+000000000000401b T mlfMmsodaCalcCbWb
+0000000000004b06 T mlfMmsodaCalcEnsembleCov
+0000000000004b40 T mlfMmsodaCalcInnovations
+0000000000004b98 T mlfMmsodaCalcKalmanGain
+0000000000004bdc T mlfMmsodaCalcMeasErrCov
+0000000000004055 T mlfMmsodaCalcObjScore
+0000000000004cdd T mlfMmsodaCalcPareto
+000000000000434f T mlfMmsodaCheckForOldResults
+000000000000408f T mlfMmsodaContinue
+0000000000004383 T mlfMmsodaCreateMakefile
+00000000000043b7 T mlfMmsodaDiffStruct
+0000000000004c16 T mlfMmsodaEnKF
+00000000000040c9 T mlfMmsodaEvolveComplex
+0000000000004117 T mlfMmsodaGelmanRubin
+0000000000004151 T mlfMmsodaGenerateOffspring
+00000000000043f6 T mlfMmsodaHostnameReturnsLisa
+0000000000004195 T mlfMmsodaInitialize
+0000000000004427 T mlfMmsodaIsColumn
+000000000000445c T mlfMmsodaLoadSettings
+0000000000004813 T mlfMmsodaMakeColors
+0000000000004848 T mlfMmsodaMargHist
+0000000000004887 T mlfMmsodaMatrixOfScatter
+0000000000004496 T mlfMmsodaOpenBrowser
+00000000000044ca T mlfMmsodaOpenPdf
+00000000000044fe T mlfMmsodaPack
+000000000000452f T mlfMmsodaParetoPrinciple
+0000000000004560 T mlfMmsodaParsePairs
+00000000000041fd T mlfMmsodaPartComplexes
+00000000000048d5 T mlfMmsodaPlotEnsemble
+0000000000004914 T mlfMmsodaPlotGelmanRubin
+0000000000004951 T mlfMmsodaPlotPaCo
+0000000000004990 T mlfMmsodaPlotSeq
+0000000000004591 T mlfMmsodaPrepParallelFiles
+0000000000004237 T mlfMmsodaPrepRejArray
+0000000000004271 T mlfMmsodaPrepSeqArray
+0000000000004c50 T mlfMmsodaProcessBundle
+0000000000004d17 T mlfMmsodaRecalcPareto
+00000000000045f6 T mlfMmsodaSaveConf
+00000000000042ab T mlfMmsodaStratDraw
+00000000000042e0 T mlfMmsodaStratRandDraw
+0000000000004627 T mlfMmsodaSubplotScreen
+0000000000004315 T mlfMmsodaUnifRandDraw
+000000000000466b T mlfMmsodaUnpack
+0000000000004c8f T mlfMmsodaUpdateStates
+000000000000469c T mlfMmsodaVerifyFieldNames
+00000000000049d4 T mlfMmsodaVisSequences
+0000000000004a11 T mlfMmsodaVisualization1
+0000000000004a42 T mlfMmsodaVisualization2
+0000000000004a73 T mlfMmsodaVisualization3
+0000000000004aa4 T mlfMmsodaVisualization4
+0000000000004ad5 T mlfMmsodaVisualization5
+00000000000046d6 T mlfMmsodaWriteJobscript
+00000000000045c5 T mlfMmsodaroot
+0000000000003eb4 T mlfReceivevar
+0000000000003db4 T mlfRunmpirank0
+0000000000003de5 T mlfRunmpirank1
+0000000000003e50 T mlfRunmpirankOther
+0000000000003e16 T mlfRunmpirankOtherFun
+0000000000003ee7 T mlfSendvar
+0000000000003d13 T mlfSetmpistuff
+0000000000004707 T mlfSubaxes
+0000000000004749 T mlfUimatlab
+000000000000477a T mlfUioctave
+0000000000003d4b T mlfWhoami
+00000000000032d4 T mlxBcastvar
+0000000000003370 T mlxCalcLikelihoodState
+000000000000319c T mlxGetverbosity
+0000000000003349 T mlxLintank
+0000000000003211 T mlxMatlabmain
+00000000000034f6 T mlxMmsoda
+0000000000003397 T mlxMmsodaAbortOptim
+00000000000033be T mlxMmsodaAllComb
+000000000000393a T mlxMmsodaAnalyzeTimings
+0000000000003961 T mlxMmsodaAnalyzeTimings_old
+00000000000033e5 T mlxMmsodaCalcCbWb
+0000000000003b83 T mlxMmsodaCalcEnsembleCov
+0000000000003baa T mlxMmsodaCalcInnovations
+0000000000003bd1 T mlxMmsodaCalcKalmanGain
+0000000000003bf8 T mlxMmsodaCalcMeasErrCov
+000000000000340c T mlxMmsodaCalcObjScore
+0000000000003c94 T mlxMmsodaCalcPareto
+0000000000003607 T mlxMmsodaCheckForOldResults
+0000000000003433 T mlxMmsodaContinue
+000000000000362e T mlxMmsodaCreateMakefile
+0000000000003655 T mlxMmsodaDiffStruct
+0000000000003c1f T mlxMmsodaEnKF
+000000000000345a T mlxMmsodaEvolveComplex
+0000000000003481 T mlxMmsodaGelmanRubin
+00000000000034a8 T mlxMmsodaGenerateOffspring
+000000000000367c T mlxMmsodaHostnameReturnsLisa
+00000000000034cf T mlxMmsodaInitialize
+00000000000036a3 T mlxMmsodaIsColumn
+00000000000036ca T mlxMmsodaLoadSettings
+0000000000003988 T mlxMmsodaMakeColors
+00000000000039af T mlxMmsodaMargHist
+00000000000039d6 T mlxMmsodaMatrixOfScatter
+00000000000036f1 T mlxMmsodaOpenBrowser
+0000000000003718 T mlxMmsodaOpenPdf
+000000000000373f T mlxMmsodaPack
+0000000000003766 T mlxMmsodaParetoPrinciple
+000000000000378d T mlxMmsodaParsePairs
+000000000000351d T mlxMmsodaPartComplexes
+00000000000039fd T mlxMmsodaPlotEnsemble
+0000000000003a24 T mlxMmsodaPlotGelmanRubin
+0000000000003a4b T mlxMmsodaPlotPaCo
+0000000000003a72 T mlxMmsodaPlotSeq
+00000000000037b4 T mlxMmsodaPrepParallelFiles
+0000000000003544 T mlxMmsodaPrepRejArray
+000000000000356b T mlxMmsodaPrepSeqArray
+0000000000003c46 T mlxMmsodaProcessBundle
+0000000000003cbb T mlxMmsodaRecalcPareto
+0000000000003802 T mlxMmsodaSaveConf
+0000000000003592 T mlxMmsodaStratDraw
+00000000000035b9 T mlxMmsodaStratRandDraw
+0000000000003829 T mlxMmsodaSubplotScreen
+00000000000035e0 T mlxMmsodaUnifRandDraw
+0000000000003850 T mlxMmsodaUnpack
+0000000000003c6d T mlxMmsodaUpdateStates
+0000000000003877 T mlxMmsodaVerifyFieldNames
+0000000000003a99 T mlxMmsodaVisSequences
+0000000000003ac0 T mlxMmsodaVisualization1
+0000000000003ae7 T mlxMmsodaVisualization2
+0000000000003b0e T mlxMmsodaVisualization3
+0000000000003b35 T mlxMmsodaVisualization4
+0000000000003b5c T mlxMmsodaVisualization5
+000000000000389e T mlxMmsodaWriteJobscript
+00000000000037db T mlxMmsodaroot
+00000000000032fb T mlxReceivevar
+0000000000003238 T mlxRunmpirank0
+000000000000325f T mlxRunmpirank1
+00000000000032ad T mlxRunmpirankOther
+0000000000003286 T mlxRunmpirankOtherFun
+0000000000003322 T mlxSendvar
+00000000000031c3 T mlxSetmpistuff
+00000000000038c5 T mlxSubaxes
+00000000000038ec T mlxUimatlab
+0000000000003913 T mlxUioctave
+00000000000031ea T mlxWhoami
+0000000000002ee0 t register_tm_clones
+
+Currently Loaded Modulefiles:
+ 1) libgfortran/32/1   4) licenses/default   7) openmpi/gnu/1.6.5
+ 2) stdenv/1.1         5) sara/1             8) mcr/v81
+ 3) compilerwrappers   6) ofed/64/1.5.2
+Setting MCR_CACHE_ROOT to: /scratch/mmsoda-hTmsClGn
+
+The current MCR_CACHE_ROOT is:
+/scratch/mmsoda-hTmsClGn
+
+
+---------------------------------------------------
+The environment variables are (env|sort)
+}
+ENVIRONMENT=BATCH
+GIT_EDITOR=nano
+HOME=/home/jspaaks
+IBV_FORK_SAFE=1
+INTEL_LICENSE_FILE_modshare=/opt/intel/licenses:1
+INTEL_LICENSE_FILE=/opt/intel/licenses
+LANG=en_US.UTF-8
+LC_ALL=en_US.UTF-8
+LC_TIME=en_DK.UTF-8
+LD_LIBRARY_PATH_modshare=/sara/sw/mcr/64/v81/sys/java/jre/glnxa64/jre/lib/amd64/server:1:/sara/sw/openmpi-gnu-1.6.5/lib:1:/sara/sw/ofed/1.5.2/64/lib64:1:/sara/sw/mcr/64/v81/runtime/glnxa64:1:/sara/sw/mcr/64/v81/sys/os/glnxa64:1:/sara/sw/mcr/64/v81/bin/glnxa64:1:/sara/sw/mcr/64/v81/sys/java/jre/glnxa64/jre/lib/amd64/native_threads:1:/sara/sw/mcr/64/v81/sys/java/jre/glnxa64/jre/lib/amd64:1:/sara/sw/libgfortran/32/1/lib:1
+LD_LIBRARY_PATH=/sara/sw/mcr/64/v81/runtime/glnxa64:/sara/sw/mcr/64/v81/bin/glnxa64:/sara/sw/mcr/64/v81/sys/os/glnxa64:/sara/sw/mcr/64/v81/sys/java/jre/glnxa64/jre/lib/amd64/native_threads:/sara/sw/mcr/64/v81/sys/java/jre/glnxa64/jre/lib/amd64/server:/sara/sw/mcr/64/v81/sys/java/jre/glnxa64/jre/lib/amd64:/sara/sw/openmpi-gnu-1.6.5/lib:/sara/sw/ofed/1.5.2/64/lib64:/sara/sw/libgfortran/32/1/lib:/home/jspaaks/tmp/mmsoda-projects/example2
+LD_RUN_PATH_modshare=/sara/sw/openmpi-gnu-1.6.5/lib:1:/sara/sw/ofed/1.5.2/64/lib64:1
+LD_RUN_PATH=/sara/sw/openmpi-gnu-1.6.5/lib:/sara/sw/ofed/1.5.2/64/lib64
+_LMFILES__modshare=/sara/sw/modules-ng-64/modulefiles/tools/ofed/64/1.5.2:2:/sara/sw/modules-ng-64/modulefiles/environment/licenses/default:2:/sara/sw/modules-ng-64/modulefiles/environment/libgfortran/32/1:2:/sara/sw/modules-ng-64/modulefiles/environment/compilerwrappers:1:/sara/sw/modules-ng-64/modulefiles/tools/mcr/v81:1
+_LMFILES_=/sara/sw/modules-ng-64/modulefiles/environment/libgfortran/32/1:/sara/sw/modules-ng-64/modulefiles/environment/compilerwrappers:/sara/sw/modules-ng-64/modulefiles/environment/licenses/default:/sara/sw/modules-ng-64/modulefiles/tools/ofed/64/1.5.2:/sara/sw/modules-ng-64/modulefiles/tools/mcr/v81
+LOADEDMODULES=libgfortran/32/1:stdenv/1.1:compilerwrappers:licenses/default:sara/1:ofed/64/1.5.2:openmpi/gnu/1.6.5:mcr/v81
+LOADEDMODULES_modshare=mcr/v81:1:openmpi/gnu/1.6.5:1:ofed/64/1.5.2:1:licenses/default:1:libgfortran/32/1:1:sara/1:1:compilerwrappers:1:stdenv/1.1:1
+LOGNAME=jspaaks
+LS_COLORS=
+MANPATH_modshare=:1:/usr/man:1:/sara/sw/ofed/1.5.2/64/share/man:1:/usr/share/man:1:/usr/local/man:1:/sara/sw/openmpi-gnu-1.6.5/share/man:1
+MANPATH=/sara/sw/openmpi-gnu-1.6.5/share/man::/sara/sw/ofed/1.5.2/64/share/man:/usr/share/man:/usr/man:/usr/local/man
+MCR_CACHE_ROOT=/scratch/mmsoda-hTmsClGn
+MODULE_BIN=/sara/sw/modules-ng-64/module/bin
+module=() {  eval $($MODULE_BIN/modulecmd bash $*)
+MODULEFILES=/sara/sw/modules-ng-64/modulefiles
+MODULE_INCLUDE=/sara/sw/modules-ng-64/module/../include
+MODULEPATH=/sara/sw/modules-ng-64/modulefiles/applications:/sara/sw/modules-ng-64/modulefiles/compilers:/sara/sw/modules-ng-64/modulefiles/environment:/sara/sw/modules-ng-64/modulefiles/libraries:/sara/sw/modules-ng-64/modulefiles/tools:/sara/sw/modules-ng-64/modulefiles/deprecated:/sara/sw/modules-ng-64/modulefiles/unsupported
+MODULES_BASE=/sara/sw/modules-ng-64
+MODULESHOME=/sara/sw/modules-ng-64/module
+MODULES_PREFIX=SARA
+MODULE_VERSION=4.0.0
+MODULE_VERSION_STACK=4.0.0
+OLDPWD=/home/jspaaks
+OMPI_MCA_btl_base_warn_component_unused=0
+PATH_modshare=/sara/sw/ofed/1.5.2/64/bin:1:/bin:1:/sara/sw/modules-ng-64/wrappers/sara:1:/usr/bin:1:/sara/sw/openmpi-gnu-1.6.5/bin:1:/usr/bin/X11:1:/sara/sw/ofed/1.5.2/64/sbin:1:/usr/local/bin:1
+PATH=/sara/sw/modules-ng-64/wrappers/sara:/sara/sw/openmpi-gnu-1.6.5/bin:/sara/sw/ofed/1.5.2/64/sbin:/sara/sw/ofed/1.5.2/64/bin:/bin:/usr/bin:/usr/bin/X11:/usr/local/bin
+PBS_ENVIRONMENT=PBS_BATCH
+PBS_GPUFILE=/var/spool/torque/aux//7228630.batch1.lisa.surfsara.nlgpu
+PBS_JOBCOOKIE=F5EBE03BCE49A38B57E22065BDC39E48
+PBS_JOBID=7228630.batch1.lisa.surfsara.nl
+PBS_JOBNAME=jobscript-mmsoda.pbs
+PBS_MOMPORT=15003
+PBS_NODEFILE=/var/spool/torque/aux//7228630.batch1.lisa.surfsara.nl
+PBS_NODENUM=0
+PBS_NP=1
+PBS_NUM_NODES=1
+PBS_NUM_PPN=1
+PBS_O_HOME=/home/jspaaks
+PBS_O_HOST=login2.lisa.surfsara.nl
+PBS_O_LANG=en_US
+PBS_O_LOGNAME=jspaaks
+PBS_O_MAIL=/var/mail/jspaaks
+PBS_O_PATH=/sara/sw/modules-ng-64/wrappers/sara:/sara/sw/openmpi-gnu-1.6.5/bin:/sara/sw/ofed/1.5.2/64/sbin:/sara/sw/ofed/1.5.2/64/bin:/sara/sw/matlab/64/2013a/bin:/bin:/usr/bin:/usr/bin/X11:/usr/local/bin
+PBS_O_QUEUE=batch
+PBS_O_SHELL=/bin/bash
+PBS_O_WORKDIR=/home/jspaaks/tmp/mmsoda-projects/example2
+PBS_QUEUE=serial
+PBS_SERVER=batch
+PBS_TASKNUM=1
+PBS_VERSION=TORQUE-2.5.13
+PBS_VNODENUM=0
+PBS_WALLTIME=900
+PWD=/home/jspaaks/tmp/mmsoda-projects/example2
+SARA_INCLUDE_PATH_modshare=/sara/sw/openmpi-gnu-1.6.5/include:1:/sara/sw/ofed/1.5.2/64/include:1
+SARA_INCLUDE_PATH=/sara/sw/openmpi-gnu-1.6.5/include:/sara/sw/ofed/1.5.2/64/include
+SARA_LIBRARY_PATH_modshare=/sara/sw/openmpi-gnu-1.6.5/lib:1:/sara/sw/ofed/1.5.2/64/lib64:1
+SARA_LIBRARY_PATH=/sara/sw/openmpi-gnu-1.6.5/lib:/sara/sw/ofed/1.5.2/64/lib64
+SARA_OFED_INCLUDE=/sara/sw/ofed/1.5.2/64/include
+SARA_OFED_LIB=/sara/sw/ofed/1.5.2/64/lib64
+SARA_OFED_ROOT=/sara/sw/ofed/1.5.2/64
+SARA_OPENMPI_INCLUDE=/sara/sw/openmpi-gnu-1.6.5/include
+SARA_OPENMPI_LIB=/sara/sw/openmpi-gnu-1.6.5/lib
+SARA_OPENMPI_ROOT=/sara/sw/openmpi-gnu-1.6.5
+SHELL=/bin/bash
+SHLVL=2
+TMPDIR=/scratch/7228630.batch1.lisa.surfsara.nl
+USER=jspaaks
+_=/usr/bin/env
+XAPPLRESDIR_modshare=/sara/sw/mcr/64/v81/X11/app-defaults:1
+XAPPLRESDIR=/sara/sw/mcr/64/v81/X11/app-defaults
+---------------------------------------------------
+
+
+Starting MPI run
+Setting verbosity to level 0.
+Warning: application is running on a locale different from the original platform locale.
+
+% This is a pre-alpha release of the MMSODA simultaneous
+% parameter optimization and data assimilation software.
+
+Setting value of 'conf.nMembers' to 1.
+
+SCEMUA-SO run started on: November 05, 2013 11:40:49
++00s: Evaluating parameter sets 1-250
++01s: Evaluating parameter sets 251-300
++01s: Evaluating parameter sets 301-350
++01s: Evaluating parameter sets 351-400
++01s: Evaluating parameter sets 401-450
++01s: Evaluating parameter sets 451-500
++01s: Evaluating parameter sets 501-550
++01s: Evaluating parameter sets 551-600
++01s: Evaluating parameter sets 601-650
++01s: Evaluating parameter sets 651-700
++01s: Evaluating parameter sets 701-750
++02s: Evaluating parameter sets 751-800
++02s: Evaluating parameter sets 801-850
++02s: Evaluating parameter sets 851-900
++02s: Evaluating parameter sets 901-950
++02s: Evaluating parameter sets 951-1000
++02s: Evaluating parameter sets 1001-1050
++02s: Evaluating parameter sets 1051-1100
++02s: Evaluating parameter sets 1101-1150
++02s: Evaluating parameter sets 1151-1200
++02s: Evaluating parameter sets 1201-1250
++02s: Evaluating parameter sets 1251-1300
++03s: Evaluating parameter sets 1301-1350
++03s: Evaluating parameter sets 1351-1400
++03s: Evaluating parameter sets 1401-1450
++03s: Evaluating parameter sets 1451-1500
++03s: Evaluating parameter sets 1501-1550
++03s: Evaluating parameter sets 1551-1600
++03s: Evaluating parameter sets 1601-1650
++03s: Evaluating parameter sets 1651-1700
++03s: Evaluating parameter sets 1701-1750
++03s: Evaluating parameter sets 1751-1800
++03s: Evaluating parameter sets 1801-1850
++04s: Evaluating parameter sets 1851-1900
++04s: Evaluating parameter sets 1901-1950
++04s: Evaluating parameter sets 1951-2000
++04s: Evaluating parameter sets 2001-2050
++04s: Evaluating parameter sets 2051-2100
++04s: Evaluating parameter sets 2101-2150
++04s: Evaluating parameter sets 2151-2200
++04s: Evaluating parameter sets 2201-2250
++04s: Evaluating parameter sets 2251-2300
++04s: Evaluating parameter sets 2301-2350
++05s: Evaluating parameter sets 2351-2400
++05s: Evaluating parameter sets 2401-2450
++05s: Evaluating parameter sets 2451-2500
++05s: Evaluating parameter sets 2501-2550
++05s: Evaluating parameter sets 2551-2600
++05s: Evaluating parameter sets 2601-2650
++05s: Evaluating parameter sets 2651-2700
++05s: Evaluating parameter sets 2701-2750
++05s: Evaluating parameter sets 2751-2800
++05s: Evaluating parameter sets 2801-2850
++05s: Evaluating parameter sets 2851-2900
++06s: Evaluating parameter sets 2901-2950
++06s: Evaluating parameter sets 2951-3000
++06s: Evaluating parameter sets 3001-3050
++06s: Evaluating parameter sets 3051-3100
++06s: Evaluating parameter sets 3101-3150
++06s: Evaluating parameter sets 3151-3200
++06s: Evaluating parameter sets 3201-3250
++06s: Evaluating parameter sets 3251-3300
++06s: Evaluating parameter sets 3301-3350
++06s: Evaluating parameter sets 3351-3400
++07s: Evaluating parameter sets 3401-3450
++07s: Evaluating parameter sets 3451-3500
++07s: Evaluating parameter sets 3501-3550
++07s: Evaluating parameter sets 3551-3600
++07s: Evaluating parameter sets 3601-3650
++07s: Evaluating parameter sets 3651-3700
++07s: Evaluating parameter sets 3701-3750
++07s: Evaluating parameter sets 3751-3800
++07s: Evaluating parameter sets 3801-3850
++07s: Evaluating parameter sets 3851-3900
++08s: Evaluating parameter sets 3901-3950
++08s: Evaluating parameter sets 3951-4000
++08s: Evaluating parameter sets 4001-4050
++08s: Evaluating parameter sets 4051-4100
++08s: Evaluating parameter sets 4101-4150
++08s: Evaluating parameter sets 4151-4200
++08s: Evaluating parameter sets 4201-4250
++08s: Evaluating parameter sets 4251-4300
++08s: Evaluating parameter sets 4301-4350
++08s: Evaluating parameter sets 4351-4400
++09s: Evaluating parameter sets 4401-4450
++09s: Evaluating parameter sets 4451-4500
++09s: Evaluating parameter sets 4501-4550
++09s: Evaluating parameter sets 4551-4600
++09s: Evaluating parameter sets 4601-4650
++09s: Evaluating parameter sets 4651-4700
++09s: Evaluating parameter sets 4701-4750
++09s: Evaluating parameter sets 4751-4800
++09s: Evaluating parameter sets 4801-4850
++09s: Evaluating parameter sets 4851-4900
++10s: Evaluating parameter sets 4901-4950
++10s: Evaluating parameter sets 4951-5000
++10s: Evaluating parameter sets 5001-5050
++10s: Evaluating parameter sets 5051-5100
++10s: Evaluating parameter sets 5101-5150
++10s: Evaluating parameter sets 5151-5200
++10s: Evaluating parameter sets 5201-5250
++10s: Evaluating parameter sets 5251-5300
++10s: Evaluating parameter sets 5301-5350
++10s: Evaluating parameter sets 5351-5400
++11s: Evaluating parameter sets 5401-5450
++11s: Evaluating parameter sets 5451-5500
++11s: Evaluating parameter sets 5501-5550
++11s: Evaluating parameter sets 5551-5600
++11s: Evaluating parameter sets 5601-5650
++11s: Evaluating parameter sets 5651-5700
++11s: Evaluating parameter sets 5701-5750
++11s: Evaluating parameter sets 5751-5800
++11s: Evaluating parameter sets 5801-5850
++11s: Evaluating parameter sets 5851-5900
++12s: Evaluating parameter sets 5901-5950
++12s: Evaluating parameter sets 5951-6000
++12s: Evaluating parameter sets 6001-6050
++12s: Evaluating parameter sets 6051-6100
++12s: Evaluating parameter sets 6101-6150
++12s: Evaluating parameter sets 6151-6200
++12s: Evaluating parameter sets 6201-6250
++12s: Evaluating parameter sets 6251-6300
++12s: Evaluating parameter sets 6301-6350
++12s: Evaluating parameter sets 6351-6400
++13s: Evaluating parameter sets 6401-6450
++13s: Evaluating parameter sets 6451-6500
++13s: Evaluating parameter sets 6501-6550
++13s: Evaluating parameter sets 6551-6600
++13s: Evaluating parameter sets 6601-6650
++13s: Evaluating parameter sets 6651-6700
++13s: Evaluating parameter sets 6701-6750
++13s: Evaluating parameter sets 6751-6800
++13s: Evaluating parameter sets 6801-6850
++14s: Evaluating parameter sets 6851-6900
++14s: Evaluating parameter sets 6901-6950
++14s: Evaluating parameter sets 6951-7000
++14s: Evaluating parameter sets 7001-7050
++14s: Evaluating parameter sets 7051-7100
++14s: Evaluating parameter sets 7101-7150
++14s: Evaluating parameter sets 7151-7200
++14s: Evaluating parameter sets 7201-7250
++14s: Evaluating parameter sets 7251-7300
++14s: Evaluating parameter sets 7301-7350
++15s: Evaluating parameter sets 7351-7400
++15s: Evaluating parameter sets 7401-7450
++15s: Evaluating parameter sets 7451-7500
++15s: Evaluating parameter sets 7501-7550
++15s: Evaluating parameter sets 7551-7600
++15s: Evaluating parameter sets 7601-7650
++15s: Evaluating parameter sets 7651-7700
++15s: Evaluating parameter sets 7701-7750
++15s: Evaluating parameter sets 7751-7800
++16s: Evaluating parameter sets 7801-7850
++16s: Evaluating parameter sets 7851-7900
++16s: Evaluating parameter sets 7901-7950
++16s: Evaluating parameter sets 7951-8000
++16s: Evaluating parameter sets 8001-8050
++16s: Evaluating parameter sets 8051-8100
++16s: Evaluating parameter sets 8101-8150
++16s: Evaluating parameter sets 8151-8200
++16s: Evaluating parameter sets 8201-8250
++16s: Evaluating parameter sets 8251-8300
++17s: Evaluating parameter sets 8301-8350
++17s: Evaluating parameter sets 8351-8400
++17s: Evaluating parameter sets 8401-8450
++17s: Evaluating parameter sets 8451-8500
++17s: Evaluating parameter sets 8501-8550
++17s: Evaluating parameter sets 8551-8600
++17s: Evaluating parameter sets 8601-8650
++17s: Evaluating parameter sets 8651-8700
++17s: Evaluating parameter sets 8701-8750
++18s: Evaluating parameter sets 8751-8800
++18s: Evaluating parameter sets 8801-8850
++18s: Evaluating parameter sets 8851-8900
++18s: Evaluating parameter sets 8901-8950
++18s: Evaluating parameter sets 8951-9000
++18s: Evaluating parameter sets 9001-9050
++18s: Evaluating parameter sets 9051-9100
++18s: Evaluating parameter sets 9101-9150
++18s: Evaluating parameter sets 9151-9200
++19s: Evaluating parameter sets 9201-9250
++19s: Evaluating parameter sets 9251-9300
++19s: Evaluating parameter sets 9301-9350
++19s: Evaluating parameter sets 9351-9400
++19s: Evaluating parameter sets 9401-9450
++19s: Evaluating parameter sets 9451-9500
++19s: Evaluating parameter sets 9501-9550
++19s: Evaluating parameter sets 9551-9600
++19s: Evaluating parameter sets 9601-9650
++20s: Evaluating parameter sets 9651-9700
++20s: Evaluating parameter sets 9701-9750
++20s: Evaluating parameter sets 9751-9800
++20s: Evaluating parameter sets 9801-9850
++20s: Evaluating parameter sets 9851-9900
++20s: Evaluating parameter sets 9901-9950
++20s: Evaluating parameter sets 9951-10000
++20s: Evaluating parameter sets 10001-10050
++20s: Evaluating parameter sets 10051-10100
++20s: Evaluating parameter sets 10101-10150
++21s: Evaluating parameter sets 10151-10200
++21s: Evaluating parameter sets 10201-10250
++21s: Evaluating parameter sets 10251-10300
++21s: Evaluating parameter sets 10301-10350
++21s: Evaluating parameter sets 10351-10400
++21s: Evaluating parameter sets 10401-10450
++21s: Evaluating parameter sets 10451-10500
++21s: Evaluating parameter sets 10501-10550
++21s: Evaluating parameter sets 10551-10600
++22s: Evaluating parameter sets 10601-10650
++22s: Evaluating parameter sets 10651-10700
++22s: Evaluating parameter sets 10701-10750
++22s: Evaluating parameter sets 10751-10800
++22s: Evaluating parameter sets 10801-10850
++22s: Evaluating parameter sets 10851-10900
++22s: Evaluating parameter sets 10901-10950
++22s: Evaluating parameter sets 10951-11000
++22s: Evaluating parameter sets 11001-11050
++23s: Evaluating parameter sets 11051-11100
++23s: Evaluating parameter sets 11101-11150
++23s: Evaluating parameter sets 11151-11200
++23s: Evaluating parameter sets 11201-11250
++23s: Evaluating parameter sets 11251-11300
++23s: Evaluating parameter sets 11301-11350
++23s: Evaluating parameter sets 11351-11400
++23s: Evaluating parameter sets 11401-11450
++24s: Evaluating parameter sets 11451-11500
++24s: Evaluating parameter sets 11501-11550
++24s: Evaluating parameter sets 11551-11600
++24s: Evaluating parameter sets 11601-11650
++24s: Evaluating parameter sets 11651-11700
++25s: Evaluating parameter sets 11701-11750
++25s: Evaluating parameter sets 11751-11800
++25s: Evaluating parameter sets 11801-11850
++25s: Evaluating parameter sets 11851-11900
++25s: Evaluating parameter sets 11901-11950
++25s: Evaluating parameter sets 11951-12000
++25s: Evaluating parameter sets 12001-12050
++25s: Evaluating parameter sets 12051-12100
++25s: Evaluating parameter sets 12101-12150
++26s: Evaluating parameter sets 12151-12200
++26s: Evaluating parameter sets 12201-12250
++26s: Evaluating parameter sets 12251-12300
++26s: Evaluating parameter sets 12301-12350
++26s: Evaluating parameter sets 12351-12400
++26s: Evaluating parameter sets 12401-12450
++26s: Evaluating parameter sets 12451-12500
++26s: Evaluating parameter sets 12501-12550
++26s: Evaluating parameter sets 12551-12600
++27s: Evaluating parameter sets 12601-12650
++27s: Evaluating parameter sets 12651-12700
++27s: Evaluating parameter sets 12701-12750
++27s: Evaluating parameter sets 12751-12800
++27s: Evaluating parameter sets 12801-12850
++27s: Evaluating parameter sets 12851-12900
++27s: Evaluating parameter sets 12901-12950
++27s: Evaluating parameter sets 12951-13000
++28s: Evaluating parameter sets 13001-13050
++28s: Evaluating parameter sets 13051-13100
++28s: Evaluating parameter sets 13101-13150
++28s: Evaluating parameter sets 13151-13200
++28s: Evaluating parameter sets 13201-13250
++28s: Evaluating parameter sets 13251-13300
++28s: Evaluating parameter sets 13301-13350
++28s: Evaluating parameter sets 13351-13400
++28s: Evaluating parameter sets 13401-13450
++29s: Evaluating parameter sets 13451-13500
++29s: Evaluating parameter sets 13501-13550
++29s: Evaluating parameter sets 13551-13600
++29s: Evaluating parameter sets 13601-13650
++29s: Evaluating parameter sets 13651-13700
++29s: Evaluating parameter sets 13701-13750
++29s: Evaluating parameter sets 13751-13800
++29s: Evaluating parameter sets 13801-13850
++29s: Evaluating parameter sets 13851-13900
++30s: Evaluating parameter sets 13901-13950
++30s: Evaluating parameter sets 13951-14000
++30s: Evaluating parameter sets 14001-14050
++30s: Evaluating parameter sets 14051-14100
++30s: Evaluating parameter sets 14101-14150
++30s: Evaluating parameter sets 14151-14200
++30s: Evaluating parameter sets 14201-14250
++30s: Evaluating parameter sets 14251-14300
++31s: Evaluating parameter sets 14301-14350
++31s: Evaluating parameter sets 14351-14400
++31s: Evaluating parameter sets 14401-14450
++31s: Evaluating parameter sets 14451-14500
++31s: Evaluating parameter sets 14501-14550
++31s: Evaluating parameter sets 14551-14600
++31s: Evaluating parameter sets 14601-14650
++31s: Evaluating parameter sets 14651-14700
++31s: Evaluating parameter sets 14701-14750
++32s: Evaluating parameter sets 14751-14800
++32s: Evaluating parameter sets 14801-14850
++32s: Evaluating parameter sets 14851-14900
++32s: Evaluating parameter sets 14901-14950
++32s: Evaluating parameter sets 14951-15000
++32s: Evaluating parameter sets 15001-15050
++32s: Evaluating parameter sets 15051-15100
++32s: Evaluating parameter sets 15101-15150
++33s: Evaluating parameter sets 15151-15200
++33s: Evaluating parameter sets 15201-15250
++33s: Evaluating parameter sets 15251-15300
++33s: Evaluating parameter sets 15301-15350
++33s: Evaluating parameter sets 15351-15400
++33s: Evaluating parameter sets 15401-15450
++33s: Evaluating parameter sets 15451-15500
++33s: Evaluating parameter sets 15501-15550
++34s: Evaluating parameter sets 15551-15600
++34s: Evaluating parameter sets 15601-15650
++34s: Evaluating parameter sets 15651-15700
++34s: Evaluating parameter sets 15701-15750
++34s: Evaluating parameter sets 15751-15800
++34s: Evaluating parameter sets 15801-15850
++34s: Evaluating parameter sets 15851-15900
++34s: Evaluating parameter sets 15901-15950
++35s: Evaluating parameter sets 15951-16000
++35s: Evaluating parameter sets 16001-16050
++35s: Evaluating parameter sets 16051-16100
++35s: Evaluating parameter sets 16101-16150
++35s: Evaluating parameter sets 16151-16200
++35s: Evaluating parameter sets 16201-16250
++35s: Evaluating parameter sets 16251-16300
++35s: Evaluating parameter sets 16301-16350
++35s: Evaluating parameter sets 16351-16400
++36s: Evaluating parameter sets 16401-16450
++36s: Evaluating parameter sets 16451-16500
++36s: Evaluating parameter sets 16501-16550
++36s: Evaluating parameter sets 16551-16600
++36s: Evaluating parameter sets 16601-16650
++36s: Evaluating parameter sets 16651-16700
++36s: Evaluating parameter sets 16701-16750
++37s: Evaluating parameter sets 16751-16800
++37s: Evaluating parameter sets 16801-16850
++37s: Evaluating parameter sets 16851-16900
++37s: Evaluating parameter sets 16901-16950
++37s: Evaluating parameter sets 16951-17000
++37s: Evaluating parameter sets 17001-17050
++37s: Evaluating parameter sets 17051-17100
++37s: Evaluating parameter sets 17101-17150
++37s: Evaluating parameter sets 17151-17200
++38s: Evaluating parameter sets 17201-17250
++38s: Evaluating parameter sets 17251-17300
++38s: Evaluating parameter sets 17301-17350
++38s: Evaluating parameter sets 17351-17400
++38s: Evaluating parameter sets 17401-17450
++38s: Evaluating parameter sets 17451-17500
++38s: Evaluating parameter sets 17501-17550
++39s: Evaluating parameter sets 17551-17600
++39s: Evaluating parameter sets 17601-17650
++39s: Evaluating parameter sets 17651-17700
++39s: Evaluating parameter sets 17701-17750
++39s: Evaluating parameter sets 17751-17800
++39s: Evaluating parameter sets 17801-17850
++39s: Evaluating parameter sets 17851-17900
++39s: Evaluating parameter sets 17901-17950
++40s: Evaluating parameter sets 17951-18000
++40s: Evaluating parameter sets 18001-18050
++40s: Evaluating parameter sets 18051-18100
++40s: Evaluating parameter sets 18101-18150
++40s: Evaluating parameter sets 18151-18200
++40s: Evaluating parameter sets 18201-18250
++40s: Evaluating parameter sets 18251-18300
++40s: Evaluating parameter sets 18301-18350
++41s: Evaluating parameter sets 18351-18400
++41s: Evaluating parameter sets 18401-18450
++41s: Evaluating parameter sets 18451-18500
++41s: Evaluating parameter sets 18501-18550
++41s: Evaluating parameter sets 18551-18600
++41s: Evaluating parameter sets 18601-18650
++41s: Evaluating parameter sets 18651-18700
++41s: Evaluating parameter sets 18701-18750
++42s: Evaluating parameter sets 18751-18800
++42s: Evaluating parameter sets 18801-18850
++42s: Evaluating parameter sets 18851-18900
++42s: Evaluating parameter sets 18901-18950
++42s: Evaluating parameter sets 18951-19000
++42s: Evaluating parameter sets 19001-19050
++42s: Evaluating parameter sets 19051-19100
++42s: Evaluating parameter sets 19101-19150
++43s: Evaluating parameter sets 19151-19200
++43s: Evaluating parameter sets 19201-19250
++43s: Evaluating parameter sets 19251-19300
++43s: Evaluating parameter sets 19301-19350
++43s: Evaluating parameter sets 19351-19400
++43s: Evaluating parameter sets 19401-19450
++43s: Evaluating parameter sets 19451-19500
++43s: Evaluating parameter sets 19501-19550
++44s: Evaluating parameter sets 19551-19600
++44s: Evaluating parameter sets 19601-19650
++44s: Evaluating parameter sets 19651-19700
++44s: Evaluating parameter sets 19701-19750
++44s: Evaluating parameter sets 19751-19800
++44s: Evaluating parameter sets 19801-19850
++44s: Evaluating parameter sets 19851-19900
++45s: Evaluating parameter sets 19901-19950
++45s: Evaluating parameter sets 19951-20000
++45s: Evaluating parameter sets 20001-20050
++45s: Evaluating parameter sets 20051-20100
++45s: Evaluating parameter sets 20101-20150
++45s: Evaluating parameter sets 20151-20200
++45s: Evaluating parameter sets 20201-20250
++45s: Evaluating parameter sets 20251-20300
++46s: Evaluating parameter sets 20301-20350
++46s: Evaluating parameter sets 20351-20400
++46s: Evaluating parameter sets 20401-20450
++46s: Evaluating parameter sets 20451-20500
++46s: Evaluating parameter sets 20501-20550
++46s: Evaluating parameter sets 20551-20600
++46s: Evaluating parameter sets 20601-20650
++46s: Evaluating parameter sets 20651-20700
++47s: Evaluating parameter sets 20701-20750
++47s: Evaluating parameter sets 20751-20800
++47s: Evaluating parameter sets 20801-20850
++47s: Evaluating parameter sets 20851-20900
++47s: Evaluating parameter sets 20901-20950
++47s: Evaluating parameter sets 20951-21000
++47s: Evaluating parameter sets 21001-21050
++47s: Evaluating parameter sets 21051-21100
++48s: Evaluating parameter sets 21101-21150
++48s: Evaluating parameter sets 21151-21200
++48s: Evaluating parameter sets 21201-21250
++48s: Evaluating parameter sets 21251-21300
++48s: Evaluating parameter sets 21301-21350
++48s: Evaluating parameter sets 21351-21400
++48s: Evaluating parameter sets 21401-21450
++49s: Evaluating parameter sets 21451-21500
++49s: Evaluating parameter sets 21501-21550
++49s: Evaluating parameter sets 21551-21600
++49s: Evaluating parameter sets 21601-21650
++49s: Evaluating parameter sets 21651-21700
++49s: Evaluating parameter sets 21701-21750
++49s: Evaluating parameter sets 21751-21800
++50s: Evaluating parameter sets 21801-21850
++50s: Evaluating parameter sets 21851-21900
++50s: Evaluating parameter sets 21901-21950
++50s: Evaluating parameter sets 21951-22000
++50s: Evaluating parameter sets 22001-22050
++50s: Evaluating parameter sets 22051-22100
++50s: Evaluating parameter sets 22101-22150
++50s: Evaluating parameter sets 22151-22200
++51s: Evaluating parameter sets 22201-22250
++51s: Evaluating parameter sets 22251-22300
++51s: Evaluating parameter sets 22301-22350
++51s: Evaluating parameter sets 22351-22400
++51s: Evaluating parameter sets 22401-22450
++51s: Evaluating parameter sets 22451-22500
++51s: Evaluating parameter sets 22501-22550
++51s: Evaluating parameter sets 22551-22600
++52s: Evaluating parameter sets 22601-22650
++52s: Evaluating parameter sets 22651-22700
++52s: Evaluating parameter sets 22701-22750
++52s: Evaluating parameter sets 22751-22800
++52s: Evaluating parameter sets 22801-22850
++52s: Evaluating parameter sets 22851-22900
++53s: Evaluating parameter sets 22901-22950
++53s: Evaluating parameter sets 22951-23000
++53s: Evaluating parameter sets 23001-23050
++53s: Evaluating parameter sets 23051-23100
++53s: Evaluating parameter sets 23101-23150
++53s: Evaluating parameter sets 23151-23200
++53s: Evaluating parameter sets 23201-23250
++54s: Evaluating parameter sets 23251-23300
++54s: Evaluating parameter sets 23301-23350
++54s: Evaluating parameter sets 23351-23400
++54s: Evaluating parameter sets 23401-23450
++54s: Evaluating parameter sets 23451-23500
++54s: Evaluating parameter sets 23501-23550
++54s: Evaluating parameter sets 23551-23600
++54s: Evaluating parameter sets 23601-23650
++55s: Evaluating parameter sets 23651-23700
++55s: Evaluating parameter sets 23701-23750
++55s: Evaluating parameter sets 23751-23800
++55s: Evaluating parameter sets 23801-23850
++55s: Evaluating parameter sets 23851-23900
++55s: Evaluating parameter sets 23901-23950
++55s: Evaluating parameter sets 23951-24000
++56s: Evaluating parameter sets 24001-24050
++56s: Evaluating parameter sets 24051-24100
++56s: Evaluating parameter sets 24101-24150
++56s: Evaluating parameter sets 24151-24200
++56s: Evaluating parameter sets 24201-24250
++56s: Evaluating parameter sets 24251-24300
++56s: Evaluating parameter sets 24301-24350
++57s: Evaluating parameter sets 24351-24400
++57s: Evaluating parameter sets 24401-24450
++57s: Evaluating parameter sets 24451-24500
++57s: Evaluating parameter sets 24501-24550
++57s: Evaluating parameter sets 24551-24600
++57s: Evaluating parameter sets 24601-24650
++57s: Evaluating parameter sets 24651-24700
++57s: Evaluating parameter sets 24701-24750
++58s: Evaluating parameter sets 24751-24800
++58s: Evaluating parameter sets 24801-24850
++58s: Evaluating parameter sets 24851-24900
++58s: Evaluating parameter sets 24901-24950
++58s: Evaluating parameter sets 24951-25000
++58s: Evaluating parameter sets 25001-25050
++58s: Evaluating parameter sets 25051-25100
++59s: Evaluating parameter sets 25101-25150
++59s: Evaluating parameter sets 25151-25200
++59s: Evaluating parameter sets 25201-25250
++59s: Evaluating parameter sets 25251-25300
++59s: Evaluating parameter sets 25301-25350
++59s: Evaluating parameter sets 25351-25400
++59s: Evaluating parameter sets 25401-25450
++01m 00s: Evaluating parameter sets 25451-25500
++01m 00s: Evaluating parameter sets 25501-25550
++01m 00s: Evaluating parameter sets 25551-25600
++01m 00s: Evaluating parameter sets 25601-25650
++01m 00s: Evaluating parameter sets 25651-25700
++01m 00s: Evaluating parameter sets 25701-25750
++01m 00s: Evaluating parameter sets 25751-25800
++01m 01s: Evaluating parameter sets 25801-25850
++01m 01s: Evaluating parameter sets 25851-25900
++01m 01s: Evaluating parameter sets 25901-25950
++01m 01s: Evaluating parameter sets 25951-26000
++01m 01s: Evaluating parameter sets 26001-26050
++01m 01s: Evaluating parameter sets 26051-26100
++01m 01s: Evaluating parameter sets 26101-26150
++01m 01s: Evaluating parameter sets 26151-26200
++01m 02s: Evaluating parameter sets 26201-26250
++01m 02s: Evaluating parameter sets 26251-26300
++01m 02s: Evaluating parameter sets 26301-26350
++01m 02s: Evaluating parameter sets 26351-26400
++01m 02s: Evaluating parameter sets 26401-26450
++01m 02s: Evaluating parameter sets 26451-26500
++01m 02s: Evaluating parameter sets 26501-26550
++01m 03s: Evaluating parameter sets 26551-26600
++01m 03s: Evaluating parameter sets 26601-26650
++01m 03s: Evaluating parameter sets 26651-26700
++01m 03s: Evaluating parameter sets 26701-26750
++01m 03s: Evaluating parameter sets 26751-26800
++01m 03s: Evaluating parameter sets 26801-26850
++01m 04s: Evaluating parameter sets 26851-26900
++01m 04s: Evaluating parameter sets 26901-26950
++01m 04s: Evaluating parameter sets 26951-27000
++01m 04s: Evaluating parameter sets 27001-27050
++01m 04s: Evaluating parameter sets 27051-27100
++01m 04s: Evaluating parameter sets 27101-27150
++01m 04s: Evaluating parameter sets 27151-27200
++01m 04s: Evaluating parameter sets 27201-27250
++01m 05s: Evaluating parameter sets 27251-27300
++01m 05s: Evaluating parameter sets 27301-27350
++01m 05s: Evaluating parameter sets 27351-27400
++01m 05s: Evaluating parameter sets 27401-27450
++01m 05s: Evaluating parameter sets 27451-27500
++01m 05s: Evaluating parameter sets 27501-27550
++01m 05s: Evaluating parameter sets 27551-27600
++01m 06s: Evaluating parameter sets 27601-27650
++01m 06s: Evaluating parameter sets 27651-27700
++01m 06s: Evaluating parameter sets 27701-27750
++01m 06s: Evaluating parameter sets 27751-27800
++01m 06s: Evaluating parameter sets 27801-27850
++01m 06s: Evaluating parameter sets 27851-27900
++01m 07s: Evaluating parameter sets 27901-27950
++01m 07s: Evaluating parameter sets 27951-28000
++01m 07s: Evaluating parameter sets 28001-28050
++01m 07s: Evaluating parameter sets 28051-28100
++01m 07s: Evaluating parameter sets 28101-28150
++01m 07s: Evaluating parameter sets 28151-28200
++01m 07s: Evaluating parameter sets 28201-28250
++01m 08s: Evaluating parameter sets 28251-28300
++01m 08s: Evaluating parameter sets 28301-28350
++01m 08s: Evaluating parameter sets 28351-28400
++01m 08s: Evaluating parameter sets 28401-28450
++01m 08s: Evaluating parameter sets 28451-28500
++01m 08s: Evaluating parameter sets 28501-28550
++01m 08s: Evaluating parameter sets 28551-28600
++01m 09s: Evaluating parameter sets 28601-28650
++01m 09s: Evaluating parameter sets 28651-28700
++01m 09s: Evaluating parameter sets 28701-28750
++01m 09s: Evaluating parameter sets 28751-28800
++01m 09s: Evaluating parameter sets 28801-28850
++01m 09s: Evaluating parameter sets 28851-28900
++01m 09s: Evaluating parameter sets 28901-28950
++01m 10s: Evaluating parameter sets 28951-29000
++01m 10s: Evaluating parameter sets 29001-29050
++01m 10s: Evaluating parameter sets 29051-29100
++01m 10s: Evaluating parameter sets 29101-29150
++01m 10s: Evaluating parameter sets 29151-29200
++01m 10s: Evaluating parameter sets 29201-29250
++01m 11s: Evaluating parameter sets 29251-29300
++01m 11s: Evaluating parameter sets 29301-29350
++01m 11s: Evaluating parameter sets 29351-29400
++01m 11s: Evaluating parameter sets 29401-29450
++01m 11s: Evaluating parameter sets 29451-29500
++01m 11s: Evaluating parameter sets 29501-29550
++01m 11s: Evaluating parameter sets 29551-29600
++01m 12s: Evaluating parameter sets 29601-29650
++01m 12s: Evaluating parameter sets 29651-29700
++01m 12s: Evaluating parameter sets 29701-29750
++01m 12s: Evaluating parameter sets 29751-29800
++01m 12s: Evaluating parameter sets 29801-29850
++01m 12s: Evaluating parameter sets 29851-29900
++01m 13s: Evaluating parameter sets 29901-29950
++01m 13s: Evaluating parameter sets 29951-30000
++01m 13s: Evaluating parameter sets 30001-30050
++01m 13s: Evaluating parameter sets 30051-30100
++01m 13s: Evaluating parameter sets 30101-30150
++01m 13s: Evaluating parameter sets 30151-30200
++01m 13s: Evaluating parameter sets 30201-30250
++01m 14s: Evaluating parameter sets 30251-30300
++01m 14s: Evaluating parameter sets 30301-30350
++01m 14s: Evaluating parameter sets 30351-30400
++01m 14s: Evaluating parameter sets 30401-30450
++01m 14s: Evaluating parameter sets 30451-30500
++01m 14s: Evaluating parameter sets 30501-30550
++01m 15s: Evaluating parameter sets 30551-30600
++01m 15s: Evaluating parameter sets 30601-30650
++01m 15s: Evaluating parameter sets 30651-30700
++01m 15s: Evaluating parameter sets 30701-30750
++01m 15s: Evaluating parameter sets 30751-30800
++01m 15s: Evaluating parameter sets 30801-30850
+Convergence achieved.
+SCEMUA-SO run completed on: November 05, 2013 11:42:05
+The run took 0d 0h 1m 15s.
+Q: "...sara_stats": -------------------Begin of SARA epilogue----------------------------------
+Q: "...sara_stats": This output was generated by the SARA epilogue script
+Q: "...sara_stats": Your job [jobscript-mmsoda.pbs] has been executed in queue [serial] with
+Q: "...sara_stats": the following PBS arguments:
+Q: "...sara_stats":    ncpus=1,neednodes=1,nodes=1,walltime=00:15:00
+Q: "...sara_stats":    .
+Q: "...sara_stats": Resources used in job [7228630.batch1.lisa.surfsara.nl] with name [jobscript-mmsoda.pbs]:
+Q: "...sara_stats":    cput=00:15:40,mem=1117536kb,vmem=7739088kb,walltime=00:01:26
+Q: "...sara_stats":    r36n27
+Q: "...sara_stats":    .
+Q: "...sara_stats": Job start and end time:
+Q: "...sara_stats":   Job start time: Tue Nov  5 11:40:41 CET 2013
+Q: "...sara_stats":   Job end time  : Tue Nov  5 11:42:08 CET 2013
+Q: "...sara_stats": ---------------------End of SARA epilogue----------------------------------
+I: Last 14 quoted lines were generated by promiser "/var/spool/torque/mom_priv/epilogue.d/sara_stats"

@@ -1,36 +1,14 @@
-function varargout = mmsodaPlotEnsemble(conf,evalResults,varargin)
+function varargout = mmsodaPlotEnsemble(conf,evalResults,metropolisRejects,varargin)
 % <a href="matlab:web(fullfile(mmsodaroot,'html','mmsodaPlotEnsemble.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>
 
-
-% % 
-
-% % LICENSE START
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-% %                                                                           % %
-% % MMSODA Toolbox for MATLAB                                                 % %
-% %                                                                           % %
-% % Copyright (C) 2013 Netherlands eScience Center                            % %
-% %                                                                           % %
-% % Licensed under the Apache License, Version 2.0 (the "License");           % %
-% % you may not use this file except in compliance with the License.          % %
-% % You may obtain a copy of the License at                                   % %
-% %                                                                           % %
-% % http://www.apache.org/licenses/LICENSE-2.0                                % %
-% %                                                                           % %
-% % Unless required by applicable law or agreed to in writing, software       % %
-% % distributed under the License is distributed on an "AS IS" BASIS,         % %
-% % WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  % %
-% % See the License for the specific language governing permissions and       % %
-% % limitations under the License.                                            % %
-% %                                                                           % %
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-% % LICENSE END
-
-
-
 if nargin == 0
-    disp(['% % Usage is:',char(10),'% %  varargout = mmsodaPlotEnsemble(conf,stateValuesKFPrior,',...
-        'stateValuesKFPert,stateValuesKFPost,obsPerturbed,varargin)'])
+    fn = [mfilename('fullpath'),'.m'];
+    fid = fopen(fn,'r');
+    line = fgetl(fid);
+    fclose(fid);
+    disp('% Usage is: ')
+    disp(['% ',line])
+    disp('%')
     return
 end
 
@@ -53,16 +31,20 @@ showiMember = true;
 showiParset = true;
 showiStateKF = true;
 
+replaceRejected = false;
+showReplaceRejected = false;
+
 authorizedOptions = {'normalizeByObs','stateStyle','colorObs','colorSim',...
                      'colorPost','connStyle','iParset','iMember','iStateKF',...
-                     'connWidth','showLegend','showiMember','showiParset','showiStateKF'};
+                     'connWidth','showLegend','showiMember','showiParset',...
+                     'showiStateKF','replaceRejected','showReplaceRejected'};
 mmsodaParsePairs()
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 
-vecParsets = iParset;
+evalNumbers = iParset;
 vecMembers = iMember;
 vecStatesKF = iStateKF;
 vecPrior = 1:numel(conf.priorTimes);
@@ -71,30 +53,18 @@ clear iParset
 clear iMember
 clear iStateKF
 
+nParsets = numel(evalNumbers);
 
-nParsets = numel(vecParsets);
-nMembers = conf.nMembers;
-nStatesKF = conf.nStatesKF;
-nPrior = conf.nPrior;
-
-nanArray = repmat(NaN,[nParsets,nMembers,nStatesKF,nPrior]);
-
-stateValuesKFPrior = nanArray;
-stateValuesKFPert = nanArray;
-stateValuesKFPost = nanArray;
-obsPerturbed = nanArray;
-
-for ip=1:nParsets
-
-    [tmp1,tmp2,tmp3,tmp4] = loadFromFile(conf,vecParsets(ip),evalResults);
-       
-    stateValuesKFPrior(ip,1:nMembers,1:nStatesKF,1:nPrior) = tmp1;
-    stateValuesKFPert(ip,1:nMembers,1:nStatesKF,1:nPrior) = tmp2;
-    stateValuesKFPost(ip,1:nMembers,1:nStatesKF,1:nPrior) = tmp3;
-    obsPerturbed(ip,1:nMembers,1:nStatesKF,1:nPrior) = tmp4;
-
+if replaceRejected
+    
+    for ip=1:nParsets
+        
+        evalNumbers(ip) = mmsodaGetPrecedingAccepted(conf,metropolisRejects,evalNumbers(ip));
+    end
+    
 end
 
+[stateValuesKFPrior,stateValuesKFPert,stateValuesKFPost,obsPerturbed] = mmsodaRetrieveEnsembleData(conf,evalNumbers);
 
 
 
@@ -119,10 +89,6 @@ stateValuesKFPost = stateValuesKFPost-normBy;
 obsPerturbed = obsPerturbed-normBy;
 
 
-% vecParsets = 1:nParsets;
-% vecMembers = iMember;
-% vecStatesKF = iStateKF;
-% vecPrior = 1:numel(conf.priorTimes);
 
 XSim = [];
 YSim = [];
@@ -170,7 +136,7 @@ for iParset = 1:nParsets
                     YSim = [YSim;stateValuesKFPost(iParset,iMember,iStatesKF,iPrior)];
                 end
             end
-            
+
             XSim = [XSim;repmat(NaN,[1,size(XSim,2)])];
             YSim = [YSim;repmat(NaN,[1,size(YSim,2)])];
         end
@@ -187,9 +153,9 @@ for iParset = 1:nParsets
 
 
                 if conf.assimilate(iPrior)
-                    
+
                     iDAStep = sum(conf.assimilate(1:iPrior));
-                    
+
                     % include observations
                     XObs = [XObs;conf.priorTimes(iPrior)];
                     YObs = [YObs;obsState(iDAStep)];
@@ -223,15 +189,15 @@ for iParset = 1:nParsets
                         [XConn,YConn] = calcConnectors(x1,y1,x2,y2,w);
                         XObs = [XObs;XConn];
                         YObs = [YObs;YConn];
-                    end
+                    end %strcmp(conf.modeStr,'soda')
 
                     XObs = [XObs;repmat(NaN,[1,size(XObs,2)])];
                     YObs = [YObs;repmat(NaN,[1,size(YObs,2)])];
-                end
-            end
-        end
-    end
-end
+                end %conf.assimilate(iPrior)
+            end %iPrior = vecPrior
+        end %iStatesKF = vecStatesKF
+    end %iMember = vecMembers
+end %iParset = 1:nParsets
 
 
 H.connSim = plot(XSim,YSim,'-','color',whiten(colorSim,0),connStyle{:});
@@ -253,6 +219,8 @@ for iParset = 1:nParsets
                 if strcmp(conf.modeStr,'soda')
                     H.obsPert = plot(conf.priorTimes(vecPrior),shiftdim(obsPerturbed(iParset,iMember,iStatesKF,vecPrior),3),...
                         stateStyle{:},'marker','o','markeredgecolor',colorObs);
+                else
+                    H.obsPert = [];
                 end
                 H.statesPost = plot(conf.priorTimes(vecPrior),shiftdim(stateValuesKFPost(iParset,iMember,iStatesKF,vecPrior),3),...
                     stateStyle{:},'marker','^','markerfacecolor',colorPost,'markeredgecolor',colorPost);
@@ -261,23 +229,48 @@ for iParset = 1:nParsets
 end
 
 
-
+appendSemicolon = false;
 titleStr = '';
-if showiParset
-    if isscalar(vecParsets)
-        titleStr = [titleStr,'parset = ',sprintf('%d; ',vecParsets)];
+if showReplaceRejected
+    titleStr = [titleStr,'replaceRejected = '];
+    if replaceRejected
+        titleStr = [titleStr,'true'];
     else
-        titleStr = [titleStr,'parsets = ',sprintf(['[',repmat('%d,',[1,numel(vecParsets)-1]),'%d',']; '],vecParsets)];
+        titleStr = [titleStr,'false'];
     end
+    appendSemicolon = true;
 end
-if showiMember
+if showiParset
+    % if isscalar(evalNumbers)
+    %     titleStr = [titleStr,'parset = ',sprintf('%d; ',evalNumbers)];
+    % else
+    %     titleStr = [titleStr,'parsets = ',sprintf(['[',repmat('%d,',[1,numel(evalNumbers)-1]),'%d',']; '],evalNumbers)];
+    % end
+    if appendSemicolon 
+        titleStr = [titleStr,'; '];
+    end
+    if isscalar(evalNumbers)
+        titleStr = [titleStr,'parset = ',vectorMakeCompact(evalNumbers)];
+    else
+        titleStr = [titleStr,'parsets = ',vectorMakeCompact(evalNumbers)];
+    end
+    appendSemicolon = true;
+end
+if strcmp(conf.modeStr,'soda') && showiMember
+    if appendSemicolon 
+        titleStr = [titleStr,'; '];
+    end
     if isscalar(vecMembers)
         titleStr = [titleStr,'member = ',sprintf('%d; ',vecMembers)];
     else
         titleStr = [titleStr,'members = ',sprintf(['[',repmat('%d,',[1,numel(vecMembers)-1]),'%d',']; '],vecMembers)];
     end
+    appendSemicolon = true;
 end
-if showiStateKF
+if conf.nStatesKF>1 && showiStateKF
+    if appendSemicolon 
+        titleStr = [titleStr,'; '];
+    end
     if isscalar(vecStatesKF)
         titleStr = [titleStr,'state = ',sprintf('%d; ',vecStatesKF)];
     else
@@ -289,9 +282,14 @@ title(titleStr)
 
 
 if showLegend
-    
-    legend([H.obs(1),H.obsPert(1),H.statesPrior(1),H.statesPert(1),H.statesPost(1)],...
-        'obs','obs,pert','sim,prior','sim,pert','posterior')
+    if strcmp(conf.modeStr,'reset')
+        legend([H.obs(1),H.statesPrior(1),H.statesPost(1)],...
+            'obs','sim,prior','posterior')
+    elseif strcmp(conf.modeStr,'soda')
+        legend([H.obs(1),H.obsPert(1),H.statesPrior(1),H.statesPert(1),H.statesPost(1)],...
+            'obs','obs,pert','sim,prior','sim,pert','posterior')
+    else
+    end
     
 end
 
@@ -361,28 +359,31 @@ function colorOut = whiten(colorIn,degree)
 colorOut = colorIn + degree*([1,1,1]-colorIn);
 
 
-function [tmp1,tmp2,tmp3,tmp4] = loadFromFile(conf,iParset,evalResults)
 
-start = [1,conf.nSamples+1:conf.nOffspring:size(evalResults,1)];
-finish = [conf.nSamples,conf.nSamples+conf.nOffspring:conf.nOffspring:size(evalResults,1)];
-ix = find((start<=iParset) & (iParset<=finish));
-formatStr = './results/%s-results-enkf-evals-%d-%d.mat';
-fn = sprintf(formatStr,conf.modeStr,start(ix),finish(ix));
 
-try
-    disp(sprintf('Loading parameter set %d from ''%s''.',iParset,fn))    
-    load(fn,'stateValuesKFPrior','stateValuesKFPert','stateValuesKFPost','obsPerturbed')
-catch err
-    warning(sprintf('Error trying to load parameter set %d from ''%s''.',iParset,fn))
-    rethrow(err)
+function s = vectorMakeCompact(v)
+
+nv = numel(v);
+
+if nv == 0
+    s = '';
+    return
 end
+
+from = v(1:nv-1);
+to = v(2:nv);
+isconsecutive = (to-from)==1;
+s = num2str(v(1));
+for iv = 2:nv
     
-
-s = iParset - start(ix) + 1;
-
-tmp1 = stateValuesKFPrior(s,:,:,:);
-tmp2 = stateValuesKFPert(s,:,:,:);
-tmp3 = stateValuesKFPost(s,:,:,:);
-tmp4 = obsPerturbed(s,:,:,:);
-
-
+    if isconsecutive(iv-1)
+        if iv==nv || ~isconsecutive(iv)
+            s = [s,':',num2str(to(iv-1))];
+        else
+            
+        end
+    else
+        s = [s,',',num2str(to(iv-1))];
+    end
+    
+end
