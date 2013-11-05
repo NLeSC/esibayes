@@ -9,17 +9,17 @@ init = [];
 
 % define the number of model outputs to include in the construction of the
 % parameter uncertainty intervals:
-nIntervals = 250;
+nModelOutputs = 250;
 
 % count the number of rows in 'evalResults'
 nRows = size(evalResults,1);
 
 % pre-allocate the array that will hold the model outputs
-allModelOutputs = repmat(NaN,[nIntervals,conf.nPrior]);
+allModelOutputs = repmat(NaN,[nModelOutputs,conf.nPrior]);
 
-% iterate over the last 'nIntervals' rows in 'evalResults', retrieve the
+% iterate over the last 'nModelOutputs' rows in 'evalResults', retrieve the
 % parameter set, re-run the model structure, and store the model output
-for k = nRows+(-nIntervals+1:1:0)
+for k = nRows+(-nModelOutputs+1:1:0)
 
     % retrieve the k-th parameter set
     parVec = evalResults(k,conf.parCols);
@@ -27,8 +27,8 @@ for k = nRows+(-nIntervals+1:1:0)
     % % re-run the model with the k-th parameter set
     modelOutput = lintank(conf,constants,init,parVec,conf.priorTimes);
 
-    % store the model output
-    allModelOutputs(k+nIntervals-nRows,1:conf.nPrior) = modelOutput;
+    % store the first row of the model output
+    allModelOutputs(k+nModelOutputs-nRows,1:conf.nPrior) = modelOutput(1,:);
 
 end
 % calculate the 2.5, 50, and 97.5 percent parameter uncertainty percentiles
@@ -49,7 +49,7 @@ for k = 1:size(bestsets,1)
 
     parVec = bestsets(k,1:conf.nOptPars);
     modelOutput = lintank(conf,constants,init,parVec,conf.priorTimes);
-    bestModelOutputs(k,1:conf.nPrior) = modelOutput;
+    bestModelOutputs(k,1:conf.nPrior) = modelOutput(1,:);
 
 end
 
