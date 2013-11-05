@@ -880,7 +880,7 @@ if any(strcmp(conf.modeStr,{'reset','soda'}))
 end
 
 
-if ~isdeployed && isunix && isempty(getenv('DISPLAY')) && conf.doPlot
+if isdeployed && isunix && isempty(getenv('DISPLAY')) && conf.doPlot
     warning('DISPLAY variable not set-- can''t plot anything.')
     disp('Resetting ''conf.doPlot'' to ''false''.')
     conf.doPlot = false;
