@@ -364,8 +364,16 @@ clear trPool
 
 if any(strcmp(conf.modeStr,{'soda','reset','scemua'}))
     if conf.saveEnKFResults
-        fname = ['./results/',conf.modeStr,sprintf('-results-enkf-evals-%d-%d.mat',...
-                                parsets(1,evalCol),parsets(nParSets,evalCol))];
+        
+        if conf.isSingleObjective
+            soMoStr = '-so';
+        elseif conf.isMultiObjective
+            soMoStr = '-mo';
+        else
+        end
+        
+        fname = fullfile('results',[conf.modeStr,soMoStr,sprintf('-results-enkf-evals-%d-%d.mat',...
+                                parsets(1,evalCol),parsets(nParSets,evalCol))]);
             save(fname,'-mat','parsets','stateValuesKFPrior',...
                 'stateValuesKFPert','stateValuesKFPost','stateValuesKFInn',...
                 'stochForce','obsPerturbations','obsPerturbed','valuesNOKF')
