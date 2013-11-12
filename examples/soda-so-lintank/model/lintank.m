@@ -61,5 +61,9 @@ for iPrior=2:numel(priorTimes)
     
 end
 
-
 modelOutput = [stateValuesKFNew;valuesNOKFNew];
+
+modelOutput(1:conf.nStatesKF,1) = NaN;
+
+
+
