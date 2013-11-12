@@ -17,6 +17,8 @@ examples/bypass-mo-triangle/results/bypass-mo-tempstate.mat
 examples/bypass-mo-triangle/results/conf-out.mat
 examples/bypass-mo-triangle/results/conf.mat
 
+examples/bypass-so-double-normal/Makefile
+examples/bypass-so-double-normal/run-mmsoda.sh
 examples/bypass-so-double-normal/data/constants.mat
 examples/bypass-so-double-normal/data/obs.mat
 examples/bypass-so-double-normal/results/bypass-so-results.mat
