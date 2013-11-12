@@ -250,9 +250,11 @@ elseif isempty(varargin)
                 randomDraw = mmsodaStratDraw(conf);
         end
 
+        
         evalResults = repmat(NaN,[conf.nSamples,conf.objCol]);
         evalResults(:,conf.evalCol) = (1:conf.nSamples)';
-        evalResults(:,conf.parCols) = randomDraw;
+        % randomize the order of randowDraw for better load balancing:
+        evalResults(:,conf.parCols) = randomDraw(randperm(conf.nSamples),:);
         evalResults(:,conf.llCols) = mmsodaCalcObjScore(conf,evalResults);
         if conf.isMultiObjective
             evalResults(:,conf.paretoCol) = -mmsodaCalcPareto(evalResults(:,conf.llCols),conf.paretoMethod);
