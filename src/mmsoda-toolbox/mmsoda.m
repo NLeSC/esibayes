@@ -485,6 +485,7 @@ elseif isempty(varargin)
             for iWorker = 1:conf.nWorkers
                 sendvar(iWorker,'die');
             end
+            pause(10)
         end
 
 
