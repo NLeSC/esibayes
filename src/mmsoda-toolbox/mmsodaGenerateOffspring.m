@@ -89,7 +89,8 @@ else
 end
 clear jumpDist_TMP
 
-
+nAttempts = 0;
+nAttemptsMax = 1000;
 while ~propPointAccepted
 
     randNormDraw = randn(1,nOptPars);
@@ -102,6 +103,22 @@ while ~propPointAccepted
 
     propPointAccepted = all((conf.parSpaceLoBound(:)<=propPoint(:)) &...
                              (propPoint(:)<=conf.parSpaceHiBound(:)));
+                         
+    nAttempts = nAttempts + 1;
+    if nAttempts > nAttemptsMax
+        
+        disp('jumpBase')
+        disp(jumpBase)
+        disp('jumpDist')
+        disp(jumpDist)
+        disp('covComplex')
+        disp(covComplex)
+        
+        error([mfilename,' says: I tried ',num2str(nAttempts),' times to ',...
+            'generate offspring within the valid ',char(10),'parameter space',...
+           'but I did not succeed. I printed some variables above that may help you find out why.'])
+    end
+
 end
 
 propChild = repmat(NaN,[1,conf.objCol]);
