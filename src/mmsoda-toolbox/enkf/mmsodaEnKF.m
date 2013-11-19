@@ -34,22 +34,47 @@ end
 
 evalCol = conf.evalCol;
 parCols = conf.parCols;
-
 nWorkers = conf.nWorkers;
 nParSets = size(parsets,1);
 nMembers = conf.nMembers;
-nStatesKF = conf.nStatesKF;
-nNOKF = conf.nNOKF;
-nDASteps = conf.nDASteps;
 nPrior = conf.nPrior;
-
-if strcmp(conf.modeStr,'scemua')
-    nOutputs = conf.nOutputs;
-end
+nDASteps = conf.nDASteps;
 
 
 emptyCellModelBundle = cell(ceil((nParSets*nMembers)/nWorkers),1);
-modelBundleTemplate = struct('type',emptyCellModelBundle,...
+emptyCellObjectiveBundle = cell(ceil(nParSets/nWorkers),1);
+
+
+if strcmp(conf.modeStr,'bypass')
+    
+elseif strcmp(conf.modeStr,'scemua')
+
+    nOutputs = conf.nOutputs;
+    
+    nanArrayModelOutputs = repmat(NaN,[nParSets,nMembers,nOutputs,nPrior]);
+    
+    modelBundleTemplate = struct('type',emptyCellModelBundle,...
+                                 'iEval',emptyCellModelBundle,...
+                                 'iParSet',emptyCellModelBundle,...
+                                 'iMember',emptyCellModelBundle,...
+                                 'parVec',emptyCellModelBundle,...
+                                 'modelOutput',emptyCellModelBundle,...
+                                 'priorTimes',emptyCellModelBundle);
+
+elseif strcmp(conf.modeStr,'reset')
+
+    nStatesKF = conf.nStatesKF;
+    nNOKF = conf.nNOKF;
+    
+    nanArrayKF = repmat(NaN,[nParSets,nMembers,nStatesKF,nPrior]);
+    nanArrayNOKF = repmat(NaN,[nParSets,nMembers,nNOKF,nPrior]);
+    
+    stateValuesKFPrior = nanArrayKF;
+    valuesNOKF = nanArrayNOKF;
+    stateValuesKFPost = nanArrayKF;
+    stateValuesKFInn = nanArrayKF;
+    
+    modelBundleTemplate = struct('type',emptyCellModelBundle,...
                              'iEval',emptyCellModelBundle,...
                              'iParSet',emptyCellModelBundle,...
                              'iMember',emptyCellModelBundle,...
@@ -59,22 +84,55 @@ modelBundleTemplate = struct('type',emptyCellModelBundle,...
                              'stateValuesKFPrior',emptyCellModelBundle,...
                              'valuesNOKF',emptyCellModelBundle,...
                              'priorTimes',emptyCellModelBundle);
-clear emptyCellModelBundle
 
-emptyCellObjectiveBundle = cell(ceil(nParSets/nWorkers),1);
+    
+elseif strcmp(conf.modeStr,'soda')
+    
+    nStatesKF = conf.nStatesKF;
+    nNOKF = conf.nNOKF;
+    
+    nanArrayKF = repmat(NaN,[nParSets,nMembers,nStatesKF,nPrior]);
+    nanArrayNOKF = repmat(NaN,[nParSets,nMembers,nNOKF,nPrior]);
+    
+    stateValuesKFPrior = nanArrayKF;
+    valuesNOKF = nanArrayNOKF;
+    stateValuesKFPert = nanArrayKF;
+    stateValuesKFPost = nanArrayKF;
+    stateValuesKFInn = nanArrayKF;
+    stochForce = nanArrayKF;
+    obsPerturbations = nanArrayKF;
+    obsPerturbed = nanArrayKF;
+    
+    % arrays without a time/DA dimension:
+    measOperator = 1;
+    ensembleCov = repmat(NaN,[nParSets,nStatesKF,nStatesKF]);
+    measErrCov = repmat(NaN,[nParSets,nStatesKF,nStatesKF]);
+    kalmanGain = repmat(NaN,[nParSets,nStatesKF,nStatesKF]);
+    
+    modelBundleTemplate = struct('type',emptyCellModelBundle,...
+                                 'iEval',emptyCellModelBundle,...
+                                 'iParSet',emptyCellModelBundle,...
+                                 'iMember',emptyCellModelBundle,...
+                                 'iDAStep',emptyCellModelBundle,...
+                                 'parVec',emptyCellModelBundle,...
+                                 'stateValuesKFPost',emptyCellModelBundle,...
+                                 'stateValuesKFPrior',emptyCellModelBundle,...
+                                 'valuesNOKF',emptyCellModelBundle,...
+                                 'priorTimes',emptyCellModelBundle);
+    
+
+else
+end
+
 objectiveBundleTemplate = struct('type',emptyCellObjectiveBundle,...
-                                 'iEval',emptyCellObjectiveBundle,...
-                                 'iParSet',emptyCellObjectiveBundle,...
-                                 'parVec',emptyCellObjectiveBundle,...
-                                 'allStateValuesKFPrior',emptyCellObjectiveBundle,...
-                                 'allValuesNOKF',emptyCellObjectiveBundle);
+                             'iEval',emptyCellObjectiveBundle,...
+                             'iParSet',emptyCellObjectiveBundle,...
+                             'parVec',emptyCellObjectiveBundle,...
+                             'modelOutputs',emptyCellObjectiveBundle);
+
+
+clear emptyCellModelBundle
 clear emptyCellObjectiveBundle
-
-nanArrayKF = repmat(NaN,[nParSets,nMembers,nStatesKF,nPrior]);
-nanArrayNOKF = repmat(NaN,[nParSets,nMembers,nNOKF,nPrior]);
-
-stateValuesKFPrior = nanArrayKF;
-valuesNOKF = nanArrayNOKF;
 
 switch conf.modeStr
     case 'bypass'
@@ -83,23 +141,29 @@ switch conf.modeStr
 
     case {'reset','soda','scemua'}
         
-        stateValuesKFPert = nanArrayKF;
-        stateValuesKFPost = nanArrayKF;
-        stateValuesKFInn = nanArrayKF;
-        stochForce = nanArrayKF;
-        obsPerturbations = nanArrayKF;
-        obsPerturbed = nanArrayKF;
-
-        % arrays without a time/DA dimension:
-        measOperator = 1;
-        ensembleCov = repmat(NaN,[nParSets,nStatesKF,nStatesKF]);
-        measErrCov = repmat(NaN,[nParSets,nStatesKF,nStatesKF]);
-        kalmanGain = repmat(NaN,[nParSets,nStatesKF,nStatesKF]);
         
         assimAtIx = find(conf.assimilate);
 
 
         switch conf.modeStr
+            case 'reset'
+                for iParSet=1:nParSets
+                    for iMember=1:nMembers
+                        % calculate unperturbed observations:
+                        obsPerturbed(iParSet,iMember,1:nStatesKF,assimAtIx) = shiftdim(conf.obsState,-2);
+
+                        switch conf.initMethodNOKF
+                            case 'reference'
+                                stateValuesKFPost(iParSet,iMember,1:nStatesKF,1) = conf.initValuesKF;
+                                if ~isempty(conf.initValuesNOKF)
+                                    valuesNOKF(iParSet,iMember,1:nNOKF,1) = conf.initValuesNOKF;
+                                end
+                            otherwise
+                                error('no other method than ''reference'' available yet')
+                        end
+
+                    end
+                end
             case 'soda'
                 for iParSet=1:nParSets
                     for iMember=1:nMembers
@@ -118,24 +182,6 @@ switch conf.modeStr
                         end
 
                         switch conf.initMethodKF
-                            case 'reference'
-                                stateValuesKFPost(iParSet,iMember,1:nStatesKF,1) = conf.initValuesKF;
-                                if ~isempty(conf.initValuesNOKF)
-                                    valuesNOKF(iParSet,iMember,1:nNOKF,1) = conf.initValuesNOKF;
-                                end
-                            otherwise
-                                error('no other method than ''reference'' available yet')
-                        end
-
-                    end
-                end
-            case 'reset'
-                for iParSet=1:nParSets
-                    for iMember=1:nMembers
-                        % calculate unperturbed observations:
-                        obsPerturbed(iParSet,iMember,1:nStatesKF,assimAtIx) = shiftdim(conf.obsState,-2);
-
-                        switch conf.initMethodNOKF
                             case 'reference'
                                 stateValuesKFPost(iParSet,iMember,1:nStatesKF,1) = conf.initValuesKF;
                                 if ~isempty(conf.initValuesNOKF)
@@ -189,10 +235,22 @@ switch conf.modeStr
                     bundle(iTask).iMember = iMember;
                     bundle(iTask).iDAStep = iDAStep;
                     bundle(iTask).parVec = parsets(iParSet,parCols);
-                    bundle(iTask).stateValuesKFPost = shiftdim(stateValuesKFPost(iParSet,iMember,1:nStatesKF,s),2);
-                    bundle(iTask).stateValuesKFPrior = repmat(NaN,[nStatesKF,nPriorChunk]);
-                    bundle(iTask).valuesNOKF = shiftdim(valuesNOKF(iParSet,iMember,1:nNOKF,s),2);
-                    bundle(iTask).priorTimes = priorTimesChunk;
+                    bundle(iTask).priorTimes = priorTimesChunk';
+                    
+                    if strcmp(conf.modeStr,'scemua')
+                        
+                        bundle(iTask).modelOutput = repmat(NaN,[nOutputs,nPriorChunk]);
+                        
+                    elseif strcmp(conf.modeStr,'reset') || strcmp(conf.modeStr,'soda')
+                        
+                        bundle(iTask).stateValuesKFPost = shiftdim(stateValuesKFPost(iParSet,iMember,1:nStatesKF,s),2);
+                        bundle(iTask).stateValuesKFPrior = repmat(NaN,[nStatesKF,nPriorChunk]);
+                        bundle(iTask).valuesNOKF = shiftdim(valuesNOKF(iParSet,iMember,1:nNOKF,s),2);
+                        
+                    else
+                    end
+    
+
 
                     if iTask==ceil((nParSets*nMembers)/nWorkers) || (iParSet==nParSets && iMember==nMembers)
                         nTasks = iTask;
@@ -212,9 +270,10 @@ switch conf.modeStr
                     end
                 end
             end
-            nActiveWorkers = iWorker;
 
             if conf.executeInParallel
+                nActiveWorkers = iWorker;
+
                 % retrieve results:
                 for i = 1:nActiveWorkers;
                     trPool(i).result=receivevar();
@@ -235,8 +294,7 @@ switch conf.modeStr
                     
                     switch conf.modeStr
                         case 'scemua'
-                            stateValuesKFPrior(iParSet,iMember,1:nOutputs,s+1:e) = shiftdim(result.stateValuesKFPrior(1:nOutputs,2:nPriorChunk),-2);
-                            valuesNOKF(iParSet,iMember,1:nNOKF,s+1:e) = shiftdim(result.valuesNOKF(1:nNOKF,2:nPriorChunk),-2);
+                            modelOutputs(iParSet,iMember,1:nOutputs,s+1:e) = shiftdim(result.modelOutput(1:nOutputs,2:nPriorChunk),-2);
                         case {'reset','soda'}
                             stateValuesKFPrior(iParSet,iMember,1:nStatesKF,s+1:e) = shiftdim(result.stateValuesKFPrior(1:nStatesKF,2:nPriorChunk),-2);
                             valuesNOKF(iParSet,iMember,1:nNOKF,s+1:e) = shiftdim(result.valuesNOKF(1:nNOKF,2:nPriorChunk),-2);
@@ -312,15 +370,15 @@ for iParSet=1:nParSets
     bundle(iTask).parVec = parsets(iParSet,parCols);
     switch conf.modeStr
         case 'scemua'
-            tmp = permute(stateValuesKFPrior(iParSet,1:nMembers,1:nOutputs,1:nPrior),[3,4,2,1]);
-            bundle(iTask).allStateValuesKFPrior = tmp;
+            tmp = permute(modelOutputs(iParSet,1:nMembers,1:nOutputs,1:nPrior),[3,4,2,1]);
+            bundle(iTask).modelOutputs = tmp;
         case {'reset','soda'}
             tmp = stateValuesKFPrior(iParSet,1:nMembers,1:nStatesKF,1:nPrior);
             bundle(iTask).allStateValuesKFPrior = permute(tmp,[3,4,2,1]);
+            tmp = valuesNOKF(iParSet,1:nMembers,1:nNOKF,1:nPrior);
+            bundle(iTask).allValuesNOKF = permute(tmp,[3,4,2,1]);
         otherwise
     end
-    tmp = valuesNOKF(iParSet,1:nMembers,1:nNOKF,1:nPrior);
-    bundle(iTask).allValuesNOKF = permute(tmp,[3,4,2,1]);
 
     if iTask==ceil(nParSets/nWorkers) || iParSet==nParSets
         nTasks = iTask;
@@ -339,9 +397,10 @@ for iParSet=1:nParSets
         end
     end
 end
-nActiveWorkers = iWorker; 
+
 
 if conf.executeInParallel
+    nActiveWorkers = iWorker;     
     % retrieve results:
     for i = 1:nActiveWorkers;
         trPool(i).result=receivevar();
@@ -362,20 +421,26 @@ for iBundle = 1:nBundles
 end
 clear trPool
 
-if any(strcmp(conf.modeStr,{'soda','reset','scemua'}))
-    if conf.saveEnKFResults
+
+if conf.saveEnKFResults
+    if conf.isSingleObjective
+        soMoStr = '-so';
+    elseif conf.isMultiObjective
+        soMoStr = '-mo';
+    else
+    end
+
+    fname = fullfile('results',[conf.modeStr,soMoStr,sprintf('-results-enkf-evals-%d-%d.mat',...
+                        parsets(1,evalCol),parsets(nParSets,evalCol))]);
+
+    if strcmp(conf.modeStr,'scemua')
+
+        save(fname,'-mat','parsets','modelOutputs')
         
-        if conf.isSingleObjective
-            soMoStr = '-so';
-        elseif conf.isMultiObjective
-            soMoStr = '-mo';
-        else
-        end
-        
-        fname = fullfile('results',[conf.modeStr,soMoStr,sprintf('-results-enkf-evals-%d-%d.mat',...
-                                parsets(1,evalCol),parsets(nParSets,evalCol))]);
-            save(fname,'-mat','parsets','stateValuesKFPrior',...
-                'stateValuesKFPert','stateValuesKFPost','stateValuesKFInn',...
-                'stochForce','obsPerturbations','obsPerturbed','valuesNOKF')
+    elseif strcmp(conf.modeStr,'reset') || strcmp(conf.modeStr,'soda')
+
+        save(fname,'-mat','parsets','stateValuesKFPrior',...
+            'stateValuesKFPert','stateValuesKFPost','stateValuesKFInn',...
+            'stochForce','obsPerturbations','obsPerturbed','valuesNOKF')
     end
 end
