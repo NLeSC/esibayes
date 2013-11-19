@@ -16,6 +16,7 @@ examples/bypass-mo-triangle/results/bypass-mo-results.mat
 examples/bypass-mo-triangle/results/bypass-mo-tempstate.mat
 examples/bypass-mo-triangle/results/conf-out.mat
 examples/bypass-mo-triangle/results/conf.mat
+examples/bypass-mo-triangle/results/timing_???.mat
 
 examples/bypass-so-double-normal/Makefile
 examples/bypass-so-double-normal/run-mmsoda.sh
@@ -72,6 +73,8 @@ examples/soda-so-lorenz/results/soda-so-tempstate.mat
 examples/soda-so-lorenz/results/conf-out.mat
 examples/soda-so-lorenz/results/conf.mat
 examples/soda-so-lorenz/results/soda-so-results-enkf-evals-*-*.mat
+examples/soda-so-lorenz/results/timing_???.mat
+
 
 examples/soda-so-lintank/Makefile
 examples/soda-so-lintank/jobscript-mmsoda.pbs
