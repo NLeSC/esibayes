@@ -27,6 +27,12 @@ function modelOutput = lorenzeq(conf,constants,init,parVec,priorTimes)
 
 
 odeOptions = odeset('RelTol',1e-6,'AbsTol',1e-6);
-[~,u] = ode45('lorenz_calc',priorTimes,init,odeOptions,parVec);
+[utime,u] = ode45('lorenz_calc',priorTimes,init,odeOptions,parVec);
 
-modelOutput = permute(u(:,1:3),[2,1]);
+if numel(priorTimes)==2
+    tmp = permute(u(:,1:3),[2,1]);
+    modelOutput = repmat(NaN,[conf.nStatesKF+conf.nNOKF,numel(priorTimes)]);
+    modelOutput(1:conf.nStatesKF,2) = tmp(:,end);
+else
+    modelOutput = permute(u(:,1:3),[2,1]);
+end
