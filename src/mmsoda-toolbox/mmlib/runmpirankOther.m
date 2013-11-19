@@ -77,6 +77,24 @@ if conf.executeInParallel
 
             sendvar(0,bundle);
         end % if
+        
+        if savetimings == 1
+            fn=sprintf([getenv('PBS_O_WORKDIR'),'/results/timing_%03d.mat'],mpirank);
+            if exist(fn,'file')==2
+                d=dir(fn);
+                if now - d.datenum > 2/60/24
+                    doSave = true;
+                else
+                    doSave = false;
+                end
+            else
+                doSave = true;
+            end
+            if doSave
+                timing = evalin('base','timing');
+                save(fn,'timing');
+            end
+        end
 
     end % while
 
@@ -86,7 +104,6 @@ else % if conf.executeInParallel
     clear msg     % renaming a variable
 
     bundle = mmsodaProcessBundle(conf,constants,bundle);
-
 
 end % if conf.executeInParallel
 
