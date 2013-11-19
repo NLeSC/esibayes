@@ -26,7 +26,7 @@ function makedata()
 
 
 constants = load('./data/constants.mat');
-conf = load('./results/conf.mat')
+conf = load('./results/conf.mat');
 
 conf.nOptPars = numel(conf.parNames);
 
