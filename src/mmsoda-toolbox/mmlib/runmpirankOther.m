@@ -82,12 +82,15 @@ if conf.executeInParallel
             fn=sprintf([getenv('PBS_O_WORKDIR'),'/results/timing_%03d.mat'],mpirank);
             if exist(fn,'file')==2
                 d=dir(fn);
-                if now - d.datenum > 2/60/24
+                
+                if now - d.datenum > 4/60/24
+                    % save if the existing file is older than 4 minutes
                     doSave = true;
                 else
                     doSave = false;
                 end
             else
+                % save the timings if no timings files exist yet
                 doSave = true;
             end
             if doSave
