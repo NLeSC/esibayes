@@ -71,6 +71,7 @@ examples/soda-so-lorenz/results/soda-so-results.mat
 examples/soda-so-lorenz/results/soda-so-tempstate.mat
 examples/soda-so-lorenz/results/conf-out.mat
 examples/soda-so-lorenz/results/conf.mat
+examples/soda-so-lorenz/results/soda-so-results-enkf-evals-*-*.mat
 
 examples/soda-so-lintank/Makefile
 examples/soda-so-lintank/jobscript-mmsoda.pbs
