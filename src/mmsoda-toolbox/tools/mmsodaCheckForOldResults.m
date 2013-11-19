@@ -40,7 +40,7 @@ listing = dir('./results');
 
 nFiles = numel(listing);
 
-exempt = {'conf.mat','conf-out.mat','.gitignore','readme'};
+exempt = {'conf.mat','conf-out.mat','.gitignore','readme','README'};
 standardout = {'jobscript-mmsoda.pbs.e','jobscript-mmsoda.pbs.o'};
 
 throwErr = false;
