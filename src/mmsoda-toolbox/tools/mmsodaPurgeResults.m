@@ -60,7 +60,7 @@ listing = dir('./results');
 
 nFiles = numel(listing);
 
-exempt = {'conf.mat'};
+exempt = {'conf.mat','readme','README'};
 
 for iFile = 3:nFiles
 
