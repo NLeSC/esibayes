@@ -94,7 +94,7 @@ if ischar(nHistory)
             numberOfPointsStr = [char(39),'Q4-parameter sets',char(39), ' (N = ',num2str(nHistory),')'];
     end
 else
-    numberOfPointsStr = [char(39),'last ',num2str(nHistory),' parameter sets',char(39)];
+    numberOfPointsStr = [char(39),'last ',num2str(min([size(evalResults,1),nHistory])),' parameter sets',char(39)];
 end
 
 
