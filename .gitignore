@@ -82,7 +82,12 @@ examples/soda-so-lorenz/results/conf-out.mat
 examples/soda-so-lorenz/results/conf.mat
 examples/soda-so-lorenz/results/soda-so-results-enkf-evals-*-*.mat
 examples/soda-so-lorenz/results/timing_???.mat
-
+examples/soda-so-lorenz/Makefile
+examples/soda-so-lorenz/jobscript-mmsoda.pbs
+examples/soda-so-lorenz/libmmpi.so
+examples/soda-so-lorenz/matlabprog
+examples/soda-so-lorenz/results/jobscript-mmsoda.pbs.e*
+examples/soda-so-lorenz/results/jobscript-mmsoda.pbs.o*
 
 examples/soda-so-lintank/Makefile
 examples/soda-so-lintank/jobscript-mmsoda.pbs
