@@ -582,9 +582,6 @@ elseif strcmp(conf.modeStr,'scemua')
     if ~isfield(conf,'assimilate')
         conf.assimilate = repmat(false,[1,conf.nPrior]);
     end
-    if ~isfield(conf,'saveEnKFResults')
-        conf.saveEnKFResults = false;
-    end
 elseif strcmp(conf.modeStr,'bypass')
     conf.nStatesKF = 0;
     conf.nNOKF = 0;
@@ -702,8 +699,7 @@ switch conf.modeStr
                     'priorTimes';...
                     'stateNamesKF';...
                     'stateSpaceLoBound';...
-                    'stateSpaceHiBound';...
-                    'saveEnKFResults'};
+                    'stateSpaceHiBound';};
     otherwise
 end
 for k=1:size(rmFields,1)
