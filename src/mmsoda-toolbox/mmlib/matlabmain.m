@@ -48,10 +48,8 @@ timing.starttimeStr = time_matlab_string;
 [~,s] = system('hostname');
 timing.host = s(1:end-1);
 
-%[~,s] = system('echo $$');
-%timing.pid = s(1:end-1);
 % returned wrong PID! This is the right way (undocumented matlab)
-timing.pid = feature('GetPid');
+timing.pid = num2str(feature('GetPid'));
 
 assignin('base','timing',timing);
 
