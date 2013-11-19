@@ -50,6 +50,7 @@ examples/scemua-so-hymod-batch/results/scemua-so-results.mat
 examples/scemua-so-hymod-batch/results/scemua-so-tempstate.mat
 examples/scemua-so-hymod-batch/results/conf-out.mat
 examples/scemua-so-hymod-batch/results/conf.mat
+examples/scemua-so-hymod-batch/results/scemua-so-results-enkf-evals-*-*.mat
 
 examples/soda-mo-lintank/data/constants.mat
 examples/soda-mo-lintank/data/obs.mat
