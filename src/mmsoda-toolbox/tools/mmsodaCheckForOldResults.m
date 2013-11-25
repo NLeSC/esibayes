@@ -103,6 +103,10 @@ for iFile = 3:nFiles
        C = textscan(fn,'%[^-]-%[^-]-tempstate.mat');
        modeStr = C{1};
        soMoStr = C{2};
+       
+   elseif numel(fn)==14 & ~isempty(strfind(fn([1:7,11:14]),'timing_.mat'))
+       % file is a timing file, can be ignored.
+       
 
    else
        disp(['Unknown file ''',char(39),fn,char(39),''' in ''./results''.'])
