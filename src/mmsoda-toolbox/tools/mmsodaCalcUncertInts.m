@@ -118,8 +118,8 @@ elseif strcmp(conf.modeStr,'scemua')
 
     tmp = mmsodaRetrieveEnsembleData(conf,evalNumbers);
     
-    allModelOutputs = squeeze(tmp);
-    X = conf.priorTimes';
+    allModelOutputs = squeeze(tmp(:,:,iOutput,:));
+    X = conf.priorTimes(:)';
 
 elseif strcmp(conf.modeStr,'reset') || strcmp(conf.modeStr,'soda')
 
