@@ -56,7 +56,20 @@ assignin('base','timing',timing);
 if mpirank == 0
 
     % run the MPI server in a while loop as process with mpirank 0
-    runmpirank1
+    try
+        runmpirank1
+    catch err
+        
+        disp(['MPIRANK=',num2str(mpirank),' says: ',datestr(now,21),' //  An error occurred.'])
+        
+        for iWorker=1:mpisize
+            sendvar(iWorker,'die');
+        end
+        pause(10)
+        
+        rethrow(err)
+        
+    end
 
 else
 

@@ -40,12 +40,31 @@ if nargin == 0
 end
 
 replaceRejected = true;
-iState = 1;
 
-authorizedOptions = {'replaceRejected','iState'};
+authorizedOptions = {'replaceRejected','iStateKF','iOutput'};
 
 mmsodaParsePairs
 
+if strcmp(conf.modeStr,'scemua')
+    clear iStateKF
+    if ~(exist('iOutput','var')==1)
+        if conf.nOutputs == 1
+            iOutput = 1;
+        else
+            error('You haven''t specified which output to retrieve.')
+        end
+    end
+elseif strcmp(conf.modeStr,'reset') || strcmp(conf.modeStr,'soda')
+    clear iOutput
+    if ~(exist('iStateKF','var')==1)
+        if conf.nStatesKF == 1
+            iStateKF = 1;
+        else
+            error('You haven''t specified which KF state to retrieve.')
+        end
+    end
+end
+        
 prc = prc(:);
 
 nPrior = conf.nPrior;
@@ -56,13 +75,22 @@ includeBest = nargout == 3;
 if includeBest
     [bestEvals,bestRows] = mmsodaBestEval(conf,evalResults);
     try
-        [stateValuesKFPrior,stateValuesKFPert,stateValuesKFPost,obsPerturbed] =...
-            mmsodaRetrieveEnsembleData(conf,bestRows);
-        if numel(bestRows) == 1
-            bestY = [permute(stateValuesKFPrior(1,1,1,1:nPrior),[4,3,2,1])';...
-                 permute(stateValuesKFPost(1,1,1,1:nPrior),[4,3,2,1])'];
-        else
-            disp('There are multiple bests')
+        if strcmp(conf.modeStr,'bypass')
+            
+        elseif strcmp(conf.modeStr,'scemua')
+            
+            modelOutputs = mmsodaRetrieveEnsembleData(conf,bestRows);
+            
+        elseif strcmp(conf.modeStr,'reset') || strcmp(conf.modeStr,'soda')
+            
+            [stateValuesKFPrior,stateValuesKFPert,stateValuesKFPost,obsPerturbed] =...
+                mmsodaRetrieveEnsembleData(conf,bestRows);
+            if numel(bestRows) == 1
+                bestY = [permute(stateValuesKFPrior(1,1,1,1:nPrior),[4,3,2,1])';...
+                     permute(stateValuesKFPost(1,1,1,1:nPrior),[4,3,2,1])'];
+            else
+                disp('There are multiple bests')
+            end
         end
 
     catch
@@ -83,27 +111,48 @@ for k=1:nParsets
     end
 end
 
-[stateValuesKFPrior,stateValuesKFPert,stateValuesKFPost,obsPerturbed] =...
-    mmsodaRetrieveEnsembleData(conf,evalNumbers);
 
-allModelOutputs = repmat(NaN,[nParsets*nMembers,nPrior*2]);
+if strcmp(conf.modeStr,'bypass')
 
-X = repmat(conf.priorTimes,[2,1]);
-X = transpose(X(:));
-for ip=1:nParsets
-    for im=1:nMembers
+elseif strcmp(conf.modeStr,'scemua')
 
-        Y = [permute(stateValuesKFPrior(ip,im,iState,1:nPrior),[4,3,2,1])';...
-            permute(stateValuesKFPost(ip,im,iState,1:nPrior),[4,3,2,1])'];
+    tmp = mmsodaRetrieveEnsembleData(conf,evalNumbers);
+    
+    allModelOutputs = squeeze(tmp(:,:,iOutput,:));
+    X = conf.priorTimes(:)';
 
-        k = (ip-1)*nMembers + im;
-        allModelOutputs(k,:) = Y(:);
+elseif strcmp(conf.modeStr,'reset') || strcmp(conf.modeStr,'soda')
+
+    [stateValuesKFPrior,stateValuesKFPert,stateValuesKFPost,obsPerturbed] =...
+        mmsodaRetrieveEnsembleData(conf,evalNumbers);
+    
+    allModelOutputs = repmat(NaN,[nParsets*nMembers,nPrior*2]);
+
+    X = repmat(conf.priorTimes,[2,1]);
+    X = transpose(X(:));
+    for ip=1:nParsets
+        for im=1:nMembers
+
+            A = permute(stateValuesKFPrior(ip,im,iStateKF,1:nPrior),[4,3,2,1])';
+            B = permute(stateValuesKFPost(ip,im,iStateKF,1:nPrior),[4,3,2,1])';
+            C = B;
+            ix = isnan(B);
+            C(ix) = A(ix);
+
+            Y = [A;C];
+
+
+            k = (ip-1)*nMembers + im;
+            allModelOutputs(k,:) = Y(:);
+        end
+
     end
 
+    
 end
 
-percentiles = mmsodaPrctile(allModelOutputs,[2.5,50,97.5]);
 
+percentiles = mmsodaPrctile(allModelOutputs,[2.5,50,97.5]);
 
 
 if nargout == 2

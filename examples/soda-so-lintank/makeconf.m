@@ -77,8 +77,8 @@ nMembers = 10;
 doPlot = true;
 % specify how the parameter space is sampled ('stratified', 'stratified random'), useful for making imagescs of sensitivity
 sampleDrawMode = 'stratified';
-% saveInterval = 0;
-% saveEnKFResults = true;
+saveInterval = 1;
+saveEnKFResults = true;
 
 drawInterval = 10;
 

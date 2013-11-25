@@ -31,6 +31,9 @@ nPriorChunk = numel(priorTimes);
 nStatesKF = conf.nStatesKF;
 nNOKF = conf.nNOKF;
 
+stateValuesKFNew = repmat(NaN,[nStatesKF,nPriorChunk]);
+valuesNOKFNew = repmat(NaN,[nNOKF,nPriorChunk]);
+
 for k=2:nPriorChunk
 
     timeNow = priorTimes(k-1);

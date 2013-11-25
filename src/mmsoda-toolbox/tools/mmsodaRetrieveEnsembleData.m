@@ -1,4 +1,4 @@
-function [stateValuesKFPrior,stateValuesKFPert,stateValuesKFPost,obsPerturbed] = mmsodaRetrieveEnsembleData(conf,evalNumbers)
+function varargout = mmsodaRetrieveEnsembleData(conf,evalNumbers)
 % <a href="matlab:web(fullfile(mmsodaroot,'html','mmsodaRetrieveEnsembleData.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>
 
 
@@ -39,37 +39,62 @@ if nargin == 0
     return
 end
 
-
+nPrior = conf.nPrior;
 nParsets = numel(evalNumbers);
 nMembers = conf.nMembers;
-nStatesKF = conf.nStatesKF;
-nPrior = conf.nPrior;
-
-nanArray = repmat(NaN,[nParsets,nMembers,nStatesKF,nPrior]);
-
-stateValuesKFPrior = nanArray;
-stateValuesKFPert = nanArray;
-stateValuesKFPost = nanArray;
-obsPerturbed = nanArray;
+if strcmp(conf.modeStr,'scemua')
+    nOutputs = conf.nOutputs;
+    nanArray = repmat(NaN,[nParsets,nMembers,nOutputs,nPrior]);
+    modelOutputs = nanArray;
+elseif strcmp(conf.modeStr,'reset') || strcmp(conf.modeStr,'soda') 
+    nStatesKF = conf.nStatesKF;
+    nanArray = repmat(NaN,[nParsets,nMembers,nStatesKF,nPrior]);
+    stateValuesKFPrior = nanArray;
+    stateValuesKFPert = nanArray;
+    stateValuesKFPost = nanArray;
+    obsPerturbed = nanArray;
+else
+end
 
 
 disp('Retrieving data from file...')
 for ip=1:nParsets
 
-    [tmp1,tmp2,tmp3,tmp4] = loadFromFile(conf,evalNumbers(ip),max(evalNumbers));
-
-    stateValuesKFPrior(ip,1:nMembers,1:nStatesKF,1:nPrior) = tmp1;
-    stateValuesKFPert(ip,1:nMembers,1:nStatesKF,1:nPrior) = tmp2;
-    stateValuesKFPost(ip,1:nMembers,1:nStatesKF,1:nPrior) = tmp3;
-    obsPerturbed(ip,1:nMembers,1:nStatesKF,1:nPrior) = tmp4;
+    if strcmp(conf.modeStr,'scemua')
+        tmp = loadFromFile(conf,evalNumbers(ip),max(evalNumbers));
+        modelOutputs(ip,1:nMembers,1:nOutputs,1:nPrior) = tmp;
+        
+    elseif strcmp(conf.modeStr,'reset') || strcmp(conf.modeStr,'soda')
+        
+        [tmp1,tmp2,tmp3,tmp4] = loadFromFile(conf,evalNumbers(ip),max(evalNumbers));
+        stateValuesKFPrior(ip,1:nMembers,1:nStatesKF,1:nPrior) = tmp1;
+        stateValuesKFPert(ip,1:nMembers,1:nStatesKF,1:nPrior) = tmp2;
+        stateValuesKFPost(ip,1:nMembers,1:nStatesKF,1:nPrior) = tmp3;
+        obsPerturbed(ip,1:nMembers,1:nStatesKF,1:nPrior) = tmp4;
+        
+    else
+    end
 
 end
 disp('Retrieving data from file...Done.')
 
+if strcmp(conf.modeStr,'scemua')
+
+    varargout{1} = modelOutputs;
+
+elseif strcmp(conf.modeStr,'reset') || strcmp(conf.modeStr,'soda')
+
+    varargout{1} = stateValuesKFPrior;
+    varargout{2} = stateValuesKFPert;
+    varargout{3} = stateValuesKFPost;
+    varargout{4} = obsPerturbed;
+
+else
+end
 
 
 
-function [tmp1,tmp2,tmp3,tmp4] = loadFromFile(conf,iParset,nRows)
+function varargout = loadFromFile(conf,iParset,nRows)
 
 if conf.isSingleObjective
     soMoStr = '-so-';
@@ -85,8 +110,13 @@ formatStr = ['./results/%s',soMoStr,'results-enkf-evals-%d-%d.mat'];
 fn = sprintf(formatStr,conf.modeStr,start(ix),finish(ix));
 
 try
-%     disp(sprintf('Loading parameter set %d from ''%s''.',iParset,fn))
-    load(fn,'stateValuesKFPrior','stateValuesKFPert','stateValuesKFPost','obsPerturbed')
+    if strcmp(conf.modeStr,'scemua')
+        load(fn,'modelOutputs')
+    elseif strcmp(conf.modeStr,'reset') || strcmp(conf.modeStr,'soda')
+        load(fn,'stateValuesKFPrior','stateValuesKFPert','stateValuesKFPost','obsPerturbed')
+    else
+    end
+    
 catch err
     warning(sprintf('Error trying to load parameter set %d from ''%s''.',iParset,fn))
     rethrow(err)
@@ -95,9 +125,16 @@ end
 
 s = iParset - start(ix) + 1;
 
-tmp1 = stateValuesKFPrior(s,:,:,:);
-tmp2 = stateValuesKFPert(s,:,:,:);
-tmp3 = stateValuesKFPost(s,:,:,:);
-tmp4 = obsPerturbed(s,:,:,:);
+if strcmp(conf.modeStr,'scemua')
+    
+    varargout{1} = modelOutputs(s,:,:,:);
+    
+elseif strcmp(conf.modeStr,'reset') || strcmp(conf.modeStr,'soda')
 
+    varargout{1} = stateValuesKFPrior(s,:,:,:);
+    varargout{2} = stateValuesKFPert(s,:,:,:);
+    varargout{3} = stateValuesKFPost(s,:,:,:);
+    varargout{4} = obsPerturbed(s,:,:,:);
 
+else
+end

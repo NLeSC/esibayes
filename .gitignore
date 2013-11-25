@@ -1,4 +1,5 @@
 
+
 manual/out/2013-mmsoda-manual.aux
 manual/out/2013-mmsoda-manual.blg
 manual/out/2013-mmsoda-manual.idx
@@ -16,6 +17,14 @@ examples/bypass-mo-triangle/results/bypass-mo-results.mat
 examples/bypass-mo-triangle/results/bypass-mo-tempstate.mat
 examples/bypass-mo-triangle/results/conf-out.mat
 examples/bypass-mo-triangle/results/conf.mat
+examples/bypass-mo-triangle/results/timing_???.mat
+examples/bypass-mo-triangle/Makefile
+examples/bypass-mo-triangle/jobscript-mmsoda.pbs
+examples/bypass-mo-triangle/libmmpi.so
+examples/bypass-mo-triangle/matlabprog
+examples/bypass-mo-triangle/results/jobscript-mmsoda.pbs.e*
+examples/bypass-mo-triangle/results/jobscript-mmsoda.pbs.o*
+
 
 examples/bypass-so-double-normal/Makefile
 examples/bypass-so-double-normal/run-mmsoda.sh
@@ -50,6 +59,7 @@ examples/scemua-so-hymod-batch/results/scemua-so-results.mat
 examples/scemua-so-hymod-batch/results/scemua-so-tempstate.mat
 examples/scemua-so-hymod-batch/results/conf-out.mat
 examples/scemua-so-hymod-batch/results/conf.mat
+examples/scemua-so-hymod-batch/results/scemua-so-results-enkf-evals-*-*.mat
 
 examples/soda-mo-lintank/data/constants.mat
 examples/soda-mo-lintank/data/obs.mat
@@ -70,6 +80,14 @@ examples/soda-so-lorenz/results/soda-so-results.mat
 examples/soda-so-lorenz/results/soda-so-tempstate.mat
 examples/soda-so-lorenz/results/conf-out.mat
 examples/soda-so-lorenz/results/conf.mat
+examples/soda-so-lorenz/results/soda-so-results-enkf-evals-*-*.mat
+examples/soda-so-lorenz/results/timing_???.mat
+examples/soda-so-lorenz/Makefile
+examples/soda-so-lorenz/jobscript-mmsoda.pbs
+examples/soda-so-lorenz/libmmpi.so
+examples/soda-so-lorenz/matlabprog
+examples/soda-so-lorenz/results/jobscript-mmsoda.pbs.e*
+examples/soda-so-lorenz/results/jobscript-mmsoda.pbs.o*
 
 examples/soda-so-lintank/Makefile
 examples/soda-so-lintank/jobscript-mmsoda.pbs
@@ -77,6 +95,7 @@ examples/soda-so-lintank/libmmpi.so
 examples/soda-so-lintank/matlabprog
 examples/soda-so-lintank/results/jobscript-mmsoda.pbs.e*
 examples/soda-so-lintank/results/jobscript-mmsoda.pbs.o*
+examples/soda-so-lintank/results/soda-so-results-enkf-evals-*-*.mat
 
 src/mmsoda-toolbox/comms/bcastvar.mexa64
 src/mmsoda-toolbox/comms/helper.o

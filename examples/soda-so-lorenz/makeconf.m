@@ -53,6 +53,7 @@ doPlot = false
 drawInterval = 0
 startFromUniform = true;
 saveInterval = 1;
+saveEnKFResults = true;
 
 save('./results/conf.mat')
 

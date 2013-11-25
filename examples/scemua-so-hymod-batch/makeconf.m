@@ -43,8 +43,7 @@ parNames = {'cmax','bexp','fQuickFlow','Rs','Rq'};
 parSpaceLoBound = [200.0, 0.1, 0.00, 0.001, 0.200];  % lower limits on the parameter space
 % set the higher limit on the parameter space for each parameter
 parSpaceHiBound = [350.0, 0.6, 0.99, 0.02, 0.600];   % upper limits on the parameter space
-% define the names of additional variables that are unique to each member
-% namesNOKF = {'output'};
+% define the number of model outputs
 nOutputs = 1;
 % define the variable that contains the time steps for which data assimilation will be performed
 priorTimes = numTime([iStart,iStart+wu:iEnd]);
@@ -52,21 +51,16 @@ priorTimes = numTime([iStart,iStart+wu:iEnd]);
 nCompl = 5;
 % define the number of samples used for the burn-in
 nSamples = 20*nCompl;
-% define the maximum number of parameter space samples
-% nModelEvalsMax = nSamples+50*(1/5)*nSamples;
-% define the number of ensemble members to use in the EnKF
-nMembers = 1;
 % specify if soda should visualize the results as they become available (requires X forwarding over ssh)
 doPlot = false;
 % specify how the parameter space is sampled ('stratified', 'stratified random'), useful for making imagescs of sensitivity
 sampleDrawMode = 'stratified';
+% start with a new optimization
 startFromUniform = true;
-drawInterval = 10;
-realPartOnly = true;
-saveInterval = 0; %dont' save for performance
-saveEnKFResults = false % not used in scemua but whatever
-
+saveInterval = 1; 
+saveEnKFResults = true 
 visualizationCall = 'mmsodaVisualization5';
+walltime = 30/3600/24;
 
 if doPlot
    figure
