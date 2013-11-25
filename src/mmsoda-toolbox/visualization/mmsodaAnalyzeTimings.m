@@ -10,6 +10,7 @@ bgColor = [0.12,0.18,0.24];
 showHost = true;
 showPID = true;
 showRank = true;
+timeUnits = 'min';
 
 startFrom = false;
 endAt = false;
@@ -25,7 +26,8 @@ authorizedOptions = {'bgColor',...
     'showPID',...
     'showRank',...
     'startFrom',...
-    'topLayerHeight'};
+    'topLayerHeight',...
+    'timeUnits'};
 
 
 mmsodaParsePairs()
@@ -75,6 +77,18 @@ IdontSeeTheTimingFiles = true;
 
 yTickLabels = {};
 
+switch timeUnits
+    case 's'
+        timeUnitFactor = 1;
+    case 'min'
+        timeUnitFactor = 1/60;        
+    case 'h'
+        timeUnitFactor = 1/3600;
+    otherwise
+        timeUnitFactor = 1;
+end
+
+
 for iItem = 1:nItems
     
     fname = d(iItem).name;
@@ -101,8 +115,8 @@ for iItem = 1:nItems
                         end
                     end
                     
-                    xStart = timing.timer(indexFrom);
-                    xEnd = timing.timer(indexTo);
+                    xStart = timing.timer(indexFrom) * timeUnitFactor;
+                    xEnd = timing.timer(indexTo) * timeUnitFactor;
                     
                     halfBandHeight = events{iEvent,4};
                     eventStyle = events(iEvent,5);
@@ -140,10 +154,10 @@ end
 
 xlims = get(gca,'xlim');
 if startFrom
-    xlims(1) = startFrom;
+    xlims(1) = startFrom * timeUnitFactor;
 end
 if endAt
-    xlims(2) = endAt;
+    xlims(2) = endAt * timeUnitFactor;
 end
 set(gca,'xlim',xlims,...
         'ylim',[mpiRankMin-0.5,mpiRankMax+0.5],...
@@ -156,7 +170,7 @@ for iEvent=1:nEvents
     end
     
 end
-xlabel('time since reference [s]')
+xlabel(['time since reference [',timeUnits,']'])
 
 if showLegend
     drawLegend(h2,events,eventOccurred)
