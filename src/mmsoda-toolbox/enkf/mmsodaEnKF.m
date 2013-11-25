@@ -429,16 +429,16 @@ if conf.saveEnKFResults
         soMoStr = '-mo';
     else
     end
-
+    
     fname = fullfile('results',[conf.modeStr,soMoStr,sprintf('-results-enkf-evals-%d-%d.mat',...
-                        parsets(1,evalCol),parsets(nParSets,evalCol))]);
-
+        parsets(1,evalCol),parsets(nParSets,evalCol))]);
+    
     if strcmp(conf.modeStr,'scemua')
-
+        
         save(fname,'-mat','parsets','modelOutputs')
         
     elseif strcmp(conf.modeStr,'reset') || strcmp(conf.modeStr,'soda')
-
+        
         save(fname,'-mat','parsets','stateValuesKFPrior',...
             'stateValuesKFPert','stateValuesKFPost','stateValuesKFInn',...
             'stochForce','obsPerturbations','obsPerturbed','valuesNOKF')
