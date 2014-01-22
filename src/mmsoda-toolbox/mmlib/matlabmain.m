@@ -1,6 +1,6 @@
 function matlabmain(verbosity,savetimings)
 
-% % 
+% 
 
 % % LICENSE START
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
@@ -57,10 +57,10 @@ if mpirank == 0
 
     % run the MPI server in a while loop as process with mpirank 0
     try
-        runmpirank1
+        runmpirank0
     catch err
         
-        disp(['MPIRANK=',num2str(mpirank),' says: ',datestr(now,21),' //  An error occurred.'])
+        disp(['MPIRANK = ',sprintf('% 3d',mpirank),' says: ',datestr(now,21),' //  An error occurred.'])
         
         for iWorker=1:mpisize
             sendvar(iWorker,'die');
@@ -84,3 +84,6 @@ if savetimings == 1
     timing = evalin('base','timing');
     save(fn,'timing');
 end
+
+
+
