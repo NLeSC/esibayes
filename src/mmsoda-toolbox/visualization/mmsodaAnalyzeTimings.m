@@ -153,10 +153,10 @@ end
 
 
 xlims = get(gca,'xlim');
-if startFrom
+if isnumeric(startFrom)
     xlims(1) = startFrom * timeUnitFactor;
 end
-if endAt
+if isnumeric(endAt)
     xlims(2) = endAt * timeUnitFactor;
 end
 set(gca,'xlim',xlims,...
