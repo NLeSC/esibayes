@@ -85,5 +85,11 @@ if savetimings == 1
     save(fn,'timing');
 end
 
-movefile('results',['results',getenv('PBS_O_JOBID')]);
+
+
+if mpirank==0 && conf.archiveResults
+    tmp = textscan(getenv('PBS_JOBID'),'%[^.]');
+    jobidStr = tmp{1}{1};
+    copyfile('results',['results',jobidStr]);
+end
 
