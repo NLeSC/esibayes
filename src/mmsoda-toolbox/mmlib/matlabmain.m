@@ -32,6 +32,11 @@ if ~(exist('mpisize','var')==1)
     whoami()
 end
 
+tmp = textscan(getenv('PBS_JOBID'),'%[^.]');
+jobidStr = tmp{1}{1};
+clear tmp
+
+timing.jobidStr = jobidStr;
 timing.mpirank = mpirank;
 timing.code(1) = uint8(0);
 timing.timer(1) = double(0);
@@ -87,9 +92,7 @@ end
 
 
 
-if mpirank==0 && conf.archiveResults
-    tmp = textscan(getenv('PBS_JOBID'),'%[^.]');
-    jobidStr = tmp{1}{1};
-    copyfile('results',['results',jobidStr]);
-end
+% if mpirank==0 && conf.archiveResults
+%     copyfile('results',['results',jobidStr]);
+% end
 
