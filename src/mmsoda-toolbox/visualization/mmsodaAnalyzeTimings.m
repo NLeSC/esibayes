@@ -98,6 +98,14 @@ for iItem = 1:nItems
         
         load(fullfile(timingsDirectory,fname),'timing');
         
+        if exist('jobidStr','var')~=1
+            jobidStr = timing.jobidStr;
+        else
+            if ~strcmp(jobidStr,timing.jobidStr)
+               warning(['It looks like you have the timing results from different PBS jobs (',fname,').'])
+            end
+        end
+        
         mpiRankMin = min([mpiRankMin,timing.mpirank]);
         mpiRankMax = max([mpiRankMax,timing.mpirank]);
         
@@ -141,7 +149,7 @@ for iItem = 1:nItems
         if ~any(eventOccurred)
             str = [str,' no events']
         end
-        yTickLabels{end+1} = str;
+        yTickLabels{timing.mpirank} = str;
 
     end
     
@@ -173,7 +181,7 @@ end
 xlabel(['time since reference [',timeUnits,']'])
 
 if showLegend
-    drawLegend(h2,events,eventOccurred)
+    drawLegend(h2,events,eventOccurred,jobidStr)
 end
 
 
@@ -198,7 +206,7 @@ set(h,patchProps{1}{:});
 
 
 
-function drawLegend(h,events,eventOccurred)
+function drawLegend(h,events,eventOccurred,jobidStr)
 
 axes(h)
 hold on
@@ -228,9 +236,12 @@ for iEvent = 1:nEvents
     
 end
 
+
+text(0.25,1.5,['PBS_JOBID = ',jobidStr],'Interpreter','none',...
+                  'horizontalalignment','center',...
+                  'verticalalignment','middle')
+
 hold off
-
-
 
 disp('Started reading the timings files...Done')
 
