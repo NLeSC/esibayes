@@ -429,7 +429,6 @@ elseif isempty(varargin)
             end
 
 
-
             if mod(iGeneration,conf.saveInterval)==0
 
                 save(['./results/',conf.modeStr,soMoStr,'-tempstate.mat'],'-mat',...
@@ -437,6 +436,13 @@ elseif isempty(varargin)
 
             end %  mod(iGeneration,...
 
+            if conf.executeInParallel
+                if conf.archiveResults
+                    tmp = textscan(getenv('PBS_JOBID'),'%[^.]');
+                    jobidStr = tmp{1}{1};
+                    copyfile('results',['results',jobidStr]);
+                end
+            end
 
         end % mmsodaContinue(conf,nModelEvals)
 
