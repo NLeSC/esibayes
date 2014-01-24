@@ -40,6 +40,18 @@ end
 switch bundle(1).type
     % a bundle of tasks has to be of the same type for this to work:
     case 'model'
+        
+        % add time stamp for analysis later when running in parallel compiled mode
+        if evalin('base','savetimings') & conf.executeInParallel 
+            
+            timing = evalin('base','timing');
+            timing.code(end + 1) = uint8(66);
+            timing.timer(end + 1) = toc(timing.starttime);
+            timing.counter = timing.counter + 1;
+            assignin('base','timing',timing);
+
+        end
+        
         for iTask=1:nTasks
             
             parVec = bundle(iTask).parVec;
@@ -79,7 +91,32 @@ switch bundle(1).type
             end
         end % for iTask
         
+        % add time stamp for analysis later when running in parallel compiled mode
+        if evalin('base','savetimings') & conf.executeInParallel
+            
+            timing = evalin('base','timing');
+            timing.code(end + 1) = uint8(77);
+            timing.timer(end + 1) = toc(timing.starttime);
+            timing.counter = timing.counter + 1;
+            assignin('base','timing',timing);
+
+        end
+        
+        
     case 'objective'
+        
+        % add time stamp for analysis later when running in parallel compiled mode
+        if evalin('base','savetimings') & conf.executeInParallel
+            
+            timing = evalin('base','timing');
+            timing.code(end + 1) = uint8(88);
+            timing.timer(end + 1) = toc(timing.starttime);
+            timing.counter = timing.counter + 1;
+            assignin('base','timing',timing);
+
+        end
+        
+        
         for iTask=1:nTasks
             
             if strcmp(conf.modeStr,'bypass')
@@ -104,6 +141,20 @@ switch bundle(1).type
             else
             end
         end
+        
+        
+        % add time stamp for analysis later when running in parallel compiled mode
+        if evalin('base','savetimings') & conf.executeInParallel
+            
+            timing = evalin('base','timing');
+            timing.code(end + 1) = uint8(99);
+            timing.timer(end + 1) = toc(timing.starttime);
+            timing.counter = timing.counter + 1;
+            assignin('base','timing',timing);
+
+        end
+        
+        
     otherwise
         % do nothing
 end
