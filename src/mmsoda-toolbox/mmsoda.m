@@ -199,8 +199,6 @@ else
     conf = orderfields(conf);
     saveList = sort(saveList);
 
-    save('./results/conf-out.mat','-struct','conf',saveList{:})
-
     if ~conf.parameterSamplesAreGiven
         % check if there are any results in ./results that are inconsistent with
         % the current configuration:
@@ -214,7 +212,6 @@ else
     clear authorizedFieldNames
     clear iVar
     clear nVars
-    clear saveList
     clear varName
     clear varList
 
@@ -228,6 +225,7 @@ else
         'mmmm dd, yyyy'),' ',datestr(conf.optStartTime,'HH:MM:SS')])
     clear s
 
+    
     % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
     % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
     % % % % % %                                             % % % % % %
@@ -241,7 +239,10 @@ else
         load('./data/parameter-samples.mat')
         
         conf.nSamples = size(samples,1);
+        conf.nModelEvalsMax = conf.nSamples;
         
+        save('./results/conf-out.mat','-struct','conf',saveList{:})
+
         evalResults = repmat(NaN,[conf.nSamples,conf.objCol]);
         evalResults(:,conf.evalCol) = (1:conf.nSamples)';
         evalResults(:,conf.parCols) = samples;
@@ -249,15 +250,16 @@ else
         if conf.isMultiObjective
             evalResults(:,conf.paretoCol) = -mmsodaCalcPareto(evalResults(:,conf.llCols),conf.paretoMethod);
         end
-        
         varargout{1} = evalResults;
-        varargout{2} = conf;
+        varargout{5} = conf;
         
         return
 
-
     end
 
+    save('./results/conf-out.mat','-struct','conf',saveList{:})
+
+    
     if conf.startFromUniform
 
         switch conf.sampleDrawMode
@@ -320,14 +322,6 @@ else
         if conf.verboseOutput
             disp([upper(conf.modeStr),' run continues at ',num2str(nModelEvals+1), ' model evaluations.'])
         end
-
-
-%         % temporarily reset the value of 'conf.startFromUniform' in
-%         % order to invoke an additional test in 'check_input_integrity'
-%         conf.startFromUniform = true;
-%         check_input_integrity(conf,nargout)
-%         % restore the old value
-%         conf.startFromUniform = false;
 
     end
     conf = orderfields(conf);
@@ -458,9 +452,15 @@ else
 
             if conf.executeInParallel
                 if conf.archiveResults
-                    tmp = textscan(getenv('PBS_JOBID'),'%[^.]');
-                    jobidStr = tmp{1}{1};
-                    copyfile('results',['results',jobidStr]);
+                    
+                    envStr = getenv('PBS_JOBID');
+                    if ~isempty(envStr)
+                        tmp = textscan(envStr,'%[^.]');
+                        jobidStr = tmp{1}{1};
+                        clear tmp
+                        copyfile('results',['results',jobidStr]);
+                    end
+                    clear envStr
                 end
             end
 

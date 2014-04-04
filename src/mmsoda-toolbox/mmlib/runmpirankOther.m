@@ -30,7 +30,7 @@ constantsFile = './data/constants.mat';
 if isdeployed
     conf = bcastvar(0,0);
 else
-    % this scripts is called by runmpirankOtherFun, conf variable exists
+    % this script is called by runmpirankOtherFun, conf variable exists
 end
 
 if exist(constantsFile,'file')==2
@@ -79,7 +79,11 @@ if conf.executeInParallel
         end % if
         
         if savetimings == 1
-            fn=sprintf([getenv('PBS_O_WORKDIR'),'/results/timing_%03d.mat'],mpirank);
+            envStr = getenv('PBS_O_WORKDIR');
+            if ~isempty(envStr) && ~strcmp(envStr(end),filesep)
+                envStr = [envStr,filesep];
+            end
+            fn = sprintf([envStr,'results/timing_%03d.mat'],mpirank);
             if exist(fn,'file')==2
                 d=dir(fn);
                 

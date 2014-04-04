@@ -28,4 +28,3 @@
 [evalResults,critGelRub,sequences,metropolisRejects,conf] = mmsoda();
 
 
-

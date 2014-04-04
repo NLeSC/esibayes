@@ -25,6 +25,109 @@ function matlabmain(verbosity,savetimings)
 % % LICENSE END
 
 
+% assignin('base','verbosity',verbosity);
+% assignin('base','savetimings',savetimings);
+% 
+% if ~(exist('mpisize','var')==1)
+%     whoami()
+% end
+% 
+% 
+% envStr = getenv('PBS_JOBID');
+% if ~isempty(envStr)
+%     tmp = textscan(envStr,'%[^.]');
+%     jobidStr = tmp{1}{1};
+%     clear tmp
+% else
+%     jobidStr = '';
+% end
+% clear envStr
+% 
+% timing.jobidStr = jobidStr;
+% timing.mpirank = mpirank;
+% timing.code(1) = uint8(0);
+% timing.timer(1) = double(0);
+% timing.counter = uint32(0);
+% timing.starttime = tic;
+% 
+% % from "http://stackoverflow.com/questions/12661862/converting-epoch-to-date-in-matlab"
+% time_unix = timing.starttime;
+% time_reference = datenum('1970', 'yyyy');
+% time_matlab = time_reference + double(time_unix) / 8.64e7/1e3;
+% time_matlab_string = datestr(time_matlab, 'mmm dd, yyyy HH:MM:SS.FFF');
+% timing.starttimeStr = time_matlab_string;
+% 
+% [~,s] = system('hostname');
+% timing.host = s(1:end-1);
+% 
+% % returned wrong PID! This is the right way (undocumented matlab)
+% timing.pid = num2str(feature('GetPid'));
+% 
+% assignin('base','timing',timing);
+% 
+% 
+% if savetimings == 1
+%     
+%     envStr = getenv('PBS_O_WORKDIR');
+%     if ~isempty(envStr) && ~strcmp(envStr(end),filesep)
+%         envStr = [envStr,filesep];
+%     end
+% 
+%     fn=sprintf([envStr,'results/timing_%03d.mat'],mpirank);
+%     timing = evalin('base','timing');
+%     save(fn,'timing');
+% end
+% 
+% 
+% 
+% 
+% if mpirank == 0
+% 
+%     % run the MPI server in a while loop as process with mpirank 0
+%     try
+%         runmpirank0
+%         
+%     catch err
+%         
+%         disp(['MPIRANK = ',sprintf('% 3d',mpirank),' says: ',datestr(now,21),' //  An error occurred.'])
+% 
+%         for iWorker=1:mpisize
+%             sendvar(iWorker,'die');
+%         end
+%         pause(10)
+% 
+%         rethrow(err)
+%         
+%     end
+% 
+%     for iWorker=1:mpisize
+%         sendvar(iWorker,'die');
+%     end
+%     pause(10)
+% 
+% else
+% 
+%     % all others are task-receiving processes
+%     runmpirankOther
+% 
+% end
+% 
+% 
+% mpirank
+% 
+% if savetimings == 1
+%     
+%     envStr = getenv('PBS_O_WORKDIR');
+%     if ~isempty(envStr) && ~strcmp(envStr(end),filesep)
+%         envStr = [envStr,filesep];
+%     end
+% 
+%     fn=sprintf([envStr,'results/timing_%03d.mat'],mpirank);
+%     timing = evalin('base','timing');
+%     save(fn,'timing');
+% end
+
+
 assignin('base','verbosity',verbosity);
 assignin('base','savetimings',savetimings);
 
@@ -32,9 +135,15 @@ if ~(exist('mpisize','var')==1)
     whoami()
 end
 
-tmp = textscan(getenv('PBS_JOBID'),'%[^.]');
-jobidStr = tmp{1}{1};
-clear tmp
+envStr = getenv('PBS_JOBID');
+if ~isempty(envStr)
+    tmp = textscan(envStr,'%[^.]');
+    jobidStr = tmp{1}{1};
+    clear tmp
+else
+    jobidStr = '';
+end
+clear envStr
 
 timing.jobidStr = jobidStr;
 timing.mpirank = mpirank;
@@ -61,19 +170,10 @@ assignin('base','timing',timing);
 if mpirank == 0
 
     % run the MPI server in a while loop as process with mpirank 0
-    try
-        runmpirank0
-    catch err
-        
-        disp(['MPIRANK = ',sprintf('% 3d',mpirank),' says: ',datestr(now,21),' //  An error occurred.'])
-        
-        for iWorker=1:mpisize
-            sendvar(iWorker,'die');
-        end
-        pause(10)
-        
-        rethrow(err)
-        
+    runmpirank0
+
+    for iWorker=1:(mpisize-1)
+        sendvar(iWorker,'die')
     end
 
 else
@@ -85,14 +185,13 @@ end
 
 
 if savetimings == 1
-    fn=sprintf([getenv('PBS_O_WORKDIR'),'/results/timing_%03d.mat'],mpirank);
+    str = getenv('PBS_O_WORKDIR');
+    if ~isempty(str) && ~strcmp(str(end),filesep)
+        str = [str,filesep];
+    end
+    fn = sprintf([str,'results/timing_%03d.mat'],mpirank);
     timing = evalin('base','timing');
     save(fn,'timing');
 end
 
-
-
-% if mpirank==0 && conf.archiveResults
-%     copyfile('results',['results',jobidStr]);
-% end
 
