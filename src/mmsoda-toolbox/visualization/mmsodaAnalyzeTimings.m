@@ -98,6 +98,10 @@ for iItem = 1:nItems
 
         IdontSeeTheTimingFiles = false;
         
+
+        if d(iItem).bytes == 0
+            continue
+        end
         load(fullfile(timingsDirectory,fname),'timing');
         
         if exist('jobidStr','var')~=1
@@ -149,7 +153,7 @@ for iItem = 1:nItems
             str = [str,' PID=',timing.pid];
         end
         if ~any(eventOccurred)
-            str = [str,' no events']
+            str = [str,' no events'];
         end
         yTickLabels{timing.mpirank+1} = str;
 
