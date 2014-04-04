@@ -115,13 +115,12 @@ for iFile = 3:nFiles
 
    end
 
-
-   if ~strcmp(conf.modeStr,modeStr{1})
+   if exist('modeStr','var')==1 && ~strcmp(conf.modeStr,modeStr{1})
        disp(['''conf.modeStr'' inconsistent with existing files (',char(39),fn,char(39),')'])
        throwErr = true;
        break
    end
-   if conf.isSingleObjective && ~strcmp(soMoStr{1},'so')
+   if exist('soMoStr','var')==1 && conf.isSingleObjective && ~strcmp(soMoStr{1},'so')
        disp(['''conf.isSingleObjective'' is true---inconsistent with existing files (',char(39),fn,char(39),')'])
        throwErr = true;
        break
