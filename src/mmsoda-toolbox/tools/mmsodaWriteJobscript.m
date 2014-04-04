@@ -340,14 +340,56 @@ if ~runAsShellScript && runThroughQSub
     clear a2
 
     a3 = ask(q3,'replyMustBeStr',true,'assumeValid',true);
-    wallTimeStr = a3;
+    if ~isempty(strfind(a3,':'))
+        if numel(a3)==8
+            wallTimeStr = a3;
+        elseif numel(a3)==5
+            wallTimeStr = ['00:',a3];
+        else
+            error('Unknown time format.')
+        end
+    else
+        a3 = strrep(a3,'d','d,');
+        a3 = strrep(a3,'h','h,');
+        a3 = strrep(a3,'m','m,');
+        a3 = strrep(a3,'s','s,');        
+        nums = textscan(a3,'%u16%c','Delimiter',',');
+        if numel(nums{1})~=numel(nums{2})
+            error('Unknown time format.')
+        end
+        
+        nums4 = zeros(4,1);
+        nums4Str = 'dhms';
+        for iNum4=1:4
+            ix = find(nums{2}==nums4Str(iNum4));
+            if numel(ix)==1
+                nums4(iNum4,1) = nums{1}(ix);
+            elseif numel(ix)>1
+                error('Unknown number format.')
+            else
+            end
+        end
+        nHours = nums4(1,1)*24 + nums4(2,1);
+        nMinutes = nums4(3,1);
+        nSeconds = nums4(4,1);
+        
+        wallTimeStr = sprintf('%d:%02d:%02d',nHours,nMinutes,nSeconds);
+        
+    end
     clear q3
     clear a3
+    clear nums
+    clear iNum4
+    clear ix
+    clear nums4
+    clear nHours
+    clear nMinutes
+    clear nSeconds
 
     pbsHeaderStr = sprintf(['#!/bin/bash',char(10),...
                    '#',char(10),...
-                   '#PBS -lwalltime=%s',char(10),...
-                   '#PBS -lnodes=%d',char(10),...
+                   '#PBS -l walltime=%s',char(10),...
+                   '#PBS -l nodes=%d',char(10),...
                    '#PBS -o results/',char(10),...
                    '#PBS -e results/' ,char(10)],wallTimeStr,nNodes);
 

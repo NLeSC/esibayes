@@ -45,7 +45,9 @@ events = { 1, 2,'receivevar\n(receivevar.c)',    bottomLayerHeight/2,{'FaceColor
           31,32,'SerializeVar\n(sendvar.c)',     topLayerHeight/2,{'FaceColor',blue,'EdgeColor',blue};...
           33,34,'MPI_Send\n(sendvar.c)',         topLayerHeight/2,{'FaceColor',lightgray,'EdgeColor',lightgray};...
           35,36,'MPI_Recv\n(receivevar.c)',      topLayerHeight/2,{'FaceColor',lime,'EdgeColor',lime};...
-          37,38,'DeserializeVar\n(receivevar.c)',topLayerHeight/2,{'FaceColor',cyan,'EdgeColor',cyan}};  
+          37,38,'DeserializeVar\n(receivevar.c)',topLayerHeight/2,{'FaceColor',cyan,'EdgeColor',cyan};...
+          66,77,'model time',bottomLayerHeight/2,{'FaceColor',[0.5,0,0.5],'EdgeColor',[0.5,0,0.5]};...
+          88,99,'objective function',bottomLayerHeight/2,{'FaceColor',[0.5,0.5,1],'EdgeColor',[0.5,0.5,1]}};  
 
 
 timingsDirectory = 'results';
@@ -98,6 +100,14 @@ for iItem = 1:nItems
         
         load(fullfile(timingsDirectory,fname),'timing');
         
+        if exist('jobidStr','var')~=1
+            jobidStr = timing.jobidStr;
+        else
+            if ~strcmp(jobidStr,timing.jobidStr)
+               warning(['It looks like you have the timing results from different PBS jobs (',fname,').'])
+            end
+        end
+        
         mpiRankMin = min([mpiRankMin,timing.mpirank]);
         mpiRankMax = max([mpiRankMax,timing.mpirank]);
         
@@ -141,7 +151,7 @@ for iItem = 1:nItems
         if ~any(eventOccurred)
             str = [str,' no events']
         end
-        yTickLabels{end+1} = str;
+        yTickLabels{timing.mpirank+1} = str;
 
     end
     
@@ -153,10 +163,10 @@ end
 
 
 xlims = get(gca,'xlim');
-if startFrom
+if isnumeric(startFrom)
     xlims(1) = startFrom * timeUnitFactor;
 end
-if endAt
+if isnumeric(endAt)
     xlims(2) = endAt * timeUnitFactor;
 end
 set(gca,'xlim',xlims,...
@@ -173,7 +183,7 @@ end
 xlabel(['time since reference [',timeUnits,']'])
 
 if showLegend
-    drawLegend(h2,events,eventOccurred)
+    drawLegend(h2,events,eventOccurred,jobidStr)
 end
 
 
@@ -198,12 +208,12 @@ set(h,patchProps{1}{:});
 
 
 
-function drawLegend(h,events,eventOccurred)
+function drawLegend(h,events,eventOccurred,jobidStr)
 
 axes(h)
 hold on
 nEvents = size(events,1);
-nCols = 3;
+nCols = 4;
 
 set(gca,'xlim',[0,nCols+1],'ydir','reverse')
 
@@ -212,7 +222,9 @@ M = [1,2,1;...
      3,1,2;...
      4,1,3,;...
      5,2,2,;...
-     6,2,3];
+     6,2,3;...
+     7,1,4;...
+     8,2,4];
 
 for iEvent = 1:nEvents
 
@@ -228,9 +240,12 @@ for iEvent = 1:nEvents
     
 end
 
+
+text(0.25,1.5,['PBS_JOBID = ',jobidStr],'Interpreter','none',...
+                  'horizontalalignment','center',...
+                  'verticalalignment','middle')
+
 hold off
-
-
 
 disp('Started reading the timings files...Done')
 
