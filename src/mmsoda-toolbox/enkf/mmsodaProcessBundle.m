@@ -29,9 +29,6 @@ function bundle = mmsodaProcessBundle(conf,constants,bundle)
 
 
 nTasks = numel(bundle);
-nStatesKF = conf.nStatesKF;
-nNOKF = conf.nNOKF;
-nDASteps = conf.nDASteps;
 
 if strcmp(conf.modeStr,'scemua')
     nOutputs = conf.nOutputs;
@@ -69,12 +66,12 @@ switch bundle(1).type
                 if ~isequal(size(modelOutput),[conf.nStatesKF + conf.nNOKF,nPrior])
                     error('Model output argument ''modelOutput'' has unexpected size.')
                 end
-                if ~all(isnan(modelOutput(1:nStatesKF,1)))
+                if ~all(isnan(modelOutput(1:conf.nStatesKF,1)))
                     error(['MMSODA expects modelOutput(1:nStatesKF,1) to be NaN.',char(10),'Please adapt ',...
                         char(39),'./model/',conf.modelName,'.m',char(39),' accordingly.'])
                 end
-                bundle(iTask).stateValuesKFPrior(1:nStatesKF,1:nPrior) = modelOutput(1:nStatesKF,1:nPrior);
-                bundle(iTask).valuesNOKF(1:nNOKF,1:nPrior) = modelOutput(nStatesKF+(1:nNOKF),1:nPrior);
+                bundle(iTask).stateValuesKFPrior(1:conf.nStatesKF,1:nPrior) = modelOutput(1:conf.nStatesKF,1:nPrior);
+                bundle(iTask).valuesNOKF(1:conf.nNOKF,1:nPrior) = modelOutput(conf.nStatesKF+(1:conf.nNOKF),1:nPrior);
             else
             end
         end % for iTask
@@ -82,7 +79,7 @@ switch bundle(1).type
     case 'objective'
         for iTask=1:nTasks
             
-            if strcmp(conf.modeStr,'bypass')
+            if strcmp(conf.modeStr,'bypass') || strcmp(conf.modeStr,'bypass-noopt')
                 modelOutputs = [];
             elseif strcmp(conf.modeStr,'scemua')
                 modelOutputs = bundle(iTask).modelOutputs;

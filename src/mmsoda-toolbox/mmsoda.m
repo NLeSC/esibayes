@@ -51,7 +51,7 @@ function varargout = mmsoda(varargin)
 
 
 
-if nargin ==0 && nargout ==0
+if nargin == 0 && nargout == 0
     mmsoda --help
     return
 end
@@ -60,7 +60,7 @@ if ~isempty(varargin) && ischar(varargin{1})
 
     mmsodaInitialize(varargin)
 
-elseif isempty(varargin)
+else
 
     % display disclaimer:
     disp_disclaimer
@@ -137,15 +137,13 @@ elseif isempty(varargin)
     conf = check_input_integrity(conf,nargout);
     checkIfFoldersExist();
 
-    % number of samples per complex:
-    conf.nSamplesPerCompl = conf.nSamples/conf.nCompl;
+    if ~conf.parameterSamplesAreGiven
+        % number of samples per complex:
+        conf.nSamplesPerCompl = conf.nSamples/conf.nCompl;
 
-    %number of offspring per complex:
-    conf.nOffspringPerCompl = conf.nOffspring/conf.nCompl;
-
-    % Calculate the parameters in the exponential power density function:
-%     [conf.cBeta,conf.omegaBeta] = mmsodaCalcCbWb(conf);
-
+        %number of offspring per complex:
+        conf.nOffspringPerCompl = conf.nOffspring/conf.nCompl;
+    end
 
     % Indicate the meaning of each column in 'evalResults':
     if conf.isSingleObjective
@@ -203,10 +201,11 @@ elseif isempty(varargin)
 
     save('./results/conf-out.mat','-struct','conf',saveList{:})
 
-    % check if there are any results in ./result that are inconsistent with
-    % the current configuration:
-    mmsodaCheckForOldResults(conf);
-
+    if ~conf.parameterSamplesAreGiven
+        % check if there are any results in ./results that are inconsistent with
+        % the current configuration:
+        mmsodaCheckForOldResults(conf);
+    end
 
     if conf.executeInParallel
         bcastvar(0,conf);
@@ -237,6 +236,27 @@ elseif isempty(varargin)
     % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
     % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
+    if conf.parameterSamplesAreGiven
+
+        load('./data/parameter-samples.mat')
+        
+        conf.nSamples = size(samples,1);
+        
+        evalResults = repmat(NaN,[conf.nSamples,conf.objCol]);
+        evalResults(:,conf.evalCol) = (1:conf.nSamples)';
+        evalResults(:,conf.parCols) = samples;
+        evalResults(:,conf.llCols) = mmsodaCalcObjScore(conf,evalResults);
+        if conf.isMultiObjective
+            evalResults(:,conf.paretoCol) = -mmsodaCalcPareto(evalResults(:,conf.llCols),conf.paretoMethod);
+        end
+        
+        varargout{1} = evalResults;
+        varargout{2} = conf;
+        
+        return
+
+
+    end
 
     if conf.startFromUniform
 
@@ -555,10 +575,6 @@ elseif all(nOut>[2:5])
         '[evalResults,critGelRub,sequences,metropolisRejects,conf] = mmsoda()',char(10)])
 end
 
-
-% % These parameters can be derived from the existing settings:
-% Number of parameters to be optimized:
-
 if any(strcmp(conf.modeStr,{'soda','reset'}))
     conf.nStatesKF = numel(conf.stateNamesKF);
     if ~isfield(conf,'namesNOKF')
@@ -582,7 +598,7 @@ elseif strcmp(conf.modeStr,'scemua')
     if ~isfield(conf,'assimilate')
         conf.assimilate = repmat(false,[1,conf.nPrior]);
     end
-elseif strcmp(conf.modeStr,'bypass')
+elseif strcmp(conf.modeStr,'bypass') || strcmp(conf.modeStr,'bypass-noopt')
     conf.nStatesKF = 0;
     conf.nNOKF = 0;
     conf.nDASteps = 0;
@@ -591,65 +607,72 @@ else
     % do nothing
 end
 
-if strcmp(conf.modeStr,'scemua') & ~isfield(conf,'nOutputs')
+if strcmp(conf.modeStr(end-3:end),'oopt')
+    conf.parameterSamplesAreGiven = true;
+else
+    conf.parameterSamplesAreGiven = false;
+end
+
+if strcmp(conf.modeStr,'scemua') && ~isfield(conf,'nOutputs')
     error('When ''modeStr'' is ''scemua'', there needs to be a configuration variable ''nOutputs''.')
 end
 
-if conf.nCompl<2
+if ~conf.parameterSamplesAreGiven && conf.nCompl<2
     error(['In order to determine the Gelman-Rubin convergence',10,...
         'criterion, at least 2 complexes should be used.'])
 end
 
-x = conf.nSamples/conf.nCompl;
-if round(x)~=x
-    error(['Unable to uniformly distribute number of samples (',...
-        num2str(conf.nSamples),') over the given number ',10,...
-        'of complexes (',num2str(conf.nCompl),').'])
-elseif x<=0
-    error(['Variable ',39,'conf.nSamples',39,' must be larger than zero.'])
+if ~conf.parameterSamplesAreGiven
+    x = conf.nSamples/conf.nCompl;
+    if round(x)~=x
+        error(['Unable to uniformly distribute number of samples (',...
+            num2str(conf.nSamples),') over the given number ',10,...
+            'of complexes (',num2str(conf.nCompl),').'])
+    elseif x<=0
+        error(['Variable ',39,'conf.nSamples',39,' must be larger than zero.'])
+    end
+
+    x = conf.nOffspring/conf.nCompl;
+    if round(x)~=x
+        error(['Unable to uniformly distribute number of offspring (',...
+            num2str(conf.nOffspring),') over the given number ',10,...
+            'of complexes (',num2str(conf.nCompl),').'])
+    elseif x<=0
+        error(['Variable ',39,'conf.nOffspring',39,' must be larger than zero.'])
+    end
+    clear x
+
+    if conf.convUseLastFraction<=0
+        error(['Value of parameter ',39,'conf.convUseLastFraction',39,' should be larger than 0.'])
+    end
+
+    if conf.convUseLastFraction>1
+        error(['Value of parameter ',39,'conf.convUseLastFraction',39,' should be smaller than or equal to 1.'])
+    end
+
+    if mod((conf.nModelEvalsMax-conf.nSamples),conf.nOffspring)~=0
+
+        suggestedValue = conf.nSamples+ceil((conf.nModelEvalsMax-...
+            conf.nSamples)/conf.nOffspring)*conf.nOffspring;
+
+        error(['Generating ',char(39),'conf.nOffspring',char(39),...
+            ' (',num2str(conf.nOffspring),') descendants per ',...
+            'generation will not ',char(10),'yield exactly ',char(39),...
+            'conf.nModelEvalsMax',char(39),' (',...
+            num2str(conf.nModelEvalsMax),') model evaluations ',...
+            'for any',char(10),'integer number of generations, given ',...
+            'that ',char(39),'conf.nSamples',char(39),' equals ',...
+            num2str(conf.nSamples),'.',char(10),'Suggested value = ',num2str(suggestedValue),'.'])
+
+
+    end
+
+    if ~all(conf.parSpaceLoBound<conf.parSpaceHiBound)
+        error(['Parameter domain boundaries incorrectly specified. Check parameters ',...
+            char(39),'conf.parSpaceLoBound',char([39,10]),...
+            'and ',char(39),'conf.parSpaceHiBound',char(39),'.'])
+    end
 end
-
-x = conf.nOffspring/conf.nCompl;
-if round(x)~=x
-    error(['Unable to uniformly distribute number of offspring (',...
-        num2str(conf.nOffspring),') over the given number ',10,...
-        'of complexes (',num2str(conf.nCompl),').'])
-elseif x<=0
-    error(['Variable ',39,'conf.nOffspring',39,' must be larger than zero.'])
-end
-clear x
-
-if conf.convUseLastFraction<=0
-    error(['Value of parameter ',39,'conf.convUseLastFraction',39,' should be larger than 0.'])
-end
-
-if conf.convUseLastFraction>1
-    error(['Value of parameter ',39,'conf.convUseLastFraction',39,' should be smaller than or equal to 1.'])
-end
-
-if mod((conf.nModelEvalsMax-conf.nSamples),conf.nOffspring)~=0
-
-    suggestedValue = conf.nSamples+ceil((conf.nModelEvalsMax-...
-        conf.nSamples)/conf.nOffspring)*conf.nOffspring;
-
-    error(['Generating ',char(39),'conf.nOffspring',char(39),...
-        ' (',num2str(conf.nOffspring),') descendants per ',...
-        'generation will not ',char(10),'yield exactly ',char(39),...
-        'conf.nModelEvalsMax',char(39),' (',...
-        num2str(conf.nModelEvalsMax),') model evaluations ',...
-        'for any',char(10),'integer number of generations, given ',...
-        'that ',char(39),'conf.nSamples',char(39),' equals ',...
-        num2str(conf.nSamples),'.',char(10),'Suggested value = ',num2str(suggestedValue),'.'])
-
-
-end
-
-if ~all(conf.parSpaceLoBound<conf.parSpaceHiBound)
-    error(['Parameter domain boundaries incorrectly specified. Check parameters ',...
-        char(39),'conf.parSpaceLoBound',char([39,10]),...
-        'and ',char(39),'conf.parSpaceHiBound',char(39),'.'])
-end
-
 
 isSingleObjective = isfield(conf,'objCallStr');
 isMultiObjective = isfield(conf,'objCallStrs');
@@ -685,7 +708,7 @@ switch conf.modeStr
         rmFields = {};
     case 'reset'
         rmFields = {'errModelCallStr'};
-    case 'bypass'
+    case {'bypass','bypass-noopt'} 
         rmFields = {'assimilate';...
                     'covModelPert';...
                     'covObsPert';...
@@ -700,8 +723,37 @@ switch conf.modeStr
                     'stateNamesKF';...
                     'stateSpaceLoBound';...
                     'stateSpaceHiBound';};
+         if conf.parameterSamplesAreGiven
+             rmFields = [rmFields;...
+                     'nCompl';...
+                     'nOffspringFraction';...
+                     'nOffspring';...
+                     'jumpRate';...
+                     'critGelRubConvd';...
+                     'convUseLastFraction';... 
+                     'nGelRub';...
+                     'modeGelRub';...
+                     'convMaxDiff';...
+                     'thresholdL';...
+                     'startFromUniform';...
+                     'optEndTime';...
+                     'converged';...
+                     'randSeed';...
+                     'visualizationCall';...
+                     'verboseOutput';...
+                     'realPartOnly';...
+                     'saveInterval';...
+                     'sampleDrawMode';...
+                     'paretoMethod';...
+                     'parNamesTex';...
+                     'nStatesKF';...
+                     'nNOKF';...
+                       ];
+         end
     otherwise
 end
+
+
 for k=1:size(rmFields,1)
     if isfield(conf,rmFields{k,1})
         disp(['Removing field ',char(39),rmFields{k,1},char(39),' from conf.'])
@@ -711,7 +763,7 @@ end
 clear k
 clear rmFields
 
-if any(strcmp(conf.modeStr,{'bypass','reset','soda'}))
+if conf.parameterSamplesAreGiven && any(strcmp(conf.modeStr,{'bypass','reset','soda'}))
    if isfield(conf,'nOutputs')
        error(['Configuration variable ''nOutputs'' is not allowed in ',char(39),conf.modeStr,char(39),' mode.'])
    end
@@ -727,7 +779,7 @@ end
 clear mustBeCellOfStr;
 clear k;
 
-if strncmp(conf.modeStr,'soda',4) && ~all(conf.stateSpaceLoBound<conf.stateSpaceHiBound)
+if conf.parameterSamplesAreGiven && strncmp(conf.modeStr,'soda',4) && ~all(conf.stateSpaceLoBound<conf.stateSpaceHiBound)
     error(['State domain boundaries incorrectly specified. Check parameters ',...
         char(39),'conf.stateSpaceLoBound',char([39,10]),...
         'and ',char(39),'conf.stateSpaceHiBound',char(39),'.'])
@@ -744,6 +796,8 @@ switch conf.modeStr
     case {'soda','reset'}
         shouldBeRowList = {'parNames','parSpaceLoBound','parSpaceHiBound','stateNamesKF',...
         'stateNamesNOKF','stateSpaceLoBound','stateSpaceHiBound'};
+    case {'bypass-noopt'}
+        shouldBeRowList = {'parNames'};
 end
 for k=1:numel(shouldBeRowList)
     if isfield(conf,shouldBeRowList{k})
@@ -756,12 +810,7 @@ for k=1:numel(shouldBeRowList)
 end
 clear shouldBeRowList TMP k
 
-% if any(strcmp(conf.modeStr,{'soda','reset'}))
-%     if ~isequal(size(conf.obsState),[conf.nStatesKF,conf.nPrior])%~(isvector(conf.obsState) && isrow(conf.obsState))
-%         error('conf.obsState should be of size [conf.nStatesKF,conf.nPrior].')
-%     end
-% end
-if any(strcmp(conf.modeStr,{'soda','reset'}))
+if conf.parameterSamplesAreGiven && any(strcmp(conf.modeStr,{'soda','reset'}))
     if ~isequal(size(conf.obsState),[conf.nStatesKF,conf.nDASteps])
         error('conf.obsState should be of size [conf.nStatesKF,conf.nDASteps].')
     end
@@ -781,7 +830,7 @@ clear C
 
 
 switch conf.modeStr
-    case {'scemua','bypass'}
+    case {'scemua','bypass','bypass-noopt'}
         if ~isfield(conf,'nMembers')
             disp(['Setting value of ',char(39),'conf.nMembers',char(39),' to 1.'])
             conf.nMembers = 1;
@@ -851,7 +900,6 @@ switch conf.modeStr
         if size(conf.covModelPert,3) == 1
             conf.covModelPert = repmat(conf.covModelPert,[1,1,conf.nDASteps]);
         end
-
 end
 
 

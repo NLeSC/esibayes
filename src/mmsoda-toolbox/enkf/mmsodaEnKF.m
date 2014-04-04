@@ -45,7 +45,8 @@ emptyCellModelBundle = cell(ceil((nParSets*nMembers)/nWorkers),1);
 emptyCellObjectiveBundle = cell(ceil(nParSets/nWorkers),1);
 
 
-if strcmp(conf.modeStr,'bypass')
+if strcmp(conf.modeStr,'bypass') || strcmp(conf.modeStr,'bypass-noopt')
+   % do nothing
     
 elseif strcmp(conf.modeStr,'scemua')
 
