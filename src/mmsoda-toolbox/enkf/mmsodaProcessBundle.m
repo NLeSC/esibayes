@@ -39,7 +39,7 @@ switch bundle(1).type
     case 'model'
         
         % add time stamp for analysis later when running in parallel compiled mode
-        if evalin('base','savetimings') & conf.executeInParallel 
+        if conf.executeInParallel && evalin('base','savetimings')  
             
             timing = evalin('base','timing');
             timing.code(end + 1) = uint8(66);
@@ -89,7 +89,7 @@ switch bundle(1).type
         end % for iTask
         
         % add time stamp for analysis later when running in parallel compiled mode
-        if evalin('base','savetimings') & conf.executeInParallel
+        if conf.executeInParallel && evalin('base','savetimings') 
             
             timing = evalin('base','timing');
             timing.code(end + 1) = uint8(77);
@@ -103,7 +103,7 @@ switch bundle(1).type
     case 'objective'
         
         % add time stamp for analysis later when running in parallel compiled mode
-        if evalin('base','savetimings') & conf.executeInParallel
+        if conf.executeInParallel && evalin('base','savetimings')
             
             timing = evalin('base','timing');
             timing.code(end + 1) = uint8(88);
@@ -141,7 +141,7 @@ switch bundle(1).type
         
         
         % add time stamp for analysis later when running in parallel compiled mode
-        if evalin('base','savetimings') & conf.executeInParallel
+        if conf.executeInParallel && evalin('base','savetimings')
             
             timing = evalin('base','timing');
             timing.code(end + 1) = uint8(99);
