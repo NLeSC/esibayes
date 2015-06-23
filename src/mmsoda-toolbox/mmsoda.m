@@ -68,7 +68,7 @@ else
     try
         conf = load('./results/conf.mat');
     catch
-        error('I can''t find the *.mat file that holds the SODA configuration.')
+        error('I can''t find the *.mat file that holds the MMSODA configuration.')
     end
 
     if ~isdeployed
