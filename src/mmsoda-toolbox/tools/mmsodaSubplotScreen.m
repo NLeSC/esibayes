@@ -34,6 +34,14 @@ if nargin==0
 end
 
 
+if isempty(getenv('DISPLAY'))
+    disp('There is no display. Aborting visualization.')
+    if nargout==1
+        varargout = {};
+    end
+    return
+end
+
 screenRect = get(0,'screensize');
 
 f = 0.45;

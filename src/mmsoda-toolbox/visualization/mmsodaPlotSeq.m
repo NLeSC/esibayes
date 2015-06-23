@@ -26,6 +26,16 @@ function varargout = mmsodaPlotSeq(conf,sequences,metropolisRejects,varargin)
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % % LICENSE END
 
+if isempty(getenv('DISPLAY'))
+    disp('There is no display. Aborting visualization.')
+    if nargout==1
+        varargout{1} = {};
+        varargout{2} = {};
+    end
+    return
+end
+
+
 
 xLim = [1,max(max(sequences(:,conf.evalCol,:)))];
 xScale = repmat({'lin'},[conf.nOptPars,1]);

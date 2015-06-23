@@ -29,6 +29,15 @@ function varargout = mmsodaMatrixOfScatter(conf,typeStr,sequences,metropolisReje
 
 % dbstop at 268
 
+if isempty(getenv('DISPLAY'))
+    disp('There is no display. Aborting visualization.')
+    if nargout==1
+        varargout{1}={};
+    end
+    return
+end
+
+
 
 authorizedOptions = sort({'showRejects',...
                           'lightFactor',...

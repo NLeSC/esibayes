@@ -33,6 +33,13 @@ if nargin == 0
     return
 end
 
+if isempty(getenv('DISPLAY'))
+    disp('There is no display. Aborting visualization.')
+    return
+end
+
+
+
 % assign default options:
 histMode='absolute';
 nBins = min([50,round(conf.nSamples/5)]);

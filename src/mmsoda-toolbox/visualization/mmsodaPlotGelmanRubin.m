@@ -27,6 +27,12 @@ function mmsodaPlotGelmanRubin(conf,critGelRub,varargin)
 % % LICENSE END
 
 
+if isempty(getenv('DISPLAY'))
+    disp('There is no display. Aborting visualization.')
+    return
+end
+
+
 
 view = 'zoom';
 printToFile = false;
