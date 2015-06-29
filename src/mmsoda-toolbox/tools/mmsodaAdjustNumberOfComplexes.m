@@ -18,7 +18,7 @@ if isdeployed
             % get mpisize, mpirank
             [mpisize,mpirank] = whoami();
 
-            nComplIncrement = (mpisize - conf.nOffspring) / (conf.nOffspring/conf.nCompl);
+            nComplIncrement = max(0,(mpisize - conf.nOffspring) / (conf.nOffspring/conf.nCompl));
             
             conf.nCompl     = conf.nCompl + nComplIncrement;
             conf.nSamples   = conf.nCompl * nSamplesPerCompl;
