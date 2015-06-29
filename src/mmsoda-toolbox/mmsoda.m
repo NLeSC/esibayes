@@ -325,6 +325,11 @@ else
         end
         
         varargout{1} = 'blah';
+        varargout{2} = 'blah';
+        varargout{3} = 'blah';
+        varargout{4} = 'blah';
+        varargout{5} = 'blah';
+        
         return
         
         
