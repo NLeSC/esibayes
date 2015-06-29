@@ -45,7 +45,7 @@ nDefaultColors = size(defaultColors,1);
 
 if nSequences>nDefaultColors
     cVec = linspace(0.1,0.9,ceil((nSequences-nDefaultColors)^(1/3)));
-    extraColors = allcomb(cVec,cVec,cVec);
+    extraColors = mmsodaAllComb(cVec,cVec,cVec);
 else
     extraColors=[];
 end
