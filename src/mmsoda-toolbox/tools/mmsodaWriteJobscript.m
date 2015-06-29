@@ -392,8 +392,7 @@ if ~runAsShellScript && runThroughQSub
     clear nMinutes
     clear nSeconds
 
-    pbsHeaderStr = sprintf(['#!/bin/bash',char(10),...
-                   '#',char(10),...
+    pbsHeaderStr = sprintf([...
                    '#PBS -l walltime=%s',char(10),...
                    '#PBS -l select=%d',char(10),...
                    '#PBS -o results/',char(10),...
@@ -427,18 +426,18 @@ clear a1
 disp(['Writing ',char(39),filename,char(39),' to ',pwd])
 fid = fopen(filename,'wt');
 if runAsShellScript && ~runThroughQSub
-    usageStr = sprintf('\n#Use this script interactively on one of the login nodes by typing ./%s at the LISA prompt.\n\n\n',filename);
+    usageStr = sprintf('#!/bin/bash\n#Use this script interactively on one of the login nodes by typing ./%s at the LISA prompt.\n\n\n',filename);
     nChars = fprintf(fid,'%s',pbsHeaderStr,usageStr,sprintf(templateInteractiveOnLogin,nProcsStr,verbosity,saveTimingsStr));
     
 elseif runAsShellScript && runThroughQSub
     templateInteractiveQSub = templatePBS;
-    usageStr = sprintf('\n#Use this script interactively in a qsub session by typing ./%s at the LISA prompt.\n\n\n',filename);
+    usageStr = sprintf('#!/bin/bash\n#Use this script interactively in a qsub session by typing ./%s at the LISA prompt.\n\n\n',filename);
     nChars = fprintf(fid,'%s',pbsHeaderStr,usageStr,sprintf(templateInteractiveQSub,verbosity,saveTimingsStr));
     
 elseif ~runAsShellScript && runThroughQSub
-    usageStr = sprintf('\n#Submit this script using "qsub %s" at the LISA prompt.\n\n\n',filename);
+    pbsHeaderStr = [sprintf('#PBS -S /bin/bash\n'),pbsHeaderStr];
+    usageStr = sprintf('#Submit this script using "qsub %s" at the LISA prompt.\n\n\n',filename);
     nChars = fprintf(fid,'%s',pbsHeaderStr,usageStr,sprintf(templatePBS,verbosity,saveTimingsStr));
-    
 else
     
 end
