@@ -323,6 +323,8 @@ else
         catch
             
         end
+        
+        varargout{1} = 'blah';
         return
         
         
