@@ -194,7 +194,7 @@ else
     if conf.executeInParallel
         % specify the number of workers
         if ~(exist('mpisize','var')==1)
-            whoami()
+            [mpisize,mpirank] = whoami();
         end
         conf.nWorkers = mpisize-1;
     else

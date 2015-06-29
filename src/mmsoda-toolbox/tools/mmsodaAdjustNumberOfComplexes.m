@@ -16,7 +16,7 @@ if isdeployed
             nSamplesPerCompl = conf.nSamples / conf.nCompl;
             
             % get mpisize, mpirank
-            whoami
+            [mpisize,mpirank] = whoami();
 
             nComplIncrement = (mpisize - conf.nOffspring) / (conf.nOffspring/conf.nCompl);
             
