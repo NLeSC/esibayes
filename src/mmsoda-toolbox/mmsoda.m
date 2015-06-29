@@ -90,7 +90,7 @@ else
             rethrow(err)
         end
     end
-
+    
     if ~isdeployed
         try
             % add constants variables to the base workspace such that the
@@ -156,6 +156,12 @@ else
         randn('seed',conf.randSeed);
     end
 
+    
+    
+    % see if the number of complexes need to be adjusted:
+    conf = mmsodaAdjustNumberOfComplexes(conf);
+    
+    
 
     % check if any inconsistencies can be identified from conf's fields:
     conf = check_input_integrity(conf,nargout);
@@ -691,20 +697,22 @@ if ~conf.parameterSamplesAreGiven
         error(['Value of parameter ',39,'conf.convUseLastFraction',39,' should be smaller than or equal to 1.'])
     end
 
-    if mod((conf.nModelEvalsMax-conf.nSamples),conf.nOffspring)~=0
+    if ~isinf(conf.nModelEvalsMax) && mod((conf.nModelEvalsMax-conf.nSamples),conf.nOffspring)~=0
 
         suggestedValue = conf.nSamples+ceil((conf.nModelEvalsMax-...
             conf.nSamples)/conf.nOffspring)*conf.nOffspring;
 
-        error(['Generating ',char(39),'conf.nOffspring',char(39),...
+        disp(['Generating ',char(39),'conf.nOffspring',char(39),...
             ' (',num2str(conf.nOffspring),') descendants per ',...
             'generation will not ',char(10),'yield exactly ',char(39),...
             'conf.nModelEvalsMax',char(39),' (',...
             num2str(conf.nModelEvalsMax),') model evaluations ',...
             'for any',char(10),'integer number of generations, given ',...
             'that ',char(39),'conf.nSamples',char(39),' equals ',...
-            num2str(conf.nSamples),'.',char(10),'Suggested value = ',num2str(suggestedValue),'.'])
-
+            num2str(conf.nSamples),'.',char(10),'I''ll set ''conf.nModelEvalsMax'' to ',...
+            num2str(suggestedValue),' instead.'])
+        
+        conf.nModelEvalsMax = suggestedValue;
 
     end
 
@@ -989,7 +997,7 @@ disp([10,...
 
 if uimatlab
     disp(['% See <a href=',34,'matlab:web(fullfile(mmsodaroot,',...
-           39,'html',39,',',39,'gpl.txt',39,'),',39,...
+           39,'html',39,',',39,'license.html',39,'),',39,...
           '-helpbrowser',39,')',34,'>link</a> for license.',10,10])
 end
 
