@@ -48,6 +48,20 @@ function varargout = mmsoda(varargin)
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % % LICENSE END
 
+% mlint directives:
+
+% ignore all mlint messages that complain about pre-allocatin an array with
+% NaN using repmat(NaN,x,y) instead of NaN(x,y)
+%#ok<*RPMTN>
+
+% ignore all mlint messages that complain about pre-allocatin an array with
+% true using repmat(true,x,y) instead of true(x,y)
+%#ok<*RPMTT>
+
+% ignore all mlint messages that complain about pre-allocatin an array with
+% false using repmat(false,x,y) instead of false(x,y)
+%#ok<*RPMTF>
+
 
 
 
@@ -67,8 +81,14 @@ else
 
     try
         conf = load('./results/conf.mat');
-    catch
-        error('I can''t find the *.mat file that holds the MMSODA configuration.')
+    catch err
+        if strcmp(err.identifier,'MATLAB:load:couldNotReadFile')
+            error('I can''t find ''results/conf.mat''. Aborting.')
+        else
+            % the error was not due to missing ''results/conf.mat'',
+            % rethrow the error
+            rethrow(err)
+        end
     end
 
     if ~isdeployed
@@ -76,9 +96,15 @@ else
             % add constants variables to the base workspace such that the
             % runmpirankOther can retrieve it from there
             evalin('base','constants = load(''./data/constants.mat'');')
-        catch
-            if ~strcmp(conf.modeStr,'bypass')
-                disp('I don''t see the constants file...attempting to proceed without it.')
+        catch err
+            if strcmp(err.identifier,'MATLAB:load:couldNotReadFile')
+                if ~strcmp(conf.modeStr,'bypass')
+                    disp('I don''t see the constants file...attempting to proceed without it.')
+                end
+            else
+                % the error was not due to missing ''data/constants.mat'',
+                % rethrow the error
+                rethrow(err);
             end
         end
     end
@@ -87,9 +113,7 @@ else
     % define whether the run is parallel or sequential
     conf.executeInParallel = isdeployed;
     if conf.executeInParallel
-        %disp('DEBUG: before verbosity')
-        verbosity = evalin('caller','verbosity');
-        %disp('DEBUG: after verbosity')
+        verbosity = evalin('caller','verbosity');  %#ok<NASGU>  (directive to ignore mlint msg at this line)
     end
 
     % verify the integrity of conf's fieldnames:
@@ -147,27 +171,25 @@ else
 
     % Indicate the meaning of each column in 'evalResults':
     if conf.isSingleObjective
-        conf.evalCol = 1;                                     % model evaluation counter
-        conf.parCols = conf.evalCol+(1:conf.nOptPars);        % model parameters
-        conf.llCols = conf.parCols(end)+1;                    % log likelihood
-        conf.paretoCol = NaN;                                 % pareto score not defined for single-objective
-        conf.objCol = conf.llCols(1);                         % SCEM-UA's decision-mkaing is based on this col
+        conf.evalCol   = 1;                                          % model evaluation counter
+        conf.parCols   = conf.evalCol      + (1:conf.nOptPars);      % model parameters
+        conf.llCols    = conf.parCols(end) + 1;                      % log likelihood
+        conf.paretoCol = NaN;                                        % pareto score not defined for single-objective
+        conf.objCol    = conf.llCols(1);                             % SCEM-UA's decision-mkaing is based on this col
     elseif conf.isMultiObjective
-        conf.evalCol = 1;                                     % model evaluation counter
-        conf.parCols = conf.evalCol+(1:conf.nOptPars);        % model parameters
-        conf.llCols = conf.parCols(end)+(1:conf.nObjs);       % log likelihoods
-        conf.paretoCol = conf.llCols(end)+1;                  % pareto score
-        conf.objCol = conf.paretoCol;                         % SCEM-UA's decision-mkaing is based on this col
+        conf.evalCol   = 1;                                          % model evaluation counter
+        conf.parCols   = conf.evalCol      + (1:conf.nOptPars);      % model parameters
+        conf.llCols    = conf.parCols(end) + (1:conf.nObjs);         % log likelihoods
+        conf.paretoCol = conf.llCols(end)  + 1;                      % pareto score
+        conf.objCol    = conf.paretoCol;                             % SCEM-UA's decision-mkaing is based on this col
     else
     end
 
     if conf.executeInParallel
         % specify the number of workers
-        %disp('DEBUG: before mpisize')
         if ~(exist('mpisize','var')==1)
             whoami()
         end
-        %disp('DEBUG: after verbosity')
         conf.nWorkers = mpisize-1;
     else
         conf.nWorkers = 1;
@@ -189,9 +211,11 @@ else
     for iVar=1:nVars
         varName = varList{iVar};
         if any(strcmp(varName,authorizedFieldNames))
-            saveList{end+1} = varName;
+            % Variable 'saveList' grows every iteration. Use an mlint
+            % directive to suppress the mlint message:
+            saveList{end+1} = varName;   %#ok<AGROW> 
         else
-            warning(['Variable ''',varName,''' is not a valid configuration variable.'])
+            warning('MMSODA:InvalidConfigurationVariable',['Variable ''',varName,''' is not a valid configuration variable.'])
         end
     end
 
@@ -328,8 +352,10 @@ else
             clear ignoreFields
             clear s
         end
-
-        nModelEvals = evalResults(end,conf.evalCol);
+        
+        % use an mlint directive to ignore the mlint message about
+        % 'evalResults' not being defined:
+        nModelEvals = evalResults(end,conf.evalCol);  %#ok<NODEF>
         if conf.verboseOutput
             disp([upper(conf.modeStr),' run continues at ',num2str(nModelEvals+1), ' model evaluations.'])
         end
@@ -418,8 +444,10 @@ else
                     % add the accepted child to the 'sequences' array:
                     sequences(rNumber,:,iCompl) = acceptedChild;
 
-                    % add the accepted child to the 'evalResults' array:
-                    evalResults = [evalResults;acceptedChild];
+                    % add the accepted child to the 'evalResults' array (variable 
+                    % 'evalResults' grows every iteration. Use an mlint
+                    % directive to suppress the mlint message):
+                    evalResults = [evalResults;acceptedChild];   %#ok<AGROW> 
 
                     if isequal(propChild,acceptedChild)
                         metropolisRejects(rNumber,:,iCompl) = repmat(NaN,[1,conf.objCol]);
@@ -437,8 +465,10 @@ else
 
             iGeneration = (nModelEvals-conf.nSamples)/conf.nOffspring;
 
-            %determine the Gelman-Rubin scale reduction (convergence) statistic:
-            critGelRub(iGeneration,:) = [nModelEvals,mmsodaGelmanRubin(conf,sequences)];
+            % determine the Gelman-Rubin scale reduction (convergence)
+            % statistic (variable 'critGelRub' grows every iteration. Use an
+            % mlint directive to suppress the mlint message):
+            critGelRub(iGeneration,:) = [nModelEvals,mmsodaGelmanRubin(conf,sequences)];  %#ok<AGROW>
 
             % determine whether all parameters meet the Gelman-Rubin scale
             % reduction criterion
@@ -447,7 +477,7 @@ else
             if conf.doPlot &&...
                 (mod(iGeneration,conf.drawInterval)==0)
                 if isunix && isempty(getenv('DISPLAY'))
-                    warning('DISPLAY variable not set-- can''t plot anything.')
+                    warning('MMSODA:DisplayNotSet','DISPLAY variable not set-- can''t plot anything.')
                 else
                     eval(conf.visualizationCall)
                 end
@@ -584,7 +614,7 @@ if nOut<2
         '[evalResults,critGelRub,sequences,conf] = mmsoda()',char(10),...
         '[evalResults,critGelRub,sequences,metropolisRejects,conf] = mmsoda()',char(10)])
 
-elseif all(nOut>[2:5])
+elseif all(nOut > 2:5)
     error(['Function ',39,mfilename,39,' should have at most 5 output arguments.',char(10),...
         '[evalResults,critGelRub] = mmsoda()',char(10),...
         '[evalResults,critGelRub,conf] = mmsoda()',char(10),...
@@ -943,7 +973,7 @@ end
 
 
 if isdeployed && isunix && isempty(getenv('DISPLAY')) && conf.doPlot
-    warning('DISPLAY variable not set-- can''t plot anything.')
+    warning('MMSODA:DisplayNotSet','DISPLAY variable not set-- can''t plot anything.')
     disp('Resetting ''conf.doPlot'' to ''false''.')
     conf.doPlot = false;
 end
@@ -997,7 +1027,7 @@ end
 function checkIfFoldersExist()
 
 if ~(exist('./data','dir')==7)
-    warning('I don''t see a folder ''data''.')
+    warning('MMSODA:NoDataFolder','I don''t see a folder ''data''.')
 end
 
 if ~(exist('./model','dir')==7)
