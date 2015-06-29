@@ -314,6 +314,18 @@ else
         end
 
         
+        % FIXME test/debug section
+        try
+            disp(['conf.nWorkers = ',num2str(conf.nWorkers)])
+            disp(['mpisize = ',num2str(mpisize)])
+            disp(['mpirank = ',num2str(mpirank)])
+            
+        catch
+            
+        end
+        return
+        
+        
         evalResults = repmat(NaN,[conf.nSamples,conf.objCol]);
         evalResults(:,conf.evalCol) = (1:conf.nSamples)';
         % randomize the order of randowDraw for better load balancing:
