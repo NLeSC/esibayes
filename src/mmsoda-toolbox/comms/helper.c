@@ -8,13 +8,13 @@
  * when explicitely specified (-DTIMINGS).
  *
  * Copyright 2013 Jeroen Engelberts, SURFsara
- *	
+ *
  *=================================================================*/
 
 #include "helper.h"
 
 mxArray*
-DeserializeVar(const char *varin, unsigned long buflen)        
+DeserializeVar(const char *varin, unsigned long buflen)
 {
     char filename[2048];
     char* tmpdir;
@@ -33,37 +33,37 @@ DeserializeVar(const char *varin, unsigned long buflen)
             strcpy(filename,tmpdir);
             strcat(filename,"mmpi.XXXXXX");
             if ((mktemp(filename)==NULL) || ((FPr=fopen(filename,"w"))==NULL)) {
-                mexErrMsgTxt("Cannot create temporary file!");
+                mexErrMsgTxt("Cannot create temporary file! (msg id = 1)");
             }
         } else {
             strcpy(filename,"/tmp/mmpi.XXXXXX");
             if ((mktemp(filename)==NULL) || ((FPr=fopen(filename,"w"))==NULL)) {
-                mexErrMsgTxt("Cannot create temporary file!");
+                mexErrMsgTxt("Cannot create temporary file! (msg id = 2)");
             }
         }
     }
-/* Write flat data to temporary file and close it. */ 
+/* Write flat data to temporary file and close it. */
     fwrite(varin, buflen, 1, FPr);
     fclose(FPr);
 
 /* Read temporary file as MATLAB.mat file */
     FPm = matOpen(filename,"r");
-	if (FPm==NULL){
-        mexErrMsgTxt("Cannot open temporary file!");
-    }   
+    if (FPm==NULL){
+        mexErrMsgTxt("Cannot open temporary file! (msg id = 3)");
+    }
     varout=matGetVariable(FPm,"temp");
     if (varout==NULL){
-        mexErrMsgTxt("Cannot write to temporary file!");
+        mexErrMsgTxt("Cannot write to temporary file! (msg id = 4)");
     }
     if (matClose(FPm)!=0){
-        mexErrMsgTxt("Cannot close temporary file!");
+        mexErrMsgTxt("Cannot close temporary file! (msg id = 5)");
     }
     remove(filename);
     return varout;
 }
 
 char*
-SerializeVar(const mxArray *varin, unsigned long *buflen)        
+SerializeVar(const mxArray *varin, unsigned long *buflen)
 {
     char *buf, *tmpdir;
     char filename[2048];
@@ -81,34 +81,34 @@ SerializeVar(const mxArray *varin, unsigned long *buflen)
             strcpy(filename,tmpdir);
             strcat(filename,"mmpi.XXXXXX");
             if ((mktemp(filename)==NULL) || ((FPm=matOpen(filename,"w"))==NULL)) {
-                mexErrMsgTxt("Cannot create temporary file!");
+                mexErrMsgTxt("Cannot create temporary file! (msg id = 6)");
             }
         } else {
             strcpy(filename,"/tmp/mmpi.XXXXXX");
             if ((mktemp(filename)==NULL) || ((FPm=matOpen(filename,"w"))==NULL)) {
-                mexErrMsgTxt("Cannot create temporary file!");
+                mexErrMsgTxt("Cannot create temporary file! (msg id = 7)");
             }
         }
     }
 /* Write input variable to MATLAB.mat temporary file */
     if (matPutVariable(FPm,"temp",varin)!=0){
-        mexErrMsgTxt("Cannot write to temporary file!");
+        mexErrMsgTxt("Cannot write to temporary file (msg id = 8)!");
     }
     if (matClose(FPm)!=0){
-        mexErrMsgTxt("Cannot close temporary file!");
+        mexErrMsgTxt("Cannot close temporary file! (msg id = 9)");
     }
-    
+
 /* Read temporary file as flat file */
     FPr = fopen(filename,"rb");
-	if (FPr==NULL){
-        mexErrMsgTxt("Cannot open raw temporary file!");
+    if (FPr==NULL){
+        mexErrMsgTxt("Cannot open raw temporary file! (msg id = 10)");
     }
     fseek(FPr, 0, SEEK_END);
-	*buflen=ftell(FPr);
-	fseek(FPr, 0, SEEK_SET);
+    *buflen=ftell(FPr);
+    fseek(FPr, 0, SEEK_SET);
     buf=(char*)malloc((*buflen)+1);
-	if (buf==NULL) {
-        mexErrMsgTxt("Cannot allocate buffer memory!");
+    if (buf==NULL) {
+        mexErrMsgTxt("Cannot allocate buffer memory! (msg id = 11)");
     }
     fread(buf, *buflen, 1, FPr);
     fclose(FPr);
@@ -128,7 +128,7 @@ SetTimeStamp(uint8_T code)
     uint64_T *starttime, *number1;
     int nelem, fieldnumber;
     uint8_T *pincodes, *poutcodes;
-            
+
     /* retrieve timing variable from base workspace */
     timing=mexGetVariable("base","timing");
     if (timing==NULL) {
@@ -146,10 +146,10 @@ SetTimeStamp(uint8_T code)
     number1=(uint64_T*) mxGetPr(fnumber1[0]);
     *number1=1;
     if(mexCallMATLAB(1,fctime,1,fnumber1,"toc")!=0) {
-        mexErrMsgTxt("cannot call toc from mex.");
+        mexErrMsgTxt("cannot call toc from mex.  (msg id = 12)");
     }
     ctime=mxGetPr(fctime[0]);
-    /* Timing only works on Linux - 1000000 
+    /* Timing only works on Linux - 1000000
      * On Mac OSX, this should be - 1000000000 */
     timer=*ctime-(double)*starttime/1000000;
     /* Get timer field from timings array */
@@ -194,7 +194,7 @@ SetTimeStamp(uint8_T code)
     mxSetFieldByNumber(timing,0,fieldnumber,outcodes);
     /* Write back timing structure */
     if (mexPutVariable("base","timing",timing)!=0) {
-        mexErrMsgTxt("Timing can not be written back.");
+        mexErrMsgTxt("Timing can not be written back. (msg id = 13)");
     }
     mxDestroyArray(fnumber1[0]);
     mxDestroyArray(intimer);
