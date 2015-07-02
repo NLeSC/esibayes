@@ -921,38 +921,27 @@ switch conf.modeStr
         end
 
     case {'reset'}
+        
         if ~isfield(conf,'nMembers')
             disp(['Setting value of ',char(39),'conf.nMembers',char(39),' to 1.'])
             conf.nMembers = 1;
-        end
-        if conf.nMembers~=1
+        elseif ~isequal(conf.nMembers,1)
             disp(['Resetting value of ',char(39),'conf.nMembers',char(39),' to 1.'])
             conf.nMembers = 1;
+        else
+            % it's all good
         end
 
-        if ~isfield(conf,'covObsPert')
-            disp(['Setting value of ',char(39),'conf.covObsPert',char(39),' to 0.'])
-            conf.covObsPert = zeros(conf.nStatesKF,conf.nStatesKF);
+        if isfield(conf,'covObsPert')
+            disp(['Removing field ',char(39),'covObsPert',char(39),' from conf.'])
+            conf = rmfield(conf,'covObsPert');
         end
-        if isfield(conf,'covObsPert') && ~isequal(conf.covObsPert,0)
-            disp(['Resetting value of ',char(39),'conf.covObsPert',char(39),' to 0.'])
-            conf.covObsPert = zeros(conf.nStatesKF,conf.nStatesKF);
+        
+        if isfield(conf,'covModelPert')
+            disp(['Removing field ',char(39),'covModelPert',char(39),' from conf.'])
+            conf = rmfield(conf,'covModelPert');
         end
-        if size(conf.covObsPert,3) == 1
-            conf.covObsPert = repmat(conf.covObsPert,[1,1,conf.nDASteps]);
-        end
-
-        if ~isfield(conf,'covModelPert')
-            disp(['Setting value of ',char(39),'conf.covModelPert',char(39),' to 0.'])
-            conf.covModelPert = zeros(conf.nStatesKF,conf.nStatesKF);
-        end
-        if isfield(conf,'covModelPert') && ~isequal(conf.covModelPert,0)
-            disp(['Resetting value of ',char(39),'conf.covModelPert',char(39),' to 0.'])
-            conf.covModelPert = zeros(conf.nStatesKF,conf.nStatesKF);
-        end
-        if size(conf.covModelPert,3) == 1
-            conf.covModelPert = repmat(conf.covModelPert,[1,1,conf.nDASteps]);
-        end
+        
 end
 
 
