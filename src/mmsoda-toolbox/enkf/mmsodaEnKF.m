@@ -438,7 +438,13 @@ if conf.saveEnKFResults
         
         save(fname,'-mat','parsets','modelOutputs')
         
-    elseif strcmp(conf.modeStr,'reset') || strcmp(conf.modeStr,'soda')
+    elseif strcmp(conf.modeStr,'reset')
+        
+        save(fname,'-mat','parsets','stateValuesKFPrior',...
+            'stateValuesKFPost','stateValuesKFInn',...
+            'obsPerturbed','valuesNOKF')
+
+    elseif strcmp(conf.modeStr,'soda')
         
         save(fname,'-mat','parsets','stateValuesKFPrior',...
             'stateValuesKFPert','stateValuesKFPost','stateValuesKFInn',...
