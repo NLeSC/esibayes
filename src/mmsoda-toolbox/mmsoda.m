@@ -266,6 +266,9 @@ else
 
     if conf.parameterSamplesAreGiven
 
+        disp(['No optimization will be done; only the parameter space samples ',char(10),...
+              'that have been provided by the user will be evaluated.'])
+
         try
             load('./data/parameter-samples.mat','samples')
         catch e
