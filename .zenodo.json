@@ -1,0 +1,21 @@
+{
+    "creators": [
+        {
+            "affiliation": "Netherlands eScience Center",
+            "name": "Spaaks, Jurriaan H.",
+            "orcid": "0000-0002-7064-4069"
+        },
+        {
+            "affiliation": "SARA",
+            "name": "Engelberts, Jeroen"
+        }
+    ],
+    "keywords": [
+        "optimization",
+        "data assimiliation"
+    ],
+    "license": {
+        "id": "Apache-2.0"
+    },
+    "title": "MMSODA Toolbox for MATLAB"
+}
